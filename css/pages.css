@@ -712,3 +712,114 @@
   transition: var(--transition);
 }
 .gallery-mob-all:hover { background: var(--white); }
+
+/* ════════════════════════════════════
+   PROPERTY FULL DESCRIPTION SECTION
+════════════════════════════════════ */
+.prop-desc-section {
+  background: var(--gray-100);
+  padding: 64px 0;
+  border-top: 1px solid var(--border);
+}
+.prop-desc-grid {
+  display: grid;
+  grid-template-columns: 1fr 400px;
+  gap: 48px;
+  align-items: start;
+}
+.prop-desc-title {
+  font-family: var(--font-head);
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--dark);
+  margin-bottom: 16px;
+}
+.prop-desc-text {
+  color: var(--gray-500);
+  line-height: 1.8;
+  font-size: 0.95rem;
+  margin-bottom: 32px;
+}
+.prop-desc-features {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+.prop-desc-feature {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+}
+.prop-desc-feature-icon {
+  width: 44px; height: 44px;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+  color: var(--red);
+}
+.prop-desc-feature-title {
+  font-family: var(--font-head);
+  font-weight: 700;
+  font-size: 0.88rem;
+  color: var(--dark);
+  margin-bottom: 4px;
+}
+.prop-desc-feature-text {
+  font-size: 0.82rem;
+  color: var(--gray-500);
+  line-height: 1.6;
+}
+
+/* Right column cards */
+.prop-amenities-card,
+.prop-legal-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 24px;
+  margin-bottom: 20px;
+}
+.prop-amenities-title,
+.prop-legal-title {
+  font-family: var(--font-head);
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--dark);
+  margin-bottom: 18px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border);
+}
+.prop-amenities-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.prop-amenities-list li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.85rem;
+  color: var(--gray-500);
+}
+.prop-amenity-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--red);
+  flex-shrink: 0;
+}
+.prop-legal-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--border);
+  font-size: 0.84rem;
+}
+.prop-legal-row:last-child { border-bottom: none; }
+.prop-legal-row span:first-child { color: var(--gray-500); }
+.prop-legal-row span:last-child { font-weight: 600; color: var(--dark); }
