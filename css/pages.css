@@ -79,8 +79,18 @@
 .filter-field--country .filter-select:focus { border-color: var(--red); }
 
 /* Кнопка поиска */
+.filter-field--btn {
+  display: flex; flex-direction: column; gap: 5px; align-self: flex-end;
+}
+.filter-reset-link {
+  font-size: 0.62rem; font-weight: 700;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--red); cursor: pointer; white-space: nowrap;
+  transition: opacity var(--transition);
+}
+.filter-reset-link:hover { opacity: 0.7; }
 .filter-btn {
-  height: 48px; align-self: flex-end;
+  height: 44px; align-self: flex-end;
   padding: 0 28px; white-space: nowrap;
 }
 
