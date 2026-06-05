@@ -833,3 +833,41 @@
 .prop-legal-row:last-child { border-bottom: none; }
 .prop-legal-row span:first-child { color: var(--gray-500); }
 .prop-legal-row span:last-child { font-weight: 600; color: var(--dark); }
+
+/* ── Expandable about text ── */
+.about-expandable {
+  position: relative;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.5s ease;
+}
+.about-expandable.open {
+  max-height: 600px;
+}
+/* Fade overlay — only when collapsed */
+.about-expandable::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 60px;
+  background: linear-gradient(to bottom, transparent, var(--white));
+  pointer-events: none;
+  transition: opacity 0.3s;
+}
+.about-expandable.open::after { opacity: 0; }
+
+.about-expand-btn {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: none; border: none; padding: 0;
+  font-family: var(--font-head); font-size: 0.75rem;
+  font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--red); cursor: pointer; margin-bottom: 16px;
+  transition: opacity var(--transition);
+}
+.about-expand-btn:hover { opacity: 0.7; }
+.about-expand-btn svg {
+  transition: transform 0.35s ease;
+}
+.about-expand-btn.open svg {
+  transform: rotate(180deg);
+}
