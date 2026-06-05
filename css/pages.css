@@ -420,11 +420,12 @@
   overflow: hidden;
   cursor: pointer;
   position: relative;
+  isolation: isolate;
 }
-.gallery-main img { width:100%; height:100%; object-fit:cover; display:block; transition:transform 0.5s ease; }
+.gallery-main img { width:100%; height:100%; object-fit:cover; display:block; transition:transform 0.5s ease; will-change:transform; }
 .gallery-main:hover img { transform:scale(1.03); }
-.gallery-side { overflow:hidden; cursor:pointer; position:relative; }
-.gallery-side img { width:100%; height:100%; object-fit:cover; display:block; transition:transform 0.4s; }
+.gallery-side { overflow:hidden; cursor:pointer; position:relative; isolation: isolate; }
+.gallery-side img { width:100%; height:100%; object-fit:cover; display:block; transition:transform 0.4s ease; will-change:transform; }
 .gallery-side:hover img { transform:scale(1.05); }
 .gallery-more-overlay {
   position:absolute; inset:0; background:rgba(10,10,10,0.52);
