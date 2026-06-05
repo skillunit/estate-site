@@ -473,3 +473,8 @@ window.showPage = function(id) {
   }
 };
 
+// ── Set actual properties count in stats ──
+(function() {
+  const el = document.getElementById('statObjectsCount');
+  if (el) el.textContent = MAP_PROPERTIES.length;
+})();
