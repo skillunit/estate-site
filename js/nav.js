@@ -58,20 +58,54 @@ function closeVideo(e) {
 let lbImgs = [], lbIdx = 0;
 function openLightbox(imgs, idx) {
   lbImgs = imgs; lbIdx = idx;
-  document.getElementById('lbImg').src = imgs[idx];
-  document.getElementById('lbCounter').textContent = (idx+1) + ' / ' + imgs.length;
-  document.getElementById('lightbox').classList.add('open');
+  const img = document.getElementById('lbImg');
+  img.src = imgs[idx];
+  lbRenderDots();
+  const lb = document.getElementById('lightbox');
+  lb.style.display = 'flex';
+  lb.classList.add('open');
   document.body.style.overflow = 'hidden';
 }
 function closeLightbox() {
-  document.getElementById('lightbox').classList.remove('open');
+  const lb = document.getElementById('lightbox');
+  lb.classList.remove('open');
+  lb.style.display = 'none';
   document.body.style.overflow = '';
 }
 function lbNav(dir) {
   lbIdx = (lbIdx + dir + lbImgs.length) % lbImgs.length;
-  document.getElementById('lbImg').src = lbImgs[lbIdx];
-  document.getElementById('lbCounter').textContent = (lbIdx+1) + ' / ' + lbImgs.length;
+  const img = document.getElementById('lbImg');
+  img.classList.add('fade');
+  setTimeout(() => {
+    img.src = lbImgs[lbIdx];
+    img.onload = () => img.classList.remove('fade');
+  }, 180);
+  lbRenderDots();
 }
+function lbRenderDots() {
+  const dots = document.getElementById('lbDots');
+  if (!dots) return;
+  dots.innerHTML = lbImgs.map((_, i) =>
+    `<div class="lb-dot${i===lbIdx?' active':''}" onclick="lbGoTo(${i})"></div>`
+  ).join('');
+}
+function lbGoTo(i) {
+  if (i === lbIdx) return;
+  lbIdx = i;
+  const img = document.getElementById('lbImg');
+  img.classList.add('fade');
+  setTimeout(() => { img.src = lbImgs[lbIdx]; img.onload = () => img.classList.remove('fade'); }, 180);
+  lbRenderDots();
+}
+// Swipe support
+let lbTouchX = null;
+document.addEventListener('touchstart', e => { if (document.getElementById('lightbox').classList.contains('open')) lbTouchX = e.touches[0].clientX; });
+document.addEventListener('touchend', e => {
+  if (!lbTouchX || !document.getElementById('lightbox').classList.contains('open')) return;
+  const dx = e.changedTouches[0].clientX - lbTouchX;
+  if (Math.abs(dx) > 50) lbNav(dx < 0 ? 1 : -1);
+  lbTouchX = null;
+});
 
 // ── FORM ──
 function submitContact(e) {
