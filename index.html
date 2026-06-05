@@ -157,7 +157,10 @@
           <option value="1000000">$1 000 000+</option>
         </select>
       </div>
-      <button class="btn btn-red filter-btn" onclick="showPage('catalog')">Найти</button>
+      <div class="filter-field filter-field--btn">
+        <span class="filter-reset-link" onclick="resetHomeFilter()">Сброс</span>
+        <button class="btn btn-red filter-btn" onclick="showPage('catalog')">Найти</button>
+      </div>
     </div>
   </div>
 
@@ -573,7 +576,10 @@
           <option value="construction">На стадии строительства</option>
         </select>
       </div>
-      <button class="btn btn-red filter-btn" onclick="filterCatalog()">Найти</button>
+      <div class="filter-field filter-field--btn">
+        <span class="filter-reset-link" onclick="resetCatalogFilter()">Сброс</span>
+        <button class="btn btn-red filter-btn" onclick="filterCatalog()">Найти</button>
+      </div>
     </div>
   </div>
 
