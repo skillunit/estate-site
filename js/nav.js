@@ -130,21 +130,26 @@ document.querySelectorAll('.prop-fav').forEach(btn => {
 });
 
 // ── MOBILE GALLERY SLIDER ──
-let mobGalleryImgs = [], mobGalleryIdx = 0, mobTouchStartX = null;
+let mobGalleryImgs = [], mobGalleryIdx = 0, mobTouchStartX = null, mobGalleryInited = false;
 
 function mobGalleryInit(imgs) {
   mobGalleryImgs = imgs;
   mobGalleryIdx = 0;
   mobGalleryRender();
-  const gallery = document.getElementById('detailGallery');
-  if (!gallery) return;
-  gallery.addEventListener('touchstart', e => { mobTouchStartX = e.touches[0].clientX; }, {passive:true});
-  gallery.addEventListener('touchend', e => {
-    if (mobTouchStartX === null) return;
-    const dx = e.changedTouches[0].clientX - mobTouchStartX;
-    if (Math.abs(dx) > 40) mobGalleryNav(dx < 0 ? 1 : -1);
-    mobTouchStartX = null;
-  });
+  // Attach touch handlers once
+  if (!mobGalleryInited) {
+    mobGalleryInited = true;
+    const gallery = document.getElementById('detailGallery');
+    if (gallery) {
+      gallery.addEventListener('touchstart', e => { mobTouchStartX = e.touches[0].clientX; }, {passive:true});
+      gallery.addEventListener('touchend', e => {
+        if (mobTouchStartX === null) return;
+        const dx = e.changedTouches[0].clientX - mobTouchStartX;
+        if (Math.abs(dx) > 40) mobGalleryNav(dx < 0 ? 1 : -1);
+        mobTouchStartX = null;
+      });
+    }
+  }
 }
 
 function mobGalleryNav(dir) {
@@ -163,11 +168,13 @@ function mobGalleryRender() {
   const dots = document.getElementById('mobDots');
   if (dots) {
     dots.innerHTML = mobGalleryImgs.map((_, i) =>
-      `<div class="gallery-mob-dot${i===mobGalleryIdx?' active':''}" onclick="mobGalleryIdx=${i};mobGalleryRender()"></div>`
+      '<div class="gallery-mob-dot' + (i===mobGalleryIdx?' active':'') + '" onclick="mobGalleryIdx=' + i + ';mobGalleryRender()"></div>'
     ).join('');
   }
+  // Store imgs globally so onclick can reference them without inline JSON
+  window._mobImgs = mobGalleryImgs;
   const main = document.querySelector('.gallery-main');
-  if (main) main.setAttribute('onclick', 'openLightbox(' + JSON.stringify(mobGalleryImgs) + ',' + mobGalleryIdx + ')');
+  if (main) main.onclick = function() { openLightbox(window._mobImgs, mobGalleryIdx); };
   const allBtn = document.getElementById('mobAllBtn');
-  if (allBtn) allBtn.setAttribute('onclick', 'openLightbox(' + JSON.stringify(mobGalleryImgs) + ',0)');
+  if (allBtn) allBtn.onclick = function() { openLightbox(window._mobImgs, 0); };
 }
