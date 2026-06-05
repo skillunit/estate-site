@@ -127,3 +127,55 @@ function submitContactPopup() {
 
 
 // ═══════════════════════════════════
+
+// ── PRESENTATION POPUP ──
+function openPresentPopup() {
+  // Pre-fill project name from detail page
+  const title = document.querySelector('#page-detail .detail-title');
+  const ppProject = document.getElementById('ppProject');
+  if (ppProject && title) ppProject.value = title.textContent;
+  document.getElementById('presentForm').style.display = '';
+  document.getElementById('presentSuccess').style.display = 'none';
+  const el = document.getElementById('presentPopup');
+  el.style.display = 'flex';
+  el.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closePresentPopup() {
+  const el = document.getElementById('presentPopup');
+  el.classList.remove('open');
+  el.style.display = 'none';
+  document.body.style.overflow = '';
+}
+function closePresentPopupOutside(e) {
+  if (e.target === document.getElementById('presentPopup')) closePresentPopup();
+}
+function submitPresentPopup() {
+  document.getElementById('presentForm').style.display = 'none';
+  document.getElementById('presentSuccess').style.display = 'block';
+  setTimeout(closePresentPopup, 3200);
+}
+
+// ── MANAGER POPUP ──
+function openManagerPopup() {
+  document.getElementById('managerForm').style.display = '';
+  document.getElementById('managerSuccess').style.display = 'none';
+  const el = document.getElementById('managerPopup');
+  el.style.display = 'flex';
+  el.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeManagerPopup() {
+  const el = document.getElementById('managerPopup');
+  el.classList.remove('open');
+  el.style.display = 'none';
+  document.body.style.overflow = '';
+}
+function closeManagerPopupOutside(e) {
+  if (e.target === document.getElementById('managerPopup')) closeManagerPopup();
+}
+function submitManagerPopup() {
+  document.getElementById('managerForm').style.display = 'none';
+  document.getElementById('managerSuccess').style.display = 'block';
+  setTimeout(closeManagerPopup, 3200);
+}
