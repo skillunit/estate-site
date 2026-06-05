@@ -43,12 +43,16 @@ function filterCatalog() {
 // ── VIDEO ──
 function openVideo(id) {
   document.getElementById('videoIframe').src = 'https://www.youtube.com/embed/' + id + '?autoplay=1';
-  document.getElementById('videoOverlay').classList.add('open');
+  const ov = document.getElementById('videoOverlay');
+  ov.style.display = 'flex';
+  ov.classList.add('open');
   document.body.style.overflow = 'hidden';
 }
 function closeVideo(e) {
-  if (!e || e.target === document.getElementById('videoOverlay')) {
-    document.getElementById('videoOverlay').classList.remove('open');
+  const ov = document.getElementById('videoOverlay');
+  if (!e || e.target === ov) {
+    ov.style.display = 'none';
+    ov.classList.remove('open');
     document.getElementById('videoIframe').src = '';
     document.body.style.overflow = '';
   }
