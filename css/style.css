@@ -160,13 +160,14 @@ header {
 }
 /* Shimmer sweep on all buttons */
 .btn::after {
-  content: ''; position: absolute; inset: 0;
+  content: ''; position: absolute; top: 0; left: 0;
+  width: 60%; height: 100%;
   background: rgba(255,255,255,0.14);
-  transform: translateX(-100%) skewX(-15deg);
+  transform: translateX(-150%) skewX(-15deg);
   transition: transform 0.5s ease;
   pointer-events: none;
 }
-.btn:hover::after { transform: translateX(120%) skewX(-15deg); }
+.btn:hover::after { transform: translateX(280%) skewX(-15deg); }
 .btn-red { background: var(--red); color: var(--white); border-color: var(--red); }
 .btn-red:hover { background: var(--red-hover); border-color: var(--red-hover); }
 .btn-outline { background: transparent; color: var(--red); border-color: var(--red); }
