@@ -165,16 +165,24 @@ function mobGalleryRender() {
     img.style.opacity = '0';
     setTimeout(() => { img.src = mobGalleryImgs[mobGalleryIdx]; img.style.opacity = '1'; }, 150);
   }
+  // Dots
   const dots = document.getElementById('mobDots');
   if (dots) {
     dots.innerHTML = mobGalleryImgs.map((_, i) =>
-      '<div class="gallery-mob-dot' + (i===mobGalleryIdx?' active':'') + '" onclick="mobGalleryIdx=' + i + ';mobGalleryRender()"></div>'
+      '<div class="gallery-mob-dot' + (i===mobGalleryIdx?' active':'') + '" onclick="mobGalleryGoTo(' + i + ')"></div>'
     ).join('');
   }
-  // Store imgs globally so onclick can reference them without inline JSON
-  window._mobImgs = mobGalleryImgs;
+  // Clicking the photo opens lightbox at current index
   const main = document.querySelector('.gallery-main');
-  if (main) main.onclick = function() { openLightbox(window._mobImgs, mobGalleryIdx); };
+  if (main) {
+    main.onclick = function() { openLightbox(mobGalleryImgs, mobGalleryIdx); };
+  }
+  // All photos button
   const allBtn = document.getElementById('mobAllBtn');
-  if (allBtn) allBtn.onclick = function() { openLightbox(window._mobImgs, 0); };
+  if (allBtn) allBtn.onclick = function(e) { e.stopPropagation(); openLightbox(mobGalleryImgs, 0); };
+}
+
+function mobGalleryGoTo(i) {
+  mobGalleryIdx = i;
+  mobGalleryRender();
 }
