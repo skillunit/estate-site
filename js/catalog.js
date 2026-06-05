@@ -10,6 +10,7 @@ const MAP_PROPERTIES = [
     badge: 'badge-ready', badgeText: 'Сдан в эксплуатацию',
     status: 'ready',
     img: 'https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=600&h=375&fit=crop',
+    imgs: ['https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=900&h=600&fit=crop', 'https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=900&h=600&fit=crop', 'https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=900&h=600&fit=crop'],
     desc: 'Современный жилой комплекс с панорамными видами на Чёрное море. Полная чистовая отделка, подземный паркинг, бассейн. Идеально для постоянного проживания и сдачи в аренду.',
     roi: '10–12%', growth: '12–15%', payback: '8–10 лет',
     specs: '45 м² · 1 спальня · 12 этаж',
@@ -23,6 +24,7 @@ const MAP_PROPERTIES = [
     badge: 'badge-build', badgeText: 'На стадии строительства',
     status: 'construction',
     img: 'https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=600&h=375&fit=crop',
+    imgs: ['https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=900&h=600&fit=crop', 'https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=900&h=600&fit=crop', 'https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=900&h=600&fit=crop'],
     desc: 'Апартаменты в строящемся комплексе на центральном бульваре Батуми. Сдача в 2025 году. Отличная инвестиционная возможность на стадии котлована.',
     roi: '12–14%', growth: '18–22%', payback: '7–9 лет',
     specs: '38 м² · 1 спальня · 7 этаж',
@@ -36,6 +38,7 @@ const MAP_PROPERTIES = [
     badge: 'badge-build', badgeText: 'Под чистовую отделку',
     status: 'ready',
     img: 'https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=600&h=375&fit=crop',
+    imgs: ['https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=900&h=600&fit=crop', 'https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=900&h=600&fit=crop', 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=900&h=600&fit=crop'],
     desc: 'Просторная квартира в историческом центре Тбилиси. Высокие потолки, панорамные окна, вид на старый город. Премиальная отделка под заказ.',
     roi: '8–10%', growth: '15–20%', payback: '9–11 лет',
     specs: '210 м² · 2 спальни · 6 этаж',
@@ -49,6 +52,7 @@ const MAP_PROPERTIES = [
     badge: 'badge-sale', badgeText: 'Эксклюзив',
     status: 'ready',
     img: 'https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=600&h=375&fit=crop',
+    imgs: ['https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=900&h=600&fit=crop', 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=900&h=600&fit=crop', 'https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=900&h=600&fit=crop'],
     desc: 'Эксклюзивный пентхаус на последнем этаже с террасой 80 м² и 360° видом на Тбилиси и горы Кавказа. Умный дом, лифт прямо в квартиру, консьерж-сервис.',
     roi: '6–8%', growth: '10–14%', payback: '12–14 лет',
     specs: '310 м² · 4 спальни · 22 этаж',
@@ -62,6 +66,7 @@ const MAP_PROPERTIES = [
     badge: 'badge-ready', badgeText: 'Готов к заселению',
     status: 'ready',
     img: 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=600&h=375&fit=crop',
+    imgs: ['https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=900&h=600&fit=crop', 'https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=900&h=600&fit=crop', 'https://images.unsplash.com/photo-1583608205776-bfd35f0d9f83?w=900&h=600&fit=crop'],
     desc: 'Апарт-отель в 50 метрах от моря в Гонио. Управляющая компания берёт на себя сдачу в аренду — пассивный доход без участия владельца.',
     roi: '12–15%', growth: '14–18%', payback: '7–8 лет',
     specs: '52 м² · 1 спальня · 5 этаж',
@@ -75,6 +80,7 @@ const MAP_PROPERTIES = [
     badge: 'badge-invest', badgeText: 'Инвестиция',
     status: 'construction',
     img: 'https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=600&h=375&fit=crop',
+    imgs: ['https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=900&h=600&fit=crop', 'https://images.unsplash.com/photo-1583608205776-bfd35f0d9f83?w=900&h=600&fit=crop', 'https://images.unsplash.com/photo-1555636222-cae831e670b3?w=900&h=600&fit=crop'],
     desc: 'Горнолыжный курорт, коттеджи у подъёмника. Высокий сезон обеспечивает загрузку 80%+. Развитая инфраструктура: рестораны, СПА, прокат снаряжения.',
     roi: '14–16%', growth: '20–25%', payback: '6–8 лет',
     specs: '150 м² · 3 спальни · 2 этажа',
@@ -88,6 +94,7 @@ const MAP_PROPERTIES = [
     badge: 'badge-build', badgeText: 'Строящееся',
     status: 'construction',
     img: 'https://images.unsplash.com/photo-1583608205776-bfd35f0d9f83?w=600&h=375&fit=crop',
+    imgs: ['https://images.unsplash.com/photo-1583608205776-bfd35f0d9f83?w=900&h=600&fit=crop', 'https://images.unsplash.com/photo-1555636222-cae831e670b3?w=900&h=600&fit=crop', 'https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=900&h=600&fit=crop'],
     desc: 'Эко-резиденция в винном регионе Грузии. Виноградники вокруг, собственный погреб, терраса с видом на горы. Идеально для загородного отдыха и агротуризма.',
     roi: '9–11%', growth: '12–16%', payback: '9–11 лет',
     specs: '110 м² · 2 спальни · 1 этаж',
@@ -101,6 +108,7 @@ const MAP_PROPERTIES = [
     badge: 'badge-ready', badgeText: 'Готов',
     status: 'ready',
     img: 'https://images.unsplash.com/photo-1555636222-cae831e670b3?w=600&h=375&fit=crop',
+    imgs: ['https://images.unsplash.com/photo-1555636222-cae831e670b3?w=900&h=600&fit=crop', 'https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=900&h=600&fit=crop', 'https://images.unsplash.com/photo-1578683010236-d716f9a3f461?w=900&h=600&fit=crop'],
     desc: 'Люкс-апартаменты в центре Манхэттена с видом на Центральный парк. Консьерж, тренажёрный зал, выход на террасу.',
     roi: '5–7%', growth: '8–10%', payback: '14–16 лет',
     specs: '120 м² · 2 спальни · 18 этаж',
@@ -114,6 +122,7 @@ const MAP_PROPERTIES = [
     badge: 'badge-sale', badgeText: 'Эксклюзив',
     status: 'ready',
     img: 'https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=600&h=375&fit=crop',
+    imgs: ['https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=900&h=600&fit=crop', 'https://images.unsplash.com/photo-1578683010236-d716f9a3f461?w=900&h=600&fit=crop', 'https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=900&h=600&fit=crop'],
     desc: 'Роскошная вилла с прямым выходом на пляж. Бассейн, джакузи, гараж на 3 авто. Элитный закрытый посёлок.',
     roi: '4–6%', growth: '7–9%', payback: '16–20 лет',
     specs: '420 м² · 5 спален · 1 этаж',
@@ -127,6 +136,7 @@ const MAP_PROPERTIES = [
     badge: 'badge-ready', badgeText: 'Готов',
     status: 'ready',
     img: 'https://images.unsplash.com/photo-1578683010236-d716f9a3f461?w=600&h=375&fit=crop',
+    imgs: ['https://images.unsplash.com/photo-1578683010236-d716f9a3f461?w=900&h=600&fit=crop', 'https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=900&h=600&fit=crop', 'https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=900&h=600&fit=crop'],
     desc: 'Апартаменты с видом на залив в престижном районе Dubai Marina. Полностью меблированы, управляющая компания.',
     roi: '7–9%', growth: '10–13%', payback: '11–13 лет',
     specs: '85 м² · 1 спальня · 24 этаж',
@@ -140,6 +150,7 @@ const MAP_PROPERTIES = [
     badge: 'badge-invest', badgeText: 'Инвестиция',
     status: 'ready',
     img: 'https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=600&h=375&fit=crop',
+    imgs: ['https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=900&h=600&fit=crop', 'https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=900&h=600&fit=crop', 'https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=900&h=600&fit=crop'],
     desc: 'Пентхаус на пальмовом острове с частным бассейном и причалом для яхты. Один из самых знаковых адресов Дубая.',
     roi: '6–8%', growth: '9–12%', payback: '12–15 лет',
     specs: '280 м² · 3 спальни · 15 этаж',
@@ -153,6 +164,7 @@ const MAP_PROPERTIES = [
     badge: 'badge-ready', badgeText: 'Готов',
     status: 'ready',
     img: 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=600&h=375&fit=crop',
+    imgs: ['https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=900&h=600&fit=crop', 'https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=900&h=600&fit=crop', 'https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=900&h=600&fit=crop'],
     desc: 'Вилла с прямым выходом к морю в Лимасоле. Частный бассейн, ландшафтный сад, гараж. Возможность получения ВНЖ.',
     roi: '5–7%', growth: '8–11%', payback: '13–15 лет',
     specs: '220 м² · 4 спальни · 1 этаж',
@@ -166,6 +178,7 @@ const MAP_PROPERTIES = [
     badge: 'badge-ready', badgeText: 'Готов',
     status: 'ready',
     img: 'https://images.unsplash.com/photo-1533929736458-ca588d08c8be?w=600&h=375&fit=crop',
+    imgs: ['https://images.unsplash.com/photo-1533929736458-ca588d08c8be?w=900&h=600&fit=crop', 'https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=900&h=600&fit=crop', 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=900&h=600&fit=crop'],
     desc: 'Апартаменты в историческом центре Афин рядом с Акрополем. Высокий туристический поток обеспечивает стабильный доход от краткосрочной аренды.',
     roi: '7–9%', growth: '9–12%', payback: '11–13 лет',
     specs: '95 м² · 2 спальни · 4 этаж',
@@ -179,6 +192,7 @@ const MAP_PROPERTIES = [
     badge: 'badge-sale', badgeText: 'Эксклюзив',
     status: 'ready',
     img: 'https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=600&h=375&fit=crop',
+    imgs: ['https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=900&h=600&fit=crop', 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=900&h=600&fit=crop', 'https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=900&h=600&fit=crop'],
     desc: 'Вилла в традиционном кикладском стиле с видом на Эгейское море. Бассейн с инфинити, терраса, летняя кухня. Пик сезона — июнь–сентябрь.',
     roi: '8–10%', growth: '11–14%', payback: '10–12 лет',
     specs: '300 м² · 4 спальни · 1 этаж',
@@ -232,13 +246,25 @@ function showDetail(id) {
   if (!prop) { showPage('detail'); return; }
 
   const page = document.getElementById('page-detail');
-  // Handle both picsum and unsplash URLs
-  const mainSrc = prop.img.includes('picsum') ? prop.img.replace('/600/375', '/900/600') : prop.img.replace('w=600&h=375', 'w=900&h=600');
-  page.querySelector('.gallery-main img').src = mainSrc;
-  const sides = page.querySelectorAll('.gallery-side img');
-  const sideSrc = prop.img.includes('picsum') ? prop.img.replace('/600/375', '/500/375') : prop.img.replace('w=600&h=375', 'w=500&h=375');
-  if (sides[0]) sides[0].src = sideSrc;
-  if (sides[1]) sides[1].src = sideSrc;
+  const imgs = prop.imgs || [prop.img.replace('w=600&h=375','w=900&h=600')];
+  const imgsJson = JSON.stringify(imgs);
+
+  // Update gallery images
+  const mainImg = page.querySelector('.gallery-main img');
+  if (mainImg) mainImg.src = imgs[0];
+  page.querySelector('.gallery-main').setAttribute('onclick', `openLightbox(${imgsJson},0)`);
+
+  const sides = page.querySelectorAll('.gallery-side');
+  if (sides[0]) {
+    sides[0].querySelector('img').src = imgs[1] || imgs[0];
+    sides[0].setAttribute('onclick', `openLightbox(${imgsJson},1)`);
+  }
+  if (sides[1]) {
+    sides[1].querySelector('img').src = imgs[2] || imgs[0];
+    sides[1].setAttribute('onclick', `openLightbox(${imgsJson},2)`);
+    const allBtn = sides[1].querySelector('.gallery-all-btn');
+    if (allBtn) allBtn.setAttribute('onclick', `event.stopPropagation();openLightbox(${imgsJson},0)`);
+  }
 
   const titleEl = page.querySelector('.detail-title');
   if (titleEl) titleEl.textContent = prop.name;
