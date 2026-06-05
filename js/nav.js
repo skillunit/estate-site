@@ -190,3 +190,13 @@ function mobGalleryGoTo(i) {
   mobGalleryIdx = i;
   mobGalleryRender();
 }
+
+// ── ABOUT EXPAND ──
+function toggleAbout() {
+  const block = document.getElementById('teamAboutExpand');
+  const btn   = document.getElementById('teamAboutBtn');
+  const text  = document.getElementById('teamAboutBtnText');
+  const open  = block.classList.toggle('open');
+  btn.classList.toggle('open', open);
+  text.textContent = open ? 'Свернуть' : 'Читать далее';
+}
