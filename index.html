@@ -887,19 +887,15 @@
 <div class="page page-body" id="page-detail">
   <!-- Gallery grid -->
   <div class="detail-gallery">
-    <!-- Main large photo -->
-    <div class="gallery-main" onclick="openLightbox(["https://picsum.photos/seed/detail-main/900/600", "https://picsum.photos/seed/apart1/900/600", "https://picsum.photos/seed/flat2/900/600", "https://picsum.photos/seed/hotel3/900/600", "https://picsum.photos/seed/tbilisi-night/900/600"],0)">
+    <div class="gallery-main" onclick="openLightbox(['https://picsum.photos/seed/detail-main/900/600','https://picsum.photos/seed/apart1/900/600','https://picsum.photos/seed/flat2/900/600','https://picsum.photos/seed/hotel3/900/600','https://picsum.photos/seed/tbilisi-night/900/600'],0)">
       <img src="https://picsum.photos/seed/detail-main/1200/800" alt="">
     </div>
-    <!-- Top-right thumb -->
-    <div class="gallery-side" onclick="openLightbox(["https://picsum.photos/seed/detail-main/900/600", "https://picsum.photos/seed/apart1/900/600", "https://picsum.photos/seed/flat2/900/600", "https://picsum.photos/seed/hotel3/900/600", "https://picsum.photos/seed/tbilisi-night/900/600"],1)">
+    <div class="gallery-side" onclick="openLightbox(['https://picsum.photos/seed/detail-main/900/600','https://picsum.photos/seed/apart1/900/600','https://picsum.photos/seed/flat2/900/600','https://picsum.photos/seed/hotel3/900/600','https://picsum.photos/seed/tbilisi-night/900/600'],1)">
       <img src="https://picsum.photos/seed/apart1/600/400" alt="">
     </div>
-    <!-- Top-right second thumb -->
-    <div class="gallery-side" onclick="openLightbox(["https://picsum.photos/seed/detail-main/900/600", "https://picsum.photos/seed/apart1/900/600", "https://picsum.photos/seed/flat2/900/600", "https://picsum.photos/seed/hotel3/900/600", "https://picsum.photos/seed/tbilisi-night/900/600"],2)">
+    <div class="gallery-side" onclick="openLightbox(['https://picsum.photos/seed/detail-main/900/600','https://picsum.photos/seed/apart1/900/600','https://picsum.photos/seed/flat2/900/600','https://picsum.photos/seed/hotel3/900/600','https://picsum.photos/seed/tbilisi-night/900/600'],2)">
       <img src="https://picsum.photos/seed/flat2/600/400" alt="">
-      <!-- "All photos" button only on last thumb -->
-      <div class="gallery-all-btn" onclick="event.stopPropagation();openLightbox(["https://picsum.photos/seed/detail-main/900/600", "https://picsum.photos/seed/apart1/900/600", "https://picsum.photos/seed/flat2/900/600", "https://picsum.photos/seed/hotel3/900/600", "https://picsum.photos/seed/tbilisi-night/900/600"],0)">
+      <div class="gallery-all-btn" onclick="event.stopPropagation();openLightbox(['https://picsum.photos/seed/detail-main/900/600','https://picsum.photos/seed/apart1/900/600','https://picsum.photos/seed/flat2/900/600','https://picsum.photos/seed/hotel3/900/600','https://picsum.photos/seed/tbilisi-night/900/600'],0)">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
         Все фото
       </div>
@@ -1498,12 +1494,12 @@
 <!-- ══════════════════════════
      LIGHTBOX
 ══════════════════════════ -->
-<div class="lightbox" id="lightbox">
+<div class="lightbox" id="lightbox" style="display:none;">
   <div class="lb-close" onclick="closeLightbox()">✕</div>
   <div class="lb-arr lb-prev" onclick="lbNav(-1)">‹</div>
   <img class="lb-img" id="lbImg" src="" alt="">
   <div class="lb-arr lb-next" onclick="lbNav(1)">›</div>
-  <div class="lb-counter" id="lbCounter"></div>
+  <div class="lb-thumbs" id="lbDots"></div>
 </div>
 
 <!-- Сначала библиотека карт, которая нужна твоему коду -->
