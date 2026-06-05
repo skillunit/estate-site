@@ -817,19 +817,60 @@
       </div>
     </div>
 
-    <!-- Stats under team -->
-    <div style="margin-top:64px;">
-      <h2 class="section-title" style="margin-bottom:28px;">О компании</h2>
-      <div class="team-about-grid" style="display:grid;grid-template-columns:240px 1fr;gap:60px;align-items:center;">
-        <div>
-          <p style="font-size:0.875rem;color:var(--gray-700);line-height:1.7;margin-bottom:20px;">Мы — команда профессионалов с многолетним опытом на рынке недвижимости Грузии. Наша миссия — помочь вам найти идеальный объект для жизни, отдыха или инвестиций.</p>
-          <button class="btn btn-outline" onclick="showPage('contact')">Подробнее о нас</button>
+    <!-- About company block -->
+    <div class="about-strip" style="margin-top:64px;">
+      <div class="about-strip-inner">
+        <div class="about-text">
+          <h2>О компании</h2>
+
+          <!-- First 2 paragraphs always visible -->
+          <p>Мы — команда профессионалов с многолетним опытом на рынке недвижимости Грузии. С 2014 года помогаем клиентам из более чем 30 стран найти идеальный объект для жизни, отдыха или инвестиций в одной из самых перспективных стран региона.</p>
+          <p>Наш офис расположен в Тбилиси, но мы работаем по всей Грузии — от черноморских курортов Батуми и Гонио до горнолыжных склонов Бакуриани и исторических кварталов столицы. Каждый проект в нашей базе проходит юридическую проверку и личный осмотр нашими экспертами.</p>
+
+          <!-- Expandable block -->
+          <div class="about-expandable" id="teamAboutExpand">
+            <p>Мы убеждены: покупка недвижимости за рубежом — это не просто сделка, это начало новой главы жизни. Именно поэтому мы сопровождаем клиентов на каждом этапе — от первого звонка до получения ключей и последующего управления объектом. Наши юристы, переводчики и аналитики всегда на связи.</p>
+            <p>Georgia Real Estate — аккредитованный партнёр ведущих застройщиков Грузии. Мы напрямую сотрудничаем с TBC Bank, Bank of Georgia и рядом международных ипотечных программ, что позволяет нашим клиентам получать лучшие условия финансирования.</p>
+            <p>За 10 лет работы мы закрыли более 2 000 сделок, запустили собственное подразделение управления недвижимостью и открыли представительства в Батуми и Тбилиси. Наша цель — стать вашим надёжным партнёром не на одну покупку, а на всю жизнь.</p>
+          </div>
+
+          <button class="about-expand-btn" id="teamAboutBtn" onclick="toggleAbout()">
+            <span id="teamAboutBtnText">Читать далее</span>
+            <svg id="teamAboutBtnIcon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+
+          <button class="btn btn-outline" onclick="showPage('contact')" style="margin-top:8px;">Связаться с нами</button>
         </div>
+
         <div class="stats-row">
-          <div class="stat-item"><div class="stat-icon">🏢</div><div class="stat-num">10+</div><div class="stat-label">лет на рынке</div></div>
-          <div class="stat-item"><div class="stat-icon">🤝</div><div class="stat-num">1000+</div><div class="stat-label">довольных клиентов</div></div>
-          <div class="stat-item"><div class="stat-icon">🏠</div><div class="stat-num">2000+</div><div class="stat-label">объектов в базе</div></div>
-          <div class="stat-item"><div class="stat-icon">📍</div><div class="stat-num">20+</div><div class="stat-label">лучших локаций</div></div>
+          <div class="stat-item">
+            <div class="stat-icon">
+              <svg class="stat-svg" viewBox="0 0 56 56" fill="none"><rect x="6" y="48" width="44" height="3" rx="1.5" fill="#C0392B" opacity="0.25"/><rect x="12" y="22" width="32" height="26" rx="1" fill="none" stroke="#C0392B" stroke-width="2"/><polyline points="8,22 28,8 48,22" fill="none" stroke="#C0392B" stroke-width="2" stroke-linejoin="round"/><rect x="22" y="37" width="12" height="11" rx="1" fill="none" stroke="#C0392B" stroke-width="1.5"/><rect x="15" y="27" width="7" height="6" rx="0.5" fill="#C0392B" opacity="0.9"/><rect x="34" y="27" width="7" height="6" rx="0.5" fill="#C0392B" opacity="0.4"/></svg>
+            </div>
+            <div class="stat-num">10+</div>
+            <div class="stat-label">лет на рынке недвижимости</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-icon">
+              <svg class="stat-svg" viewBox="0 0 56 56" fill="none"><circle cx="28" cy="20" r="10" fill="none" stroke="#C0392B" stroke-width="2"/><path d="M10 48c0-10 8-17 18-17s18 7 18 17" fill="none" stroke="#C0392B" stroke-width="2" stroke-linecap="round"/></svg>
+            </div>
+            <div class="stat-num">1000+</div>
+            <div class="stat-label">довольных клиентов</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-icon">
+              <svg class="stat-svg" viewBox="0 0 56 56" fill="none"><rect x="15.5" y="2" width="5" height="52" fill="#C0392B"/><rect x="2" y="25.5" width="52" height="5" fill="#C0392B"/><rect x="4" y="4" width="4" height="12" fill="#C0392B"/><rect x="2" y="6" width="12" height="4" fill="#C0392B"/><rect x="48" y="4" width="4" height="12" fill="#C0392B"/><rect x="42" y="6" width="12" height="4" fill="#C0392B"/><rect x="4" y="40" width="4" height="12" fill="#C0392B"/><rect x="2" y="46" width="12" height="4" fill="#C0392B"/><rect x="48" y="40" width="4" height="12" fill="#C0392B"/><rect x="42" y="46" width="12" height="4" fill="#C0392B"/></svg>
+            </div>
+            <div class="stat-num" id="statObjectsCount2">—</div>
+            <div class="stat-label">Общее количество предложений</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-icon">
+              <svg class="stat-svg" viewBox="0 0 56 56" fill="none"><path d="M28 6C18 6 10 14 10 23c0 13 18 27 18 27s18-14 18-27C46 14 38 6 28 6z" fill="none" stroke="#C0392B" stroke-width="2"/><circle cx="28" cy="23" r="6" fill="#C0392B"/><circle cx="28" cy="23" r="3" fill="white"/></svg>
+            </div>
+            <div class="stat-num">20+</div>
+            <div class="stat-label">лучших локаций</div>
+          </div>
         </div>
       </div>
     </div>
