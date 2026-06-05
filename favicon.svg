@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <defs>
+    <!-- Outer red glow -->
+    <filter id="glow" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="2.5" result="blur1"/>
+      <feGaussianBlur in="SourceGraphic" stdDeviation="5" result="blur2"/>
+      <feMerge>
+        <feMergeNode in="blur2"/>
+        <feMergeNode in="blur1"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <!-- Dark background with rounded corners -->
+    <clipPath id="rounded">
+      <rect width="64" height="64" rx="14"/>
+    </clipPath>
+  </defs>
+
+  <!-- Background: deep dark with subtle warmth -->
+  <rect width="64" height="64" rx="14" fill="#0f0d0d"/>
+  <!-- subtle inner vignette -->
+  <rect width="64" height="64" rx="14" fill="url(#vignette)" opacity="0.4"/>
+
+  <defs>
+    <radialGradient id="vignette" cx="50%" cy="50%" r="70%">
+      <stop offset="0%" stop-color="#1a0a0a"/>
+      <stop offset="100%" stop-color="#000000"/>
+    </radialGradient>
+  </defs>
+
+  <!-- Georgian cross + 4 small crosses, glowing red -->
+  <g filter="url(#glow)">
+    <!-- Main cross: vertical -->
+    <rect x="27.5" y="4" width="9" height="56" rx="1" fill="#C0392B"/>
+    <!-- Main cross: horizontal -->
+    <rect x="4" y="27.5" width="56" height="9" rx="1" fill="#C0392B"/>
+
+    <!-- Top-left small cross -->
+    <rect x="8"  y="8"   width="4.5" height="14" rx="0.8" fill="#C0392B"/>
+    <rect x="3"  y="12"  width="14"  height="4.5" rx="0.8" fill="#C0392B"/>
+
+    <!-- Top-right small cross -->
+    <rect x="51.5" y="8"  width="4.5" height="14" rx="0.8" fill="#C0392B"/>
+    <rect x="47"   y="12" width="14"  height="4.5" rx="0.8" fill="#C0392B"/>
+
+    <!-- Bottom-left small cross -->
+    <rect x="8"  y="42"  width="4.5" height="14" rx="0.8" fill="#C0392B"/>
+    <rect x="3"  y="47.5" width="14" height="4.5" rx="0.8" fill="#C0392B"/>
+
+    <!-- Bottom-right small cross -->
+    <rect x="51.5" y="42"   width="4.5" height="14" rx="0.8" fill="#C0392B"/>
+    <rect x="47"   y="47.5" width="14"  height="4.5" rx="0.8" fill="#C0392B"/>
+  </g>
+</svg>
