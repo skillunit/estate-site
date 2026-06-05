@@ -1050,8 +1050,8 @@
           <div class="invest-row"><span class="invest-row-label">Окупаемость:</span><span class="invest-row-val">9 – 11 лет</span></div>
         </div>
         <div class="detail-actions">
-          <button class="btn btn-red" onclick="showPage('contact')">Заказать подробную презентацию</button>
-          <button class="btn btn-outline" onclick="showPage('contact')">Связаться с менеджером</button>
+          <button class="btn btn-red" onclick="openPresentPopup()">Заказать подробную презентацию</button>
+          <button class="btn btn-outline" onclick="openManagerPopup()">Связаться с менеджером</button>
         </div>
       </div>
     </div>
@@ -1517,5 +1517,128 @@
 <script src="js/nav.js"></script>
 <script src="js/forms.js"></script>
 <script src="js/catalog.js"></script>
+
+<!-- ══════════════════════════
+     POPUP: PRESENTATION
+══════════════════════════ -->
+<div class="cpopup-overlay" id="presentPopup" onclick="closePresentPopupOutside(event)" style="display:none">
+  <div class="cpopup" id="presentPopupBox">
+    <div class="cpopup-bar"></div>
+    <svg class="cpopup-deco" viewBox="0 0 160 160" fill="none">
+      <rect x="67" y="8" width="26" height="144" fill="#C0392B"/>
+      <rect x="8" y="67" width="144" height="26" fill="#C0392B"/>
+      <rect x="18" y="18" width="12" height="36" fill="#C0392B"/>
+      <rect x="8" y="28" width="32" height="12" fill="#C0392B"/>
+      <rect x="130" y="18" width="12" height="36" fill="#C0392B"/>
+      <rect x="120" y="28" width="32" height="12" fill="#C0392B"/>
+      <rect x="18" y="106" width="12" height="36" fill="#C0392B"/>
+      <rect x="8" y="120" width="32" height="12" fill="#C0392B"/>
+      <rect x="130" y="106" width="12" height="36" fill="#C0392B"/>
+      <rect x="120" y="120" width="32" height="12" fill="#C0392B"/>
+    </svg>
+    <button class="cpopup-close" onclick="closePresentPopup()">✕</button>
+    <div class="cpopup-body">
+      <div id="presentForm">
+        <div class="cpopup-eyebrow">Бесплатно</div>
+        <div class="cpopup-title">Презентация проекта</div>
+        <p class="cpopup-sub">Пришлём подробную презентацию с планировками, ценами и условиями инвестирования.</p>
+        <div class="cpopup-row">
+          <div class="cpopup-field">
+            <label>Ваше имя</label>
+            <input class="cpopup-input" type="text" placeholder="Иван Иванов" id="ppName">
+          </div>
+          <div class="cpopup-field">
+            <label>Телефон</label>
+            <input class="cpopup-input" type="tel" placeholder="+995 5XX XXX XXX" id="ppPhone" maxlength="17">
+          </div>
+        </div>
+        <div class="cpopup-field" style="margin-bottom:14px;">
+          <label>Электронная почта</label>
+          <input class="cpopup-input" type="email" placeholder="example@mail.com" id="ppEmail">
+        </div>
+        <div class="cpopup-field" style="margin-bottom:14px;">
+          <label>Объект</label>
+          <input class="cpopup-input" type="text" id="ppProject" readonly style="opacity:0.7;cursor:default;">
+        </div>
+        <div class="cpopup-field">
+          <label>Формат презентации</label>
+          <div class="cpopup-radio-group">
+            <label class="cpopup-radio"><input type="radio" name="ppFormat" value="PDF" checked> <span>PDF на email</span></label>
+            <label class="cpopup-radio"><input type="radio" name="ppFormat" value="online"> <span>Онлайн-встреча</span></label>
+            <label class="cpopup-radio"><input type="radio" name="ppFormat" value="whatsapp"> <span>WhatsApp</span></label>
+          </div>
+        </div>
+        <button class="btn btn-red cpopup-submit" onclick="submitPresentPopup()">Получить презентацию →</button>
+      </div>
+      <div class="cpopup-success" id="presentSuccess">
+        <div class="cpopup-success-icon">✓</div>
+        <div class="cpopup-success-title">Заявка принята!</div>
+        <p class="cpopup-success-text">Презентация будет отправлена<br>в течение 10 минут.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════
+     POPUP: MANAGER
+══════════════════════════ -->
+<div class="cpopup-overlay" id="managerPopup" onclick="closeManagerPopupOutside(event)" style="display:none">
+  <div class="cpopup" id="managerPopupBox">
+    <div class="cpopup-bar"></div>
+    <svg class="cpopup-deco" viewBox="0 0 160 160" fill="none">
+      <rect x="67" y="8" width="26" height="144" fill="#C0392B"/>
+      <rect x="8" y="67" width="144" height="26" fill="#C0392B"/>
+      <rect x="18" y="18" width="12" height="36" fill="#C0392B"/>
+      <rect x="8" y="28" width="32" height="12" fill="#C0392B"/>
+      <rect x="130" y="18" width="12" height="36" fill="#C0392B"/>
+      <rect x="120" y="28" width="32" height="12" fill="#C0392B"/>
+      <rect x="18" y="106" width="12" height="36" fill="#C0392B"/>
+      <rect x="8" y="120" width="32" height="12" fill="#C0392B"/>
+      <rect x="130" y="106" width="12" height="36" fill="#C0392B"/>
+      <rect x="120" y="120" width="32" height="12" fill="#C0392B"/>
+    </svg>
+    <button class="cpopup-close" onclick="closeManagerPopup()">✕</button>
+    <div class="cpopup-body">
+      <div id="managerForm">
+        <div class="cpopup-eyebrow">Личная консультация</div>
+        <div class="cpopup-title">Связаться с менеджером</div>
+        <p class="cpopup-sub">Наш менеджер ответит на все вопросы и поможет подобрать лучший вариант.</p>
+        <div class="cpopup-row">
+          <div class="cpopup-field">
+            <label>Ваше имя</label>
+            <input class="cpopup-input" type="text" placeholder="Иван Иванов" id="mpName">
+          </div>
+          <div class="cpopup-field">
+            <label>Телефон</label>
+            <input class="cpopup-input" type="tel" placeholder="+995 5XX XXX XXX" id="mpPhone" maxlength="17">
+          </div>
+        </div>
+        <div class="cpopup-field" style="margin-bottom:14px;">
+          <label>Удобное время для звонка</label>
+          <div class="cpopup-radio-group">
+            <label class="cpopup-radio"><input type="radio" name="mpTime" value="morning" checked> <span>Утром (9:00–12:00)</span></label>
+            <label class="cpopup-radio"><input type="radio" name="mpTime" value="day"> <span>Днём (12:00–17:00)</span></label>
+            <label class="cpopup-radio"><input type="radio" name="mpTime" value="evening"> <span>Вечером (17:00–21:00)</span></label>
+          </div>
+        </div>
+        <div class="cpopup-field">
+          <label>Мессенджер для связи</label>
+          <div class="cpopup-radio-group">
+            <label class="cpopup-radio"><input type="radio" name="mpMessenger" value="whatsapp" checked> <span>WhatsApp</span></label>
+            <label class="cpopup-radio"><input type="radio" name="mpMessenger" value="telegram"> <span>Telegram</span></label>
+            <label class="cpopup-radio"><input type="radio" name="mpMessenger" value="call"> <span>Звонок</span></label>
+          </div>
+        </div>
+        <button class="btn btn-red cpopup-submit" onclick="submitManagerPopup()">Жду звонка →</button>
+      </div>
+      <div class="cpopup-success" id="managerSuccess">
+        <div class="cpopup-success-icon">✓</div>
+        <div class="cpopup-success-title">Заявка принята!</div>
+        <p class="cpopup-success-text">Менеджер свяжется с вами<br>в указанное время.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
 </body>
 </html>
