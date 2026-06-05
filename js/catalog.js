@@ -476,10 +476,10 @@ window.showPage = function(id) {
 // ── Set actual properties count ──
 (function() {
   const count = MAP_PROPERTIES.length;
-  const stat = document.getElementById('statObjectsCount');
-  if (stat) stat.textContent = count;
-  const cat = document.getElementById('catalogCount');
-  if (cat) cat.textContent = count;
+  ['statObjectsCount','statObjectsCount2','catalogCount'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.textContent = count;
+  });
 })();
 
 // ── RESET FILTERS ──
