@@ -871,3 +871,107 @@
 .about-expand-btn.open svg {
   transform: rotate(180deg);
 }
+
+/* ════════════════════════════════════
+   TEAM PAGE — ABOUT BLOCK
+════════════════════════════════════ */
+.team-about-block {
+  background: var(--dark);
+  margin-top: 80px;
+  padding: 72px var(--container-pad);
+  position: relative;
+  overflow: hidden;
+}
+/* Subtle cross watermark top-right */
+.team-about-block::before {
+  content: '';
+  position: absolute;
+  top: -40px; right: -40px;
+  width: 280px; height: 280px;
+  background-image:
+    linear-gradient(rgba(192,57,43,0.06) 5px, transparent 5px),
+    linear-gradient(90deg, rgba(192,57,43,0.06) 5px, transparent 5px);
+  background-size: 60px 60px;
+  pointer-events: none;
+}
+
+.team-about-header {
+  margin-bottom: 48px;
+}
+.team-about-eyebrow {
+  font-family: var(--font-head);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--red);
+  margin-bottom: 16px;
+}
+.team-about-title {
+  font-family: var(--font-head);
+  font-size: clamp(1.6rem, 3vw, 2.4rem);
+  font-weight: 800;
+  color: var(--white);
+  line-height: 1.2;
+  max-width: 640px;
+}
+
+.team-about-cols {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  margin-bottom: 0;
+}
+.team-about-col p {
+  font-size: 0.9rem;
+  color: rgba(255,255,255,0.6);
+  line-height: 1.8;
+  margin-bottom: 16px;
+}
+.team-about-col p:last-child { margin-bottom: 0; }
+
+/* Expandable inside dark block */
+.team-about-more {
+  margin-top: 0;
+}
+.team-about-more::after {
+  background: linear-gradient(to bottom, transparent, var(--dark));
+}
+
+.team-about-expand-btn {
+  margin-top: 24px;
+  color: rgba(255,255,255,0.5);
+}
+.team-about-expand-btn:hover { color: var(--white); opacity: 1; }
+
+/* Stats bar */
+.team-about-stats {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  margin-top: 64px;
+  padding-top: 40px;
+  border-top: 1px solid rgba(255,255,255,0.08);
+  gap: 0;
+}
+.team-about-stat {
+  padding: 0 32px;
+  border-right: 1px solid rgba(255,255,255,0.08);
+  text-align: center;
+}
+.team-about-stat:first-child { padding-left: 0; }
+.team-about-stat:last-child { border-right: none; padding-right: 0; }
+.team-about-stat-num {
+  font-family: var(--font-head);
+  font-size: 2rem;
+  font-weight: 800;
+  color: var(--white);
+  line-height: 1;
+  margin-bottom: 8px;
+}
+.team-about-stat-label {
+  font-size: 0.72rem;
+  color: rgba(255,255,255,0.4);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-weight: 600;
+}
