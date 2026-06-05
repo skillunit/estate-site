@@ -8,6 +8,10 @@
   .detail-layout { grid-template-columns:1fr; }
   .detail-sidebar { position:static; }
   .prop-desc-grid { grid-template-columns: 1fr; }
+  .team-about-cols { grid-template-columns: 1fr; gap: 0; }
+  .team-about-stats { grid-template-columns: repeat(2, 1fr); gap: 24px; }
+  .team-about-stat { border-right: none; padding: 0; text-align: left; }
+  .team-about-stat:nth-child(odd) { border-right: 1px solid rgba(255,255,255,0.08); padding-right: 24px; }
   .contacts-grid { grid-template-columns:1fr; }
   .catalog-filter-inner { grid-template-columns:1fr 1fr; }
   .catalog-filter-inner .btn { grid-column:span 2; }
