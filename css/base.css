@@ -36,8 +36,8 @@ a { text-decoration:none; color:inherit; }
 /* ═══════════════════════════════════
    PAGE SYSTEM
 ═══════════════════════════════════ */
-.page { display:none; }
-.page.active { display:block; }
+.page { display:none; overflow:hidden; }
+.page.active { display:block; overflow:hidden; }
 
 /* ═══════════════════════════════════
    HEADER
