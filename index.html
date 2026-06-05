@@ -1,0 +1,1491 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Georgia Real Estate — Недвижимость в Грузии</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+<link rel="stylesheet" href="css/style.css">
+
+</head>
+<body>
+
+<!-- ══════════════════════════
+     HEADER
+══════════════════════════ -->
+<header id="header">
+  <div class="header-inner">
+    <!-- Logo -->
+    <div class="logo" onclick="showPage('home')">
+      <svg class="logo-icon" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect width="36" height="36" fill="white"/>
+        <!-- Georgian cross: vertical -->
+        <rect x="15.5" y="2" width="5" height="32" fill="#C0392B"/>
+        <!-- Georgian cross: horizontal -->
+        <rect x="2" y="15.5" width="32" height="5" fill="#C0392B"/>
+        <!-- 4 small crosses in corners -->
+        <rect x="4" y="4" width="2.5" height="8" fill="#C0392B"/>
+        <rect x="1.5" y="6" width="7.5" height="2.5" fill="#C0392B"/>
+        <rect x="29.5" y="4" width="2.5" height="8" fill="#C0392B"/>
+        <rect x="27" y="6" width="7.5" height="2.5" fill="#C0392B"/>
+        <rect x="4" y="24" width="2.5" height="8" fill="#C0392B"/>
+        <rect x="1.5" y="27.5" width="7.5" height="2.5" fill="#C0392B"/>
+        <rect x="29.5" y="24" width="2.5" height="8" fill="#C0392B"/>
+        <rect x="27" y="27.5" width="7.5" height="2.5" fill="#C0392B"/>
+      </svg>
+      <div class="logo-text">
+        <span class="logo-text-top">Georgia</span>
+        <span class="logo-text-bot">Real Estate</span>
+      </div>
+    </div>
+
+    <!-- Nav -->
+    <nav class="header-nav" id="mainNav">
+      <a onclick="showPage('home')" data-page="home" class="active">Главная</a>
+      <span class="nav-sep">|</span>
+      <a onclick="showPage('team')" data-page="team">Команда</a>
+      <span class="nav-sep">|</span>
+      <a onclick="showPage('catalog')" data-page="catalog">Проекты</a>
+      <span class="nav-sep">|</span>
+      <a onclick="showPage('contact')" data-page="contact">Связаться с нами</a>
+    </nav>
+
+    <!-- Right -->
+    <div class="header-right">
+      <div class="header-phone">+995 32 2 123 456</div>
+      <div class="lang-switch">
+        <button class="lang-btn active">RU</button>
+        <span class="lang-sep-char">|</span>
+        <button class="lang-btn">EN</button>
+        <span class="lang-sep-char">|</span>
+        <button class="lang-btn">HE</button>
+      </div>
+      <button class="hamburger" id="hamburger" onclick="toggleMenu()">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- ══════════════════════════
+     PAGE: HOME
+══════════════════════════ -->
+<div class="page active page-body" id="page-home">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-overlay"></div>
+    <div class="container">
+      <div class="hero-content" style="padding:0 0 72px;">
+        <span class="hero-eyebrow">Международный девелопер</span>
+        <h1>Недвижимость<br>в Грузии</h1>
+        <p class="hero-sub">Для жизни и инвестиций</p>
+        <div class="hero-actions">
+          <button class="btn btn-red" onclick="showPage('catalog')">Смотреть проекты</button>
+          <button class="btn btn-white" onclick="openContactPopup()">Связаться с нами</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SEARCH BAR -->
+  <div class="filter-bar">
+    <div class="filter-tabs">
+      <button class="filter-tab active" onclick="setSearchTab(this)">Купить</button>
+      <button class="filter-tab" onclick="setSearchTab(this)">Арендовать</button>
+      <button class="filter-tab" onclick="setSearchTab(this)">Инвестировать</button>
+    </div>
+    <div class="filter-form">
+      <div class="filter-field filter-field--country">
+        <label>Страна</label>
+        <select class="filter-select">
+          <option value="georgia">🇬🇪 Грузия</option>
+          <option value="usa">🇺🇸 США</option>
+          <option value="uae">🇦🇪 ОАЭ</option>
+          <option value="cyprus">🇨🇾 Кипр</option>
+          <option value="greece">🇬🇷 Греция</option>
+        </select>
+      </div>
+      <div class="filter-field">
+        <label>Регион</label>
+        <select class="filter-select">
+          <option value="">Любой регион</option>
+          <option value="tbilisi-region">Тбилиси</option>
+          <option value="adjara">Аджара (Батуми, Гонио)</option>
+          <option value="kakheti">Кахетия</option>
+          <option value="bakuriani">Бакуриани</option>
+        </select>
+      </div>
+      <div class="filter-field">
+        <label>Город</label>
+        <select class="filter-select">
+          <option value="">Любой город</option>
+          <option value="tbilisi">Тбилиси</option>
+          <option value="batumi">Батуми</option>
+          <option value="gonio">Гонио</option>
+          <option value="bakuriani">Бакуриани</option>
+        </select>
+      </div>
+      <div class="filter-field">
+        <label>Тип недвижимости</label>
+        <select class="filter-select">
+          <option value="">Любой</option>
+          <option value="apartment">Квартира</option>
+          <option value="villa">Вилла</option>
+          <option value="apart">Апартаменты</option>
+          <option value="commercial">Коммерческая</option>
+        </select>
+      </div>
+      <div class="filter-field">
+        <label>Цена до</label>
+        <select class="filter-select">
+          <option value="">Любая</option>
+          <option value="100000">$100 000</option>
+          <option value="200000">$200 000</option>
+          <option value="500000">$500 000</option>
+          <option value="1000000">$1 000 000+</option>
+        </select>
+      </div>
+      <button class="btn btn-red filter-btn" onclick="showPage('catalog')">Найти</button>
+    </div>
+  </div>
+
+  <!-- DIRECTIONS -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header">
+        <div>
+          <h2 class="section-title">Популярные направления</h2>
+        </div>
+        <span class="see-all" onclick="showPage('catalog')">Смотреть все</span>
+      </div>
+      <div class="directions-grid">
+        <div class="direction-card" onclick="showPage('catalog')">
+          <img class="direction-img" src="https://picsum.photos/seed/tbilisi1/400/530" alt="Тбилиси">
+          <div class="direction-overlay"></div>
+          <div class="direction-info">
+            <div class="direction-name">Тбилиси</div>
+            <div class="direction-desc">Столица и сердце Грузии</div>
+          </div>
+        </div>
+        <div class="direction-card" onclick="showPage('catalog')">
+          <img class="direction-img" src="https://picsum.photos/seed/batumi1/400/530" alt="Батуми">
+          <div class="direction-overlay"></div>
+          <div class="direction-info">
+            <div class="direction-name">Батуми</div>
+            <div class="direction-desc">Жизнь у моря</div>
+          </div>
+        </div>
+        <div class="direction-card" onclick="showPage('catalog')">
+          <img class="direction-img" src="https://picsum.photos/seed/gonio1/400/530" alt="Гонио">
+          <div class="direction-overlay"></div>
+          <div class="direction-info">
+            <div class="direction-name">Гонио</div>
+            <div class="direction-desc">Перспективный район</div>
+          </div>
+        </div>
+        <div class="direction-card" onclick="showPage('catalog')">
+          <img class="direction-img" src="https://picsum.photos/seed/bakuriani1/400/530" alt="Бакуриани">
+          <div class="direction-overlay"></div>
+          <div class="direction-info">
+            <div class="direction-name">Бакуриани</div>
+            <div class="direction-desc">Горнолыжный курорт</div>
+          </div>
+        </div>
+        <div class="direction-card" onclick="showPage('catalog')">
+          <img class="direction-img" src="https://picsum.photos/seed/kakheti1/400/530" alt="Кахетия">
+          <div class="direction-overlay"></div>
+          <div class="direction-info">
+            <div class="direction-name">Кахетия</div>
+            <div class="direction-desc">Винный регион</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT + STATS -->
+  <div class="about-strip">
+    <div class="about-strip-inner">
+      <div class="about-text">
+        <h2>О компании</h2>
+        <p>Мы — команда профессионалов с многолетним опытом на рынке недвижимости Грузии. Наша миссия — помочь вам найти идеальный объект для жизни, отдыха или инвестиций.</p>
+        <button class="btn btn-outline" onclick="showPage('team')">Подробнее о нас</button>
+      </div>
+      <div class="stats-row">
+
+        <div class="stat-item">
+          <div class="stat-icon">
+            <svg class="stat-svg" viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="6" y="48" width="44" height="3" rx="1.5" fill="#C0392B" opacity="0.25"/>
+              <rect x="12" y="22" width="32" height="26" rx="1" fill="none" stroke="#C0392B" stroke-width="2" class="svg-build-body"/>
+              <polyline points="8,22 28,8 48,22" fill="none" stroke="#C0392B" stroke-width="2" stroke-linejoin="round" class="svg-roof"/>
+              <line x1="28" y1="8" x2="28" y2="4" stroke="#C0392B" stroke-width="1.5" class="svg-flag-pole"/>
+              <path d="M28 4 L34 6 L28 8 Z" fill="#C0392B" class="svg-flag"/>
+              <rect x="22" y="37" width="12" height="11" rx="1" fill="none" stroke="#C0392B" stroke-width="1.5"/>
+              <circle cx="32" cy="43" r="1" fill="#C0392B" class="svg-knob"/>
+              <rect x="15" y="27" width="7" height="6" rx="0.5" fill="#C0392B" class="svg-win svg-win-1" opacity="0.9"/>
+              <rect x="34" y="27" width="7" height="6" rx="0.5" fill="#C0392B" class="svg-win svg-win-2" opacity="0.4"/>
+              <rect x="15" y="37" width="7" height="6" rx="0.5" fill="#C0392B" class="svg-win svg-win-3" opacity="0.6"/>
+            </svg>
+          </div>
+          <div class="stat-num">10+</div>
+          <div class="stat-label">лет на рынке недвижимости</div>
+        </div>
+
+        <div class="stat-item">
+          <div class="stat-icon">
+            <svg class="stat-svg" viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="28" cy="28" r="20" stroke="#C0392B" stroke-width="1" opacity="0.15" class="svg-pulse-3"/>
+              <circle cx="28" cy="28" r="14" stroke="#C0392B" stroke-width="1" opacity="0.25" class="svg-pulse-2"/>
+              <path d="M10 32 C10 28 14 24 18 24 L22 24 L26 28" stroke="#C0392B" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" fill="none" class="svg-hand-l"/>
+              <path d="M46 32 C46 28 42 24 38 24 L34 24 L30 28" stroke="#C0392B" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" fill="none" class="svg-hand-r"/>
+              <path d="M26 28 C26 28 27 30 28 30 C29 30 30 28 30 28" stroke="#C0392B" stroke-width="2.2" stroke-linecap="round" fill="none"/>
+              <path d="M22 24 L20 20 M24 23 L23 19 M26 23 L26 19" stroke="#C0392B" stroke-width="1.5" stroke-linecap="round"/>
+              <path d="M34 24 L36 20 M32 23 L33 19 M30 23 L30 19" stroke="#C0392B" stroke-width="1.5" stroke-linecap="round"/>
+              <path d="M28 12 L28.8 14.8 L32 14 L29.8 16 L31 19 L28 17.2 L25 19 L26.2 16 L24 14 L27.2 14.8 Z" fill="#C0392B" class="svg-star-spin" opacity="0.8"/>
+            </svg>
+          </div>
+          <div class="stat-num">1000+</div>
+          <div class="stat-label">довольных клиентов</div>
+        </div>
+
+        <div class="stat-item">
+          <div class="stat-icon">
+            <svg class="stat-svg" viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <ellipse cx="28" cy="50" rx="16" ry="2.5" fill="#C0392B" opacity="0.12" class="svg-shadow"/>
+              <path d="M10 30 L10 48 L46 48 L46 30" stroke="#C0392B" stroke-width="2" stroke-linejoin="round" fill="none" class="svg-walls"/>
+              <path d="M6 30 L28 10 L50 30" stroke="#C0392B" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round" fill="none" class="svg-house-roof"/>
+              <rect x="36" y="14" width="5" height="9" rx="0.5" fill="none" stroke="#C0392B" stroke-width="1.5" class="svg-chimney"/>
+              <path d="M38.5 13 Q37 10 39 8 Q41 6 39.5 4" stroke="#C0392B" stroke-width="1.2" stroke-linecap="round" fill="none" class="svg-smoke" opacity="0.6"/>
+              <rect x="22" y="35" width="12" height="13" rx="1" fill="none" stroke="#C0392B" stroke-width="1.8" class="svg-door"/>
+              <path d="M22 35 Q28 33 34 35" stroke="#C0392B" stroke-width="1.5" fill="none"/>
+              <circle cx="33" cy="41.5" r="1.2" fill="#C0392B"/>
+              <rect x="23" y="20" width="10" height="8" rx="1" fill="none" stroke="#C0392B" stroke-width="1.5" class="svg-attic-win"/>
+              <line x1="28" y1="20" x2="28" y2="28" stroke="#C0392B" stroke-width="1"/>
+              <line x1="23" y1="24" x2="33" y2="24" stroke="#C0392B" stroke-width="1"/>
+            </svg>
+          </div>
+          <div class="stat-num">2000+</div>
+          <div class="stat-label">объектов в базе</div>
+        </div>
+
+        <div class="stat-item">
+          <div class="stat-icon">
+            <svg class="stat-svg" viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M14 20 Q11 13 14 8" stroke="#C0392B" stroke-width="1.5" stroke-linecap="round" fill="none" class="svg-wave svg-wave-l1" opacity="0.5"/>
+              <path d="M10 22 Q5 12 10 5" stroke="#C0392B" stroke-width="1.5" stroke-linecap="round" fill="none" class="svg-wave svg-wave-l2" opacity="0.25"/>
+              <path d="M42 20 Q45 13 42 8" stroke="#C0392B" stroke-width="1.5" stroke-linecap="round" fill="none" class="svg-wave svg-wave-r1" opacity="0.5"/>
+              <path d="M46 22 Q51 12 46 5" stroke="#C0392B" stroke-width="1.5" stroke-linecap="round" fill="none" class="svg-wave svg-wave-r2" opacity="0.25"/>
+              <path d="M28 6 C20 6 14 12 14 19 C14 28 28 44 28 44 C28 44 42 28 42 19 C42 12 36 6 28 6 Z" fill="none" stroke="#C0392B" stroke-width="2.2" class="svg-pin-body"/>
+              <circle cx="28" cy="19" r="5.5" fill="#C0392B" class="svg-pin-dot"/>
+              <circle cx="28" cy="19" r="2.5" fill="white"/>
+              <ellipse cx="28" cy="47" rx="7" ry="2" fill="#C0392B" opacity="0.15" class="svg-pin-shadow"/>
+            </svg>
+          </div>
+          <div class="stat-num">20+</div>
+          <div class="stat-label">лучших локаций по всей Грузии</div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- PROPERTY LISTING -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header">
+        <div>
+          <h2 class="section-title">Подборка недвижимости</h2>
+        </div>
+        <span class="see-all" onclick="showPage('catalog')">Смотреть все</span>
+      </div>
+      <div class="props-grid">
+        <div class="prop-card" onclick="showPage('detail')">
+          <div class="prop-img-wrap">
+            <img class="prop-img" src="https://picsum.photos/seed/apart1/500/375" alt="Апартаменты в Батуми">
+            <span class="prop-badge badge-sale">Продажа</span>
+            <button class="prop-fav">♡</button>
+          </div>
+          <div class="prop-body">
+            <div class="prop-price">$95,000</div>
+            <div class="prop-name">Апартаменты в Батуми</div>
+            <div class="prop-addr">Батуми, ул. Джавахишвили</div>
+            <div class="prop-specs">
+              <div class="prop-spec"><span>45</span> м²</div>
+              <div class="prop-spec"><span>1</span> спальня</div>
+              <div class="prop-spec"><span>12</span> этаж</div>
+            </div>
+          </div>
+        </div>
+        <div class="prop-card" onclick="showPage('detail')">
+          <div class="prop-img-wrap">
+            <img class="prop-img" src="https://picsum.photos/seed/flat2/500/375" alt="Квартира в Тбилиси">
+            <span class="prop-badge badge-rent">Аренда</span>
+            <button class="prop-fav">♡</button>
+          </div>
+          <div class="prop-body">
+            <div class="prop-price">$120,000</div>
+            <div class="prop-name">Квартира в Тбилиси</div>
+            <div class="prop-addr">Тбилиси, Сабуртало</div>
+            <div class="prop-specs">
+              <div class="prop-spec"><span>78</span> м²</div>
+              <div class="prop-spec"><span>2</span> спальни</div>
+              <div class="prop-spec"><span>6</span> этаж</div>
+            </div>
+          </div>
+        </div>
+        <div class="prop-card" onclick="showPage('detail')">
+          <div class="prop-img-wrap">
+            <img class="prop-img" src="https://picsum.photos/seed/hotel3/500/375" alt="Апарт-отель в Гонио">
+            <span class="prop-badge badge-invest">Инвестиция</span>
+            <button class="prop-fav">♡</button>
+          </div>
+          <div class="prop-body">
+            <div class="prop-price">$1,200,000</div>
+            <div class="prop-name">Апарт-отель в Гонио</div>
+            <div class="prop-addr">Гонио, Аджара, Приморье</div>
+            <div class="prop-specs">
+              <div class="prop-spec"><span>1200</span> м²</div>
+              <div class="prop-spec"><span>1</span> спальня</div>
+              <div class="prop-spec"><span>30</span> номеров</div>
+            </div>
+          </div>
+        </div>
+        <div class="prop-card" onclick="showPage('detail')">
+          <div class="prop-img-wrap">
+            <img class="prop-img" src="https://picsum.photos/seed/villa4/500/375" alt="Вилла в Бакуриани">
+            <span class="prop-badge badge-sale">Продажа</span>
+            <button class="prop-fav">♡</button>
+          </div>
+          <div class="prop-body">
+            <div class="prop-price">$350,000</div>
+            <div class="prop-name">Вилла в Бакуриани</div>
+            <div class="prop-addr">Бакуриани, Дзирула</div>
+            <div class="prop-specs">
+              <div class="prop-spec"><span>210</span> м²</div>
+              <div class="prop-spec"><span>4</span> спальни</div>
+              <div class="prop-spec"><span>2</span> этажа</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section class="testimonials" id="testimonials">
+    <div class="container">
+      <div class="testimonials-header">
+        <div class="testimonials-eyebrow">Отзывы</div>
+        <div class="testimonials-title">Нам доверяют<br><span>партнёры и инвесторы</span></div>
+      </div>
+      <div class="testi-track-wrap">
+        <div class="testi-track" id="testiTrack">
+          <div class="testi-card">
+            <div class="testi-stars">★★★★★</div>
+            <p class="testi-quote">Команда Georgia Real Estate провела нас через весь процесс покупки квартиры в Батуми — от первого звонка до получения ключей. Профессионализм и прозрачность на каждом шагу.</p>
+            <div class="testi-author">
+              <div class="testi-avatar-placeholder">АМ</div>
+              <div><div class="testi-name">Алексей Морозов</div><div class="testi-role">Частный инвестор, Москва</div></div>
+              <div class="testi-tag">Инвестор</div>
+            </div>
+          </div>
+          <div class="testi-card">
+            <div class="testi-stars">★★★★★</div>
+            <p class="testi-quote">Сотрудничаем с компанией уже третий год. Надёжный партнёр для масштабных инвестиций в грузинскую недвижимость. Особо ценим юридическую чистоту сделок и постпродажное сопровождение.</p>
+            <div class="testi-author">
+              <div class="testi-avatar-placeholder">DK</div>
+              <div><div class="testi-name">David Kvaratskhelia</div><div class="testi-role">CEO, KvGroup Invest</div></div>
+              <div class="testi-tag">Партнёр</div>
+            </div>
+          </div>
+          <div class="testi-card">
+            <div class="testi-stars">★★★★★</div>
+            <p class="testi-quote">Искала апартаменты у моря для семейного отдыха и сдачи в аренду. Менеджер подобрал идеальный вариант в Гонио — уже получаю 12% годовых. Рекомендую всем, кто думает об инвестициях.</p>
+            <div class="testi-author">
+              <div class="testi-avatar-placeholder">ОС</div>
+              <div><div class="testi-name">Ольга Степанова</div><div class="testi-role">Предприниматель, Киев</div></div>
+              <div class="testi-tag">Клиент</div>
+            </div>
+          </div>
+          <div class="testi-card">
+            <div class="testi-stars">★★★★★</div>
+            <p class="testi-quote">Приобрели коммерческое помещение в Тбилиси для открытия ресторана. Georgia Real Estate сопроводили не только сделку, но и помогли с регистрацией бизнеса. Это настоящий партнёрский подход.</p>
+            <div class="testi-author">
+              <div class="testi-avatar-placeholder">МТ</div>
+              <div><div class="testi-name">Михаил Тетрадзе</div><div class="testi-role">Ресторатор, Тбилиси</div></div>
+              <div class="testi-tag">Клиент</div>
+            </div>
+          </div>
+          <div class="testi-card">
+            <div class="testi-stars">★★★★★</div>
+            <p class="testi-quote">Направляю всех своих клиентов именно сюда. Лучшая база объектов по грузинскому рынку, честные комиссии и молниеносная реакция команды. Для нашего агентства это стратегический партнёр.</p>
+            <div class="testi-author">
+              <div class="testi-avatar-placeholder">NB</div>
+              <div><div class="testi-name">Nino Bakradze</div><div class="testi-role">Директор, Prime Realty GE</div></div>
+              <div class="testi-tag">Партнёр</div>
+            </div>
+          </div>
+          <div class="testi-card">
+            <div class="testi-stars">★★★★★</div>
+            <p class="testi-quote">Диверсифицируем портфель зарубежной недвижимостью. Грузия оказалась лучшим выбором — стабильный рост, доступный вход. Команда дала исчерпывающие аналитические материалы ещё на этапе переговоров.</p>
+            <div class="testi-author">
+              <div class="testi-avatar-placeholder">РШ</div>
+              <div><div class="testi-name">Роман Шевченко</div><div class="testi-role">Управляющий активами, Дубай</div></div>
+              <div class="testi-tag">Инвестор</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="testi-nav">
+        <button class="testi-btn" id="testiBtnPrev" onclick="testiNav(-1)">‹</button>
+        <div class="testi-dots" id="testiDots"></div>
+        <button class="testi-btn" id="testiBtnNext" onclick="testiNav(1)">›</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-grid">
+        <div>
+          <div class="footer-brand-name">
+            <svg width="22" height="22" viewBox="0 0 36 36" fill="none"><rect width="36" height="36" fill="transparent"/><rect x="15.5" y="2" width="5" height="32" fill="#C0392B"/><rect x="2" y="15.5" width="32" height="5" fill="#C0392B"/><rect x="4" y="4" width="2.5" height="8" fill="#C0392B"/><rect x="1.5" y="6" width="7.5" height="2.5" fill="#C0392B"/><rect x="29.5" y="4" width="2.5" height="8" fill="#C0392B"/><rect x="27" y="6" width="7.5" height="2.5" fill="#C0392B"/><rect x="4" y="24" width="2.5" height="8" fill="#C0392B"/><rect x="1.5" y="27.5" width="7.5" height="2.5" fill="#C0392B"/><rect x="29.5" y="24" width="2.5" height="8" fill="#C0392B"/><rect x="27" y="27.5" width="7.5" height="2.5" fill="#C0392B"/></svg>
+            Georgia Real Estate
+          </div>
+          <div class="footer-brand-desc">Ваш надёжный партнёр на рынке недвижимости в Грузии.</div>
+          <div class="footer-socials">
+            <div class="footer-social">f</div>
+            <div class="footer-social">in</div>
+            <div class="footer-social">✈</div>
+            <div class="footer-social">▶</div>
+          </div>
+        </div>
+        <div>
+          <div class="footer-col-title">Меню</div>
+          <ul class="footer-links">
+            <li onclick="showPage('home')">О компании</li>
+            <li onclick="showPage('catalog')">Недвижимость</li>
+            <li>Услуги</li>
+            <li>Блог</li>
+            <li onclick="showPage('contact')">Контакты</li>
+          </ul>
+        </div>
+        <div>
+          <div class="footer-col-title">Услуги</div>
+          <ul class="footer-links">
+            <li>Подбор недвижимости</li>
+            <li>Юридическое сопровождение</li>
+            <li>Управление недвижимостью</li>
+            <li>Инвестиционные консультации</li>
+          </ul>
+        </div>
+        <div>
+          <div class="footer-col-title">Контакты</div>
+          <div class="footer-contact">
+            <span>+995 32 2 123 456</span>
+            <span>info@georgia-re.com</span>
+            <span>г. Тбилиси,<br>ул. Чаокаедзе, 37</span>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span class="footer-copy">© 2026 Georgia Real Estate</span>
+        <span class="footer-policy" onclick="showPage('privacy')">Политика конфиденциальности</span>
+      </div>
+    </div>
+  </footer>
+</div>
+
+<!-- ══════════════════════════
+     PAGE: CATALOG
+══════════════════════════ -->
+<div class="page page-body" id="page-catalog">
+  <div class="catalog-hero">
+    <div class="catalog-hero-bg"></div>
+    <div class="catalog-hero-overlay"></div>
+    <div class="catalog-hero-content">
+      <h1>All Projects</h1>
+    </div>
+  </div>
+
+  <div class="filter-bar">
+    <div class="filter-form">
+      <div class="filter-field filter-field--country">
+        <label>Страна</label>
+        <select class="filter-select" onchange="filterCatalog()">
+          <option value="all">🇬🇪 Грузия</option>
+          <option value="usa">🇺🇸 США</option>
+          <option value="uae">🇦🇪 ОАЭ</option>
+          <option value="cyprus">🇨🇾 Кипр</option>
+          <option value="greece">🇬🇷 Греция</option>
+        </select>
+      </div>
+      <div class="filter-field">
+        <label>Регион</label>
+        <select class="filter-select" onchange="filterCatalog()">
+          <option value="all">Любой регион</option>
+          <option value="tbilisi-region">Тбилиси</option>
+          <option value="adjara">Аджара</option>
+          <option value="kakheti">Кахетия</option>
+          <option value="bakuriani">Бакуриани</option>
+        </select>
+      </div>
+      <div class="filter-field">
+        <label>Город</label>
+        <select class="filter-select" id="citySelect" onchange="filterCatalog()">
+          <option value="all">Любой город</option>
+          <option value="tbilisi">Тбилиси</option>
+          <option value="batumi">Батуми</option>
+          <option value="gonio">Гонио</option>
+          <option value="kakheti">Кахетия</option>
+          <option value="bakuriani">Бакуриани</option>
+        </select>
+      </div>
+      <div class="filter-field">
+        <label>Тип недвижимости</label>
+        <select class="filter-select" onchange="filterCatalog()">
+          <option value="all">Любой</option>
+          <option value="apartment">Квартира</option>
+          <option value="villa">Вилла</option>
+          <option value="apart">Апартаменты</option>
+          <option value="commercial">Коммерческая</option>
+        </select>
+      </div>
+      <div class="filter-field">
+        <label>Статус</label>
+        <select class="filter-select" id="statusSelect" onchange="filterCatalog()">
+          <option value="all">Любой статус</option>
+          <option value="ready">Готов к заселению</option>
+          <option value="construction">На стадии строительства</option>
+        </select>
+      </div>
+      <button class="btn btn-red filter-btn" onclick="filterCatalog()">Найти</button>
+    </div>
+  </div>
+
+  <!-- ══ MAP ══ -->
+  <div class="catalog-map-wrap" id="catalogMapWrap">
+    <div id="catalogMap"></div>
+    <div class="map-toggle-btn" onclick="toggleCatalogMap()" id="mapToggleBtn">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 6l7-3 8 3 7-3v15l-7 3-8-3-7 3V6z"/><line x1="8" y1="3" x2="8" y2="18"/><line x1="16" y1="6" x2="16" y2="21"/></svg>
+      Скрыть карту
+    </div>
+  </div>
+  <div class="map-show-row" id="mapShowRow">
+    <button class="map-show-btn" onclick="toggleCatalogMap()">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 6l7-3 8 3 7-3v15l-7 3-8-3-7 3V6z"/><line x1="8" y1="3" x2="8" y2="18"/><line x1="16" y1="6" x2="16" y2="21"/></svg>
+      Показать карту
+    </button>
+  </div>
+
+  <div class="catalog-body">
+    <div class="catalog-headline">ALL PROJECTS</div>
+    <div class="catalog-grid" id="catalogGrid">
+
+      <div class="catalog-card" data-city="batumi" data-status="ready" onclick="showPage('detail')">
+        <div style="position:relative;overflow:hidden;"><img class="catalog-img" src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=600&h=375&fit=crop" alt="ЖК Гранд Панорама Батуми">
+          <span class="prop-badge badge-ready" style="position:absolute;top:12px;left:12px;">Сдан в эксплуатацию</span></div>
+        <div class="catalog-card-body">
+          <div class="catalog-city">Batumi</div>
+          <div class="catalog-name">ЖК «Гранд Панорама Батуми»</div>
+          <div class="catalog-price">$125,000</div>
+          <div class="catalog-specs"><span>45</span> м² &nbsp;·&nbsp; <span>1</span> спальня &nbsp;·&nbsp; <span>12</span> этаж</div>
+          <a class="catalog-detail-link" onclick="event.stopPropagation();showPage('detail')">Detailed Specs →</a>
+        </div>
+      </div>
+
+      <div class="catalog-card" data-city="tbilisi" data-status="ready" onclick="showPage('detail')">
+        <div style="position:relative;overflow:hidden;"><img class="catalog-img" src="https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=600&h=375&fit=crop" alt="Элитная квартира Тбилиси">
+          <span class="prop-badge badge-build" style="position:absolute;top:12px;left:12px;">Под чистовую отделку</span></div>
+        <div class="catalog-card-body">
+          <div class="catalog-city">Tbilisi</div>
+          <div class="catalog-name">Элитная квартира в центре Тбилиси</div>
+          <div class="catalog-price">$210,000</div>
+          <div class="catalog-specs"><span>210</span> м² &nbsp;·&nbsp; <span>2</span> спальни &nbsp;·&nbsp; <span>6</span> этаж</div>
+          <a class="catalog-detail-link" onclick="event.stopPropagation();showPage('detail')">Detailed Specs →</a>
+        </div>
+      </div>
+
+      <div class="catalog-card" data-city="gonio" data-status="ready" onclick="showPage('detail')">
+        <div style="position:relative;overflow:hidden;"><img class="catalog-img" src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=600&h=375&fit=crop" alt="Апартаменты у моря Гонио">
+          <span class="prop-badge badge-ready" style="position:absolute;top:12px;left:12px;">Готовые к заселению</span></div>
+        <div class="catalog-card-body">
+          <div class="catalog-city">Gonio</div>
+          <div class="catalog-name">Апартаменты у моря, Gonio Coast</div>
+          <div class="catalog-price">$98,000</div>
+          <div class="catalog-specs"><span>1200</span> м² &nbsp;·&nbsp; <span>1</span> спальня &nbsp;·&nbsp; <span>30</span> номеров</div>
+          <a class="catalog-detail-link" onclick="event.stopPropagation();showPage('detail')">Detailed Specs →</a>
+        </div>
+      </div>
+
+      <div class="catalog-card" data-city="bakuriani" data-status="construction" onclick="showPage('detail')">
+        <div style="position:relative;overflow:hidden;"><img class="catalog-img" src="https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=600&h=375&fit=crop" alt="Коттеджный комплекс Бакуриани">
+          <span class="prop-badge badge-invest" style="position:absolute;top:12px;left:12px;">Инвестиция</span></div>
+        <div class="catalog-card-body">
+          <div class="catalog-city">Bakuriani</div>
+          <div class="catalog-name">Коттеджный комплекс «Бакуриани Хиллс»</div>
+          <div class="catalog-price">$195,000</div>
+          <div class="catalog-specs"><span>1800</span> м² &nbsp;·&nbsp; <span>1</span> спальня &nbsp;·&nbsp; <span>12</span> домов</div>
+          <a class="catalog-detail-link" onclick="event.stopPropagation();showPage('detail')">Detailed Specs →</a>
+        </div>
+      </div>
+
+      <div class="catalog-card" data-city="kakheti" data-status="construction" onclick="showPage('detail')">
+        <div style="position:relative;overflow:hidden;"><img class="catalog-img" src="https://images.unsplash.com/photo-1583608205776-bfd35f0d9f83?w=600&h=375&fit=crop" alt="Резиденция в Алазанской Долине">
+          <span class="prop-badge badge-build" style="position:absolute;top:12px;left:12px;">Строящееся</span></div>
+        <div class="catalog-card-body">
+          <div class="catalog-city">Kakheti</div>
+          <div class="catalog-name">Резиденция в Алазанской Долине</div>
+          <div class="catalog-price">$110,000</div>
+          <div class="catalog-specs"><span>110</span> м² &nbsp;·&nbsp; <span>2</span> спальни &nbsp;·&nbsp; <span>6</span> этаж</div>
+          <a class="catalog-detail-link" onclick="event.stopPropagation();showPage('detail')">Detailed Specs →</a>
+        </div>
+      </div>
+
+      <div class="catalog-card" data-city="tbilisi" data-status="ready" onclick="showPage('detail')">
+        <div style="position:relative;overflow:hidden;"><img class="catalog-img" src="https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=600&h=375&fit=crop" alt="Пентхаус Тбилиси">
+          <span class="prop-badge badge-sale" style="position:absolute;top:12px;left:12px;">Эксклюзив</span></div>
+        <div class="catalog-card-body">
+          <div class="catalog-city">Tbilisi luxury</div>
+          <div class="catalog-name">Пентхаус «Царская Высота», Тбилиси</div>
+          <div class="catalog-price">$650,000</div>
+          <div class="catalog-specs"><span>310</span> м² &nbsp;·&nbsp; <span>4</span> спальни &nbsp;·&nbsp; <span>16</span> этаж</div>
+          <a class="catalog-detail-link" onclick="event.stopPropagation();showPage('detail')">Detailed Specs →</a>
+        </div>
+      </div>
+
+    </div>
+
+    <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;margin-top:32px;">
+      <div class="catalog-count"><span>1200+</span> объектов</div>
+      <div class="pagination">
+        <button class="page-btn">‹</button>
+        <button class="page-btn active">2</button>
+        <button class="page-btn">3</button>
+        <button class="page-btn">›</button>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-grid">
+        <div>
+          <div class="footer-brand-name">
+            <svg width="22" height="22" viewBox="0 0 36 36" fill="none"><rect width="36" height="36" fill="transparent"/><rect x="15.5" y="2" width="5" height="32" fill="#C0392B"/><rect x="2" y="15.5" width="32" height="5" fill="#C0392B"/><rect x="4" y="4" width="2.5" height="8" fill="#C0392B"/><rect x="1.5" y="6" width="7.5" height="2.5" fill="#C0392B"/><rect x="29.5" y="4" width="2.5" height="8" fill="#C0392B"/><rect x="27" y="6" width="7.5" height="2.5" fill="#C0392B"/><rect x="4" y="24" width="2.5" height="8" fill="#C0392B"/><rect x="1.5" y="27.5" width="7.5" height="2.5" fill="#C0392B"/><rect x="29.5" y="24" width="2.5" height="8" fill="#C0392B"/><rect x="27" y="27.5" width="7.5" height="2.5" fill="#C0392B"/></svg>
+            Georgia Real Estate
+          </div>
+          <div class="footer-brand-desc">Ваш надёжный партнёр на рынке недвижимости в Грузии.</div>
+          <div class="footer-socials">
+            <div class="footer-social">f</div>
+            <div class="footer-social">in</div>
+            <div class="footer-social">✈</div>
+            <div class="footer-social">▶</div>
+          </div>
+        </div>
+        <div>
+          <div class="footer-col-title">Меню</div>
+          <ul class="footer-links">
+            <li onclick="showPage('home')">О компании</li>
+            <li onclick="showPage('catalog')">Недвижимость</li>
+            <li>Услуги</li>
+            <li>Блог</li>
+            <li onclick="showPage('contact')">Контакты</li>
+          </ul>
+        </div>
+        <div>
+          <div class="footer-col-title">Услуги</div>
+          <ul class="footer-links">
+            <li>Подбор недвижимости</li>
+            <li>Юридическое сопровождение</li>
+            <li>Управление недвижимостью</li>
+            <li>Инвестиционные консультации</li>
+          </ul>
+        </div>
+        <div>
+          <div class="footer-col-title">Контакты</div>
+          <div class="footer-contact">
+            <span>+995 32 2 123 456</span>
+            <span>info@georgia-re.com</span>
+            <span>г. Тбилиси,<br>ул. Чаокаедзе, 37</span>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span class="footer-copy">© 2024 Georgia Real Estate</span>
+        <span class="footer-policy" onclick="showPage('privacy')">Политика конфиденциальности</span>
+      </div>
+    </div>
+  </footer>
+</div>
+
+<!-- ══════════════════════════
+     PAGE: TEAM
+══════════════════════════ -->
+<div class="page page-body" id="page-team">
+  <div class="team-hero">
+    <div class="team-hero-bg"></div>
+    <div class="team-hero-overlay"></div>
+    <div class="team-hero-content"><h1>Наша команда</h1></div>
+  </div>
+
+  <div class="team-section-inner">
+    <div class="team-grid">
+      <div class="team-card">
+        <img class="team-photo" src="https://picsum.photos/seed/man1/400/530" alt="">
+        <div class="team-body">
+          <div class="team-name">Александр Верин</div>
+          <div class="team-role">Генеральный директор</div>
+          <div class="team-desc">Специализируется на стратегическом развитии и международных переговорах.</div>
+          <div class="team-socials"><div class="social-btn">vk</div><div class="social-btn">📞</div><div class="social-btn">@</div></div>
+        </div>
+      </div>
+      <div class="team-card">
+        <img class="team-photo" src="https://picsum.photos/seed/woman2/400/530" alt="">
+        <div class="team-body">
+          <div class="team-name">Наталья Соловьёва</div>
+          <div class="team-role">Ведущий агент по продажам</div>
+          <div class="team-desc">Специализируется на жилой недвижимости Тбилиси и Батуми, работает с иностранными инвесторами.</div>
+          <div class="team-socials"><div class="social-btn">vk</div><div class="social-btn">📞</div><div class="social-btn">@</div></div>
+        </div>
+      </div>
+      <div class="team-card">
+        <img class="team-photo" src="https://picsum.photos/seed/woman3/400/530" alt="">
+        <div class="team-body">
+          <div class="team-name">Мариам Джанелидзе</div>
+          <div class="team-role">Директор грузинского направления</div>
+          <div class="team-desc">Глубокое знание грузинского рынка. Ведёт ключевые сделки в Тбилиси и Кахетии.</div>
+          <div class="team-socials"><div class="social-btn">vk</div><div class="social-btn">📞</div><div class="social-btn">@</div></div>
+        </div>
+      </div>
+      <div class="team-card">
+        <img class="team-photo" src="https://picsum.photos/seed/man4/400/530" alt="">
+        <div class="team-body">
+          <div class="team-name">Дэвид Коэн</div>
+          <div class="team-role">Финансовый директор</div>
+          <div class="team-desc">Структурирование инвестиционных сделок, работа с международным капиталом.</div>
+          <div class="team-socials"><div class="social-btn">vk</div><div class="social-btn">📞</div></div>
+        </div>
+      </div>
+      <div class="team-card">
+        <img class="team-photo" src="https://picsum.photos/seed/man5/400/530" alt="">
+        <div class="team-body">
+          <div class="team-name">Роберт Чейз</div>
+          <div class="team-role">Ведущий агент по продажам</div>
+          <div class="team-desc">Специалист по курортной недвижимости Батуми и Гонио.</div>
+          <div class="team-socials"><div class="social-btn">vk</div><div class="social-btn">📞</div></div>
+        </div>
+      </div>
+      <div class="team-card">
+        <img class="team-photo" src="https://picsum.photos/seed/man6/400/530" alt="">
+        <div class="team-body">
+          <div class="team-name">Яков Леви</div>
+          <div class="team-role">Юридический директор</div>
+          <div class="team-desc">Международный юрист. Сопровождение сделок в пяти юрисдикциях.</div>
+          <div class="team-socials"><div class="social-btn">vk</div><div class="social-btn">📞</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Stats under team -->
+    <div style="margin-top:64px;">
+      <h2 class="section-title" style="margin-bottom:28px;">О компании</h2>
+      <div class="team-about-grid" style="display:grid;grid-template-columns:240px 1fr;gap:60px;align-items:center;">
+        <div>
+          <p style="font-size:0.875rem;color:var(--gray-700);line-height:1.7;margin-bottom:20px;">Мы — команда профессионалов с многолетним опытом на рынке недвижимости Грузии. Наша миссия — помочь вам найти идеальный объект для жизни, отдыха или инвестиций.</p>
+          <button class="btn btn-outline" onclick="showPage('contact')">Подробнее о нас</button>
+        </div>
+        <div class="stats-row">
+          <div class="stat-item"><div class="stat-icon">🏢</div><div class="stat-num">10+</div><div class="stat-label">лет на рынке</div></div>
+          <div class="stat-item"><div class="stat-icon">🤝</div><div class="stat-num">1000+</div><div class="stat-label">довольных клиентов</div></div>
+          <div class="stat-item"><div class="stat-icon">🏠</div><div class="stat-num">2000+</div><div class="stat-label">объектов в базе</div></div>
+          <div class="stat-item"><div class="stat-icon">📍</div><div class="stat-num">20+</div><div class="stat-label">лучших локаций</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-grid">
+        <div>
+          <div class="footer-brand-name">
+            <svg width="22" height="22" viewBox="0 0 36 36" fill="none"><rect width="36" height="36" fill="transparent"/><rect x="15.5" y="2" width="5" height="32" fill="#C0392B"/><rect x="2" y="15.5" width="32" height="5" fill="#C0392B"/><rect x="4" y="4" width="2.5" height="8" fill="#C0392B"/><rect x="1.5" y="6" width="7.5" height="2.5" fill="#C0392B"/><rect x="29.5" y="4" width="2.5" height="8" fill="#C0392B"/><rect x="27" y="6" width="7.5" height="2.5" fill="#C0392B"/><rect x="4" y="24" width="2.5" height="8" fill="#C0392B"/><rect x="1.5" y="27.5" width="7.5" height="2.5" fill="#C0392B"/><rect x="29.5" y="24" width="2.5" height="8" fill="#C0392B"/><rect x="27" y="27.5" width="7.5" height="2.5" fill="#C0392B"/></svg>
+            Georgia Real Estate
+          </div>
+          <div class="footer-brand-desc">Ваш надёжный партнёр на рынке недвижимости в Грузии.</div>
+          <div class="footer-socials">
+            <div class="footer-social">f</div>
+            <div class="footer-social">in</div>
+            <div class="footer-social">✈</div>
+            <div class="footer-social">▶</div>
+          </div>
+        </div>
+        <div>
+          <div class="footer-col-title">Меню</div>
+          <ul class="footer-links">
+            <li onclick="showPage('home')">О компании</li>
+            <li onclick="showPage('catalog')">Недвижимость</li>
+            <li>Услуги</li>
+            <li>Блог</li>
+            <li onclick="showPage('contact')">Контакты</li>
+          </ul>
+        </div>
+        <div>
+          <div class="footer-col-title">Услуги</div>
+          <ul class="footer-links">
+            <li>Подбор недвижимости</li>
+            <li>Юридическое сопровождение</li>
+            <li>Управление недвижимостью</li>
+            <li>Инвестиционные консультации</li>
+          </ul>
+        </div>
+        <div>
+          <div class="footer-col-title">Контакты</div>
+          <div class="footer-contact">
+            <span>+995 32 2 123 456</span>
+            <span>info@georgia-re.com</span>
+            <span>г. Тбилиси,<br>ул. Чаокаедзе, 37</span>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span class="footer-copy">© 2024 Georgia Real Estate</span>
+        <span class="footer-policy" onclick="showPage('privacy')">Политика конфиденциальности</span>
+      </div>
+    </div>
+  </footer>
+</div>
+
+<!-- ══════════════════════════
+     PAGE: PROPERTY DETAIL
+══════════════════════════ -->
+<div class="page page-body" id="page-detail">
+  <!-- Gallery grid -->
+  <div class="detail-gallery">
+    <div class="gallery-main">
+      <img src="https://picsum.photos/seed/detail-main/900/600" alt="" style="width:100%;height:100%;object-fit:cover;">
+    </div>
+    <div class="gallery-side" onclick="openLightbox(['https://picsum.photos/seed/apart1/900/600','https://picsum.photos/seed/flat2/900/600','https://picsum.photos/seed/hotel3/900/600','https://picsum.photos/seed/tbilisi-night/900/600'],0)">
+      <img src="https://picsum.photos/seed/apart1/500/375" alt="">
+    </div>
+    <div class="gallery-side" onclick="openLightbox(['https://picsum.photos/seed/apart1/900/600','https://picsum.photos/seed/flat2/900/600','https://picsum.photos/seed/hotel3/900/600','https://picsum.photos/seed/tbilisi-night/900/600'],1)" style="position:relative;">
+      <img src="https://picsum.photos/seed/flat2/500/375" alt="">
+      <div class="gallery-more-overlay">+8 фото</div>
+    </div>
+  </div>
+
+  <div class="detail-body">
+    <div class="detail-layout">
+      <div>
+        <h1 class="detail-title">Квартира в Тбилиси — Элитный Проект в Районе Вера</h1>
+        <div class="detail-specs-bar">
+          <div class="detail-spec">
+            <div class="detail-spec-icon">
+              <!-- PIN / Location -->
+              <svg class="detail-spec-svg" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M7 11 Q5 7 7 3" stroke="#C0392B" stroke-width="1.2" stroke-linecap="round" fill="none" opacity="0.45"/>
+                <path d="M4 12.5 Q1 6.5 4 1" stroke="#C0392B" stroke-width="1.2" stroke-linecap="round" fill="none" opacity="0.22"/>
+                <path d="M33 11 Q35 7 33 3" stroke="#C0392B" stroke-width="1.2" stroke-linecap="round" fill="none" opacity="0.45"/>
+                <path d="M36 12.5 Q39 6.5 36 1" stroke="#C0392B" stroke-width="1.2" stroke-linecap="round" fill="none" opacity="0.22"/>
+                <path d="M20 2 C14 2 9 7.2 9 13.5 C9 22 20 34 20 34 C20 34 31 22 31 13.5 C31 7.2 26 2 20 2 Z" fill="none" stroke="#C0392B" stroke-width="2" class="ds-pin-body"/>
+                <circle cx="20" cy="13.5" r="4.5" fill="#C0392B" class="ds-pin-dot"/>
+                <circle cx="20" cy="13.5" r="2" fill="white"/>
+                <ellipse cx="20" cy="36" rx="5" ry="1.5" fill="#C0392B" opacity="0.12"/>
+              </svg>
+            </div>
+            <div class="detail-spec-label">Расположение</div>
+            <div class="detail-spec-val">Тбилиси, р-н Вера</div>
+          </div>
+          <div class="detail-spec">
+            <div class="detail-spec-icon">
+              <!-- RULER / Area -->
+              <svg class="detail-spec-svg" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <g class="ds-ruler">
+                  <rect x="4" y="14" width="32" height="12" rx="2" stroke="#C0392B" stroke-width="2" fill="none"/>
+                  <line x1="10" y1="14" x2="10" y2="19" stroke="#C0392B" stroke-width="1.5" stroke-linecap="round"/>
+                  <line x1="16" y1="14" x2="16" y2="22" stroke="#C0392B" stroke-width="1.5" stroke-linecap="round"/>
+                  <line x1="22" y1="14" x2="22" y2="19" stroke="#C0392B" stroke-width="1.5" stroke-linecap="round"/>
+                  <line x1="28" y1="14" x2="28" y2="22" stroke="#C0392B" stroke-width="1.5" stroke-linecap="round"/>
+                </g>
+                <!-- arrows indicating measurement -->
+                <path d="M4 8 L8 10 M4 8 L8 6" stroke="#C0392B" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.5"/>
+                <path d="M36 8 L32 10 M36 8 L32 6" stroke="#C0392B" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.5"/>
+                <line x1="4" y1="8" x2="36" y2="8" stroke="#C0392B" stroke-width="1" stroke-dasharray="2 2" opacity="0.4"/>
+              </svg>
+            </div>
+            <div class="detail-spec-label">Площадь</div>
+            <div class="detail-spec-val">112 м²</div>
+          </div>
+          <div class="detail-spec">
+            <div class="detail-spec-icon">
+              <!-- BED / Bedrooms -->
+              <svg class="detail-spec-svg" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <g class="ds-bed">
+                  <rect x="4" y="20" width="32" height="11" rx="2" stroke="#C0392B" stroke-width="2" fill="none"/>
+                  <path d="M4 22 L4 14 C4 13 5 12 6 12 L34 12 C35 12 36 13 36 14 L36 22" stroke="#C0392B" stroke-width="2" stroke-linecap="round" fill="none"/>
+                  <rect x="8" y="15" width="9" height="7" rx="1.5" fill="#C0392B" opacity="0.25"/>
+                  <rect x="23" y="15" width="9" height="7" rx="1.5" fill="#C0392B" opacity="0.25"/>
+                  <line x1="7" y1="31" x2="7" y2="36" stroke="#C0392B" stroke-width="2" stroke-linecap="round"/>
+                  <line x1="33" y1="31" x2="33" y2="36" stroke="#C0392B" stroke-width="2" stroke-linecap="round"/>
+                </g>
+              </svg>
+            </div>
+            <div class="detail-spec-label">Спальни</div>
+            <div class="detail-spec-val">3</div>
+          </div>
+          <div class="detail-spec">
+            <div class="detail-spec-icon">
+              <!-- BUILDING / Floor -->
+              <svg class="detail-spec-svg" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect class="ds-floor-block" x="6" y="30" width="28" height="6" rx="1" fill="#C0392B" opacity="0.9"/>
+                <rect class="ds-floor-block" x="8" y="23" width="24" height="6" rx="1" fill="#C0392B" opacity="0.7"/>
+                <rect class="ds-floor-block" x="10" y="16" width="20" height="6" rx="1" fill="#C0392B" opacity="0.5"/>
+                <rect class="ds-floor-block" x="13" y="9" width="14" height="6" rx="1" fill="#C0392B" opacity="0.3"/>
+                <!-- windows -->
+                <rect x="12" y="32" width="3" height="3" rx="0.5" fill="white" opacity="0.6"/>
+                <rect x="18" y="32" width="3" height="3" rx="0.5" fill="white" opacity="0.6"/>
+                <rect x="25" y="32" width="3" height="3" rx="0.5" fill="white" opacity="0.6"/>
+              </svg>
+            </div>
+            <div class="detail-spec-label">Этаж</div>
+            <div class="detail-spec-val">5</div>
+          </div>
+          <div class="detail-spec">
+            <div class="detail-spec-icon">
+              <!-- HOUSE / Type -->
+              <svg class="detail-spec-svg" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M20 5 L35 18 L32 18 L32 35 L8 35 L8 18 L5 18 Z" stroke="#C0392B" stroke-width="2" stroke-linejoin="round" fill="none" class="ds-house"/>
+                <rect x="15" y="24" width="10" height="11" rx="1" fill="#C0392B" opacity="0.2" stroke="#C0392B" stroke-width="1.5"/>
+                <rect x="11" y="18" width="7" height="6" rx="1" fill="#C0392B" opacity="0.25"/>
+                <rect x="22" y="18" width="7" height="6" rx="1" fill="#C0392B" opacity="0.25"/>
+                <!-- chimney smoke -->
+                <path d="M28 6 Q29 3 28 1" stroke="#C0392B" stroke-width="1.2" stroke-linecap="round" opacity="0.4"/>
+                <rect x="26" y="6" width="4" height="4" rx="0.5" fill="#C0392B" opacity="0.3"/>
+              </svg>
+            </div>
+            <div class="detail-spec-label">Тип</div>
+            <div class="detail-spec-val">Квартира (Элит)</div>
+          </div>
+          <div class="detail-spec">
+            <div class="detail-spec-icon">
+              <!-- CALENDAR / Year -->
+              <svg class="detail-spec-svg" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <g class="ds-cal">
+                  <rect x="5" y="9" width="30" height="26" rx="2" stroke="#C0392B" stroke-width="2" fill="none"/>
+                  <line x1="5" y1="17" x2="35" y2="17" stroke="#C0392B" stroke-width="1.5"/>
+                  <line x1="13" y1="5" x2="13" y2="13" stroke="#C0392B" stroke-width="2" stroke-linecap="round"/>
+                  <line x1="27" y1="5" x2="27" y2="13" stroke="#C0392B" stroke-width="2" stroke-linecap="round"/>
+                  <!-- date dots -->
+                  <circle cx="13" cy="23" r="1.5" fill="#C0392B" opacity="0.4"/>
+                  <circle cx="20" cy="23" r="1.5" fill="#C0392B" opacity="0.4"/>
+                  <circle cx="27" cy="23" r="1.5" fill="#C0392B" opacity="0.4"/>
+                  <circle cx="13" cy="30" r="1.5" fill="#C0392B" opacity="0.4"/>
+                  <circle cx="20" cy="30" r="2" fill="#C0392B"/>
+                  <circle cx="27" cy="30" r="1.5" fill="#C0392B" opacity="0.4"/>
+                </g>
+              </svg>
+            </div>
+            <div class="detail-spec-label">Год постройки</div>
+            <div class="detail-spec-val">2026 (план.)</div>
+          </div>
+        </div>
+
+        <p class="detail-desc">Этот уникальный жилой комплекс расположен в историческом центре Тбилиси, предлагая роскошную жизнь и панорамные виды на город и горы. Современная архитектура, высококачественные материалы и отличная инфраструктура делают его идеальным выбором для тех, кто ценит комфорт и стиль. В шаговой доступности парки, театры и лучшие рестораны города.</p>
+
+        <div class="video-section">
+          <div class="video-label">Видео презентация проекта</div>
+          <div class="video-thumb" onclick="openVideo('dQw4w9WgXcQ')">
+            <img src="https://picsum.photos/seed/video-thumb/800/450" alt="">
+            <div class="play-btn"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Sidebar -->
+      <div class="detail-sidebar">
+        <div class="invest-card">
+          <div class="invest-badge">📈 Investment</div>
+          <div class="invest-title">Потенциал для инвестиций</div>
+          <div class="invest-row"><span class="invest-row-label">Ожидаемый рост цены:</span><span class="invest-row-val">15% – 20%</span></div>
+          <div class="invest-row"><span class="invest-row-label">Доход от аренды:</span><span class="invest-row-val">8% – 10%</span></div>
+          <div class="invest-row"><span class="invest-row-label">Окупаемость:</span><span class="invest-row-val">9 – 11 лет</span></div>
+        </div>
+        <div class="detail-actions">
+          <button class="btn btn-red" onclick="showPage('contact')">Заказать подробную презентацию</button>
+          <button class="btn btn-outline" onclick="showPage('contact')">Связаться с менеджером</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-grid">
+        <div>
+          <div class="footer-brand-name">
+            <svg width="22" height="22" viewBox="0 0 36 36" fill="none"><rect width="36" height="36" fill="transparent"/><rect x="15.5" y="2" width="5" height="32" fill="#C0392B"/><rect x="2" y="15.5" width="32" height="5" fill="#C0392B"/><rect x="4" y="4" width="2.5" height="8" fill="#C0392B"/><rect x="1.5" y="6" width="7.5" height="2.5" fill="#C0392B"/><rect x="29.5" y="4" width="2.5" height="8" fill="#C0392B"/><rect x="27" y="6" width="7.5" height="2.5" fill="#C0392B"/><rect x="4" y="24" width="2.5" height="8" fill="#C0392B"/><rect x="1.5" y="27.5" width="7.5" height="2.5" fill="#C0392B"/><rect x="29.5" y="24" width="2.5" height="8" fill="#C0392B"/><rect x="27" y="27.5" width="7.5" height="2.5" fill="#C0392B"/></svg>
+            Georgia Real Estate
+          </div>
+          <div class="footer-brand-desc">Ваш надёжный партнёр на рынке недвижимости в Грузии.</div>
+          <div class="footer-socials">
+            <div class="footer-social">f</div>
+            <div class="footer-social">in</div>
+            <div class="footer-social">✈</div>
+            <div class="footer-social">▶</div>
+          </div>
+        </div>
+        <div>
+          <div class="footer-col-title">Меню</div>
+          <ul class="footer-links">
+            <li onclick="showPage('home')">О компании</li>
+            <li onclick="showPage('catalog')">Недвижимость</li>
+            <li>Услуги</li>
+            <li>Блог</li>
+            <li onclick="showPage('contact')">Контакты</li>
+          </ul>
+        </div>
+        <div>
+          <div class="footer-col-title">Услуги</div>
+          <ul class="footer-links">
+            <li>Подбор недвижимости</li>
+            <li>Юридическое сопровождение</li>
+            <li>Управление недвижимостью</li>
+            <li>Инвестиционные консультации</li>
+          </ul>
+        </div>
+        <div>
+          <div class="footer-col-title">Контакты</div>
+          <div class="footer-contact">
+            <span>+995 32 2 123 456</span>
+            <span>info@georgia-re.com</span>
+            <span>г. Тбилиси,<br>ул. Чаокаедзе, 37</span>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span class="footer-copy">© 2024 Georgia Real Estate</span>
+        <span class="footer-policy" onclick="showPage('privacy')">Политика конфиденциальности</span>
+      </div>
+    </div>
+  </footer>
+</div>
+
+<!-- ══════════════════════════
+     PAGE: CONTACTS
+══════════════════════════ -->
+<div class="page page-body" id="page-contact">
+  <div class="contacts-hero">
+    <div class="contacts-hero-bg"></div>
+    <div class="contacts-hero-overlay"></div>
+    <div class="contacts-hero-content"><h1>Контакты</h1></div>
+  </div>
+
+  <div class="contacts-body">
+    <div class="contacts-grid">
+      <div class="contacts-left">
+        <div class="office-card office-card--stretch">
+          <div class="office-title">Офис в Тбилиси</div>
+          <div class="office-row"><span class="office-row-label">Адрес:</span><span class="office-row-val">ул. Шота Руставели 15,<br>Тбилиси, Грузия</span></div>
+          <div class="office-row"><span class="office-row-label">Телефон:</span><span class="office-row-val">+995 32 2 123 456</span></div>
+          <div class="office-row"><span class="office-row-label">Email:</span><span class="office-row-val">info@georgia-re.com</span></div>
+          <div class="office-row"><span class="office-row-label">Часы работы:</span><span class="office-row-val">Пн–Пт 9:00 – 18:00</span></div>
+          <div class="office-socials">
+            <a class="office-social-btn" href="https://t.me/" target="_blank">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221l-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12L7.19 13.67l-2.96-.924c-.643-.204-.657-.643.136-.953l11.57-4.461c.537-.194 1.006.131.958.889z"/></svg>
+              Telegram
+            </a>
+            <a class="office-social-btn" href="https://wa.me/99532123456" target="_blank">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+              WhatsApp
+            </a>
+            <a class="office-social-btn" href="https://instagram.com/" target="_blank">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+              Instagram
+            </a>
+            <a class="office-social-btn" href="https://facebook.com/" target="_blank">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+              Facebook
+            </a>
+          </div>
+          <div class="office-action">
+            <a href="https://maps.google.com/?q=Shota+Rustaveli+15+Tbilisi+Georgia" target="_blank" class="btn btn-red">📍 Открыть на карте</a>
+          </div>
+        </div>
+      </div>
+
+      <div style="display:flex;flex-direction:column;">
+        <div class="form-card" style="flex:1;display:flex;flex-direction:column;">
+          <div class="form-card-title">Форма обратной связи</div>
+          <div class="form-row">
+            <div class="form-group" style="margin-bottom:0;">
+              <label>Ваше имя</label>
+              <input class="form-input" type="text" placeholder="Ваше Имя">
+            </div>
+            <div class="form-group" style="margin-bottom:0;">
+              <label>Email</label>
+              <input class="form-input" type="email" placeholder="Ваш Email">
+            </div>
+          </div>
+          <div class="form-row" style="margin-top:14px;">
+            <div class="form-group" style="margin-bottom:0;">
+              <label>Email (дубль)</label>
+              <input class="form-input" type="email" placeholder="Ваш Email">
+            </div>
+            <div class="form-group" style="margin-bottom:0;">
+              <label>Телефон</label>
+              <input class="form-input" type="tel" placeholder="Ваш Телефон">
+            </div>
+          </div>
+          <div class="form-group" style="margin-top:14px;">
+            <label>Сообщение</label>
+            <textarea class="form-textarea" placeholder="Ваше сообщение..."></textarea>
+          </div>
+          <button class="btn btn-red form-submit" onclick="submitContact(event)">Отправить сообщение</button>
+          <div class="form-success" id="formSuccess">✓ Сообщение отправлено! Мы свяжемся с вами в течение 24 часов.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-grid">
+        <div>
+          <div class="footer-brand-name">Georgia Real Estate</div>
+          <div class="footer-brand-desc">Ваш надёжный партнёр на рынке недвижимости в Грузии.</div>
+          <div class="footer-socials">
+            <div class="footer-social">f</div><div class="footer-social">in</div>
+            <div class="footer-social">✈</div><div class="footer-social">▶</div>
+          </div>
+        </div>
+        <div>
+          <div class="footer-col-title">Меню</div>
+          <ul class="footer-links">
+            <li onclick="showPage('home')">О компании</li>
+            <li onclick="showPage('catalog')">Недвижимость</li>
+            <li>Услуги</li><li>Блог</li>
+            <li onclick="showPage('contact')">Контакты</li>
+          </ul>
+        </div>
+        <div>
+          <div class="footer-col-title">Услуги</div>
+          <ul class="footer-links">
+            <li>Подбор недвижимости</li>
+            <li>Юридическое сопровождение</li>
+            <li>Управление недвижимостью</li>
+            <li>Инвестиционные консультации</li>
+          </ul>
+        </div>
+        <div>
+          <div class="footer-col-title">Контакты</div>
+          <div class="footer-contact">
+            <span>+995 32 2 123 456</span>
+            <span>info@georgia-re.com</span>
+            <span>г. Тбилиси, ул. Чаокаедзе, 37</span>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span class="footer-copy">© 2024 Georgia Real Estate</span>
+        <span class="footer-policy" onclick="showPage('privacy')">Политика конфиденциальности</span>
+      </div>
+    </div>
+  </footer>
+</div>
+
+<!-- ══════════════════════════
+     CONTACT POPUP
+══════════════════════════ -->
+<div class="cpopup-overlay" id="contactPopup" onclick="closeContactPopupOutside(event)">
+  <div class="cpopup" id="contactPopupBox">
+    <div class="cpopup-bar"></div>
+    <svg class="cpopup-deco" viewBox="0 0 160 160" fill="none">
+      <rect x="67" y="8" width="26" height="144" fill="#C0392B"/>
+      <rect x="8" y="67" width="144" height="26" fill="#C0392B"/>
+      <rect x="18" y="18" width="12" height="36" fill="#C0392B"/>
+      <rect x="8" y="28" width="32" height="12" fill="#C0392B"/>
+      <rect x="130" y="18" width="12" height="36" fill="#C0392B"/>
+      <rect x="120" y="28" width="32" height="12" fill="#C0392B"/>
+      <rect x="18" y="106" width="12" height="36" fill="#C0392B"/>
+      <rect x="8" y="120" width="32" height="12" fill="#C0392B"/>
+      <rect x="130" y="106" width="12" height="36" fill="#C0392B"/>
+      <rect x="120" y="120" width="32" height="12" fill="#C0392B"/>
+    </svg>
+    <button class="cpopup-close" onclick="closeContactPopup()">✕</button>
+    <div class="cpopup-body">
+      <div id="cpopupForm">
+        <div class="cpopup-eyebrow">Обратная связь</div>
+        <div class="cpopup-title">Свяжитесь с нами</div>
+        <p class="cpopup-sub">Оставьте заявку — наш менеджер свяжется с вами в течение 30 минут.</p>
+        <div class="cpopup-row">
+          <div class="cpopup-field">
+            <label>Ваше имя</label>
+            <input class="cpopup-input" type="text" placeholder="Иван Иванов" id="cpName">
+          </div>
+          <div class="cpopup-field">
+            <label>Телефон</label>
+            <input class="cpopup-input" type="tel" placeholder="+995 5XX XXX XXX" id="cpPhone" maxlength="17">
+          </div>
+        </div>
+        <div class="cpopup-field" style="margin-bottom:14px;">
+          <label>Электронная почта</label>
+          <input class="cpopup-input" type="email" placeholder="example@mail.com" id="cpEmail">
+        </div>
+        <div class="cpopup-field">
+          <label>Ваш вопрос</label>
+          <textarea class="cpopup-textarea" placeholder="Расскажите, что вас интересует…" id="cpMessage"></textarea>
+        </div>
+        <button class="btn btn-red cpopup-submit" onclick="submitContactPopup()">Отправить заявку →</button>
+      </div>
+      <div class="cpopup-success" id="cpopupSuccess">
+        <div class="cpopup-success-icon">✓</div>
+        <div class="cpopup-success-title">Заявка отправлена!</div>
+        <p class="cpopup-success-text">Наш менеджер свяжется с вами<br>в ближайшие 30 минут.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════
+     PAGE: PRIVACY
+══════════════════════════ -->
+<div class="page page-body" id="page-privacy">
+  <div class="privacy-hero">
+    <div class="privacy-hero-bg"></div>
+    <div class="privacy-hero-bar"></div>
+    <div class="privacy-hero-content">
+      <h1>Политика конфиденциальности</h1>
+      <div class="privacy-hero-sub">Последнее обновление: 1 января 2024 г.</div>
+    </div>
+  </div>
+
+  <div class="privacy-body">
+
+    <div class="privacy-toc">
+      <div class="privacy-toc-title">Содержание</div>
+      <ol>
+        <li><a href="#priv-1">Общие положения</a></li>
+        <li><a href="#priv-2">Сбор и использование персональных данных</a></li>
+        <li><a href="#priv-3">Файлы cookie</a></li>
+        <li><a href="#priv-4">Передача данных третьим лицам</a></li>
+        <li><a href="#priv-5">Хранение и защита данных</a></li>
+        <li><a href="#priv-6">Права пользователей</a></li>
+        <li><a href="#priv-7">Изменения политики</a></li>
+        <li><a href="#priv-8">Контактная информация</a></li>
+      </ol>
+    </div>
+
+    <div class="privacy-section" id="priv-1">
+      <div class="privacy-section-num">01</div>
+      <h2>Общие положения</h2>
+      <p>Настоящая Политика конфиденциальности регулирует порядок сбора, использования, хранения и защиты персональных данных пользователей сайта Georgia Real Estate (далее — «Компания», «мы»).</p>
+      <p>Используя наш сайт и услуги, вы соглашаетесь с условиями настоящей Политики. Если вы не согласны с какими-либо условиями, пожалуйста, прекратите использование сайта.</p>
+      <div class="privacy-highlight">Мы обрабатываем ваши данные в соответствии с законодательством Грузии о защите персональных данных (Закон Грузии «О защите персональных данных», 2011 г.) и международными стандартами GDPR.</div>
+    </div>
+
+    <div class="privacy-divider"></div>
+
+    <div class="privacy-section" id="priv-2">
+      <div class="privacy-section-num">02</div>
+      <h2>Сбор и использование персональных данных</h2>
+      <p>Мы собираем следующие категории персональных данных:</p>
+      <ul>
+        <li><strong>Контактные данные</strong> — имя, номер телефона, адрес электронной почты, которые вы предоставляете при заполнении форм на сайте.</li>
+        <li><strong>Данные об использовании</strong> — IP-адрес, тип браузера, страницы сайта, которые вы посещаете, время и дата визитов.</li>
+        <li><strong>Данные о предпочтениях</strong> — информация о недвижимости, которую вы просматриваете и сохраняете в избранное.</li>
+        <li><strong>Данные переписки</strong> — сообщения, которые вы направляете нам через формы обратной связи.</li>
+      </ul>
+      <p>Собранные данные используются для следующих целей:</p>
+      <ul>
+        <li>Ответа на ваши запросы и консультаций по недвижимости.</li>
+        <li>Подбора объектов, соответствующих вашим требованиям и бюджету.</li>
+        <li>Направления актуальных предложений и новостей рынка (только с вашего согласия).</li>
+        <li>Улучшения качества наших услуг и работы сайта.</li>
+        <li>Выполнения юридических обязательств.</li>
+      </ul>
+    </div>
+
+    <div class="privacy-divider"></div>
+
+    <div class="privacy-section" id="priv-3">
+      <div class="privacy-section-num">03</div>
+      <h2>Файлы cookie</h2>
+      <p>Наш сайт использует файлы cookie — небольшие текстовые файлы, которые сохраняются на вашем устройстве. Они помогают нам запоминать ваши предпочтения и улучшать работу сайта.</p>
+      <p>Мы используем следующие типы cookie:</p>
+      <ul>
+        <li><strong>Технически необходимые</strong> — обеспечивают корректную работу сайта и не могут быть отключены.</li>
+        <li><strong>Аналитические</strong> — позволяют нам анализировать трафик и поведение пользователей (Google Analytics).</li>
+        <li><strong>Маркетинговые</strong> — используются для показа релевантной рекламы (только с вашего согласия).</li>
+      </ul>
+      <p>Вы можете отключить файлы cookie в настройках браузера. Это может повлиять на функциональность некоторых разделов сайта.</p>
+    </div>
+
+    <div class="privacy-divider"></div>
+
+    <div class="privacy-section" id="priv-4">
+      <div class="privacy-section-num">04</div>
+      <h2>Передача данных третьим лицам</h2>
+      <p>Мы не продаём и не передаём ваши персональные данные третьим лицам без вашего согласия, за исключением следующих случаев:</p>
+      <ul>
+        <li><strong>Партнёры по услугам</strong> — юридические компании, нотариусы и банки, привлекаемые для сопровождения сделок, получают только те данные, которые необходимы для выполнения конкретной услуги.</li>
+        <li><strong>Государственные органы</strong> — данные могут быть переданы по законному требованию властей Грузии или других юрисдикций.</li>
+        <li><strong>Технические провайдеры</strong> — сервисы хостинга, аналитики и коммуникаций, которые действуют как обработчики данных и связаны с нами договорами о конфиденциальности.</li>
+      </ul>
+    </div>
+
+    <div class="privacy-divider"></div>
+
+    <div class="privacy-section" id="priv-5">
+      <div class="privacy-section-num">05</div>
+      <h2>Хранение и защита данных</h2>
+      <p>Мы храним ваши персональные данные только столько, сколько необходимо для достижения целей, указанных в настоящей Политике, или в соответствии с требованиями законодательства.</p>
+      <p>Для защиты ваших данных мы применяем:</p>
+      <ul>
+        <li>Шифрование данных при передаче (SSL/TLS).</li>
+        <li>Ограниченный доступ к персональным данным — только для уполномоченных сотрудников.</li>
+        <li>Регулярный аудит систем безопасности.</li>
+        <li>Физическую защиту серверов и резервное копирование данных.</li>
+      </ul>
+      <div class="privacy-highlight">При обнаружении утечки данных мы уведомим вас и соответствующие регуляторные органы в течение 72 часов, как того требует законодательство.</div>
+    </div>
+
+    <div class="privacy-divider"></div>
+
+    <div class="privacy-section" id="priv-6">
+      <div class="privacy-section-num">06</div>
+      <h2>Права пользователей</h2>
+      <p>В соответствии с применимым законодательством вы имеете следующие права в отношении своих персональных данных:</p>
+      <ul>
+        <li><strong>Право на доступ</strong> — получить копию персональных данных, которые мы храним о вас.</li>
+        <li><strong>Право на исправление</strong> — потребовать исправления неточных или неполных данных.</li>
+        <li><strong>Право на удаление</strong> — запросить удаление ваших данных («право на забвение»).</li>
+        <li><strong>Право на ограничение обработки</strong> — в определённых случаях потребовать ограничения обработки данных.</li>
+        <li><strong>Право на переносимость</strong> — получить данные в структурированном формате.</li>
+        <li><strong>Право на отзыв согласия</strong> — отозвать согласие на обработку данных в любой момент.</li>
+      </ul>
+      <p>Для реализации своих прав направьте запрос на адрес <a href="mailto:privacy@georgia-re.com">privacy@georgia-re.com</a>. Мы рассмотрим ваш запрос в течение 30 дней.</p>
+    </div>
+
+    <div class="privacy-divider"></div>
+
+    <div class="privacy-section" id="priv-7">
+      <div class="privacy-section-num">07</div>
+      <h2>Изменения политики</h2>
+      <p>Мы оставляем за собой право вносить изменения в настоящую Политику конфиденциальности. О существенных изменениях мы уведомим вас по электронной почте или через уведомление на сайте.</p>
+      <p>Продолжение использования сайта после публикации изменений означает ваше согласие с обновлённой Политикой. Рекомендуем периодически проверять эту страницу.</p>
+    </div>
+
+    <div class="privacy-divider"></div>
+
+    <div class="privacy-section" id="priv-8">
+      <div class="privacy-section-num">08</div>
+      <h2>Контактная информация</h2>
+      <p>По вопросам, связанным с обработкой персональных данных, вы можете обратиться к нашему ответственному за защиту данных:</p>
+      <div class="privacy-contact-box">
+        <div class="privacy-contact-icon">📋</div>
+        <div>
+          <h3>Georgia Real Estate — Отдел защиты данных</h3>
+          <p>
+            <strong>Email:</strong> <a href="mailto:privacy@georgia-re.com">privacy@georgia-re.com</a><br>
+            <strong>Телефон:</strong> +995 32 2 123 456<br>
+            <strong>Адрес:</strong> ул. Шота Руставели 15, Тбилиси, Грузия, 0108<br>
+            <strong>Часы работы:</strong> Пн–Пт, 9:00–18:00 (GMT+4)
+          </p>
+        </div>
+      </div>
+      <div class="privacy-back-btn">
+        <button class="btn btn-outline" onclick="history.back ? history.back() : showPage('home')">← Вернуться назад</button>
+      </div>
+    </div>
+
+  </div>
+
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-grid">
+        <div>
+          <div class="footer-brand-name">
+            <svg width="22" height="22" viewBox="0 0 36 36" fill="none"><rect width="36" height="36" fill="transparent"/><rect x="15.5" y="2" width="5" height="32" fill="#C0392B"/><rect x="2" y="15.5" width="32" height="5" fill="#C0392B"/><rect x="4" y="4" width="2.5" height="8" fill="#C0392B"/><rect x="1.5" y="6" width="7.5" height="2.5" fill="#C0392B"/><rect x="29.5" y="4" width="2.5" height="8" fill="#C0392B"/><rect x="27" y="6" width="7.5" height="2.5" fill="#C0392B"/><rect x="4" y="24" width="2.5" height="8" fill="#C0392B"/><rect x="1.5" y="27.5" width="7.5" height="2.5" fill="#C0392B"/><rect x="29.5" y="24" width="2.5" height="8" fill="#C0392B"/><rect x="27" y="27.5" width="7.5" height="2.5" fill="#C0392B"/></svg>
+            Georgia Real Estate
+          </div>
+          <div class="footer-brand-desc">Ваш надёжный партнёр на рынке недвижимости в Грузии.</div>
+          <div class="footer-socials">
+            <div class="footer-social">f</div>
+            <div class="footer-social">in</div>
+            <div class="footer-social">✈</div>
+            <div class="footer-social">▶</div>
+          </div>
+        </div>
+        <div>
+          <div class="footer-col-title">Меню</div>
+          <ul class="footer-links">
+            <li onclick="showPage('home')">О компании</li>
+            <li onclick="showPage('catalog')">Недвижимость</li>
+            <li>Услуги</li>
+            <li>Блог</li>
+            <li onclick="showPage('contact')">Контакты</li>
+          </ul>
+        </div>
+        <div>
+          <div class="footer-col-title">Услуги</div>
+          <ul class="footer-links">
+            <li>Подбор недвижимости</li>
+            <li>Юридическое сопровождение</li>
+            <li>Управление недвижимостью</li>
+            <li>Инвестиционные консультации</li>
+          </ul>
+        </div>
+        <div>
+          <div class="footer-col-title">Контакты</div>
+          <div class="footer-contact">
+            <span>+995 32 2 123 456</span>
+            <span>info@georgia-re.com</span>
+            <span>г. Тбилиси,<br>ул. Чаокаедзе, 37</span>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span class="footer-copy">© 2024 Georgia Real Estate</span>
+        <span class="footer-policy" onclick="showPage('privacy')">Политика конфиденциальности</span>
+      </div>
+    </div>
+  </footer>
+</div>
+
+<!-- ══════════════════════════
+     VIDEO OVERLAY
+══════════════════════════ -->
+<div class="overlay" id="videoOverlay" onclick="closeVideo(event)">
+  <div class="overlay-close" onclick="closeVideo()">✕</div>
+  <div class="video-frame">
+    <iframe id="videoIframe" src="" allow="autoplay;encrypted-media" allowfullscreen></iframe>
+  </div>
+</div>
+
+<!-- ══════════════════════════
+     LIGHTBOX
+══════════════════════════ -->
+<div class="lightbox" id="lightbox">
+  <div class="lb-close" onclick="closeLightbox()">✕</div>
+  <div class="lb-arr lb-prev" onclick="lbNav(-1)">‹</div>
+  <img class="lb-img" id="lbImg" src="" alt="">
+  <div class="lb-arr lb-next" onclick="lbNav(1)">›</div>
+  <div class="lb-counter" id="lbCounter"></div>
+</div>
+
+<!-- Сначала библиотека карт, которая нужна твоему коду -->
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+<!-- Затем твой файл common.js (уже без тегов <script> внутри себя) -->
+<script src="js/common.js"></script>
+</body>
+</html>
