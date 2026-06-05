@@ -481,3 +481,13 @@ window.showPage = function(id) {
   const cat = document.getElementById('catalogCount');
   if (cat) cat.textContent = count;
 })();
+
+// ── RESET FILTERS ──
+function resetHomeFilter() {
+  document.querySelectorAll('#page-home .filter-select').forEach(s => s.selectedIndex = 0);
+}
+
+function resetCatalogFilter() {
+  document.querySelectorAll('#page-catalog .filter-select').forEach(s => s.selectedIndex = 0);
+  filterCatalog();
+}
