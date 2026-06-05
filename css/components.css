@@ -352,3 +352,19 @@ footer {
 .privacy-contact-box a:hover { text-decoration: underline; }
 .privacy-back-btn { margin-top: 48px; }
 
+/* ── Popup radio group ── */
+.cpopup-radio-group {
+  display: flex; flex-wrap: wrap; gap: 8px; margin-top: 6px;
+}
+.cpopup-radio {
+  display: flex; align-items: center; gap: 6px;
+  padding: 7px 14px; border-radius: 6px;
+  border: 1.5px solid var(--border);
+  cursor: pointer; font-size: 0.8rem;
+  transition: var(--transition); user-select: none;
+}
+.cpopup-radio:hover { border-color: var(--red); color: var(--red); }
+.cpopup-radio input[type="radio"] { display: none; }
+.cpopup-radio:has(input:checked) {
+  border-color: var(--red); background: rgba(192,57,43,0.06); color: var(--red); font-weight: 600;
+}
