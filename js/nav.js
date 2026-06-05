@@ -119,7 +119,7 @@ function submitContact(e) {
 
 // ── KEY EVENTS ──
 document.addEventListener('keydown', e => {
-  if (e.key === 'Escape') { closeLightbox(); closeVideo(); closeContactPopup(); }
+  if (e.key === 'Escape') { closeLightbox(); closeVideo(); closeContactPopup(); closePresentPopup(); closeManagerPopup(); }
   if (e.key === 'ArrowLeft'  && document.getElementById('lightbox').classList.contains('open')) lbNav(-1);
   if (e.key === 'ArrowRight' && document.getElementById('lightbox').classList.contains('open')) lbNav(1);
 });
