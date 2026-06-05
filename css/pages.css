@@ -129,22 +129,23 @@
 }
 .about-strip-inner {
   max-width: 1200px; margin: 0 auto; padding: 0 32px;
-  display: grid; grid-template-columns: 320px 1fr; gap: 80px; align-items: center;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: start;
 }
 .about-text h2 { font-family:var(--font-head); font-size:1.5rem; font-weight:700; margin-bottom:12px; color:var(--dark); }
 .about-text p { font-size:0.875rem; color:var(--gray-700); line-height:1.7; margin-bottom:20px; }
 .stats-row {
-  display: grid; grid-template-columns: repeat(4, 1fr);
+  display: grid; grid-template-columns: repeat(2, 1fr);
   gap: 0; background: transparent;
   overflow: visible;
 }
 .stat-item {
   background: var(--white); padding: 28px 24px; text-align: center;
   border: 1px solid var(--border);
-  margin-right: -1px;
+  margin-right: -1px; margin-bottom: -1px;
   overflow: visible;
 }
-.stat-item:last-child { margin-right: 0; }
+.stat-item:nth-child(2n) { margin-right: 0; }
+.stat-item:last-child { margin-bottom: 0; }
 .stat-icon { font-size: 1.6rem; margin-bottom: 10px; color: var(--red); line-height: 0; display: flex; justify-content: center; }
 .stat-num {
   font-family: var(--font-head); font-size: 2rem; font-weight: 800;
