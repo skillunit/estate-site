@@ -7,6 +7,7 @@
   .footer-grid { grid-template-columns:1fr 1fr 1fr; }
   .detail-layout { grid-template-columns:1fr; }
   .detail-sidebar { position:static; }
+  .prop-desc-grid { grid-template-columns: 1fr; }
   .contacts-grid { grid-template-columns:1fr; }
   .catalog-filter-inner { grid-template-columns:1fr 1fr; }
   .catalog-filter-inner .btn { grid-column:span 2; }
