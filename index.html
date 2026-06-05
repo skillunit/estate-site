@@ -1494,7 +1494,7 @@
 <!-- ══════════════════════════
      VIDEO OVERLAY
 ══════════════════════════ -->
-<div class="overlay" id="videoOverlay" onclick="closeVideo(event)">
+<div class="overlay" id="videoOverlay" onclick="closeVideo(event)" style="display:none">
   <div class="overlay-close" onclick="closeVideo()">✕</div>
   <div class="video-frame">
     <iframe id="videoIframe" src="" allow="autoplay;encrypted-media" allowfullscreen></iframe>
@@ -1504,7 +1504,7 @@
 <!-- ══════════════════════════
      LIGHTBOX
 ══════════════════════════ -->
-<div class="lightbox" id="lightbox">
+<div class="lightbox" id="lightbox" style="display:none">
   <div class="lb-close" onclick="closeLightbox()">✕</div>
   <div class="lb-arr lb-prev" onclick="lbNav(-1)">‹</div>
   <img class="lb-img" id="lbImg" src="" alt="">
