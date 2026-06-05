@@ -97,9 +97,25 @@
     display:flex !important; flex-direction:column; gap:24px;
   }
 
-  /* ── Detail ── */
-  .detail-gallery { grid-template-columns:1fr; grid-template-rows:auto; max-height:none; }
-  .gallery-main { grid-row:auto; height:240px; }
+  /* ── Detail gallery: mobile slider ── */
+  .detail-gallery {
+    display: block;
+    position: relative;
+    height: 280px;
+    border-radius: var(--radius);
+    overflow: hidden;
+  }
+  .gallery-main { height: 280px; }
+  .gallery-side { display: none; }
+  .gallery-all-btn { display: none; }
+
+  /* Mobile slider controls */
+  .gallery-mob-slider { display: flex; }
+  .gallery-mob-prev,
+  .gallery-mob-next {
+    display: flex;
+  }
+  .gallery-mob-dots { display: flex; }
   .detail-body { padding: 24px 16px 60px; }
   .detail-layout { gap:24px; }
   .detail-specs-bar { display:grid; grid-template-columns:repeat(3,1fr); }
