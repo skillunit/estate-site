@@ -37,8 +37,10 @@ function goToCountry(country) {
   if (citySelect) citySelect.value = 'all';
   if (statusSelect) statusSelect.value = 'all';
   showPage('catalog');
-  renderCatalogGrid(country, 'all', 'all');
-  renderMapMarkers(country, 'all', 'all');
+  // Georgian properties have country:'all' in data, treat 'georgia' as 'all'
+  const dataCountry = country === 'georgia' ? 'all' : country;
+  renderCatalogGrid(dataCountry, 'all', 'all');
+  renderMapMarkers(dataCountry, 'all', 'all');
 }
 
 function filterCatalog() {
