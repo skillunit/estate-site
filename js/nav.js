@@ -259,3 +259,12 @@ function shareAction(type) {
     closeSharePopup({target: document.getElementById('shareOverlay')});
   }
 }
+
+// ── BLOG ARTICLE OPENER ──
+function openArticle(imgUrl) {
+  const heroBg = document.querySelector('.blog-article-hero-bg');
+  if (heroBg && imgUrl) {
+    heroBg.style.backgroundImage = `url('${imgUrl}')`;
+  }
+  showPage('blog-article');
+}
