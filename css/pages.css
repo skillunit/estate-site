@@ -1206,3 +1206,63 @@
   cursor: pointer; transition: background 0.2s;
 }
 .gallery-back-btn:hover { background: rgba(0,0,0,0.7); }
+
+/* Gallery share button */
+.gallery-share-btn {
+  position: absolute; bottom: 16px; right: 16px; z-index: 10;
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 8px 14px;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  font-size: 0.78rem; font-weight: 600; color: var(--dark);
+  cursor: pointer; transition: box-shadow var(--transition);
+}
+.gallery-share-btn:hover { box-shadow: var(--shadow-md); }
+
+/* Share popup */
+.share-overlay {
+  display: none; position: fixed; inset: 0; z-index: 9000;
+  background: rgba(0,0,0,0.45); align-items: center; justify-content: center;
+}
+.share-overlay.open { display: flex; }
+.share-popup {
+  background: var(--white); border-radius: 16px;
+  width: 100%; max-width: 420px; margin: 0 16px;
+  overflow: hidden;
+  box-shadow: 0 24px 64px rgba(0,0,0,0.18);
+  animation: shareIn 0.2s ease;
+}
+@keyframes shareIn {
+  from { opacity:0; transform: translateY(20px) scale(0.97); }
+  to   { opacity:1; transform: translateY(0) scale(1); }
+}
+.share-header {
+  display: flex; align-items: center; justify-content: center;
+  padding: 20px 20px 16px; position: relative;
+  border-bottom: 1px solid var(--border);
+}
+.share-title { font-family: var(--font-head); font-size: 1.1rem; font-weight: 700; color: var(--dark); }
+.share-close {
+  position: absolute; right: 16px; top: 50%; transform: translateY(-50%);
+  background: none; border: none; cursor: pointer; color: var(--gray-500);
+  display: flex; padding: 4px; transition: color var(--transition);
+}
+.share-close:hover { color: var(--dark); }
+.share-list { padding: 8px 0; }
+.share-item {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 16px 24px; cursor: pointer;
+  border-bottom: 1px solid var(--gray-100);
+  transition: background 0.15s;
+  font-size: 1rem; color: var(--dark);
+}
+.share-item:last-child { border-bottom: none; }
+.share-item:hover { background: var(--gray-100); }
+.share-item svg { color: var(--gray-500); flex-shrink: 0; }
+.share-copied {
+  display: none; text-align: center; padding: 12px;
+  font-size: 0.85rem; font-weight: 600; color: var(--white);
+  background: var(--red);
+}
+.share-copied.show { display: block; }

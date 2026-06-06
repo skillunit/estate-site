@@ -223,3 +223,41 @@ document.addEventListener('click', function(e) {
     e.target.classList.add('active');
   }
 });
+
+// ── SHARE POPUP ──
+function openSharePopup() {
+  const ov = document.getElementById('shareOverlay');
+  ov.style.display = 'flex';
+  setTimeout(() => ov.classList.add('open'), 10);
+  document.body.style.overflow = 'hidden';
+}
+function closeSharePopup(e) {
+  if (e && e.target !== document.getElementById('shareOverlay') && !e.target.closest('.share-close')) return;
+  const ov = document.getElementById('shareOverlay');
+  ov.classList.remove('open');
+  ov.style.display = 'none';
+  document.body.style.overflow = '';
+  document.getElementById('shareCopied').classList.remove('show');
+}
+function shareAction(type) {
+  const url = window.location.href;
+  const title = document.querySelector('.detail-title') ? document.querySelector('.detail-title').textContent : 'Georgia Real Estate';
+  if (type === 'copy') {
+    navigator.clipboard.writeText(url).then(() => {
+      document.getElementById('shareCopied').classList.add('show');
+      setTimeout(() => document.getElementById('shareCopied').classList.remove('show'), 2000);
+    });
+  } else if (type === 'email') {
+    window.open(`mailto:?subject=${encodeURIComponent(title)}&body=${encodeURIComponent(url)}`);
+    closeSharePopup({target: document.getElementById('shareOverlay')});
+  } else if (type === 'whatsapp') {
+    window.open(`https://wa.me/?text=${encodeURIComponent(title + ' ' + url)}`);
+    closeSharePopup({target: document.getElementById('shareOverlay')});
+  } else if (type === 'telegram') {
+    window.open(`https://t.me/share/url?url=${encodeURIComponent(url)}&text=${encodeURIComponent(title)}`);
+    closeSharePopup({target: document.getElementById('shareOverlay')});
+  } else if (type === 'facebook') {
+    window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`);
+    closeSharePopup({target: document.getElementById('shareOverlay')});
+  }
+}
