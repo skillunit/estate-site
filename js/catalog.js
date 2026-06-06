@@ -587,7 +587,7 @@ function renderRelated(currentId) {
   `).join('');
 
   relatedCur = 0;
-  setTimeout(initRelatedSlider, 200);
+  setTimeout(initRelatedSlider, 300);
 }
 
 function initRelatedSlider() {
