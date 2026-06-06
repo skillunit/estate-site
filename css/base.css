@@ -259,3 +259,6 @@ header {
 .hero-actions { display: flex; gap: 14px; flex-wrap: wrap; }
 
 /* ═══════════════════════════════════
+
+/* Mobile-only nav elements */
+.nav-mobile-footer { display:none; }
