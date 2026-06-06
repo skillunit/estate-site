@@ -39,21 +39,19 @@
     background:var(--white); padding:0;
     gap:0; z-index:999; border-top:2px solid var(--red);
     overflow-y:auto;
-    justify-content:center;
   }
   .header-nav.open .nav-sep { display:none; }
+  .header-nav.open a:not(.nav-contact-link):first-of-type { margin-top:auto; }
+  .header-nav.open a:not(.nav-contact-link):last-of-type { margin-bottom:auto; }
   .header-nav.open a {
-    display:flex; align-items:center; justify-content:center; gap:14px;
+    display:flex; align-items:center; justify-content:center;
     height:68px; padding:0 24px;
     font-size:1.3rem; font-weight:600; color:var(--dark);
     border-bottom:1px solid var(--gray-100);
     transition: background 0.15s, color 0.15s;
   }
-  .header-nav.open a svg { color: var(--gray-500); flex-shrink:0; transition: color 0.15s; }
   .header-nav.open a:hover,
   .header-nav.open a.active { background:var(--gray-100); color:var(--red); }
-  .header-nav.open a:hover svg,
-  .header-nav.open a.active svg { color:var(--red); }
   .header-nav.open a.nav-contact-link { display:none; }
   .header-nav.open a::after { display:none; }
 
