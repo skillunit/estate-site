@@ -70,6 +70,8 @@ function updateCatalogHeadline(country) {
   el.textContent = `${dealLabel} в ${countryLabel}`;
 }
 
+let _prevCountry = 'all';
+
 function filterCatalog() {
   const cityEl   = document.getElementById('citySelect');
   const statusEl = document.getElementById('statusSelect');
@@ -77,9 +79,15 @@ function filterCatalog() {
   const catalogFilterBar = document.querySelector('#page-catalog .filter-bar .filter-field--country .filter-select');
   const country = catalogFilterBar ? catalogFilterBar.value : 'all';
 
-  updateCatalogHeadline(country);
-  updateCityOptions(country);
+  // If country changed — update city options and reset city to 'all'
+  if (country !== _prevCountry) {
+    _prevCountry = country;
+    updateCityOptions(country);
+    if (cityEl) cityEl.value = 'all';
+  }
+
   const city = cityEl ? cityEl.value : 'all';
+  updateCatalogHeadline(country);
   renderCatalogGrid(country, city, status);
   renderMapMarkers(country, city, status);
 }
