@@ -942,7 +942,14 @@
         <h2 class="section-title" id="relatedTitle">Другие объекты в этом регионе</h2>
         <span class="see-all" onclick="showPage('catalog')">Смотреть все</span>
       </div>
-      <div class="catalog-grid" id="relatedGrid"></div>
+      <div class="testi-track-wrap">
+        <div class="testi-track" id="relatedTrack" style="gap:24px;"></div>
+      </div>
+      <div class="testi-nav" id="relatedNav">
+        <button class="testi-btn" onclick="relatedNav(-1)">‹</button>
+        <div class="testi-dots" id="relatedDots"></div>
+        <button class="testi-btn" onclick="relatedNav(1)">›</button>
+      </div>
     </div>
   </section>
 
