@@ -991,16 +991,14 @@
      PAGE: PROPERTY DETAIL
 ══════════════════════════ -->
 <div class="page page-body" id="page-detail">
-  <div class="detail-back-bar">
-    <span class="detail-back-btn" onclick="history.go(-1) || showPage('catalog')">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
-      Назад к проектам
-    </span>
-  </div>
   <!-- Gallery grid -->
   <div class="detail-gallery" id="detailGallery">
     <div class="gallery-main" onclick="openLightbox(['https://picsum.photos/seed/detail-main/900/600','https://picsum.photos/seed/apart1/900/600','https://picsum.photos/seed/flat2/900/600','https://picsum.photos/seed/hotel3/900/600','https://picsum.photos/seed/tbilisi-night/900/600'],0)">
       <img src="https://picsum.photos/seed/detail-main/1200/800" alt="" id="mobGalleryImg">
+      <span class="gallery-back-btn" onclick="event.stopPropagation();showPage('catalog')">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+        Назад
+      </span>
     </div>
     <div class="gallery-side" onclick="openLightbox(['https://picsum.photos/seed/detail-main/900/600','https://picsum.photos/seed/apart1/900/600','https://picsum.photos/seed/flat2/900/600','https://picsum.photos/seed/hotel3/900/600','https://picsum.photos/seed/tbilisi-night/900/600'],1)">
       <img src="https://picsum.photos/seed/apart1/600/400" alt="">

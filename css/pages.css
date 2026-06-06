@@ -1192,11 +1192,17 @@
   .blog-article-hero { height:320px; }
 }
 
-/* Detail back button */
-.detail-back-bar { max-width:1200px; margin:0 auto; padding:16px 32px 0; }
-.detail-back-btn {
-  display:inline-flex; align-items:center; gap:6px;
-  font-size:0.85rem; font-weight:600; color:var(--gray-700);
-  cursor:pointer; transition:color var(--transition);
+/* Detail back button — overlay on main photo */
+.gallery-main { position: relative; }
+.gallery-back-btn {
+  position: absolute; top: 16px; left: 16px; z-index: 10;
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 8px 16px;
+  background: rgba(0,0,0,0.45);
+  backdrop-filter: blur(6px);
+  border: 1px solid rgba(255,255,255,0.25);
+  border-radius: 20px;
+  font-size: 0.82rem; font-weight: 600; color: var(--white);
+  cursor: pointer; transition: background 0.2s;
 }
-.detail-back-btn:hover { color:var(--red); }
+.gallery-back-btn:hover { background: rgba(0,0,0,0.7); }
