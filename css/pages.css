@@ -403,7 +403,8 @@
   transition: box-shadow var(--transition);
 }
 .team-card:hover { box-shadow: var(--shadow-md); }
-.team-photo { width: 100%; aspect-ratio: 3/4; object-fit: cover; object-position: top; }
+.team-photo { width: 100%; aspect-ratio: 1/1; object-fit: cover; object-position: top center; filter: grayscale(100%); transition: filter 0.3s ease; }
+.team-card:hover .team-photo { filter: grayscale(0%); }
 .team-body { padding: 20px; }
 .team-name { font-family:var(--font-head); font-size:1rem; font-weight:700; color:var(--dark); margin-bottom:4px; }
 .team-role { font-size:0.72rem; font-weight:600; letter-spacing:0.06em; text-transform:uppercase; color:var(--red); margin-bottom:10px; }
