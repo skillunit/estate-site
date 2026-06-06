@@ -1191,3 +1191,12 @@
   .blog-article-sidebar { position:static; }
   .blog-article-hero { height:320px; }
 }
+
+/* Detail back button */
+.detail-back-bar { max-width:1200px; margin:0 auto; padding:16px 32px 0; }
+.detail-back-btn {
+  display:inline-flex; align-items:center; gap:6px;
+  font-size:0.85rem; font-weight:600; color:var(--gray-700);
+  cursor:pointer; transition:color var(--transition);
+}
+.detail-back-btn:hover { color:var(--red); }
