@@ -1229,7 +1229,7 @@
 /* Share button in sidebar */
 .btn-share {
   display:flex; align-items:center; justify-content:center; gap:8px;
-  width:100%; padding:12px; margin-top:10px;
+  width:100%; padding:12px;
   background:none; border:1px solid var(--border); border-radius:var(--radius);
   font-size:0.8rem; font-weight:600; letter-spacing:0.06em; text-transform:uppercase;
   color:var(--gray-700); cursor:pointer; transition:var(--transition);
