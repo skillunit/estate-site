@@ -46,6 +46,21 @@ function goToCountry(country) {
 
 const COUNTRY_LABELS = { 'all': 'Грузии', 'usa': 'США', 'uae': 'ОАЭ', 'cyprus': 'Кипре', 'greece': 'Греции' };
 
+const COUNTRY_CITIES = {
+  'all':    [['all','Любой город'],['tbilisi','Тбилиси'],['batumi','Батуми'],['gonio','Гонио'],['kakheti','Кахетия'],['bakuriani','Бакуриани']],
+  'usa':    [['all','Любой город'],['new-york','Нью-Йорк'],['miami','Майами']],
+  'uae':    [['all','Любой город'],['dubai','Дубай']],
+  'cyprus': [['all','Любой город'],['limassol','Лимасол'],['paphos','Пафос']],
+  'greece': [['all','Любой город'],['athens','Афины'],['mykonos','Миконос']],
+};
+
+function updateCityOptions(country) {
+  const citySelect = document.getElementById('citySelect');
+  if (!citySelect) return;
+  const cities = COUNTRY_CITIES[country] || COUNTRY_CITIES['all'];
+  citySelect.innerHTML = cities.map(([v, l]) => `<option value="${v}">${l}</option>`).join('');
+}
+
 function updateCatalogHeadline(country) {
   const el = document.getElementById('catalogHeadline');
   if (!el) return;
@@ -58,12 +73,13 @@ function updateCatalogHeadline(country) {
 function filterCatalog() {
   const cityEl   = document.getElementById('citySelect');
   const statusEl = document.getElementById('statusSelect');
-  const city   = cityEl ? cityEl.value : 'all';
   const status = statusEl ? statusEl.value : 'all';
   const catalogFilterBar = document.querySelector('#page-catalog .filter-bar .filter-field--country .filter-select');
   const country = catalogFilterBar ? catalogFilterBar.value : 'all';
 
   updateCatalogHeadline(country);
+  updateCityOptions(country);
+  const city = cityEl ? cityEl.value : 'all';
   renderCatalogGrid(country, city, status);
   renderMapMarkers(country, city, status);
 }

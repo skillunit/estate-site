@@ -366,6 +366,10 @@ function renderCatalogGrid(countryVal, cityVal, statusVal) {
     return md && mc && mci && ms;
   });
 
+  // Update count
+  const countEl = document.getElementById('catalogCount');
+  if (countEl) countEl.textContent = filtered.length;
+
   if (filtered.length === 0) {
     grid.innerHTML = `<div style="grid-column:1/-1;text-align:center;padding:48px 0;color:var(--gray-500);font-size:0.875rem;">По выбранным фильтрам объектов не найдено</div>`;
     return;
