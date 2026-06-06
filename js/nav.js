@@ -208,3 +208,34 @@ document.addEventListener('click', function(e) {
     e.target.classList.add('active');
   }
 });
+
+// Blog category filter
+document.addEventListener('click', function(e) {
+  const btn = e.target.closest('.blog-filter-btn');
+  if (!btn) return;
+
+  // Active state
+  btn.closest('.blog-filters').querySelectorAll('.blog-filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+
+  const selected = btn.textContent.trim();
+  const grid = btn.closest('.blog-section-inner').querySelector('.blog-grid');
+  const cards = grid.querySelectorAll('.blog-card');
+
+  cards.forEach(card => {
+    const match = selected === 'Все' || card.dataset.category === selected;
+    card.style.display = match ? '' : 'none';
+  });
+
+  // Featured card: remove/restore wide layout when hidden
+  const featured = grid.querySelector('.blog-featured');
+  if (featured) {
+    if (featured.style.display === 'none') {
+      featured.classList.remove('blog-featured');
+      featured.dataset.wasFeatured = '1';
+    } else if (featured.dataset.wasFeatured) {
+      featured.classList.add('blog-featured');
+      delete featured.dataset.wasFeatured;
+    }
+  }
+});
