@@ -7,6 +7,7 @@ function showPage(id) {
   });
   window.scrollTo({top:0, behavior:'instant'});
   document.getElementById('mainNav').classList.remove('open');
+  document.getElementById('hamburger').classList.remove('open');
 }
 
 function toggleMenu() {
