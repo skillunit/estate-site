@@ -52,7 +52,7 @@
   }
   .header-nav.open a:hover,
   .header-nav.open a.active { color:var(--red); }
-  .header-nav.open a.nav-contact-link { display:none; }
+  .header-nav.open a.nav-contact-link { color: var(--red); }
   .header-nav.open a::after { display:none; }
 
   /* Mobile footer inside nav */
