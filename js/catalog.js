@@ -100,6 +100,62 @@ const MAP_PROPERTIES = [
     specs: '110 м² · 2 спальни · 1 этаж',
   },
   {
+    id: 'gonio-seaview',
+    city: 'gonio', cityLabel: 'Гонио', country: 'all',
+    lat: 41.5200, lng: 41.6500,
+    name: 'Вилла с видом на море, Гонио',
+    price: '$185,000', area: '120', rooms: '3', floor: '2',
+    badge: 'badge-ready', badgeText: 'Сдан в эксплуатацию',
+    status: 'ready',
+    img: 'https://images.unsplash.com/photo-1580587771525-78b9dba3b914?w=600&h=375&fit=crop',
+    imgs: ['https://images.unsplash.com/photo-1580587771525-78b9dba3b914?w=900&h=600&fit=crop', 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=900&h=600&fit=crop', 'https://images.unsplash.com/photo-1523217582562-09d0def993a6?w=900&h=600&fit=crop'],
+    desc: 'Двухэтажная вилла в тихом пригороде Батуми. Открытая терраса, панорамный вид на Чёрное море, 3 спальни, собственный сад.',
+    roi: '8–10%', growth: '10–14%', payback: '10–12 лет',
+    specs: '120 м² · 3 спальни · 2 этажа',
+  },
+  {
+    id: 'bakuriani-chalet',
+    city: 'bakuriani', cityLabel: 'Бакуриани', country: 'all',
+    lat: 41.7500, lng: 43.5300,
+    name: 'Шале «Альпийский стиль», Бакуриани',
+    price: '$145,000', area: '95', rooms: '2', floor: '2',
+    badge: 'badge-invest', badgeText: 'Инвестиция',
+    status: 'investment',
+    img: 'https://images.unsplash.com/photo-1601918774516-7bd7c3648e8d?w=600&h=375&fit=crop',
+    imgs: ['https://images.unsplash.com/photo-1601918774516-7bd7c3648e8d?w=900&h=600&fit=crop', 'https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=900&h=600&fit=crop', 'https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=900&h=600&fit=crop'],
+    desc: 'Уютное шале в горнолыжном курорте Бакуриани. Высокий арендный доход в сезон, панорамный вид на горы, камин, терраса.',
+    roi: '10–13%', growth: '11–15%', payback: '8–10 лет',
+    specs: '95 м² · 2 спальни · 2 этажа',
+  },
+  {
+    id: 'limassol-apart',
+    city: 'limassol', cityLabel: 'Лимасол', country: 'cyprus',
+    lat: 34.6851, lng: 33.0332,
+    name: 'Апартаменты в центре Лимасола',
+    price: '$320,000', area: '85', rooms: '2', floor: '5',
+    badge: 'badge-ready', badgeText: 'Сдан в эксплуатацию',
+    status: 'ready',
+    img: 'https://images.unsplash.com/photo-1502005229762-cf1b2da7c5d6?w=600&h=375&fit=crop',
+    imgs: ['https://images.unsplash.com/photo-1502005229762-cf1b2da7c5d6?w=900&h=600&fit=crop', 'https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=900&h=600&fit=crop', 'https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=900&h=600&fit=crop'],
+    desc: 'Современные апартаменты в деловом центре Лимасола. Пешая доступность до набережной, развитая инфраструктура, вид на море.',
+    roi: '6–8%', growth: '8–12%', payback: '12–14 лет',
+    specs: '85 м² · 2 спальни · 5 этаж',
+  },
+  {
+    id: 'ny-brooklyn',
+    city: 'new-york', cityLabel: 'Нью-Йорк', country: 'usa',
+    lat: 40.6501, lng: -73.9496,
+    name: 'Таунхаус в Бруклине',
+    price: '$890,000', area: '160', rooms: '3', floor: '3',
+    badge: 'badge-ready', badgeText: 'Готовый',
+    status: 'ready',
+    img: 'https://images.unsplash.com/photo-1555636222-cae831e670b3?w=600&h=375&fit=crop',
+    imgs: ['https://images.unsplash.com/photo-1555636222-cae831e670b3?w=900&h=600&fit=crop', 'https://images.unsplash.com/photo-1502005229762-cf1b2da7c5d6?w=900&h=600&fit=crop', 'https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=900&h=600&fit=crop'],
+    desc: 'Просторный таунхаус в модном районе Бруклина. Три этажа, терраса на крыше, собственный гараж.',
+    roi: '4–6%', growth: '5–8%', payback: '16–18 лет',
+    specs: '160 м² · 3 спальни · 3 этажа',
+  },
+  {
     id: 'ny-manhattan',
     city: 'new-york', cityLabel: 'Нью-Йорк', country: 'usa',
     lat: 40.7128, lng: -74.0060,
@@ -500,7 +556,7 @@ function renderRelated(currentId) {
   const prop = MAP_PROPERTIES.find(p => p.id === currentId);
   if (!prop) return;
 
-  const same = MAP_PROPERTIES.filter(p => p.city === prop.city && p.id !== currentId);
+  const same = MAP_PROPERTIES.filter(p => p.country === prop.country && p.id !== currentId);
   const section = document.getElementById('relatedSection');
   const track = document.getElementById('relatedTrack');
   const nav = document.getElementById('relatedNav');
@@ -511,7 +567,8 @@ function renderRelated(currentId) {
   }
 
   section.style.display = '';
-  document.getElementById('relatedTitle').textContent = `Другие объекты в ${prop.cityLabel}`;
+  const countryNames = { 'all': 'Грузии', 'usa': 'США', 'uae': 'ОАЭ', 'cyprus': 'Кипре', 'greece': 'Греции' };
+  document.getElementById('relatedTitle').textContent = `Другие объекты в ${countryNames[prop.country] || prop.cityLabel}`;
 
   track.innerHTML = same.map(p => `
     <div class="catalog-card" style="flex-shrink:0;" onclick="showDetail('${p.id}')">
