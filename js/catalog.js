@@ -566,7 +566,7 @@ function renderRelated(currentId) {
     return;
   }
 
-  section.style.display = '';
+  section.style.display = 'block';
   const countryNames = { 'all': 'Грузии', 'usa': 'США', 'uae': 'ОАЭ', 'cyprus': 'Кипре', 'greece': 'Греции' };
   document.getElementById('relatedTitle').textContent = `Другие объекты в ${countryNames[prop.country] || prop.cityLabel}`;
 
@@ -587,7 +587,7 @@ function renderRelated(currentId) {
   `).join('');
 
   relatedCur = 0;
-  setTimeout(initRelatedSlider, 50);
+  setTimeout(initRelatedSlider, 200);
 }
 
 function initRelatedSlider() {
