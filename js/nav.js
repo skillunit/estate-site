@@ -29,6 +29,18 @@ function setSearchTab(el) {
 }
 
 // ── CATALOG FILTER ──
+function goToCountry(country) {
+  const countrySelect = document.querySelector('#page-catalog .filter-field--country .filter-select');
+  if (countrySelect) countrySelect.value = country;
+  const citySelect = document.getElementById('citySelect');
+  const statusSelect = document.getElementById('statusSelect');
+  if (citySelect) citySelect.value = 'all';
+  if (statusSelect) statusSelect.value = 'all';
+  showPage('catalog');
+  renderCatalogGrid(country, 'all', 'all');
+  renderMapMarkers(country, 'all', 'all');
+}
+
 function filterCatalog() {
   const cityEl   = document.getElementById('citySelect');
   const statusEl = document.getElementById('statusSelect');
