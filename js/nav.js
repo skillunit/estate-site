@@ -227,15 +227,12 @@ document.addEventListener('click', function(e) {
 // ── SHARE POPUP ──
 function openSharePopup() {
   const ov = document.getElementById('shareOverlay');
-  ov.style.display = 'flex';
-  setTimeout(() => ov.classList.add('open'), 10);
+  ov.classList.add('open');
   document.body.style.overflow = 'hidden';
 }
 function closeSharePopup(e) {
-  if (e && e.target !== document.getElementById('shareOverlay') && !e.target.closest('.share-close')) return;
-  const ov = document.getElementById('shareOverlay');
-  ov.classList.remove('open');
-  ov.style.display = 'none';
+  if (e && e.target !== document.getElementById('shareOverlay') && !e.target.closest('.cpopup-close')) return;
+  document.getElementById('shareOverlay').classList.remove('open');
   document.body.style.overflow = '';
   document.getElementById('shareCopied').classList.remove('show');
 }
