@@ -553,59 +553,59 @@
 
   <div class="filter-bar">
     <div class="filter-form">
-      <div class="filter-field filter-field--country">
-        <label>Страна</label>
-        <select class="filter-select" onchange="filterCatalog()">
-          <option value="all">🇬🇪 Грузия</option>
-          <option value="usa">🇺🇸 США</option>
-          <option value="uae">🇦🇪 ОАЭ</option>
-          <option value="cyprus">🇨🇾 Кипр</option>
-          <option value="greece">🇬🇷 Греция</option>
-        </select>
+
+      <!-- Deal type toggle -->
+      <div class="filter-deal-toggle">
+        <button class="deal-btn active" id="dealBtnBuy" onclick="setDealType('buy')">Покупка</button>
+        <button class="deal-btn" id="dealBtnRent" onclick="setDealType('rent')">Аренда</button>
       </div>
-      <div class="filter-field">
-        <label>Регион</label>
-        <select class="filter-select" onchange="filterCatalog()">
-          <option value="all">Любой регион</option>
-          <option value="tbilisi-region">Тбилиси</option>
-          <option value="adjara">Аджара</option>
-          <option value="kakheti">Кахетия</option>
-          <option value="bakuriani">Бакуриани</option>
-        </select>
+
+      <div class="filter-fields-group" id="filterFieldsGroup">
+        <div class="filter-field filter-field--country">
+          <label>Страна</label>
+          <select class="filter-select" onchange="filterCatalog()">
+            <option value="all">🇬🇪 Грузия</option>
+            <option value="usa">🇺🇸 США</option>
+            <option value="uae">🇦🇪 ОАЭ</option>
+            <option value="cyprus">🇨🇾 Кипр</option>
+            <option value="greece">🇬🇷 Греция</option>
+          </select>
+        </div>
+        <div class="filter-field">
+          <label>Город</label>
+          <select class="filter-select" id="citySelect" onchange="filterCatalog()">
+            <option value="all">Любой город</option>
+            <option value="tbilisi">Тбилиси</option>
+            <option value="batumi">Батуми</option>
+            <option value="gonio">Гонио</option>
+            <option value="kakheti">Кахетия</option>
+            <option value="bakuriani">Бакуриани</option>
+          </select>
+        </div>
+        <div class="filter-field">
+          <label>Тип недвижимости</label>
+          <select class="filter-select" onchange="filterCatalog()">
+            <option value="all">Любой</option>
+            <option value="apartment">Квартира</option>
+            <option value="villa">Вилла</option>
+            <option value="apart">Апартаменты</option>
+            <option value="commercial">Коммерческая</option>
+          </select>
+        </div>
+        <div class="filter-field">
+          <label>Статус</label>
+          <select class="filter-select" id="statusSelect" onchange="filterCatalog()">
+            <option value="all">Любой статус</option>
+            <option value="ready">Готов к заселению</option>
+            <option value="construction">На стадии строительства</option>
+          </select>
+        </div>
+        <div class="filter-field filter-field--btn">
+          <span class="filter-reset-link" onclick="resetCatalogFilter()">Сброс</span>
+          <button class="btn btn-red filter-btn" onclick="filterCatalog()">Найти</button>
+        </div>
       </div>
-      <div class="filter-field">
-        <label>Город</label>
-        <select class="filter-select" id="citySelect" onchange="filterCatalog()">
-          <option value="all">Любой город</option>
-          <option value="tbilisi">Тбилиси</option>
-          <option value="batumi">Батуми</option>
-          <option value="gonio">Гонио</option>
-          <option value="kakheti">Кахетия</option>
-          <option value="bakuriani">Бакуриани</option>
-        </select>
-      </div>
-      <div class="filter-field">
-        <label>Тип недвижимости</label>
-        <select class="filter-select" onchange="filterCatalog()">
-          <option value="all">Любой</option>
-          <option value="apartment">Квартира</option>
-          <option value="villa">Вилла</option>
-          <option value="apart">Апартаменты</option>
-          <option value="commercial">Коммерческая</option>
-        </select>
-      </div>
-      <div class="filter-field">
-        <label>Статус</label>
-        <select class="filter-select" id="statusSelect" onchange="filterCatalog()">
-          <option value="all">Любой статус</option>
-          <option value="ready">Готов к заселению</option>
-          <option value="construction">На стадии строительства</option>
-        </select>
-      </div>
-      <div class="filter-field filter-field--btn">
-        <span class="filter-reset-link" onclick="resetCatalogFilter()">Сброс</span>
-        <button class="btn btn-red filter-btn" onclick="filterCatalog()">Найти</button>
-      </div>
+
     </div>
   </div>
 

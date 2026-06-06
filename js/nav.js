@@ -268,3 +268,34 @@ function openArticle(imgUrl) {
   }
   showPage('blog-article');
 }
+
+// ── DEAL TYPE TOGGLE ──
+let currentDealType = null;
+
+function setDealType(type) {
+  currentDealType = type;
+  document.getElementById('dealBtnBuy').classList.toggle('active', type === 'buy');
+  document.getElementById('dealBtnRent').classList.toggle('active', type === 'rent');
+  document.getElementById('filterFieldsGroup').classList.remove('disabled');
+  filterCatalog();
+}
+
+// On catalog page open — reset to disabled state
+const _origShowPage = window.showPage;
+window.showPage = function(id) {
+  _origShowPage(id);
+  if (id === 'catalog') {
+    const group = document.getElementById('filterFieldsGroup');
+    const btnBuy = document.getElementById('dealBtnBuy');
+    const btnRent = document.getElementById('dealBtnRent');
+    if (group && !currentDealType) {
+      group.classList.add('disabled');
+    }
+  }
+};
+
+// Init on load
+document.addEventListener('DOMContentLoaded', function() {
+  const group = document.getElementById('filterFieldsGroup');
+  if (group) group.classList.add('disabled');
+});
