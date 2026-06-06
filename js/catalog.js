@@ -289,6 +289,7 @@ function showDetail(id) {
   if (investRows[2]) investRows[2].textContent = prop.payback;
 
   showPage('detail');
+  renderRelated(id);
 
   // ── Mobile slider ──
   if (typeof mobGalleryInit === 'function') mobGalleryInit(imgs);
@@ -490,4 +491,82 @@ function resetHomeFilter() {
 function resetCatalogFilter() {
   document.querySelectorAll('#page-catalog .filter-select').forEach(s => s.selectedIndex = 0);
   filterCatalog();
+}
+
+// ── RELATED PROPERTIES SLIDER ──
+let relatedCur = 0;
+
+function renderRelated(currentId) {
+  const prop = MAP_PROPERTIES.find(p => p.id === currentId);
+  if (!prop) return;
+
+  const same = MAP_PROPERTIES.filter(p => p.city === prop.city && p.id !== currentId);
+  const section = document.getElementById('relatedSection');
+  const track = document.getElementById('relatedTrack');
+  const nav = document.getElementById('relatedNav');
+
+  if (same.length === 0) {
+    section.style.display = 'none';
+    return;
+  }
+
+  section.style.display = '';
+  document.getElementById('relatedTitle').textContent = `Другие объекты в ${prop.cityLabel}`;
+
+  track.innerHTML = same.map(p => `
+    <div class="catalog-card" style="flex-shrink:0;" onclick="showDetail('${p.id}')">
+      <div style="position:relative;overflow:hidden;">
+        <img class="catalog-img" src="${p.img}" alt="${p.name}">
+        <span class="prop-badge ${p.badgeClass || 'badge-ready'}" style="position:absolute;top:12px;left:12px;">${p.statusLabel || p.status}</span>
+      </div>
+      <div class="catalog-card-body">
+        <div class="catalog-city">${p.cityLabel}</div>
+        <div class="catalog-name">${p.name}</div>
+        <div class="catalog-price">$${p.price.toLocaleString()}</div>
+        <div class="catalog-specs"><span>${p.area}</span> м² &nbsp;·&nbsp; <span>${p.beds}</span> спальн${p.beds === 1 ? 'я' : 'и'} &nbsp;·&nbsp; <span>${p.floor}</span> этаж</div>
+        <a class="catalog-detail-link" onclick="event.stopPropagation();showDetail('${p.id}')">Подробнее →</a>
+      </div>
+    </div>
+  `).join('');
+
+  relatedCur = 0;
+  initRelatedSlider();
+}
+
+function initRelatedSlider() {
+  const track = document.getElementById('relatedTrack');
+  const dotsWrap = document.getElementById('relatedDots');
+  const cards = track.querySelectorAll('.catalog-card');
+  const total = cards.length;
+  const gap = 24;
+  const pv = () => window.innerWidth <= 600 ? 1 : window.innerWidth <= 900 ? 2 : 3;
+  const pages = () => Math.max(1, total - pv() + 1);
+
+  function buildDots() {
+    dotsWrap.innerHTML = '';
+    for (let i = 0; i < pages(); i++) {
+      const d = document.createElement('div');
+      d.className = 'testi-dot' + (i === relatedCur ? ' active' : '');
+      d.addEventListener('click', () => goTo(i));
+      dotsWrap.appendChild(d);
+    }
+  }
+
+  function goTo(idx) {
+    relatedCur = Math.max(0, Math.min(idx, pages() - 1));
+    const w = (track.parentElement.offsetWidth - gap * (pv() - 1)) / pv();
+    cards.forEach(c => c.style.width = w + 'px');
+    track.style.transform = `translateX(-${relatedCur * (w + gap)}px)`;
+    dotsWrap.querySelectorAll('.testi-dot').forEach((d, i) => d.classList.toggle('active', i === relatedCur));
+  }
+
+  window.relatedNav = dir => goTo(relatedCur + dir);
+
+  const w = (track.parentElement.offsetWidth - gap * (pv() - 1)) / pv();
+  cards.forEach(c => c.style.width = w + 'px');
+  buildDots();
+  goTo(0);
+
+  // nav visibility
+  document.getElementById('relatedNav').style.display = total <= pv() ? 'none' : 'flex';
 }
