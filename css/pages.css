@@ -568,6 +568,10 @@
   font-size:0.62rem; font-weight:700; letter-spacing:0.12em; text-transform:uppercase;
   padding:5px 12px; border-radius:2px; margin-bottom:14px;
 }
+.invest-badge.badge-ready  { background: #8E44AD; color:var(--white); }
+.invest-badge.badge-build  { background: #F39C12; color: var(--dark); }
+.invest-badge.badge-invest { background: #27AE60; color:var(--white); }
+.invest-badge.badge-sale   { background: var(--red); color:var(--white); }
 .invest-title { font-family:var(--font-head); font-size:0.9rem; font-weight:700; text-transform:uppercase; color:var(--dark); margin-bottom:14px; letter-spacing:0.03em; }
 .invest-row { display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px solid var(--gray-100); font-size:0.82rem; }
 .invest-row:last-child { border-bottom:none; }

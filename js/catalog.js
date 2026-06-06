@@ -344,6 +344,13 @@ function showDetail(id) {
   if (investRows[1]) investRows[1].textContent = prop.roi;
   if (investRows[2]) investRows[2].textContent = prop.payback;
 
+  // Update status badge
+  const detailBadge = document.getElementById('detailBadge');
+  if (detailBadge && prop.badge && prop.badgeText) {
+    detailBadge.className = 'invest-badge ' + prop.badge;
+    detailBadge.textContent = prop.badgeText;
+  }
+
   showPage('detail');
   renderRelated(id);
 
