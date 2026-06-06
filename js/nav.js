@@ -11,6 +11,7 @@ function showPage(id) {
 
 function toggleMenu() {
   document.getElementById('mainNav').classList.toggle('open');
+  document.getElementById('hamburger').classList.toggle('open');
 }
 
 // ── LANG ──
