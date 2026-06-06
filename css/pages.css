@@ -1244,13 +1244,13 @@
 .filter-deal-toggle {
   display: flex; gap: 0; flex-shrink: 0;
   border: 1px solid var(--border); border-radius: var(--radius);
-  overflow: hidden;
+  overflow: hidden; align-self: stretch;
 }
 .deal-btn {
-  padding: 10px 20px; font-size: 0.85rem; font-weight: 600;
+  padding: 0 20px; font-size: 0.85rem; font-weight: 600;
   background: var(--white); color: var(--gray-700);
   border: none; cursor: pointer; transition: var(--transition);
-  white-space: nowrap;
+  white-space: nowrap; height: 100%;
 }
 .deal-btn.active { background: var(--red); color: var(--white); }
 .deal-btn:not(.active):hover { background: var(--gray-100); }
