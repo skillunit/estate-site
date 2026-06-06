@@ -550,28 +550,19 @@ function resetCatalogFilter() {
 }
 
 // ── RELATED PROPERTIES SLIDER ──
-let relatedCur = 0;
-
 function renderRelated(currentId) {
   const prop = MAP_PROPERTIES.find(p => p.id === currentId);
-  if (!prop) return;
+  const track = document.getElementById('relatedTrack');
+  const dotsWrap = document.getElementById('relatedDots');
+  const nav = document.getElementById('relatedNav');
+  if (!prop || !track) return;
 
   const same = MAP_PROPERTIES.filter(p => p.country === prop.country && p.id !== currentId);
-  const section = document.getElementById('relatedSection');
-  const track = document.getElementById('relatedTrack');
-  const nav = document.getElementById('relatedNav');
-
-  if (same.length === 0) {
-    section.style.display = 'none';
-    return;
-  }
-
-  section.style.display = 'block';
   const countryNames = { 'all': 'Грузии', 'usa': 'США', 'uae': 'ОАЭ', 'cyprus': 'Кипре', 'greece': 'Греции' };
   document.getElementById('relatedTitle').textContent = `Другие объекты в ${countryNames[prop.country] || prop.cityLabel}`;
 
   track.innerHTML = same.map(p => `
-    <div class="catalog-card" style="flex-shrink:0;" onclick="showDetail('${p.id}')">
+    <div class="catalog-card" style="flex-shrink:0;cursor:pointer;" onclick="showDetail('${p.id}')">
       <div style="position:relative;overflow:hidden;">
         <img class="catalog-img" src="${p.img}" alt="${p.name}">
         <span class="prop-badge ${p.badge || 'badge-ready'}" style="position:absolute;top:12px;left:12px;">${p.badgeText || ''}</span>
@@ -580,33 +571,49 @@ function renderRelated(currentId) {
         <div class="catalog-city">${p.cityLabel}</div>
         <div class="catalog-name">${p.name}</div>
         <div class="catalog-price">${p.price}</div>
-        <div class="catalog-specs"><span>${p.area}</span> м² &nbsp;·&nbsp; <span>${p.rooms}</span> спальн${p.rooms === '1' ? 'я' : 'и'} &nbsp;·&nbsp; <span>${p.floor}</span> этаж</div>
+        <div class="catalog-specs">${p.specs}</div>
         <a class="catalog-detail-link" onclick="event.stopPropagation();showDetail('${p.id}')">Подробнее →</a>
       </div>
-    </div>
-  `).join('');
+    </div>`).join('');
 
-  relatedCur = 0;
-  setTimeout(initRelatedSlider, 200);
-}
-
-function initRelatedSlider() {
-  const track = document.getElementById('relatedTrack');
-  const dotsWrap = document.getElementById('relatedDots');
-  const cards = track.querySelectorAll('.catalog-card');
-  const total = cards.length;
+  // Init slider
   const gap = 24;
   const pv = () => window.innerWidth <= 600 ? 1 : window.innerWidth <= 900 ? 2 : 3;
-  const pages = () => Math.max(1, total - pv() + 1);
+  let cur = 0;
+  const cards = () => track.querySelectorAll('.catalog-card');
+  const pages = () => Math.max(1, cards().length - pv() + 1);
+
+  function setWidths() {
+    const w = (track.parentElement.offsetWidth - gap * (pv() - 1)) / pv();
+    cards().forEach(c => c.style.width = w + 'px');
+    return w;
+  }
 
   function buildDots() {
     dotsWrap.innerHTML = '';
     for (let i = 0; i < pages(); i++) {
       const d = document.createElement('div');
-      d.className = 'testi-dot' + (i === relatedCur ? ' active' : '');
-      d.addEventListener('click', () => goTo(i));
+      d.className = 'testi-dot' + (i === cur ? ' active' : '');
+      d.onclick = () => goTo(i);
       dotsWrap.appendChild(d);
     }
+  }
+
+  function goTo(idx) {
+    cur = Math.max(0, Math.min(idx, pages() - 1));
+    const w = setWidths();
+    track.style.transform = `translateX(-${cur * (w + gap)}px)`;
+    dotsWrap.querySelectorAll('.testi-dot').forEach((d, i) => d.classList.toggle('active', i === cur));
+  }
+
+  window.relatedNav = dir => goTo(cur + dir);
+
+  setWidths();
+  buildDots();
+  nav.style.display = cards().length > pv() ? 'flex' : 'none';
+  goTo(0);
+}
+
   }
 
   function goTo(idx) {
