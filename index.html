@@ -336,79 +336,60 @@
     <div class="container">
       <div class="section-header">
         <div>
-          <h2 class="section-title">Подборка недвижимости</h2>
+          <h2 class="section-title">Топовые предложения</h2>
         </div>
         <span class="see-all" onclick="showPage('catalog')">Смотреть все</span>
       </div>
-      <div class="props-grid">
-        <div class="prop-card" onclick="showPage('detail')">
-          <div class="prop-img-wrap">
-            <img class="prop-img" src="https://picsum.photos/seed/apart1/500/375" alt="Апартаменты в Батуми">
-            <span class="prop-badge badge-sale">Продажа</span>
-            <button class="prop-fav">♡</button>
-          </div>
-          <div class="prop-body">
-            <div class="prop-price">$95,000</div>
-            <div class="prop-name">Апартаменты в Батуми</div>
-            <div class="prop-addr">Батуми, ул. Джавахишвили</div>
-            <div class="prop-specs">
-              <div class="prop-spec"><span>45</span> м²</div>
-              <div class="prop-spec"><span>1</span> спальня</div>
-              <div class="prop-spec"><span>12</span> этаж</div>
-            </div>
+      <div class="catalog-grid">
+
+        <div class="catalog-card" onclick="showPage('detail')">
+          <div style="position:relative;overflow:hidden;"><img class="catalog-img" src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=600&h=375&fit=crop" alt="ЖК Гранд Панорама Батуми">
+            <span class="prop-badge badge-ready" style="position:absolute;top:12px;left:12px;">Сдан в эксплуатацию</span></div>
+          <div class="catalog-card-body">
+            <div class="catalog-city">Батуми</div>
+            <div class="catalog-name">ЖК «Гранд Панорама Батуми»</div>
+            <div class="catalog-price">$125,000</div>
+            <div class="catalog-specs"><span>45</span> м² &nbsp;·&nbsp; <span>1</span> спальня &nbsp;·&nbsp; <span>12</span> этаж</div>
+            <a class="catalog-detail-link" onclick="event.stopPropagation();showPage('detail')">Подробнее →</a>
           </div>
         </div>
-        <div class="prop-card" onclick="showPage('detail')">
-          <div class="prop-img-wrap">
-            <img class="prop-img" src="https://picsum.photos/seed/flat2/500/375" alt="Квартира в Тбилиси">
-            <span class="prop-badge badge-rent">Аренда</span>
-            <button class="prop-fav">♡</button>
-          </div>
-          <div class="prop-body">
-            <div class="prop-price">$120,000</div>
-            <div class="prop-name">Квартира в Тбилиси</div>
-            <div class="prop-addr">Тбилиси, Сабуртало</div>
-            <div class="prop-specs">
-              <div class="prop-spec"><span>78</span> м²</div>
-              <div class="prop-spec"><span>2</span> спальни</div>
-              <div class="prop-spec"><span>6</span> этаж</div>
-            </div>
+
+        <div class="catalog-card" onclick="showPage('detail')">
+          <div style="position:relative;overflow:hidden;"><img class="catalog-img" src="https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=600&h=375&fit=crop" alt="Элитная квартира Тбилиси">
+            <span class="prop-badge badge-build" style="position:absolute;top:12px;left:12px;">Под чистовую отделку</span></div>
+          <div class="catalog-card-body">
+            <div class="catalog-city">Тбилиси</div>
+            <div class="catalog-name">Элитная квартира в центре Тбилиси</div>
+            <div class="catalog-price">$210,000</div>
+            <div class="catalog-specs"><span>78</span> м² &nbsp;·&nbsp; <span>2</span> спальни &nbsp;·&nbsp; <span>6</span> этаж</div>
+            <a class="catalog-detail-link" onclick="event.stopPropagation();showPage('detail')">Подробнее →</a>
           </div>
         </div>
-        <div class="prop-card" onclick="showPage('detail')">
-          <div class="prop-img-wrap">
-            <img class="prop-img" src="https://picsum.photos/seed/hotel3/500/375" alt="Апарт-отель в Гонио">
-            <span class="prop-badge badge-invest">Инвестиция</span>
-            <button class="prop-fav">♡</button>
-          </div>
-          <div class="prop-body">
-            <div class="prop-price">$1,200,000</div>
-            <div class="prop-name">Апарт-отель в Гонио</div>
-            <div class="prop-addr">Гонио, Аджара, Приморье</div>
-            <div class="prop-specs">
-              <div class="prop-spec"><span>1200</span> м²</div>
-              <div class="prop-spec"><span>1</span> спальня</div>
-              <div class="prop-spec"><span>30</span> номеров</div>
-            </div>
+
+        <div class="catalog-card" onclick="showPage('detail')">
+          <div style="position:relative;overflow:hidden;"><img class="catalog-img" src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=600&h=375&fit=crop" alt="Апартаменты у моря Гонио">
+            <span class="prop-badge badge-ready" style="position:absolute;top:12px;left:12px;">Готовые к заселению</span></div>
+          <div class="catalog-card-body">
+            <div class="catalog-city">Гонио</div>
+            <div class="catalog-name">Апартаменты у моря, Gonio Coast</div>
+            <div class="catalog-price">$98,000</div>
+            <div class="catalog-specs"><span>55</span> м² &nbsp;·&nbsp; <span>1</span> спальня &nbsp;·&nbsp; <span>4</span> этаж</div>
+            <a class="catalog-detail-link" onclick="event.stopPropagation();showPage('detail')">Подробнее →</a>
           </div>
         </div>
-        <div class="prop-card" onclick="showPage('detail')">
-          <div class="prop-img-wrap">
-            <img class="prop-img" src="https://picsum.photos/seed/villa4/500/375" alt="Вилла в Бакуриани">
-            <span class="prop-badge badge-sale">Продажа</span>
-            <button class="prop-fav">♡</button>
-          </div>
-          <div class="prop-body">
-            <div class="prop-price">$350,000</div>
-            <div class="prop-name">Вилла в Бакуриани</div>
-            <div class="prop-addr">Бакуриани, Дзирула</div>
-            <div class="prop-specs">
-              <div class="prop-spec"><span>210</span> м²</div>
-              <div class="prop-spec"><span>4</span> спальни</div>
-              <div class="prop-spec"><span>2</span> этажа</div>
-            </div>
+
+        <div class="catalog-card" onclick="showPage('detail')">
+          <div style="position:relative;overflow:hidden;"><img class="catalog-img" src="https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=600&h=375&fit=crop" alt="Коттеджный комплекс Бакуриани">
+            <span class="prop-badge badge-invest" style="position:absolute;top:12px;left:12px;">Инвестиция</span></div>
+          <div class="catalog-card-body">
+            <div class="catalog-city">Бакуриани</div>
+            <div class="catalog-name">Коттеджный комплекс «Бакуриани Хиллс»</div>
+            <div class="catalog-price">$195,000</div>
+            <div class="catalog-specs"><span>210</span> м² &nbsp;·&nbsp; <span>4</span> спальни &nbsp;·&nbsp; <span>2</span> этажа</div>
+            <a class="catalog-detail-link" onclick="event.stopPropagation();showPage('detail')">Подробнее →</a>
           </div>
         </div>
+
       </div>
     </div>
   </section>
