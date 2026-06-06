@@ -200,3 +200,11 @@ function toggleAbout() {
   btn.classList.toggle('open', open);
   text.textContent = open ? 'Свернуть' : 'Читать далее';
 }
+
+// Blog filter buttons
+document.addEventListener('click', function(e) {
+  if (e.target.classList.contains('blog-filter-btn')) {
+    document.querySelectorAll('.blog-filter-btn').forEach(b => b.classList.remove('active'));
+    e.target.classList.add('active');
+  }
+});
