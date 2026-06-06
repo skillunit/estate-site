@@ -222,7 +222,7 @@
 }
 .catalog-hero-bg {
   position: absolute; inset: 0;
-  background: url('https://picsum.photos/seed/city-catalog/1400/600') center/cover no-repeat;
+  background: url('https://images.unsplash.com/photo-1565008576549-57569a49371d?w=1400&h=600&fit=crop') center/cover no-repeat;
 }
 .catalog-hero-overlay {
   position: absolute; inset: 0;
@@ -378,7 +378,7 @@
 }
 .team-hero-bg {
   position: absolute; inset: 0;
-  background: url('https://picsum.photos/seed/mountain-team/1400/600') center 30%/cover no-repeat;
+  background: url('https://images.unsplash.com/photo-1603302576837-37561b2e2302?w=1400&h=600&fit=crop') center 30%/cover no-repeat;
 }
 .team-hero-overlay {
   position: absolute; inset: 0;
@@ -585,7 +585,7 @@
 }
 .contacts-hero-bg {
   position: absolute; inset: 0;
-  background: url('https://picsum.photos/seed/tbilisi-night/1400/600') center/cover no-repeat;
+  background: url('https://images.unsplash.com/photo-1589156229687-496a31ad1d1f?w=1400&h=600&fit=crop') center/cover no-repeat;
 }
 .contacts-hero-overlay {
   position: absolute; inset: 0;
@@ -993,7 +993,7 @@
 }
 .blog-hero-bg {
   position: absolute; inset: 0;
-  background: url('https://picsum.photos/seed/tbilisi-blog/1400/600') center 40%/cover no-repeat;
+  background: url('https://images.unsplash.com/photo-1552465011-b4e21bf6e79a?w=1400&h=600&fit=crop') center 40%/cover no-repeat;
 }
 .blog-hero-overlay {
   position: absolute; inset: 0;
@@ -1085,7 +1085,7 @@
 }
 .blog-article-hero-bg {
   position: absolute; inset: 0;
-  background: url('https://picsum.photos/seed/tbilisi-invest/1400/700') center 40%/cover no-repeat;
+  background: url('https://images.unsplash.com/photo-1559628376-f3fe5f782a2e?w=1400&h=700&fit=crop') center 40%/cover no-repeat;
 }
 .blog-article-hero-overlay {
   position: absolute; inset: 0;
