@@ -179,3 +179,49 @@ function submitManagerPopup() {
   document.getElementById('managerSuccess').style.display = 'block';
   setTimeout(closeManagerPopup, 3200);
 }
+
+// ── FEATURED PROPERTIES SLIDER ──
+(function() {
+  const track = document.getElementById('featuredTrack');
+  const dotsWrap = document.getElementById('featuredDots');
+  if (!track) return;
+  const cards = track.querySelectorAll('.catalog-card');
+  const total = cards.length;
+  const gap = 24;
+  let cur = 0;
+  let perView = () => window.innerWidth <= 600 ? 1 : window.innerWidth <= 900 ? 2 : 3;
+
+  function pages() { return Math.max(1, total - perView() + 1); }
+
+  function buildDots() {
+    dotsWrap.innerHTML = '';
+    for (let i = 0; i < pages(); i++) {
+      const d = document.createElement('div');
+      d.className = 'testi-dot' + (i === cur ? ' active' : '');
+      d.addEventListener('click', () => goTo(i));
+      dotsWrap.appendChild(d);
+    }
+  }
+
+  function goTo(idx) {
+    cur = Math.max(0, Math.min(idx, pages() - 1));
+    const cardW = (track.parentElement.offsetWidth - gap * (perView() - 1)) / perView();
+    // Set each card width explicitly
+    cards.forEach(c => { c.style.width = cardW + 'px'; });
+    track.style.transform = `translateX(-${cur * (cardW + gap)}px)`;
+    dotsWrap.querySelectorAll('.testi-dot').forEach((d, i) => d.classList.toggle('active', i === cur));
+  }
+
+  window.featuredNav = function(dir) { goTo(cur + dir); };
+
+  // Init card widths
+  function init() {
+    const cardW = (track.parentElement.offsetWidth - gap * (perView() - 1)) / perView();
+    cards.forEach(c => { c.style.width = cardW + 'px'; });
+    buildDots();
+    goTo(Math.min(cur, pages() - 1));
+  }
+
+  init();
+  window.addEventListener('resize', init);
+})();
