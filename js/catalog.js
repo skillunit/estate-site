@@ -530,7 +530,7 @@ function renderRelated(currentId) {
   `).join('');
 
   relatedCur = 0;
-  initRelatedSlider();
+  setTimeout(initRelatedSlider, 50);
 }
 
 function initRelatedSlider() {
