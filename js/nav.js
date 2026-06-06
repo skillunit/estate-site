@@ -44,6 +44,17 @@ function goToCountry(country) {
   renderMapMarkers(dataCountry, 'all', 'all');
 }
 
+const COUNTRY_LABELS = { 'all': 'Грузии', 'usa': 'США', 'uae': 'ОАЭ', 'cyprus': 'Кипре', 'greece': 'Греции' };
+
+function updateCatalogHeadline(country) {
+  const el = document.getElementById('catalogHeadline');
+  if (!el) return;
+  const deal = typeof currentDealType !== 'undefined' ? currentDealType : 'buy';
+  const dealLabel = deal === 'rent' ? 'Аренда' : 'Покупка';
+  const countryLabel = COUNTRY_LABELS[country] || 'Грузии';
+  el.textContent = `${dealLabel} в ${countryLabel}`;
+}
+
 function filterCatalog() {
   const cityEl   = document.getElementById('citySelect');
   const statusEl = document.getElementById('statusSelect');
@@ -52,6 +63,7 @@ function filterCatalog() {
   const catalogFilterBar = document.querySelector('#page-catalog .filter-bar .filter-field--country .filter-select');
   const country = catalogFilterBar ? catalogFilterBar.value : 'all';
 
+  updateCatalogHeadline(country);
   renderCatalogGrid(country, city, status);
   renderMapMarkers(country, city, status);
 }
