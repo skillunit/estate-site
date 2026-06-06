@@ -31,14 +31,14 @@ function setSearchTab(el) {
 // ── CATALOG FILTER ──
 function goToCountry(country) {
   const countrySelect = document.querySelector('#page-catalog .filter-field--country .filter-select');
-  if (countrySelect) countrySelect.value = country;
+  // Georgian properties have country:'all' in data, treat 'georgia' as 'all'
+  const dataCountry = country === 'georgia' ? 'all' : country;
+  if (countrySelect) countrySelect.value = dataCountry;
   const citySelect = document.getElementById('citySelect');
   const statusSelect = document.getElementById('statusSelect');
   if (citySelect) citySelect.value = 'all';
   if (statusSelect) statusSelect.value = 'all';
   showPage('catalog');
-  // Georgian properties have country:'all' in data, treat 'georgia' as 'all'
-  const dataCountry = country === 'georgia' ? 'all' : country;
   renderCatalogGrid(dataCountry, 'all', 'all');
   renderMapMarkers(dataCountry, 'all', 'all');
 }
