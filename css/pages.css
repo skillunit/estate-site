@@ -1276,3 +1276,11 @@
 }
 .catalog-headline-row > div { flex: 0 0 50%; }
 .catalog-sort-select { width: 100%; }
+
+/* TOP label on card */
+.top-label {
+  position: absolute; top: 12px; right: 12px;
+  background: #F39C12; color: var(--white);
+  font-size: 0.62rem; font-weight: 700; letter-spacing: 0.08em;
+  padding: 4px 10px; border-radius: 2px; text-transform: uppercase;
+}

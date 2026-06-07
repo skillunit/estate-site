@@ -2,7 +2,7 @@
 // ═══════════════════════════════════
 const MAP_PROPERTIES = [
   {
-    id: 'batumi-grand',
+    id: 'batumi-grand', top: true,
     city: 'batumi', cityLabel: 'Батуми', country: 'all',
     lat: 41.6418, lng: 41.6340,
     name: 'ЖК «Гранд Панорама Батуми»',
@@ -32,7 +32,7 @@ const MAP_PROPERTIES = [
     specs: '38 м² · 1 спальня · 7 этаж',
   },
   {
-    id: 'tbilisi-elite',
+    id: 'tbilisi-elite', top: true,
     city: 'tbilisi', cityLabel: 'Тбилиси', country: 'all',
     lat: 41.6938, lng: 44.8015,
     name: 'Элитная квартира в центре Тбилиси',
@@ -197,7 +197,7 @@ const MAP_PROPERTIES = [
     specs: '420 м² · 5 спален · 1 этаж',
   },
   {
-    id: 'dubai-marina',
+    id: 'dubai-marina', top: true,
     city: 'dubai', cityLabel: 'Дубай', country: 'uae',
     lat: 25.2048, lng: 55.2708,
     name: 'Апартаменты в Dubai Marina',
@@ -495,7 +495,9 @@ function renderCatalogGrid(countryVal, cityVal, statusVal) {
   // Sort
   const sortEl = document.getElementById('catalogSort');
   const sortVal = sortEl ? sortEl.value : 'default';
-  if (sortVal === 'price-asc') {
+  if (sortVal === 'top') {
+    filtered.sort((a, b) => (b.top ? 1 : 0) - (a.top ? 1 : 0));
+  } else if (sortVal === 'price-asc') {
     filtered.sort((a, b) => parseFloat(a.price.replace(/[^0-9.]/g,'')) - parseFloat(b.price.replace(/[^0-9.]/g,'')));
   } else if (sortVal === 'price-desc') {
     filtered.sort((a, b) => parseFloat(b.price.replace(/[^0-9.]/g,'')) - parseFloat(a.price.replace(/[^0-9.]/g,'')));
@@ -519,6 +521,7 @@ function renderCatalogGrid(countryVal, cityVal, statusVal) {
       <div style="position:relative;overflow:hidden;">
         <img class="catalog-img" src="${p.img}" alt="${p.name}">
         <span class="prop-badge ${p.badge}" style="position:absolute;top:12px;left:12px;">${p.badgeText}</span>
+        ${p.top ? '<span class="top-label">★ ТОП</span>' : ''}
       </div>
       <div class="catalog-card-body">
         <div class="catalog-city">${p.cityLabel}</div>
