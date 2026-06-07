@@ -273,7 +273,7 @@ const MAP_PROPERTIES = [
   },
   // ── АРЕНДА ──
   {
-    id: 'rent-tbilisi-vera',
+    id: 'rent-tbilisi-vera', top: true,
     city: 'tbilisi', cityLabel: 'Тбилиси', country: 'all',
     lat: 41.6990, lng: 44.7980,
     name: 'Апартаменты в районе Вера, Тбилиси',
@@ -287,7 +287,7 @@ const MAP_PROPERTIES = [
     specs: '65 м² · 2 спальни · 4 этаж',
   },
   {
-    id: 'rent-batumi-sea',
+    id: 'rent-batumi-sea', top: true,
     city: 'batumi', cityLabel: 'Батуми', country: 'all',
     lat: 41.6450, lng: 41.6380,
     name: 'Студия с видом на море, Батуми',
@@ -329,7 +329,7 @@ const MAP_PROPERTIES = [
     specs: '90 м² · 3 спальни · 2 этажа',
   },
   {
-    id: 'rent-dubai',
+    id: 'rent-dubai', top: true,
     city: 'dubai', cityLabel: 'Дубай', country: 'uae',
     lat: 25.2048, lng: 55.2708,
     name: 'Апартаменты в Дубай Марина',
