@@ -591,6 +591,10 @@ function showDetail(id) {
   const detailTopLabel = document.getElementById('detailTopLabel');
   if (detailTopLabel) detailTopLabel.style.display = prop.top ? 'inline-flex' : 'none';
 
+  // Update price
+  const detailPrice = document.getElementById('detailPrice');
+  if (detailPrice) detailPrice.textContent = prop.price;
+
   showPage('detail');
   renderRelated(id);
 

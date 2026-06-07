@@ -1284,3 +1284,18 @@
   font-size: 0.62rem; font-weight: 700; letter-spacing: 0.08em;
   padding: 4px 10px; border-radius: 2px; text-transform: uppercase;
 }
+
+/* Detail price block in sidebar */
+.detail-price-block {
+  padding: 16px 0 20px;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 4px;
+}
+.detail-price-label {
+  font-size: 0.72rem; font-weight: 600; text-transform: uppercase;
+  letter-spacing: 0.08em; color: var(--gray-500); margin-bottom: 4px;
+}
+.detail-price-value {
+  font-family: var(--font-head); font-size: 1.8rem; font-weight: 800;
+  color: var(--red); line-height: 1;
+}
