@@ -1272,7 +1272,7 @@
 /* Catalog headline row with sort */
 .catalog-headline-row {
   display: flex; align-items: center; justify-content: space-between;
-  gap: 16px; margin-bottom: 8px;
+  gap: 24px; margin-bottom: 24px;
 }
 .catalog-sort-select {
   min-width: 220px; flex-shrink: 0;
