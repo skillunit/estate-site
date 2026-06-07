@@ -628,10 +628,7 @@
 
   <div class="catalog-body">
     <div class="catalog-headline-row">
-      <div>
-        <div class="catalog-headline" id="catalogHeadline">Покупка в Грузии</div>
-        <p class="catalog-count-line">Найдено предложений: <span id="catalogCount">—</span></p>
-      </div>
+      <div class="catalog-headline" id="catalogHeadline">Покупка в Грузии</div>
       <select class="filter-select catalog-sort-select" id="catalogSort" onchange="filterCatalog()">
         <option value="default">Сортировка</option>
         <option value="price-asc">Цена: от низкой к высокой</option>
@@ -640,6 +637,7 @@
         <option value="name-desc">Название: Я → А</option>
       </select>
     </div>
+    <p class="catalog-count-line">Найдено предложений: <span id="catalogCount">—</span></p>
     <div class="catalog-grid" id="catalogGrid">
 
       <div class="catalog-card" data-city="batumi" data-status="ready" onclick="showPage('detail')">

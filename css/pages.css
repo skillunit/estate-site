@@ -239,7 +239,7 @@
 .catalog-body { max-width:1200px; margin:0 auto; padding: 40px 32px 80px; }
 .catalog-headline {
   font-family: var(--font-head); font-size: 1.5rem; font-weight: 800;
-  color: var(--dark); margin-bottom: 24px;
+  color: var(--dark); margin-bottom: 0;
 }
 .catalog-grid {
   display: grid; grid-template-columns: repeat(3, 1fr);
@@ -1271,9 +1271,9 @@
 
 /* Catalog headline row with sort */
 .catalog-headline-row {
-  display: flex; align-items: flex-start; justify-content: space-between;
-  gap: 16px; flex-wrap: wrap; margin-bottom: 0;
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 16px; margin-bottom: 8px;
 }
 .catalog-sort-select {
-  min-width: 240px; flex-shrink: 0; align-self: center;
+  min-width: 220px; flex-shrink: 0;
 }
