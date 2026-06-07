@@ -1268,3 +1268,12 @@
   font-size: 0.82rem; color: var(--gray-500);
   margin: 4px 0 24px; font-weight: 400;
 }
+
+/* Catalog headline row with sort */
+.catalog-headline-row {
+  display: flex; align-items: flex-start; justify-content: space-between;
+  gap: 16px; flex-wrap: wrap; margin-bottom: 0;
+}
+.catalog-sort-select {
+  min-width: 240px; flex-shrink: 0; align-self: center;
+}

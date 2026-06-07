@@ -492,6 +492,19 @@ function renderCatalogGrid(countryVal, cityVal, statusVal) {
     return md && mc && mci && ms;
   });
 
+  // Sort
+  const sortEl = document.getElementById('catalogSort');
+  const sortVal = sortEl ? sortEl.value : 'default';
+  if (sortVal === 'price-asc') {
+    filtered.sort((a, b) => parseFloat(a.price.replace(/[^0-9.]/g,'')) - parseFloat(b.price.replace(/[^0-9.]/g,'')));
+  } else if (sortVal === 'price-desc') {
+    filtered.sort((a, b) => parseFloat(b.price.replace(/[^0-9.]/g,'')) - parseFloat(a.price.replace(/[^0-9.]/g,'')));
+  } else if (sortVal === 'name-asc') {
+    filtered.sort((a, b) => a.name.localeCompare(b.name, 'ru'));
+  } else if (sortVal === 'name-desc') {
+    filtered.sort((a, b) => b.name.localeCompare(a.name, 'ru'));
+  }
+
   // Update count
   const countEl = document.getElementById('catalogCount');
   if (countEl) countEl.textContent = filtered.length;
