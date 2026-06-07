@@ -494,7 +494,7 @@ function renderCatalogGrid(countryVal, cityVal, statusVal) {
 
   // Sort
   const sortEl = document.getElementById('catalogSort');
-  const sortVal = sortEl ? sortEl.value : 'default';
+  const sortVal = sortEl ? sortEl.value : 'top';
   if (sortVal === 'top') {
     filtered.sort((a, b) => (b.top ? 1 : 0) - (a.top ? 1 : 0));
   } else if (sortVal === 'price-asc') {
@@ -587,6 +587,9 @@ function showDetail(id) {
     detailBadge.className = 'invest-badge ' + prop.badge;
     detailBadge.textContent = prop.badgeText;
   }
+  // Update top label
+  const detailTopLabel = document.getElementById('detailTopLabel');
+  if (detailTopLabel) detailTopLabel.style.display = prop.top ? 'inline-flex' : 'none';
 
   showPage('detail');
   renderRelated(id);

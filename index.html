@@ -633,7 +633,6 @@
         <p class="catalog-count-line">Найдено предложений: <span id="catalogCount">—</span></p>
       </div>
       <select class="filter-select catalog-sort-select" id="catalogSort" onchange="filterCatalog()">
-        <option value="default">Сортировка</option>
         <option value="top">Топ продаж</option>
         <option value="price-asc">Цена: от низкой к высокой</option>
         <option value="price-desc">Цена: от высокой к низкой</option>
@@ -1168,7 +1167,10 @@
       <!-- Sidebar -->
       <div class="detail-sidebar">
         <div class="invest-card">
-          <div class="invest-badge" id="detailBadge">📈 Investment</div>
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:14px;">
+            <div class="invest-badge" id="detailBadge" style="margin-bottom:0;">📈 Investment</div>
+            <div class="invest-badge" id="detailTopLabel" style="display:none;margin-bottom:0;background:var(--red);">★ ТОП</div>
+          </div>
           <div class="invest-title">Потенциал для инвестиций</div>
           <div class="invest-row"><span class="invest-row-label">Ожидаемый рост цены:</span><span class="invest-row-val">15% – 20%</span></div>
           <div class="invest-row"><span class="invest-row-label">Доход от аренды:</span><span class="invest-row-val">8% – 10%</span></div>
