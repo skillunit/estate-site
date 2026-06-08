@@ -623,8 +623,6 @@ function initCatalogMap() {
   L.control.attribution({ prefix: false, position: 'bottomleft' })
     .addTo(catalogMap)
     .setPrefix('<a href="https://www.openstreetmap.org/copyright" style="font-size:9px;opacity:0.5">© OSM</a>');
-
-  renderMapMarkers('all', 'all', 'all');
 }
 
 function clusterByProximity(props, thresholdKm = 5) {
@@ -775,10 +773,22 @@ const _origShowPage = showPage;
 window.showPage = function(id) {
   _origShowPage(id);
   if (id === 'catalog') {
-    renderCatalogGrid('all', 'all', 'all');
+    // Читаем текущее состояние фильтров — не сбрасываем то, что установил goToCountry
+    const countryEl = document.querySelector('#page-catalog .filter-field--country .filter-select');
+    const cityEl    = document.getElementById('citySelect');
+    const statusEl  = document.getElementById('statusSelect');
+    const country = countryEl ? countryEl.value : 'all';
+    const city    = cityEl    ? cityEl.value    : 'all';
+    const status  = statusEl  ? statusEl.value  : 'all';
+
+    renderCatalogGrid(country, city, status);
+    updateCatalogHeadline(country);
     setTimeout(() => {
       initCatalogMap();
-      if (catalogMap) catalogMap.invalidateSize();
+      if (catalogMap) {
+        catalogMap.invalidateSize();
+        renderMapMarkers(country, city, status);
+      }
     }, 50);
   }
 };
