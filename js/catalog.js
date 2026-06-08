@@ -532,7 +532,14 @@ function renderCatalogGrid(countryVal, cityVal, statusVal) {
         <div class="catalog-city">${p.cityLabel}</div>
         <div class="catalog-name">${p.name}</div>
         <div class="catalog-price">${p.price}</div>
-        <div class="catalog-specs">${p.specs}${p.year ? ` &nbsp;·&nbsp; <span>${p.year}</span> г.` : ''}</div>
+        <div class="catalog-specs">
+          <span class="spec-item"><strong>${p.area}</strong> м²</span>
+          <span class="spec-sep">·</span>
+          <span class="spec-item"><strong>${p.rooms}</strong> спал.</span>
+          <span class="spec-sep">·</span>
+          <span class="spec-item"><strong>${p.floor}</strong> эт.</span>
+          ${p.year ? `<span class="spec-sep">·</span><span class="spec-item"><strong>${p.year}</strong> г.</span>` : ''}
+        </div>
         <a class="catalog-detail-link" onclick="event.stopPropagation();showDetail('${p.id}')">Подробнее →</a>
       </div>
     </div>`).join('');

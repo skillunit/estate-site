@@ -358,63 +358,123 @@
       <div class="testi-track-wrap">
         <div class="testi-track" id="featuredTrack" style="gap:24px;">
 
-          <div class="catalog-card" style="flex-shrink:0;" onclick="showPage('detail')">
-            <div style="position:relative;overflow:hidden;"><img class="catalog-img" src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=600&h=375&fit=crop" alt="ЖК Гранд Панорама Батуми">
-              <span class="prop-badge badge-ready" style="position:absolute;top:12px;left:12px;">Сдан в эксплуатацию</span></div>
+          <div class="catalog-card" style="flex-shrink:0;" onclick="showDetail('batumi-grand')">
+            <div class="catalog-card-img-wrap" style="position:relative;overflow:hidden;">
+              <div class="card-slider" data-imgs='["https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=900&h=600&fit=crop","https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=900&h=600&fit=crop","https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=900&h=600&fit=crop"]' data-idx="0">
+                <img class="catalog-img card-slider-img" src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=600&h=375&fit=crop" alt="ЖК Гранд Панорама Батуми">
+                <button class="card-slider-btn card-slider-prev" onclick="cardSlide(event,this,-1)" aria-label="Назад">&#8249;</button>
+                <button class="card-slider-btn card-slider-next" onclick="cardSlide(event,this,1)" aria-label="Вперёд">&#8250;</button>
+                <div class="card-slider-dots"><span class="card-slider-dot active"></span><span class="card-slider-dot"></span><span class="card-slider-dot"></span></div>
+              </div>
+              <span class="prop-badge badge-ready" style="position:absolute;top:12px;left:12px;z-index:2;">Сдан в эксплуатацию</span>
+            </div>
             <div class="catalog-card-body">
               <div class="catalog-city">Батуми</div>
               <div class="catalog-name">ЖК «Гранд Панорама Батуми»</div>
               <div class="catalog-price">$125,000</div>
-              <div class="catalog-specs"><span>45</span> м² &nbsp;·&nbsp; <span>1</span> спальня &nbsp;·&nbsp; <span>12</span> этаж</div>
-              <a class="catalog-detail-link" onclick="event.stopPropagation();showPage('detail')">Подробнее →</a>
+              <div class="catalog-specs">
+                <span class="spec-item"><strong>45</strong> м²</span><span class="spec-sep">·</span>
+                <span class="spec-item"><strong>1</strong> спал.</span><span class="spec-sep">·</span>
+                <span class="spec-item"><strong>12</strong> эт.</span><span class="spec-sep">·</span>
+                <span class="spec-item"><strong>2022</strong> г.</span>
+              </div>
+              <a class="catalog-detail-link" onclick="event.stopPropagation();showDetail('batumi-grand')">Подробнее →</a>
             </div>
           </div>
 
-          <div class="catalog-card" style="flex-shrink:0;" onclick="showPage('detail')">
-            <div style="position:relative;overflow:hidden;"><img class="catalog-img" src="https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=600&h=375&fit=crop" alt="Элитная квартира Тбилиси">
-              <span class="prop-badge badge-build" style="position:absolute;top:12px;left:12px;">Под чистовую отделку</span></div>
+          <div class="catalog-card" style="flex-shrink:0;" onclick="showDetail('tbilisi-elite')">
+            <div class="catalog-card-img-wrap" style="position:relative;overflow:hidden;">
+              <div class="card-slider" data-imgs='["https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=900&h=600&fit=crop","https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=900&h=600&fit=crop","https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=900&h=600&fit=crop"]' data-idx="0">
+                <img class="catalog-img card-slider-img" src="https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=600&h=375&fit=crop" alt="Элитная квартира Тбилиси">
+                <button class="card-slider-btn card-slider-prev" onclick="cardSlide(event,this,-1)" aria-label="Назад">&#8249;</button>
+                <button class="card-slider-btn card-slider-next" onclick="cardSlide(event,this,1)" aria-label="Вперёд">&#8250;</button>
+                <div class="card-slider-dots"><span class="card-slider-dot active"></span><span class="card-slider-dot"></span><span class="card-slider-dot"></span></div>
+              </div>
+              <span class="prop-badge badge-build" style="position:absolute;top:12px;left:12px;z-index:2;">На стадии строительства</span>
+            </div>
             <div class="catalog-card-body">
               <div class="catalog-city">Тбилиси</div>
               <div class="catalog-name">Элитная квартира в центре Тбилиси</div>
               <div class="catalog-price">$210,000</div>
-              <div class="catalog-specs"><span>78</span> м² &nbsp;·&nbsp; <span>2</span> спальни &nbsp;·&nbsp; <span>6</span> этаж</div>
-              <a class="catalog-detail-link" onclick="event.stopPropagation();showPage('detail')">Подробнее →</a>
+              <div class="catalog-specs">
+                <span class="spec-item"><strong>210</strong> м²</span><span class="spec-sep">·</span>
+                <span class="spec-item"><strong>2</strong> спал.</span><span class="spec-sep">·</span>
+                <span class="spec-item"><strong>6</strong> эт.</span><span class="spec-sep">·</span>
+                <span class="spec-item"><strong>2024</strong> г.</span>
+              </div>
+              <a class="catalog-detail-link" onclick="event.stopPropagation();showDetail('tbilisi-elite')">Подробнее →</a>
             </div>
           </div>
 
-          <div class="catalog-card" style="flex-shrink:0;" onclick="showPage('detail')">
-            <div style="position:relative;overflow:hidden;"><img class="catalog-img" src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=600&h=375&fit=crop" alt="Апартаменты у моря Гонио">
-              <span class="prop-badge badge-ready" style="position:absolute;top:12px;left:12px;">Готовые к заселению</span></div>
+          <div class="catalog-card" style="flex-shrink:0;" onclick="showDetail('gonio-coast')">
+            <div class="catalog-card-img-wrap" style="position:relative;overflow:hidden;">
+              <div class="card-slider" data-imgs='["https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=900&h=600&fit=crop","https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=900&h=600&fit=crop","https://images.unsplash.com/photo-1583608205776-bfd35f0d9f83?w=900&h=600&fit=crop"]' data-idx="0">
+                <img class="catalog-img card-slider-img" src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=600&h=375&fit=crop" alt="Апартаменты у моря Гонио">
+                <button class="card-slider-btn card-slider-prev" onclick="cardSlide(event,this,-1)" aria-label="Назад">&#8249;</button>
+                <button class="card-slider-btn card-slider-next" onclick="cardSlide(event,this,1)" aria-label="Вперёд">&#8250;</button>
+                <div class="card-slider-dots"><span class="card-slider-dot active"></span><span class="card-slider-dot"></span><span class="card-slider-dot"></span></div>
+              </div>
+              <span class="prop-badge badge-ready" style="position:absolute;top:12px;left:12px;z-index:2;">Готовые к заселению</span>
+            </div>
             <div class="catalog-card-body">
               <div class="catalog-city">Гонио</div>
               <div class="catalog-name">Апартаменты у моря, Gonio Coast</div>
               <div class="catalog-price">$98,000</div>
-              <div class="catalog-specs"><span>55</span> м² &nbsp;·&nbsp; <span>1</span> спальня &nbsp;·&nbsp; <span>4</span> этаж</div>
-              <a class="catalog-detail-link" onclick="event.stopPropagation();showPage('detail')">Подробнее →</a>
+              <div class="catalog-specs">
+                <span class="spec-item"><strong>52</strong> м²</span><span class="spec-sep">·</span>
+                <span class="spec-item"><strong>1</strong> спал.</span><span class="spec-sep">·</span>
+                <span class="spec-item"><strong>5</strong> эт.</span><span class="spec-sep">·</span>
+                <span class="spec-item"><strong>2023</strong> г.</span>
+              </div>
+              <a class="catalog-detail-link" onclick="event.stopPropagation();showDetail('gonio-coast')">Подробнее →</a>
             </div>
           </div>
 
-          <div class="catalog-card" style="flex-shrink:0;" onclick="showPage('detail')">
-            <div style="position:relative;overflow:hidden;"><img class="catalog-img" src="https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=600&h=375&fit=crop" alt="Коттеджный комплекс Бакуриани">
-              <span class="prop-badge badge-invest" style="position:absolute;top:12px;left:12px;">Инвестиция</span></div>
+          <div class="catalog-card" style="flex-shrink:0;" onclick="showDetail('bakuriani-hills')">
+            <div class="catalog-card-img-wrap" style="position:relative;overflow:hidden;">
+              <div class="card-slider" data-imgs='["https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=900&h=600&fit=crop","https://images.unsplash.com/photo-1583608205776-bfd35f0d9f83?w=900&h=600&fit=crop","https://images.unsplash.com/photo-1555636222-cae831e670b3?w=900&h=600&fit=crop"]' data-idx="0">
+                <img class="catalog-img card-slider-img" src="https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=600&h=375&fit=crop" alt="Коттеджный комплекс Бакуриани">
+                <button class="card-slider-btn card-slider-prev" onclick="cardSlide(event,this,-1)" aria-label="Назад">&#8249;</button>
+                <button class="card-slider-btn card-slider-next" onclick="cardSlide(event,this,1)" aria-label="Вперёд">&#8250;</button>
+                <div class="card-slider-dots"><span class="card-slider-dot active"></span><span class="card-slider-dot"></span><span class="card-slider-dot"></span></div>
+              </div>
+              <span class="prop-badge badge-invest" style="position:absolute;top:12px;left:12px;z-index:2;">Инвестиция</span>
+            </div>
             <div class="catalog-card-body">
               <div class="catalog-city">Бакуриани</div>
               <div class="catalog-name">Коттеджный комплекс «Бакуриани Хиллс»</div>
               <div class="catalog-price">$195,000</div>
-              <div class="catalog-specs"><span>210</span> м² &nbsp;·&nbsp; <span>4</span> спальни &nbsp;·&nbsp; <span>2</span> этажа</div>
-              <a class="catalog-detail-link" onclick="event.stopPropagation();showPage('detail')">Подробнее →</a>
+              <div class="catalog-specs">
+                <span class="spec-item"><strong>150</strong> м²</span><span class="spec-sep">·</span>
+                <span class="spec-item"><strong>3</strong> спал.</span><span class="spec-sep">·</span>
+                <span class="spec-item"><strong>2</strong> эт.</span><span class="spec-sep">·</span>
+                <span class="spec-item"><strong>2025</strong> г.</span>
+              </div>
+              <a class="catalog-detail-link" onclick="event.stopPropagation();showDetail('bakuriani-hills')">Подробнее →</a>
             </div>
           </div>
 
-          <div class="catalog-card" style="flex-shrink:0;" onclick="showPage('detail')">
-            <div style="position:relative;overflow:hidden;"><img class="catalog-img" src="https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=600&h=375&fit=crop" alt="Пентхаус Тбилиси">
-              <span class="prop-badge badge-sale" style="position:absolute;top:12px;left:12px;">Эксклюзив</span></div>
+          <div class="catalog-card" style="flex-shrink:0;" onclick="showDetail('tbilisi-penthouse')">
+            <div class="catalog-card-img-wrap" style="position:relative;overflow:hidden;">
+              <div class="card-slider" data-imgs='["https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=900&h=600&fit=crop","https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=900&h=600&fit=crop","https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=900&h=600&fit=crop"]' data-idx="0">
+                <img class="catalog-img card-slider-img" src="https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=600&h=375&fit=crop" alt="Пентхаус Тбилиси">
+                <button class="card-slider-btn card-slider-prev" onclick="cardSlide(event,this,-1)" aria-label="Назад">&#8249;</button>
+                <button class="card-slider-btn card-slider-next" onclick="cardSlide(event,this,1)" aria-label="Вперёд">&#8250;</button>
+                <div class="card-slider-dots"><span class="card-slider-dot active"></span><span class="card-slider-dot"></span><span class="card-slider-dot"></span></div>
+              </div>
+              <span class="prop-badge badge-sale" style="position:absolute;top:12px;left:12px;z-index:2;">Эксклюзив</span>
+            </div>
             <div class="catalog-card-body">
               <div class="catalog-city">Тбилиси</div>
               <div class="catalog-name">Пентхаус «Царская Высота»</div>
               <div class="catalog-price">$650,000</div>
-              <div class="catalog-specs"><span>310</span> м² &nbsp;·&nbsp; <span>4</span> спальни &nbsp;·&nbsp; <span>16</span> этаж</div>
-              <a class="catalog-detail-link" onclick="event.stopPropagation();showPage('detail')">Подробнее →</a>
+              <div class="catalog-specs">
+                <span class="spec-item"><strong>310</strong> м²</span><span class="spec-sep">·</span>
+                <span class="spec-item"><strong>4</strong> спал.</span><span class="spec-sep">·</span>
+                <span class="spec-item"><strong>22</strong> эт.</span><span class="spec-sep">·</span>
+                <span class="spec-item"><strong>2021</strong> г.</span>
+              </div>
+              <a class="catalog-detail-link" onclick="event.stopPropagation();showDetail('tbilisi-penthouse')">Подробнее →</a>
             </div>
           </div>
 

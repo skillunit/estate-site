@@ -405,11 +405,14 @@ function cardSlide(e, btn, dir) {
   slider.dataset.idx = idx;
 
   const img = slider.querySelector('.card-slider-img');
+  img.style.transition = 'opacity 0.22s ease-in-out, transform 0.4s ease';
   img.style.opacity = '0';
   setTimeout(() => {
     img.src = imgs[idx];
-    img.style.opacity = '1';
-  }, 120);
+    img.onload = () => { img.style.opacity = '1'; };
+    // fallback если картинка уже в кеше
+    if (img.complete) img.style.opacity = '1';
+  }, 180);
 
   slider.querySelectorAll('.card-slider-dot').forEach((d, i) => {
     d.classList.toggle('active', i === idx);
