@@ -664,12 +664,12 @@ function renderMapMarkers(countryVal, cityVal, statusVal) {
   clusters.forEach(cluster => {
     const count = cluster.items.length;
     const isCluster = count > 1;
-    const size = isCluster ? (count >= 5 ? 52 : 44) : 36;
-    const fontSize = isCluster ? (count >= 5 ? '14px' : '13px') : '11px';
+    const size = count >= 5 ? 52 : 44;
+    const fontSize = count >= 5 ? '14px' : '13px';
 
     const icon = L.divIcon({
       className: '',
-      html: `<div class="map-cluster-icon" style="width:${size}px;height:${size}px;font-size:${fontSize};">${isCluster ? count : '<svg width="14" height="14" viewBox="0 0 24 24" fill="white"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>'}</div>`,
+      html: `<div class="map-cluster-icon" style="width:${size}px;height:${size}px;font-size:${fontSize};">${count}</div>`,
       iconSize: [size, size],
       iconAnchor: [size / 2, size / 2],
       popupAnchor: [0, -(size / 2 + 6)],
