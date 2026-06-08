@@ -265,9 +265,34 @@ function toggleAbout() {
 
 // Blog filter buttons
 document.addEventListener('click', function(e) {
-  if (e.target.classList.contains('blog-filter-btn')) {
-    document.querySelectorAll('.blog-filter-btn').forEach(b => b.classList.remove('active'));
-    e.target.classList.add('active');
+  if (!e.target.classList.contains('blog-filter-btn')) return;
+
+  // Переключаем активную кнопку
+  document.querySelectorAll('.blog-filter-btn').forEach(b => b.classList.remove('active'));
+  e.target.classList.add('active');
+
+  const tag = e.target.dataset.tag;
+
+  // Фильтруем карточки
+  document.querySelectorAll('#page-blog .blog-card').forEach(card => {
+    if (tag === 'all' || card.dataset.tag === tag) {
+      card.style.display = '';
+    } else {
+      card.style.display = 'none';
+    }
+  });
+
+  // Если первая карточка (featured) скрыта — убираем у неё класс blog-featured
+  // чтобы сетка не ломалась, и возвращаем когда показывается снова
+  const featured = document.querySelector('#page-blog .blog-featured');
+  if (featured) {
+    if (featured.style.display === 'none') {
+      featured.classList.remove('blog-featured');
+      featured.dataset.wasFeatured = '1';
+    } else if (featured.dataset.wasFeatured) {
+      featured.classList.add('blog-featured');
+      delete featured.dataset.wasFeatured;
+    }
   }
 });
 

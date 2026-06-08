@@ -1407,18 +1407,18 @@
 
   <div class="blog-section-inner">
     <div class="blog-filters">
-      <button class="blog-filter-btn active">Все</button>
-      <button class="blog-filter-btn">Инвестиции</button>
-      <button class="blog-filter-btn">Рынок</button>
-      <button class="blog-filter-btn">Советы</button>
-      <button class="blog-filter-btn">Тбилиси</button>
-      <button class="blog-filter-btn">Батуми</button>
+      <button class="blog-filter-btn active" data-tag="all">Все</button>
+      <button class="blog-filter-btn" data-tag="Инвестиции">Инвестиции</button>
+      <button class="blog-filter-btn" data-tag="Рынок">Рынок</button>
+      <button class="blog-filter-btn" data-tag="Советы">Советы</button>
+      <button class="blog-filter-btn" data-tag="Тбилиси">Тбилиси</button>
+      <button class="blog-filter-btn" data-tag="Батуми">Батуми</button>
     </div>
 
     <div class="blog-grid">
 
       <!-- Featured post -->
-      <div class="blog-card blog-featured" onclick="openArticle('https://picsum.photos/seed/tbilisi-invest/1400/700')" style="cursor:pointer;">
+      <div class="blog-card blog-featured" data-tag="Инвестиции" onclick="openArticle('https://picsum.photos/seed/tbilisi-invest/1400/700')" style="cursor:pointer;">
         <div class="blog-card-img-wrap">
           <img class="blog-card-img" src="https://picsum.photos/seed/tbilisi-invest/800/500" alt="">
         </div>
@@ -1435,7 +1435,7 @@
       </div>
 
       <!-- Post 2 -->
-      <div class="blog-card" onclick="openArticle('https://picsum.photos/seed/batumi-sea/1400/700')" style="cursor:pointer;">
+      <div class="blog-card" data-tag="Батуми" onclick="openArticle('https://picsum.photos/seed/batumi-sea/1400/700')" style="cursor:pointer;">
         <div class="blog-card-img-wrap">
           <img class="blog-card-img" src="https://picsum.photos/seed/batumi-sea/600/400" alt="">
         </div>
@@ -1452,7 +1452,7 @@
       </div>
 
       <!-- Post 3 -->
-      <div class="blog-card" onclick="openArticle('https://picsum.photos/seed/georgia-law/1400/700')" style="cursor:pointer;">
+      <div class="blog-card" data-tag="Советы" onclick="openArticle('https://picsum.photos/seed/georgia-law/1400/700')" style="cursor:pointer;">
         <div class="blog-card-img-wrap">
           <img class="blog-card-img" src="https://picsum.photos/seed/georgia-law/600/400" alt="">
         </div>
@@ -1469,7 +1469,7 @@
       </div>
 
       <!-- Post 4 -->
-      <div class="blog-card" onclick="openArticle('https://picsum.photos/seed/market-georgia/1400/700')" style="cursor:pointer;">
+      <div class="blog-card" data-tag="Рынок" onclick="openArticle('https://picsum.photos/seed/market-georgia/1400/700')" style="cursor:pointer;">
         <div class="blog-card-img-wrap">
           <img class="blog-card-img" src="https://picsum.photos/seed/market-georgia/600/400" alt="">
         </div>
@@ -1486,7 +1486,7 @@
       </div>
 
       <!-- Post 5 -->
-      <div class="blog-card" onclick="openArticle('https://picsum.photos/seed/vake-tbilisi/1400/700')" style="cursor:pointer;">
+      <div class="blog-card" data-tag="Тбилиси" onclick="openArticle('https://picsum.photos/seed/vake-tbilisi/1400/700')" style="cursor:pointer;">
         <div class="blog-card-img-wrap">
           <img class="blog-card-img" src="https://picsum.photos/seed/vake-tbilisi/600/400" alt="">
         </div>
@@ -1503,7 +1503,7 @@
       </div>
 
       <!-- Post 6 -->
-      <div class="blog-card" onclick="openArticle('https://picsum.photos/seed/rental-yield/1400/700')" style="cursor:pointer;">
+      <div class="blog-card" data-tag="Инвестиции" onclick="openArticle('https://picsum.photos/seed/rental-yield/1400/700')" style="cursor:pointer;">
         <div class="blog-card-img-wrap">
           <img class="blog-card-img" src="https://picsum.photos/seed/rental-yield/600/400" alt="">
         </div>

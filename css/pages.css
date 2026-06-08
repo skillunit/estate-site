@@ -1062,15 +1062,30 @@
 
 .blog-section-inner { max-width:1200px; margin:0 auto; padding: 56px 32px 80px; }
 
-.blog-filters { display:flex; gap:10px; flex-wrap:wrap; margin-bottom:40px; }
-.blog-filter-btn {
-  padding: 7px 18px; border-radius: 20px;
-  border: 1px solid var(--border); background: var(--white);
-  font-size: 0.8rem; font-weight:600; color: var(--gray-700);
-  cursor: pointer; transition: var(--transition);
+.blog-filters {
+  display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 40px;
 }
-.blog-filter-btn:hover,
-.blog-filter-btn.active { background: var(--red); color: var(--white); border-color: var(--red); }
+.blog-filter-btn {
+  padding: 7px 16px;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  background: var(--white);
+  font-family: var(--font-body);
+  font-size: 0.8rem; font-weight: 600;
+  color: var(--gray-700);
+  cursor: pointer;
+  transition: border-color var(--transition), color var(--transition), background var(--transition);
+  letter-spacing: 0.02em;
+}
+.blog-filter-btn:hover {
+  border-color: var(--red);
+  color: var(--red);
+}
+.blog-filter-btn.active {
+  background: var(--red);
+  color: var(--white);
+  border-color: var(--red);
+}
 
 .blog-grid {
   display: grid;
