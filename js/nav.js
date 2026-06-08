@@ -314,3 +314,46 @@ function setDealType(type) {
   document.getElementById('dealBtnRent').classList.toggle('active', type === 'rent');
   filterCatalog();
 }
+
+// ── CUSTOM SORT DROPDOWN ──
+function toggleSortDropdown(e) {
+  e.stopPropagation();
+  const dd = document.getElementById('sortDropdown');
+  const isOpen = dd.classList.toggle('open');
+  if (isOpen) {
+    // Закрыть при клике вне
+    setTimeout(() => {
+      document.addEventListener('click', closeSortDropdownOutside, { once: true });
+    }, 0);
+  }
+}
+
+function closeSortDropdownOutside(e) {
+  const dd = document.getElementById('sortDropdown');
+  if (dd && !dd.contains(e.target)) {
+    dd.classList.remove('open');
+  }
+}
+
+function selectSort(el) {
+  const value = el.dataset.value;
+
+  // Обновить активный пункт
+  document.querySelectorAll('.sort-option').forEach(o => o.classList.remove('active'));
+  el.classList.add('active');
+
+  // Обновить лейбл кнопки
+  const label = el.textContent.trim();
+  const labelEl = document.getElementById('sortCurrentLabel');
+  if (labelEl) labelEl.textContent = label;
+
+  // Обновить скрытый input и вызвать фильтрацию
+  const input = document.getElementById('catalogSort');
+  if (input) {
+    input.value = value;
+    filterCatalog();
+  }
+
+  // Закрыть дропдаун
+  document.getElementById('sortDropdown').classList.remove('open');
+}

@@ -632,13 +632,49 @@
         <div class="catalog-headline" id="catalogHeadline">Покупка в Грузии</div>
         <p class="catalog-count-line">Найдено предложений: <span id="catalogCount">—</span></p>
       </div>
-      <select class="filter-select catalog-sort-select" id="catalogSort" onchange="filterCatalog()">
-        <option value="top">Топ продаж</option>
-        <option value="price-asc">Цена: от низкой к высокой</option>
-        <option value="price-desc">Цена: от высокой к низкой</option>
-        <option value="name-asc">Название: А → Я</option>
-        <option value="name-desc">Название: Я → А</option>
-      </select>
+      <div class="sort-dropdown" id="sortDropdown">
+        <button class="sort-dropdown-btn" onclick="toggleSortDropdown(event)" type="button">
+          <span class="sort-dropdown-label">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="6" y1="12" x2="18" y2="12"/><line x1="9" y1="18" x2="15" y2="18"/></svg>
+            <span id="sortCurrentLabel">Топ продаж</span>
+          </span>
+          <svg class="sort-dropdown-arrow" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="sort-dropdown-menu" id="sortDropdownMenu">
+          <div class="sort-option active" data-value="top" onclick="selectSort(this)">
+            <span class="sort-option-check">
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            </span>
+            Топ продаж
+          </div>
+          <div class="sort-option" data-value="price-asc" onclick="selectSort(this)">
+            <span class="sort-option-check">
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            </span>
+            Цена: от низкой к высокой
+          </div>
+          <div class="sort-option" data-value="price-desc" onclick="selectSort(this)">
+            <span class="sort-option-check">
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            </span>
+            Цена: от высокой к низкой
+          </div>
+          <div class="sort-option" data-value="name-asc" onclick="selectSort(this)">
+            <span class="sort-option-check">
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            </span>
+            Название: А → Я
+          </div>
+          <div class="sort-option" data-value="name-desc" onclick="selectSort(this)">
+            <span class="sort-option-check">
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            </span>
+            Название: Я → А
+          </div>
+        </div>
+        <!-- скрытый input для совместимости с catalog.js -->
+        <input type="hidden" id="catalogSort" value="top">
+      </div>
     </div>
     <div class="catalog-grid" id="catalogGrid">
 
