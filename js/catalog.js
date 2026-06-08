@@ -475,7 +475,7 @@ const COUNTRY_VIEW = {
   usa:    { lat: 37.0, lng: -95.0, zoom: 4 },
   uae:    { lat: 24.5, lng: 54.5, zoom: 8 },
   cyprus: { lat: 34.9, lng: 33.1, zoom: 9 },
-  greece: { lat: 38.5, lng: 23.8, zoom: 6 },
+  greece: { lat: 38.0, lng: 24.5, zoom: 7 },
 };
 
 // ── Рендер карточек каталога из базы ──
