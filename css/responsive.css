@@ -2,10 +2,7 @@
    RESPONSIVE
 ═══════════════════════════════════ */
 @media (max-width:1024px) {
-  .directions-grid { flex-wrap:wrap; height:auto; border-radius:var(--radius); }
-  .directions-grid .direction-card { flex: 1 1 calc(33.33% - 1px); min-height:240px; transition:none; }
-  .directions-grid:hover .direction-card { flex: 1 1 calc(33.33% - 1px); }
-  .directions-grid:hover .direction-card:hover { flex: 1 1 calc(33.33% - 1px); }
+  .directions-grid { grid-template-columns:repeat(3,1fr); }
   .props-grid { grid-template-columns:repeat(2,1fr); }
   .footer-grid { grid-template-columns:1fr 1fr 1fr; }
   .detail-layout { grid-template-columns:1fr; }
@@ -111,9 +108,7 @@
   .filter-btn { grid-column: span 2; width:100%; }
 
   /* ── Directions ── */
-  .directions-grid .direction-card { flex: 1 1 calc(50% - 1px); min-height:200px; }
-  .directions-grid:hover .direction-card { flex: 1 1 calc(50% - 1px); }
-  .directions-grid:hover .direction-card:hover { flex: 1 1 calc(50% - 1px); }
+  .directions-grid { grid-template-columns:repeat(2,1fr); gap:10px; }
 
   /* ── About strip ── */
   .about-strip-inner { padding: 0 16px; gap:28px; }
@@ -200,9 +195,8 @@
   .search-form .btn { grid-column:auto; }
 
   /* ── Directions ── */
-  .directions-grid .direction-card { flex: 1 1 calc(50% - 1px); min-height:160px; }
-  .directions-grid:hover .direction-card { flex: 1 1 calc(50% - 1px); }
-  .directions-grid:hover .direction-card:hover { flex: 1 1 calc(50% - 1px); }
+  .directions-grid { grid-template-columns:1fr 1fr; gap:8px; }
+  .direction-img { aspect-ratio:2/3; }
   
 
   /* ── Props ── */
