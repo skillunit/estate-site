@@ -272,6 +272,18 @@ document.addEventListener('click', function(e) {
   e.target.classList.add('active');
 
   const tag = e.target.dataset.tag;
+  const featured = document.querySelector('#page-blog [data-was-featured], #page-blog .blog-featured');
+
+  // Большая карточка — только при «Все»
+  if (featured) {
+    if (tag === 'all') {
+      featured.classList.add('blog-featured');
+      delete featured.dataset.wasFeatured;
+    } else {
+      featured.classList.remove('blog-featured');
+      featured.dataset.wasFeatured = '1';
+    }
+  }
 
   // Фильтруем карточки
   document.querySelectorAll('#page-blog .blog-card').forEach(card => {
@@ -281,19 +293,6 @@ document.addEventListener('click', function(e) {
       card.style.display = 'none';
     }
   });
-
-  // Если первая карточка (featured) скрыта — убираем у неё класс blog-featured
-  // чтобы сетка не ломалась, и возвращаем когда показывается снова
-  const featured = document.querySelector('#page-blog .blog-featured');
-  if (featured) {
-    if (featured.style.display === 'none') {
-      featured.classList.remove('blog-featured');
-      featured.dataset.wasFeatured = '1';
-    } else if (featured.dataset.wasFeatured) {
-      featured.classList.add('blog-featured');
-      delete featured.dataset.wasFeatured;
-    }
-  }
 });
 
 // ── SHARE POPUP ──
