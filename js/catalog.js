@@ -14,7 +14,7 @@ const MAP_PROPERTIES = [
     imgs: ['https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=900&h=600&fit=crop', 'https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=900&h=600&fit=crop', 'https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=900&h=600&fit=crop'],
     desc: 'Современный жилой комплекс с панорамными видами на Чёрное море. Полная чистовая отделка, подземный паркинг, бассейн. Идеально для постоянного проживания и сдачи в аренду.',
     roi: '10–12%', growth: '12–15%', payback: '8–10 лет',
-    specs: '45 м² · 1 спальня · 12 этаж', year: '2022', year: '2022',
+    specs: '45 м² · 1 спальня · 12 этаж', year: '2022', oldPrice: '$149,000', year: '2022',
   },
   {
     id: 'batumi-rustaveli',
@@ -44,7 +44,7 @@ const MAP_PROPERTIES = [
     imgs: ['https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=900&h=600&fit=crop', 'https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=900&h=600&fit=crop', 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=900&h=600&fit=crop'],
     desc: 'Просторная квартира в историческом центре Тбилиси. Высокие потолки, панорамные окна, вид на старый город. Премиальная отделка под заказ.',
     roi: '8–10%', growth: '15–20%', payback: '9–11 лет',
-    specs: '210 м² · 2 спальни · 6 этаж', year: '2024',
+    specs: '210 м² · 2 спальни · 6 этаж', year: '2024', oldPrice: '$245,000',
   },
   {
     id: 'tbilisi-penthouse',
@@ -74,7 +74,7 @@ const MAP_PROPERTIES = [
     imgs: ['https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=900&h=600&fit=crop', 'https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=900&h=600&fit=crop', 'https://images.unsplash.com/photo-1583608205776-bfd35f0d9f83?w=900&h=600&fit=crop'],
     desc: 'Апарт-отель в 50 метрах от моря в Гонио. Управляющая компания берёт на себя сдачу в аренду — пассивный доход без участия владельца.',
     roi: '12–15%', growth: '14–18%', payback: '7–8 лет',
-    specs: '52 м² · 1 спальня · 5 этаж', year: '2023',
+    specs: '52 м² · 1 спальня · 5 этаж', year: '2023', oldPrice: '$115,000',
   },
   {
     id: 'bakuriani-hills',
@@ -89,7 +89,7 @@ const MAP_PROPERTIES = [
     imgs: ['https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=900&h=600&fit=crop', 'https://images.unsplash.com/photo-1583608205776-bfd35f0d9f83?w=900&h=600&fit=crop', 'https://images.unsplash.com/photo-1555636222-cae831e670b3?w=900&h=600&fit=crop'],
     desc: 'Горнолыжный курорт, коттеджи у подъёмника. Высокий сезон обеспечивает загрузку 80%+. Развитая инфраструктура: рестораны, СПА, прокат снаряжения.',
     roi: '14–16%', growth: '20–25%', payback: '6–8 лет',
-    specs: '150 м² · 3 спальни · 2 этажа', year: '2025',
+    specs: '150 м² · 3 спальни · 2 этажа', year: '2025', oldPrice: '$225,000',
   },
   {
     id: 'kakheti-alazani',
@@ -149,7 +149,7 @@ const MAP_PROPERTIES = [
     imgs: ['https://images.unsplash.com/photo-1502005229762-cf1b2da7c5d6?w=900&h=600&fit=crop', 'https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=900&h=600&fit=crop', 'https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=900&h=600&fit=crop'],
     desc: 'Современные апартаменты в деловом центре Лимасола. Пешая доступность до набережной, развитая инфраструктура, вид на море.',
     roi: '6–8%', growth: '8–12%', payback: '12–14 лет',
-    specs: '85 м² · 2 спальни · 5 этаж', year: '2020',
+    specs: '85 м² · 2 спальни · 5 этаж', year: '2020', oldPrice: '$369,000',
   },
   {
     id: 'ny-brooklyn',
@@ -164,7 +164,7 @@ const MAP_PROPERTIES = [
     imgs: ['https://images.unsplash.com/photo-1555636222-cae831e670b3?w=900&h=600&fit=crop', 'https://images.unsplash.com/photo-1502005229762-cf1b2da7c5d6?w=900&h=600&fit=crop', 'https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=900&h=600&fit=crop'],
     desc: 'Просторный таунхаус в модном районе Бруклина. Три этажа, терраса на крыше, собственный гараж.',
     roi: '4–6%', growth: '5–8%', payback: '16–18 лет',
-    specs: '160 м² · 3 спальни · 3 этажа', year: '2019',
+    specs: '160 м² · 3 спальни · 3 этажа', year: '2019', oldPrice: '$990,000',
   },
   {
     id: 'ny-manhattan',
@@ -209,7 +209,7 @@ const MAP_PROPERTIES = [
     imgs: ['https://images.unsplash.com/photo-1578683010236-d716f9a3f461?w=900&h=600&fit=crop', 'https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=900&h=600&fit=crop', 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=900&h=600&fit=crop'],
     desc: 'Апартаменты с видом на залив в престижном районе Dubai Marina. Полностью меблированы, управляющая компания.',
     roi: '7–9%', growth: '10–13%', payback: '11–13 лет',
-    specs: '85 м² · 1 спальня · 24 этаж', year: '2023',
+    specs: '85 м² · 1 спальня · 24 этаж', year: '2023', oldPrice: '$520,000',
   },
   {
     id: 'dubai-palm',
@@ -254,7 +254,7 @@ const MAP_PROPERTIES = [
     imgs: ['https://images.unsplash.com/photo-1533929736458-ca588d08c8be?w=900&h=600&fit=crop', 'https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=900&h=600&fit=crop', 'https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=900&h=600&fit=crop'],
     desc: 'Апартаменты в историческом центре Афин рядом с Акрополем. Высокий туристический поток обеспечивает стабильный доход от краткосрочной аренды.',
     roi: '7–9%', growth: '9–12%', payback: '11–13 лет',
-    specs: '95 м² · 2 спальни · 4 этаж', year: '2019',
+    specs: '95 м² · 2 спальни · 4 этаж', year: '2019', oldPrice: '$375,000',
   },
   {
     id: 'mykonos-villa',
@@ -531,7 +531,13 @@ function renderCatalogGrid(countryVal, cityVal, statusVal) {
       <div class="catalog-card-body">
         <div class="catalog-city">${p.cityLabel}</div>
         <div class="catalog-name">${p.name}</div>
-        <div class="catalog-price">${p.price}</div>
+        <div class="catalog-price-block">
+          <div class="catalog-price-row">
+            <span class="catalog-price">${p.price}</span>
+            ${p.deal === 'buy' && p.area ? `<span class="catalog-price-sqm">${Math.round(parseFloat(p.price.replace(/[^0-9.]/g,'')) / parseFloat(p.area)).toLocaleString('ru-RU')} $/м²</span>` : ''}
+          </div>
+          ${p.oldPrice ? `<div class="catalog-price-old">${p.oldPrice}</div>` : ''}
+        </div>
         <div class="catalog-specs">
           <span class="spec-item"><strong>${p.area}</strong> м²</span>
           <span class="spec-sep">·</span>
@@ -607,6 +613,29 @@ function showDetail(id) {
   // Update price
   const detailPrice = document.getElementById('detailPrice');
   if (detailPrice) detailPrice.textContent = prop.price;
+
+  // Цена за м² (только для покупки)
+  const detailPriceSqm = document.getElementById('detailPriceSqm');
+  if (detailPriceSqm) {
+    if (prop.deal === 'buy' && prop.area) {
+      const sqm = Math.round(parseFloat(prop.price.replace(/[^0-9.]/g,'')) / parseFloat(prop.area));
+      detailPriceSqm.textContent = sqm.toLocaleString('ru-RU') + ' $/м²';
+      detailPriceSqm.style.display = '';
+    } else {
+      detailPriceSqm.style.display = 'none';
+    }
+  }
+
+  // Старая цена (перечёркнутая)
+  const detailPriceOld = document.getElementById('detailPriceOld');
+  if (detailPriceOld) {
+    if (prop.oldPrice) {
+      detailPriceOld.textContent = prop.oldPrice;
+      detailPriceOld.style.display = '';
+    } else {
+      detailPriceOld.style.display = 'none';
+    }
+  }
 
   showPage('detail');
   renderRelated(id);
