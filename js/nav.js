@@ -37,8 +37,18 @@ function goToCountry(country) {
   if (countrySelect) countrySelect.value = dataCountry;
   const citySelect = document.getElementById('citySelect');
   const statusSelect = document.getElementById('statusSelect');
-  if (citySelect) citySelect.value = 'all';
   if (statusSelect) statusSelect.value = 'all';
+
+  // Синхронизируем _prevCountry чтобы filterCatalog не сбросил состояние
+  _prevCountry = dataCountry;
+
+  // Обновляем список городов под выбранную страну
+  updateCityOptions(dataCountry);
+  if (citySelect) citySelect.value = 'all';
+
+  // Обновляем заголовок «Покупка в ОАЭ» и т.д.
+  updateCatalogHeadline(dataCountry);
+
   showPage('catalog');
   renderCatalogGrid(dataCountry, 'all', 'all');
   renderMapMarkers(dataCountry, 'all', 'all');
