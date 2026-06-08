@@ -391,3 +391,27 @@ function selectSort(el) {
   // Закрыть дропдаун
   document.getElementById('sortDropdown').classList.remove('open');
 }
+
+// ── CARD IMAGE SLIDER ──
+function cardSlide(e, btn, dir) {
+  e.stopPropagation();
+  const slider = btn.closest('.card-slider');
+  const imgs = JSON.parse(slider.dataset.imgs);
+  if (imgs.length <= 1) return;
+
+  let idx = parseInt(slider.dataset.idx) + dir;
+  if (idx < 0) idx = imgs.length - 1;
+  if (idx >= imgs.length) idx = 0;
+  slider.dataset.idx = idx;
+
+  const img = slider.querySelector('.card-slider-img');
+  img.style.opacity = '0';
+  setTimeout(() => {
+    img.src = imgs[idx];
+    img.style.opacity = '1';
+  }, 120);
+
+  slider.querySelectorAll('.card-slider-dot').forEach((d, i) => {
+    d.classList.toggle('active', i === idx);
+  });
+}

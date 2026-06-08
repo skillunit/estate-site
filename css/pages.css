@@ -308,8 +308,50 @@
 }
 .catalog-card:hover { box-shadow: var(--shadow-lg); transform: translateY(-3px); }
 .catalog-card.hidden { display: none; }
-.catalog-img { width:100%; aspect-ratio:16/9; object-fit:cover; transition: transform 0.4s; }
-.catalog-card:hover .catalog-img { transform:scale(1.03); }
+
+/* Slider wrapper */
+.card-slider { position: relative; overflow: hidden; }
+.catalog-img {
+  width: 100%; aspect-ratio: 16/9; object-fit: cover;
+  transition: opacity 0.12s ease, transform 0.4s ease;
+  display: block;
+}
+.catalog-card:hover .catalog-img { transform: scale(1.03); }
+
+/* Стрелки — появляются при hover на карточку */
+.card-slider-btn {
+  position: absolute; top: 50%; transform: translateY(-50%);
+  width: 28px; height: 28px;
+  background: rgba(0,0,0,0.38);
+  border: 1px solid rgba(255,255,255,0.25);
+  border-radius: 2px;
+  color: #fff; font-size: 1.1rem; line-height: 1;
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  opacity: 0;
+  transition: opacity 0.2s ease, background 0.2s ease;
+  z-index: 3;
+  padding: 0;
+}
+.card-slider-btn:hover { background: rgba(192,57,43,0.82); border-color: transparent; }
+.catalog-card:hover .card-slider-btn { opacity: 1; }
+.card-slider-prev { left: 8px; }
+.card-slider-next { right: 8px; }
+
+/* Точки */
+.card-slider-dots {
+  position: absolute; bottom: 8px; left: 0; right: 0;
+  display: flex; justify-content: center; gap: 4px;
+  z-index: 3;
+  opacity: 0; transition: opacity 0.2s ease;
+}
+.catalog-card:hover .card-slider-dots { opacity: 1; }
+.card-slider-dot {
+  width: 5px; height: 5px; border-radius: 50%;
+  background: rgba(255,255,255,0.5);
+  transition: background 0.2s;
+}
+.card-slider-dot.active { background: #fff; }
 .catalog-card-body { padding: 18px; }
 .catalog-city { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--gray-500); margin-bottom: 4px; }
 .catalog-name { font-family: var(--font-head); font-size: 1rem; font-weight: 700; color: var(--dark); margin-bottom: 4px; line-height:1.3; }

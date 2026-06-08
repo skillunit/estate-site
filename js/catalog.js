@@ -14,7 +14,7 @@ const MAP_PROPERTIES = [
     imgs: ['https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=900&h=600&fit=crop', 'https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=900&h=600&fit=crop', 'https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=900&h=600&fit=crop'],
     desc: 'Современный жилой комплекс с панорамными видами на Чёрное море. Полная чистовая отделка, подземный паркинг, бассейн. Идеально для постоянного проживания и сдачи в аренду.',
     roi: '10–12%', growth: '12–15%', payback: '8–10 лет',
-    specs: '45 м² · 1 спальня · 12 этаж',
+    specs: '45 м² · 1 спальня · 12 этаж', year: '2022', year: '2022',
   },
   {
     id: 'batumi-rustaveli',
@@ -29,7 +29,7 @@ const MAP_PROPERTIES = [
     imgs: ['https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=900&h=600&fit=crop', 'https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=900&h=600&fit=crop', 'https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=900&h=600&fit=crop'],
     desc: 'Апартаменты в строящемся комплексе на центральном бульваре Батуми. Сдача в 2025 году. Отличная инвестиционная возможность на стадии котлована.',
     roi: '12–14%', growth: '18–22%', payback: '7–9 лет',
-    specs: '38 м² · 1 спальня · 7 этаж',
+    specs: '38 м² · 1 спальня · 7 этаж', year: '2026',
   },
   {
     id: 'tbilisi-elite', top: true,
@@ -44,7 +44,7 @@ const MAP_PROPERTIES = [
     imgs: ['https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=900&h=600&fit=crop', 'https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=900&h=600&fit=crop', 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=900&h=600&fit=crop'],
     desc: 'Просторная квартира в историческом центре Тбилиси. Высокие потолки, панорамные окна, вид на старый город. Премиальная отделка под заказ.',
     roi: '8–10%', growth: '15–20%', payback: '9–11 лет',
-    specs: '210 м² · 2 спальни · 6 этаж',
+    specs: '210 м² · 2 спальни · 6 этаж', year: '2024',
   },
   {
     id: 'tbilisi-penthouse',
@@ -59,7 +59,7 @@ const MAP_PROPERTIES = [
     imgs: ['https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=900&h=600&fit=crop', 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=900&h=600&fit=crop', 'https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=900&h=600&fit=crop'],
     desc: 'Эксклюзивный пентхаус на последнем этаже с террасой 80 м² и 360° видом на Тбилиси и горы Кавказа. Умный дом, лифт прямо в квартиру, консьерж-сервис.',
     roi: '6–8%', growth: '10–14%', payback: '12–14 лет',
-    specs: '310 м² · 4 спальни · 22 этаж',
+    specs: '310 м² · 4 спальни · 22 этаж', year: '2021',
   },
   {
     id: 'gonio-coast',
@@ -74,7 +74,7 @@ const MAP_PROPERTIES = [
     imgs: ['https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=900&h=600&fit=crop', 'https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=900&h=600&fit=crop', 'https://images.unsplash.com/photo-1583608205776-bfd35f0d9f83?w=900&h=600&fit=crop'],
     desc: 'Апарт-отель в 50 метрах от моря в Гонио. Управляющая компания берёт на себя сдачу в аренду — пассивный доход без участия владельца.',
     roi: '12–15%', growth: '14–18%', payback: '7–8 лет',
-    specs: '52 м² · 1 спальня · 5 этаж',
+    specs: '52 м² · 1 спальня · 5 этаж', year: '2023',
   },
   {
     id: 'bakuriani-hills',
@@ -89,7 +89,7 @@ const MAP_PROPERTIES = [
     imgs: ['https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=900&h=600&fit=crop', 'https://images.unsplash.com/photo-1583608205776-bfd35f0d9f83?w=900&h=600&fit=crop', 'https://images.unsplash.com/photo-1555636222-cae831e670b3?w=900&h=600&fit=crop'],
     desc: 'Горнолыжный курорт, коттеджи у подъёмника. Высокий сезон обеспечивает загрузку 80%+. Развитая инфраструктура: рестораны, СПА, прокат снаряжения.',
     roi: '14–16%', growth: '20–25%', payback: '6–8 лет',
-    specs: '150 м² · 3 спальни · 2 этажа',
+    specs: '150 м² · 3 спальни · 2 этажа', year: '2025',
   },
   {
     id: 'kakheti-alazani',
@@ -104,7 +104,7 @@ const MAP_PROPERTIES = [
     imgs: ['https://images.unsplash.com/photo-1583608205776-bfd35f0d9f83?w=900&h=600&fit=crop', 'https://images.unsplash.com/photo-1555636222-cae831e670b3?w=900&h=600&fit=crop', 'https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=900&h=600&fit=crop'],
     desc: 'Эко-резиденция в винном регионе Грузии. Виноградники вокруг, собственный погреб, терраса с видом на горы. Идеально для загородного отдыха и агротуризма.',
     roi: '9–11%', growth: '12–16%', payback: '9–11 лет',
-    specs: '110 м² · 2 спальни · 1 этаж',
+    specs: '110 м² · 2 спальни · 1 этаж', year: '2025',
   },
   {
     id: 'gonio-seaview',
@@ -119,7 +119,7 @@ const MAP_PROPERTIES = [
     imgs: ['https://images.unsplash.com/photo-1580587771525-78b9dba3b914?w=900&h=600&fit=crop', 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=900&h=600&fit=crop', 'https://images.unsplash.com/photo-1523217582562-09d0def993a6?w=900&h=600&fit=crop'],
     desc: 'Двухэтажная вилла в тихом пригороде Батуми. Открытая терраса, панорамный вид на Чёрное море, 3 спальни, собственный сад.',
     roi: '8–10%', growth: '10–14%', payback: '10–12 лет',
-    specs: '120 м² · 3 спальни · 2 этажа',
+    specs: '120 м² · 3 спальни · 2 этажа', year: '2022',
   },
   {
     id: 'bakuriani-chalet',
@@ -134,7 +134,7 @@ const MAP_PROPERTIES = [
     imgs: ['https://images.unsplash.com/photo-1542718610-a1d656d1884c?w=900&h=600&fit=crop', 'https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=900&h=600&fit=crop', 'https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=900&h=600&fit=crop'],
     desc: 'Уютное шале в горнолыжном курорте Бакуриани. Высокий арендный доход в сезон, панорамный вид на горы, камин, терраса.',
     roi: '10–13%', growth: '11–15%', payback: '8–10 лет',
-    specs: '95 м² · 2 спальни · 2 этажа',
+    specs: '95 м² · 2 спальни · 2 этажа', year: '2021',
   },
   {
     id: 'limassol-apart',
@@ -149,7 +149,7 @@ const MAP_PROPERTIES = [
     imgs: ['https://images.unsplash.com/photo-1502005229762-cf1b2da7c5d6?w=900&h=600&fit=crop', 'https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=900&h=600&fit=crop', 'https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=900&h=600&fit=crop'],
     desc: 'Современные апартаменты в деловом центре Лимасола. Пешая доступность до набережной, развитая инфраструктура, вид на море.',
     roi: '6–8%', growth: '8–12%', payback: '12–14 лет',
-    specs: '85 м² · 2 спальни · 5 этаж',
+    specs: '85 м² · 2 спальни · 5 этаж', year: '2020',
   },
   {
     id: 'ny-brooklyn',
@@ -164,7 +164,7 @@ const MAP_PROPERTIES = [
     imgs: ['https://images.unsplash.com/photo-1555636222-cae831e670b3?w=900&h=600&fit=crop', 'https://images.unsplash.com/photo-1502005229762-cf1b2da7c5d6?w=900&h=600&fit=crop', 'https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=900&h=600&fit=crop'],
     desc: 'Просторный таунхаус в модном районе Бруклина. Три этажа, терраса на крыше, собственный гараж.',
     roi: '4–6%', growth: '5–8%', payback: '16–18 лет',
-    specs: '160 м² · 3 спальни · 3 этажа',
+    specs: '160 м² · 3 спальни · 3 этажа', year: '2019',
   },
   {
     id: 'ny-manhattan',
@@ -179,7 +179,7 @@ const MAP_PROPERTIES = [
     imgs: ['https://images.unsplash.com/photo-1555636222-cae831e670b3?w=900&h=600&fit=crop', 'https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=900&h=600&fit=crop', 'https://images.unsplash.com/photo-1578683010236-d716f9a3f461?w=900&h=600&fit=crop'],
     desc: 'Люкс-апартаменты в центре Манхэттена с видом на Центральный парк. Консьерж, тренажёрный зал, выход на террасу.',
     roi: '5–7%', growth: '8–10%', payback: '14–16 лет',
-    specs: '120 м² · 2 спальни · 18 этаж',
+    specs: '120 м² · 2 спальни · 18 этаж', year: '2018',
   },
   {
     id: 'miami-beach',
@@ -194,7 +194,7 @@ const MAP_PROPERTIES = [
     imgs: ['https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=900&h=600&fit=crop', 'https://images.unsplash.com/photo-1578683010236-d716f9a3f461?w=900&h=600&fit=crop', 'https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=900&h=600&fit=crop'],
     desc: 'Роскошная вилла с прямым выходом на пляж. Бассейн, джакузи, гараж на 3 авто. Элитный закрытый посёлок.',
     roi: '4–6%', growth: '7–9%', payback: '16–20 лет',
-    specs: '420 м² · 5 спален · 1 этаж',
+    specs: '420 м² · 5 спален · 1 этаж', year: '2020',
   },
   {
     id: 'dubai-marina', top: true,
@@ -209,7 +209,7 @@ const MAP_PROPERTIES = [
     imgs: ['https://images.unsplash.com/photo-1578683010236-d716f9a3f461?w=900&h=600&fit=crop', 'https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=900&h=600&fit=crop', 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=900&h=600&fit=crop'],
     desc: 'Апартаменты с видом на залив в престижном районе Dubai Marina. Полностью меблированы, управляющая компания.',
     roi: '7–9%', growth: '10–13%', payback: '11–13 лет',
-    specs: '85 м² · 1 спальня · 24 этаж',
+    specs: '85 м² · 1 спальня · 24 этаж', year: '2023',
   },
   {
     id: 'dubai-palm',
@@ -224,7 +224,7 @@ const MAP_PROPERTIES = [
     imgs: ['https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=900&h=600&fit=crop', 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=900&h=600&fit=crop', 'https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=900&h=600&fit=crop'],
     desc: 'Пентхаус на пальмовом острове с частным бассейном и причалом для яхты. Один из самых знаковых адресов Дубая.',
     roi: '6–8%', growth: '9–12%', payback: '12–15 лет',
-    specs: '280 м² · 3 спальни · 15 этаж',
+    specs: '280 м² · 3 спальни · 15 этаж', year: '2022',
   },
   {
     id: 'limassol-villa',
@@ -239,7 +239,7 @@ const MAP_PROPERTIES = [
     imgs: ['https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=900&h=600&fit=crop', 'https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=900&h=600&fit=crop', 'https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=900&h=600&fit=crop'],
     desc: 'Вилла с прямым выходом к морю в Лимасоле. Частный бассейн, ландшафтный сад, гараж. Возможность получения ВНЖ.',
     roi: '5–7%', growth: '8–11%', payback: '13–15 лет',
-    specs: '220 м² · 4 спальни · 1 этаж',
+    specs: '220 м² · 4 спальни · 1 этаж', year: '2021',
   },
   {
     id: 'athens-apart',
@@ -254,7 +254,7 @@ const MAP_PROPERTIES = [
     imgs: ['https://images.unsplash.com/photo-1533929736458-ca588d08c8be?w=900&h=600&fit=crop', 'https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=900&h=600&fit=crop', 'https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=900&h=600&fit=crop'],
     desc: 'Апартаменты в историческом центре Афин рядом с Акрополем. Высокий туристический поток обеспечивает стабильный доход от краткосрочной аренды.',
     roi: '7–9%', growth: '9–12%', payback: '11–13 лет',
-    specs: '95 м² · 2 спальни · 4 этаж',
+    specs: '95 м² · 2 спальни · 4 этаж', year: '2019',
   },
   {
     id: 'mykonos-villa',
@@ -269,7 +269,7 @@ const MAP_PROPERTIES = [
     imgs: ['https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=900&h=600&fit=crop', 'https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=900&h=600&fit=crop', 'https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=900&h=600&fit=crop'],
     desc: 'Вилла в традиционном кикладском стиле с видом на Эгейское море. Бассейн с инфинити, терраса, летняя кухня. Пик сезона — июнь–сентябрь.',
     roi: '8–10%', growth: '11–14%', payback: '10–12 лет',
-    specs: '300 м² · 4 спальни · 1 этаж',
+    specs: '300 м² · 4 спальни · 1 этаж', year: '2018',
   },
   // ── АРЕНДА ──
   {
@@ -284,7 +284,7 @@ const MAP_PROPERTIES = [
     imgs: ['https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=900&h=600&fit=crop', 'https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=900&h=600&fit=crop', 'https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=900&h=600&fit=crop'],
     desc: 'Уютные апартаменты в престижном районе Вера. Полностью меблированы, современная техника, интернет включён. Тихий двор, 5 минут пешком до Руставели.',
     roi: '—', growth: '—', payback: '—',
-    specs: '65 м² · 2 спальни · 4 этаж',
+    specs: '65 м² · 2 спальни · 4 этаж', year: '2020',
   },
   {
     id: 'rent-batumi-sea', top: true,
@@ -298,7 +298,7 @@ const MAP_PROPERTIES = [
     imgs: ['https://images.unsplash.com/photo-1560185007-cde436f6a4d0?w=900&h=600&fit=crop', 'https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=900&h=600&fit=crop', 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=900&h=600&fit=crop'],
     desc: 'Светлая студия с панорамным видом на Чёрное море. Новый ремонт, полностью оснащена. Идеально для краткосрочного и долгосрочного проживания.',
     roi: '—', growth: '—', payback: '—',
-    specs: '35 м² · 1 спальня · 9 этаж',
+    specs: '35 м² · 1 спальня · 9 этаж', year: '2023',
   },
   {
     id: 'rent-tbilisi-saburtalo',
@@ -312,7 +312,7 @@ const MAP_PROPERTIES = [
     imgs: ['https://images.unsplash.com/photo-1493809842364-78817add7ffb?w=900&h=600&fit=crop', 'https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=900&h=600&fit=crop', 'https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=900&h=600&fit=crop'],
     desc: 'Просторная 3-комнатная квартира в Сабуртало. Развитая инфраструктура, рядом метро, школы и торговые центры. Долгосрочная аренда.',
     roi: '—', growth: '—', payback: '—',
-    specs: '80 м² · 3 спальни · 6 этаж',
+    specs: '80 м² · 3 спальни · 6 этаж', year: '2018',
   },
   {
     id: 'rent-bakuriani-chalet',
@@ -326,7 +326,7 @@ const MAP_PROPERTIES = [
     imgs: ['https://images.unsplash.com/photo-1542718610-a1d656d1884c?w=900&h=600&fit=crop', 'https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=900&h=600&fit=crop', 'https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=900&h=600&fit=crop'],
     desc: 'Горное шале в Бакуриани. Камин, сауна, терраса с видом на горы. Посуточная и понедельная аренда в горнолыжный сезон.',
     roi: '—', growth: '—', payback: '—',
-    specs: '90 м² · 3 спальни · 2 этажа',
+    specs: '90 м² · 3 спальни · 2 этажа', year: '2021',
   },
   {
     id: 'rent-dubai', top: true,
@@ -340,7 +340,7 @@ const MAP_PROPERTIES = [
     imgs: ['https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=900&h=600&fit=crop', 'https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=900&h=600&fit=crop', 'https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=900&h=600&fit=crop'],
     desc: 'Меблированные апартаменты в Дубай Марина с видом на яхтенную гавань. Бассейн, фитнес, консьерж-сервис в доме.',
     roi: '—', growth: '—', payback: '—',
-    specs: '95 м² · 2 спальни · 18 этаж',
+    specs: '95 м² · 2 спальни · 18 этаж', year: '2022',
   },
   {
     id: 'rent-ny-manhattan',
@@ -354,7 +354,7 @@ const MAP_PROPERTIES = [
     imgs: ['https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=900&h=600&fit=crop', 'https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=900&h=600&fit=crop', 'https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=900&h=600&fit=crop'],
     desc: 'Меблированные апартаменты в центре Манхэттена с видом на Central Park. Консьерж 24/7, фитнес, терраса на крыше. Краткосрочная и долгосрочная аренда.',
     roi: '—', growth: '—', payback: '—',
-    specs: '75 м² · 2 спальни · 22 этаж',
+    specs: '75 м² · 2 спальни · 22 этаж', year: '2017',
   },
   {
     id: 'rent-ny-brooklyn',
@@ -368,7 +368,7 @@ const MAP_PROPERTIES = [
     imgs: ['https://images.unsplash.com/photo-1493809842364-78817add7ffb?w=900&h=600&fit=crop', 'https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=900&h=600&fit=crop', 'https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=900&h=600&fit=crop'],
     desc: 'Просторный лофт в модном районе DUMBO с кирпичными стенами и высокими потолками. Вид на Бруклинский мост, 2 спальни, паркинг включён.',
     roi: '—', growth: '—', payback: '—',
-    specs: '110 м² · 2 спальни · 3 этаж',
+    specs: '110 м² · 2 спальни · 3 этаж', year: '2016',
   },
   {
     id: 'rent-miami-beach',
@@ -382,7 +382,7 @@ const MAP_PROPERTIES = [
     imgs: ['https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=900&h=600&fit=crop', 'https://images.unsplash.com/photo-1580587771525-78b9dba3b914?w=900&h=600&fit=crop', 'https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=900&h=600&fit=crop'],
     desc: 'Роскошная вилла на первой линии океана в Майами Бич. Частный пляж, бассейн с подогревом, 4 спальни, летняя кухня. Идеально для отдыха и представительских целей.',
     roi: '—', growth: '—', payback: '—',
-    specs: '220 м² · 4 спальни · 1 этаж',
+    specs: '220 м² · 4 спальни · 1 этаж', year: '2019',
   },
   {
     id: 'rent-miami-downtown',
@@ -396,7 +396,7 @@ const MAP_PROPERTIES = [
     imgs: ['https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=900&h=600&fit=crop', 'https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=900&h=600&fit=crop', 'https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=900&h=600&fit=crop'],
     desc: 'Современные апартаменты в финансовом квартале Brickell с видом на залив Бискейн. Фитнес, бассейн, консьерж, паркинг. Рядом лучшие рестораны и бизнес-центры.',
     roi: '—', growth: '—', payback: '—',
-    specs: '85 м² · 2 спальни · 15 этаж',
+    specs: '85 м² · 2 спальни · 15 этаж', year: '2021',
   },
   {
     id: 'rent-gonio',
@@ -410,7 +410,7 @@ const MAP_PROPERTIES = [
     imgs: ['https://images.unsplash.com/photo-1560185007-cde436f6a4d0?w=900&h=600&fit=crop', 'https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=900&h=600&fit=crop', 'https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=900&h=600&fit=crop'],
     desc: 'Уютные апартаменты в 100 метрах от пляжа в Гонио. Полностью меблированы, кондиционер, балкон с видом на море.',
     roi: '—', growth: '—', payback: '—',
-    specs: '45 м² · 1 спальня · 3 этаж',
+    specs: '45 м² · 1 спальня · 3 этаж', year: '2023',
   },
   {
     id: 'rent-kakheti',
@@ -424,7 +424,7 @@ const MAP_PROPERTIES = [
     imgs: ['https://images.unsplash.com/photo-1542718610-a1d656d1884c?w=900&h=600&fit=crop', 'https://images.unsplash.com/photo-1583608205776-bfd35f0d9f83?w=900&h=600&fit=crop', 'https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=900&h=600&fit=crop'],
     desc: 'Традиционный грузинский дом в Сигнахи с видом на Алазанскую долину, сад с виноградником и собственной террасой.',
     roi: '—', growth: '—', payback: '—',
-    specs: '80 м² · 2 спальни · 1 этаж',
+    specs: '80 м² · 2 спальни · 1 этаж', year: '2015',
   },
   {
     id: 'rent-limassol',
@@ -438,7 +438,7 @@ const MAP_PROPERTIES = [
     imgs: ['https://images.unsplash.com/photo-1580587771525-78b9dba3b914?w=900&h=600&fit=crop', 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=900&h=600&fit=crop', 'https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=900&h=600&fit=crop'],
     desc: 'Роскошная вилла с частным бассейном в тихом районе Лимасола. 3 спальни, сад, барбекю, 10 минут до Marina.',
     roi: '—', growth: '—', payback: '—',
-    specs: '180 м² · 3 спальни · 1 этаж',
+    specs: '180 м² · 3 спальни · 1 этаж', year: '2020',
   },
   {
     id: 'rent-athens',
@@ -452,7 +452,7 @@ const MAP_PROPERTIES = [
     imgs: ['https://images.unsplash.com/photo-1493809842364-78817add7ffb?w=900&h=600&fit=crop', 'https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=900&h=600&fit=crop', 'https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=900&h=600&fit=crop'],
     desc: 'Элегантные апартаменты в престижном районе Колонаки с видом на Акрополь. Меблированы, кондиционер, рядом лучшие рестораны.',
     roi: '—', growth: '—', payback: '—',
-    specs: '90 м² · 2 спальни · 4 этаж',
+    specs: '90 м² · 2 спальни · 4 этаж', year: '2018',
   },
   {
     id: 'rent-mykonos',
@@ -466,7 +466,7 @@ const MAP_PROPERTIES = [
     imgs: ['https://images.unsplash.com/photo-1533105079780-92b9be482077?w=900&h=600&fit=crop', 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=900&h=600&fit=crop', 'https://images.unsplash.com/photo-1580587771525-78b9dba3b914?w=900&h=600&fit=crop'],
     desc: 'Кикладская вилла с бесконечным бассейном и видом на Эгейское море. 3 спальни, частный пляжный клуб, сезонная аренда.',
     roi: '—', growth: '—', payback: '—',
-    specs: '150 м² · 3 спальни · 1 этаж',
+    specs: '150 м² · 3 спальни · 1 этаж', year: '2017',
   },
 ];
 
@@ -518,16 +518,21 @@ function renderCatalogGrid(countryVal, cityVal, statusVal) {
 
   grid.innerHTML = filtered.map(p => `
     <div class="catalog-card" data-city="${p.city}" data-status="${p.status}" data-id="${p.id}" onclick="showDetail('${p.id}')">
-      <div style="position:relative;overflow:hidden;">
-        <img class="catalog-img" src="${p.img}" alt="${p.name}">
-        <span class="prop-badge ${p.badge}" style="position:absolute;top:12px;left:12px;">${p.badgeText}</span>
-        ${p.top ? '<span class="top-label">★ ТОП</span>' : ''}
+      <div class="catalog-card-img-wrap" style="position:relative;overflow:hidden;">
+        <div class="card-slider" data-imgs='${JSON.stringify(p.imgs || [p.img])}' data-idx="0">
+          <img class="catalog-img card-slider-img" src="${p.img}" alt="${p.name}">
+          <button class="card-slider-btn card-slider-prev" onclick="cardSlide(event,this,-1)" aria-label="Назад">&#8249;</button>
+          <button class="card-slider-btn card-slider-next" onclick="cardSlide(event,this,1)" aria-label="Вперёд">&#8250;</button>
+          <div class="card-slider-dots">${(p.imgs || [p.img]).map((_,i) => `<span class="card-slider-dot${i===0?' active':''}"></span>`).join('')}</div>
+        </div>
+        <span class="prop-badge ${p.badge}" style="position:absolute;top:12px;left:12px;z-index:2;">${p.badgeText}</span>
+        ${p.top ? '<span class="top-label" style="z-index:2;">★ ТОП</span>' : ''}
       </div>
       <div class="catalog-card-body">
         <div class="catalog-city">${p.cityLabel}</div>
         <div class="catalog-name">${p.name}</div>
         <div class="catalog-price">${p.price}</div>
-        <div class="catalog-specs">${p.specs}</div>
+        <div class="catalog-specs">${p.specs}${p.year ? ` &nbsp;·&nbsp; <span>${p.year}</span> г.` : ''}</div>
         <a class="catalog-detail-link" onclick="event.stopPropagation();showDetail('${p.id}')">Подробнее →</a>
       </div>
     </div>`).join('');
@@ -572,6 +577,7 @@ function showDetail(id) {
   if (specVals[1]) specVals[1].textContent = prop.area + ' м²';
   if (specVals[2]) specVals[2].textContent = prop.rooms;
   if (specVals[3]) specVals[3].textContent = prop.floor;
+  if (specVals[5]) specVals[5].textContent = prop.year || '—';
 
   const descEl = page.querySelector('.detail-desc');
   if (descEl) descEl.textContent = prop.desc;
