@@ -403,7 +403,7 @@
 /* Pagination */
 .pagination { display: flex; align-items: center; gap: 4px; }
 .page-btn {
-  width: 36px; height: 36px; border: 1.5px solid var(--gray-300);
+  width: 36px; height: 36px; border: 1.5px solid #ADADAD;
   border-radius: var(--radius); background: var(--white);
   font-size: 0.82rem; font-weight: 600; color: var(--gray-700);
   display: flex; align-items: center; justify-content: center;
