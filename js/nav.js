@@ -37,7 +37,9 @@ function goToCountry(country) {
   if (countrySelect) countrySelect.value = dataCountry;
   const citySelect = document.getElementById('citySelect');
   const statusSelect = document.getElementById('statusSelect');
+  const typeSelect = document.getElementById('typeSelect');
   if (statusSelect) statusSelect.value = 'all';
+  if (typeSelect) typeSelect.value = 'all';
 
   // Синхронизируем _prevCountry чтобы filterCatalog не сбросил состояние
   _prevCountry = dataCountry;
@@ -85,11 +87,12 @@ let _prevCountry = 'all';
 function filterCatalog() {
   const cityEl   = document.getElementById('citySelect');
   const statusEl = document.getElementById('statusSelect');
+  const typeEl   = document.getElementById('typeSelect');
   const status = statusEl ? statusEl.value : 'all';
+  const type   = typeEl   ? typeEl.value   : 'all';
   const catalogFilterBar = document.querySelector('#page-catalog .filter-bar .filter-field--country .filter-select');
   const country = catalogFilterBar ? catalogFilterBar.value : 'all';
 
-  // If country changed — update city options and reset city to 'all'
   if (country !== _prevCountry) {
     _prevCountry = country;
     updateCityOptions(country);
@@ -98,7 +101,7 @@ function filterCatalog() {
 
   const city = cityEl ? cityEl.value : 'all';
   updateCatalogHeadline(country);
-  renderCatalogGrid(country, city, status);
+  renderCatalogGrid(country, city, status, type);
   renderMapMarkers(country, city, status);
 }
 

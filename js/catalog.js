@@ -2,7 +2,7 @@
 // ═══════════════════════════════════
 const MAP_PROPERTIES = [
   {
-    id: 'batumi-grand', top: true,
+    id: 'batumi-grand', type: 'apartment', top: true,
     city: 'batumi', cityLabel: 'Батуми', country: 'all',
     lat: 41.6418, lng: 41.6340,
     name: 'ЖК «Гранд Панорама Батуми»',
@@ -17,7 +17,7 @@ const MAP_PROPERTIES = [
     specs: '45 м² · 1 спальня · 12 этаж', year: '2022', oldPrice: '$149,000', year: '2022',
   },
   {
-    id: 'batumi-rustaveli',
+    id: 'batumi-rustaveli', type: 'apartment',
     city: 'batumi', cityLabel: 'Батуми', country: 'all',
     lat: 41.6440, lng: 41.6370,
     name: 'Апартаменты на Руставели, Батуми',
@@ -32,7 +32,7 @@ const MAP_PROPERTIES = [
     specs: '38 м² · 1 спальня · 7 этаж', year: '2026',
   },
   {
-    id: 'tbilisi-elite', top: true,
+    id: 'tbilisi-elite', type: 'apartment', top: true,
     city: 'tbilisi', cityLabel: 'Тбилиси', country: 'all',
     lat: 41.6938, lng: 44.8015,
     name: 'Элитная квартира в центре Тбилиси',
@@ -47,7 +47,7 @@ const MAP_PROPERTIES = [
     specs: '210 м² · 2 спальни · 6 этаж', year: '2024', oldPrice: '$245,000',
   },
   {
-    id: 'tbilisi-penthouse', top: true,
+    id: 'tbilisi-penthouse', type: 'apartment', top: true,
     city: 'tbilisi', cityLabel: 'Тбилиси', country: 'all',
     lat: 41.7000, lng: 44.8130,
     name: 'Пентхаус «Царская Высота», Тбилиси',
@@ -62,7 +62,7 @@ const MAP_PROPERTIES = [
     specs: '310 м² · 4 спальни · 22 этаж', year: '2021',
   },
   {
-    id: 'gonio-coast', top: true,
+    id: 'gonio-coast', type: 'apart', top: true,
     city: 'gonio', cityLabel: 'Гонио', country: 'all',
     lat: 41.5300, lng: 41.6000,
     name: 'Апартаменты у моря, Gonio Coast',
@@ -77,7 +77,7 @@ const MAP_PROPERTIES = [
     specs: '52 м² · 1 спальня · 5 этаж', year: '2023', oldPrice: '$115,000',
   },
   {
-    id: 'bakuriani-hills', top: true,
+    id: 'bakuriani-hills', type: 'villa', top: true,
     city: 'bakuriani', cityLabel: 'Бакуриани', country: 'all',
     lat: 41.7500, lng: 43.5200,
     name: 'Коттеджный комплекс «Бакуриани Хиллс»',
@@ -92,7 +92,7 @@ const MAP_PROPERTIES = [
     specs: '150 м² · 3 спальни · 2 этажа', year: '2025', oldPrice: '$225,000',
   },
   {
-    id: 'kakheti-alazani',
+    id: 'kakheti-alazani', type: 'apart',
     city: 'kakheti', cityLabel: 'Кахетия', country: 'all',
     lat: 41.9000, lng: 45.3500,
     name: 'Резиденция в Алазанской Долине',
@@ -107,7 +107,7 @@ const MAP_PROPERTIES = [
     specs: '110 м² · 2 спальни · 1 этаж', year: '2025',
   },
   {
-    id: 'gonio-seaview',
+    id: 'gonio-seaview', type: 'apart',
     city: 'gonio', cityLabel: 'Гонио', country: 'all',
     lat: 41.5200, lng: 41.6500,
     name: 'Вилла с видом на море, Гонио',
@@ -122,7 +122,7 @@ const MAP_PROPERTIES = [
     specs: '120 м² · 3 спальни · 2 этажа', year: '2022',
   },
   {
-    id: 'bakuriani-chalet',
+    id: 'bakuriani-chalet', type: 'villa',
     city: 'bakuriani', cityLabel: 'Бакуриани', country: 'all',
     lat: 41.7500, lng: 43.5300,
     name: 'Шале «Альпийский стиль», Бакуриани',
@@ -137,7 +137,7 @@ const MAP_PROPERTIES = [
     specs: '95 м² · 2 спальни · 2 этажа', year: '2021',
   },
   {
-    id: 'limassol-apart',
+    id: 'limassol-apart', type: 'apartment',
     city: 'limassol', cityLabel: 'Лимасол', country: 'cyprus',
     lat: 34.6851, lng: 33.0332,
     name: 'Апартаменты в центре Лимасола',
@@ -152,7 +152,7 @@ const MAP_PROPERTIES = [
     specs: '85 м² · 2 спальни · 5 этаж', year: '2020', oldPrice: '$369,000',
   },
   {
-    id: 'ny-brooklyn',
+    id: 'ny-brooklyn', type: 'apartment',
     city: 'new-york', cityLabel: 'Нью-Йорк', country: 'usa',
     lat: 40.6501, lng: -73.9496,
     name: 'Таунхаус в Бруклине',
@@ -167,7 +167,7 @@ const MAP_PROPERTIES = [
     specs: '160 м² · 3 спальни · 3 этажа', year: '2019', oldPrice: '$990,000',
   },
   {
-    id: 'ny-manhattan', top: true,
+    id: 'ny-manhattan', type: 'apartment', top: true,
     city: 'new-york', cityLabel: 'Нью-Йорк', country: 'usa',
     lat: 40.7128, lng: -74.0060,
     name: 'Апартаменты на Манхэттене',
@@ -182,7 +182,7 @@ const MAP_PROPERTIES = [
     specs: '120 м² · 2 спальни · 18 этаж', year: '2018',
   },
   {
-    id: 'miami-beach', top: true,
+    id: 'miami-beach', type: 'apart', top: true,
     city: 'miami', cityLabel: 'Майами', country: 'usa',
     lat: 25.7617, lng: -80.1918,
     name: 'Вилла в Майами Бич',
@@ -197,7 +197,7 @@ const MAP_PROPERTIES = [
     specs: '420 м² · 5 спален · 1 этаж', year: '2020',
   },
   {
-    id: 'dubai-marina', top: true,
+    id: 'dubai-marina', type: 'apart', top: true,
     city: 'dubai', cityLabel: 'Дубай', country: 'uae',
     lat: 25.2048, lng: 55.2708,
     name: 'Апартаменты в Dubai Marina',
@@ -212,7 +212,7 @@ const MAP_PROPERTIES = [
     specs: '85 м² · 1 спальня · 24 этаж', year: '2023', oldPrice: '$520,000',
   },
   {
-    id: 'dubai-palm',
+    id: 'dubai-palm', type: 'villa',
     city: 'dubai', cityLabel: 'Дубай', country: 'uae',
     lat: 25.1972, lng: 55.2744,
     name: 'Пентхаус Palm Jumeirah',
@@ -227,7 +227,7 @@ const MAP_PROPERTIES = [
     specs: '280 м² · 3 спальни · 15 этаж', year: '2022',
   },
   {
-    id: 'limassol-villa', top: true,
+    id: 'limassol-villa', type: 'villa', top: true,
     city: 'limassol', cityLabel: 'Лимасол', country: 'cyprus',
     lat: 34.6841, lng: 33.0440,
     name: 'Вилла у моря, Лимасол',
@@ -242,7 +242,7 @@ const MAP_PROPERTIES = [
     specs: '220 м² · 4 спальни · 1 этаж', year: '2021',
   },
   {
-    id: 'athens-apart',
+    id: 'athens-apart', type: 'apartment',
     city: 'athens', cityLabel: 'Афины', country: 'greece',
     lat: 37.9838, lng: 23.7275,
     name: 'Апартаменты в Афинах',
@@ -257,7 +257,7 @@ const MAP_PROPERTIES = [
     specs: '95 м² · 2 спальни · 4 этаж', year: '2019', oldPrice: '$375,000',
   },
   {
-    id: 'mykonos-villa', top: true,
+    id: 'mykonos-villa', type: 'villa', top: true,
     city: 'mykonos', cityLabel: 'Миконос', country: 'greece',
     lat: 37.4467, lng: 25.3289,
     name: 'Вилла на Миконосе',
@@ -273,7 +273,7 @@ const MAP_PROPERTIES = [
   },
   // ── АРЕНДА ──
   {
-    id: 'rent-tbilisi-vera', top: true,
+    id: 'rent-tbilisi-vera', type: 'apartment', top: true,
     city: 'tbilisi', cityLabel: 'Тбилиси', country: 'all',
     lat: 41.6990, lng: 44.7980,
     name: 'Апартаменты в районе Вера, Тбилиси',
@@ -287,7 +287,7 @@ const MAP_PROPERTIES = [
     specs: '65 м² · 2 спальни · 4 этаж', year: '2020',
   },
   {
-    id: 'rent-batumi-sea', top: true,
+    id: 'rent-batumi-sea', type: 'apart', top: true,
     city: 'batumi', cityLabel: 'Батуми', country: 'all',
     lat: 41.6450, lng: 41.6380,
     name: 'Студия с видом на море, Батуми',
@@ -301,7 +301,7 @@ const MAP_PROPERTIES = [
     specs: '35 м² · 1 спальня · 9 этаж', year: '2023',
   },
   {
-    id: 'rent-tbilisi-saburtalo',
+    id: 'rent-tbilisi-saburtalo', type: 'apartment',
     city: 'tbilisi', cityLabel: 'Тбилиси', country: 'all',
     lat: 41.7200, lng: 44.7650,
     name: 'Квартира в Сабуртало, Тбилиси',
@@ -315,7 +315,7 @@ const MAP_PROPERTIES = [
     specs: '80 м² · 3 спальни · 6 этаж', year: '2018',
   },
   {
-    id: 'rent-bakuriani-chalet',
+    id: 'rent-bakuriani-chalet', type: 'villa',
     city: 'bakuriani', cityLabel: 'Бакуриани', country: 'all',
     lat: 41.7500, lng: 43.5300,
     name: 'Шале в Бакуриани, посуточно',
@@ -329,7 +329,7 @@ const MAP_PROPERTIES = [
     specs: '90 м² · 3 спальни · 2 этажа', year: '2021',
   },
   {
-    id: 'rent-dubai', top: true,
+    id: 'rent-dubai', type: 'apart', top: true,
     city: 'dubai', cityLabel: 'Дубай', country: 'uae',
     lat: 25.2048, lng: 55.2708,
     name: 'Апартаменты в Дубай Марина',
@@ -343,7 +343,7 @@ const MAP_PROPERTIES = [
     specs: '95 м² · 2 спальни · 18 этаж', year: '2022',
   },
   {
-    id: 'rent-ny-manhattan',
+    id: 'rent-ny-manhattan', type: 'apartment',
     city: 'new-york', cityLabel: 'Нью-Йорк', country: 'usa',
     lat: 40.7549, lng: -73.9840,
     name: 'Апартаменты на Манхэттене, Мидтаун',
@@ -357,7 +357,7 @@ const MAP_PROPERTIES = [
     specs: '75 м² · 2 спальни · 22 этаж', year: '2017',
   },
   {
-    id: 'rent-ny-brooklyn',
+    id: 'rent-ny-brooklyn', type: 'apartment',
     city: 'new-york', cityLabel: 'Нью-Йорк', country: 'usa',
     lat: 40.6782, lng: -73.9442,
     name: 'Лофт в Бруклине, DUMBO',
@@ -371,7 +371,7 @@ const MAP_PROPERTIES = [
     specs: '110 м² · 2 спальни · 3 этаж', year: '2016',
   },
   {
-    id: 'rent-miami-beach',
+    id: 'rent-miami-beach', type: 'apart',
     city: 'miami', cityLabel: 'Майами', country: 'usa',
     lat: 25.7617, lng: -80.1918,
     name: 'Вилла у океана, Майами Бич',
@@ -385,7 +385,7 @@ const MAP_PROPERTIES = [
     specs: '220 м² · 4 спальни · 1 этаж', year: '2019',
   },
   {
-    id: 'rent-miami-downtown',
+    id: 'rent-miami-downtown', type: 'apartment',
     city: 'miami', cityLabel: 'Майами', country: 'usa',
     lat: 25.7743, lng: -80.1937,
     name: 'Апартаменты в Бrickell, Майами',
@@ -399,7 +399,7 @@ const MAP_PROPERTIES = [
     specs: '85 м² · 2 спальни · 15 этаж', year: '2021',
   },
   {
-    id: 'rent-gonio',
+    id: 'rent-gonio', type: 'apart',
     city: 'gonio', cityLabel: 'Гонио', country: 'all',
     lat: 41.5210, lng: 41.6480,
     name: 'Апартаменты у моря, Гонио',
@@ -413,7 +413,7 @@ const MAP_PROPERTIES = [
     specs: '45 м² · 1 спальня · 3 этаж', year: '2023',
   },
   {
-    id: 'rent-kakheti',
+    id: 'rent-kakheti', type: 'villa',
     city: 'kakheti', cityLabel: 'Кахетия', country: 'all',
     lat: 41.9100, lng: 45.3600,
     name: 'Гостевой дом в Сигнахи',
@@ -427,7 +427,7 @@ const MAP_PROPERTIES = [
     specs: '80 м² · 2 спальни · 1 этаж', year: '2015',
   },
   {
-    id: 'rent-limassol',
+    id: 'rent-limassol', type: 'apartment',
     city: 'limassol', cityLabel: 'Лимасол', country: 'cyprus',
     lat: 34.6780, lng: 33.0440,
     name: 'Вилла с бассейном, Лимасол',
@@ -441,7 +441,7 @@ const MAP_PROPERTIES = [
     specs: '180 м² · 3 спальни · 1 этаж', year: '2020',
   },
   {
-    id: 'rent-athens',
+    id: 'rent-athens', type: 'apartment',
     city: 'athens', cityLabel: 'Афины', country: 'greece',
     lat: 37.9755, lng: 23.7348,
     name: 'Апартаменты в Колонаки, Афины',
@@ -455,7 +455,7 @@ const MAP_PROPERTIES = [
     specs: '90 м² · 2 спальни · 4 этаж', year: '2018',
   },
   {
-    id: 'rent-mykonos',
+    id: 'rent-mykonos', type: 'villa',
     city: 'mykonos', cityLabel: 'Миконос', country: 'greece',
     lat: 37.4467, lng: 25.3289,
     name: 'Вилла с видом на море, Миконос',
@@ -631,17 +631,18 @@ const COUNTRY_VIEW = {
 };
 
 // ── Рендер карточек каталога из базы ──
-function renderCatalogGrid(countryVal, cityVal, statusVal) {
+function renderCatalogGrid(countryVal, cityVal, statusVal, typeVal) {
   const grid = document.getElementById('catalogGrid');
   if (!grid) return;
   const dealType = typeof currentDealType !== 'undefined' ? currentDealType : 'buy';
 
   const filtered = MAP_PROPERTIES.filter(p => {
-    const md = p.deal === dealType;
-    const mc = countryVal === 'all' || p.country === countryVal || (countryVal === 'all' && p.country === 'all');
+    const md  = p.deal === dealType;
+    const mc  = countryVal === 'all' || p.country === countryVal;
     const mci = cityVal === 'all' || p.city === cityVal;
-    const ms = statusVal === 'all' || p.status === statusVal;
-    return md && mc && mci && ms;
+    const ms  = statusVal === 'all' || p.status === statusVal;
+    const mt  = !typeVal || typeVal === 'all' || p.type === typeVal;
+    return md && mc && mci && ms && mt;
   });
 
   // Sort
@@ -1109,11 +1110,13 @@ window.showPage = function(id) {
     const countryEl = document.querySelector('#page-catalog .filter-field--country .filter-select');
     const cityEl    = document.getElementById('citySelect');
     const statusEl  = document.getElementById('statusSelect');
+    const typeEl    = document.getElementById('typeSelect');
     const country = countryEl ? countryEl.value : 'all';
     const city    = cityEl    ? cityEl.value    : 'all';
     const status  = statusEl  ? statusEl.value  : 'all';
+    const type    = typeEl    ? typeEl.value    : 'all';
 
-    renderCatalogGrid(country, city, status);
+    renderCatalogGrid(country, city, status, type);
     updateCatalogHeadline(country);
     renderRecentlyViewed();
     // Синхронизируем активную кнопку валюты (могла быть сохранена в localStorage)
