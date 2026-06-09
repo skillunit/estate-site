@@ -808,6 +808,9 @@ function showDetail(id) {
   // Запоминаем просмотр
   trackRecentlyViewed(id);
 
+  // ── Карта объекта ──
+  initDetailMap(prop);
+
   showPage('detail');
   renderRelated(id);
 
@@ -1330,3 +1333,70 @@ function renderFeatured() {
 document.addEventListener('DOMContentLoaded', () => {
   renderFeatured();
 });
+
+// ── DETAIL MAP ──
+let detailMap = null;
+let detailMarker = null;
+
+function initDetailMap(prop) {
+  const container = document.getElementById('detailMap');
+  if (!container) return;
+
+  const lat = parseFloat(prop.lat);
+  const lng = parseFloat(prop.lng);
+  if (isNaN(lat) || isNaN(lng)) return;
+
+  // Обновляем заголовок
+  const titleEl = document.getElementById('detailLocationTitle');
+  if (titleEl) titleEl.textContent = prop.name;
+
+  // Если карта уже создана — просто перемещаем
+  if (detailMap) {
+    detailMap.setView([lat, lng], 15);
+    if (detailMarker) {
+      detailMarker.setLatLng([lat, lng]);
+      detailMarker.getPopup().setContent(popupContent(prop));
+    }
+    detailMap.invalidateSize();
+    return;
+  }
+
+  // Первая инициализация
+  detailMap = L.map('detailMap', {
+    center: [lat, lng],
+    zoom: 15,
+    scrollWheelZoom: false,
+    zoomControl: true,
+  });
+
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '© <a href="https://www.openstreetmap.org/copyright" style="font-size:9px;opacity:0.5">OSM</a>',
+    maxZoom: 19,
+  }).addTo(detailMap);
+
+  // Кастомная иконка — красный кружок
+  const icon = L.divIcon({
+    className: '',
+    html: `<div class="detail-map-marker"><svg width="14" height="14" viewBox="0 0 24 24" fill="white"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg></div>`,
+    iconSize: [40, 40],
+    iconAnchor: [20, 20],
+    popupAnchor: [0, -22],
+  });
+
+  detailMarker = L.marker([lat, lng], { icon })
+    .addTo(detailMap)
+    .bindPopup(popupContent(prop), {
+      maxWidth: 240,
+      className: 'detail-map-popup',
+    })
+    .openPopup();
+}
+
+function popupContent(prop) {
+  return `
+    <div class="dmp-inner">
+      <div class="dmp-name">${prop.name}</div>
+      <div class="dmp-city">${prop.cityLabel}</div>
+      <div class="dmp-price">${formatPrice(prop.price)}</div>
+    </div>`;
+}

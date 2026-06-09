@@ -239,3 +239,8 @@
   .catalog-headline-tools { width: 100%; flex-wrap: wrap; }
   .currency-switch { order: 2; }
 }
+
+/* ── Detail map responsive ── */
+@media (max-width: 768px) {
+  .detail-map { height: 280px; }
+}
