@@ -504,6 +504,8 @@ function setCurrency(cur) {
   // Перерисовать каталог с текущими фильтрами
   if (typeof filterCatalog === 'function') filterCatalog();
   renderRecentlyViewed();
+  // Перерисовать карусель на главной
+  if (typeof renderFeatured === 'function') renderFeatured();
 }
 
 // ── RECENTLY VIEWED ──
@@ -1141,3 +1143,61 @@ function initRelatedSlider() {
   // nav visibility
   document.getElementById('relatedNav').style.display = total <= pv() ? 'none' : 'flex';
 }
+
+// ── RENDER FEATURED TRACK (главная страница) ──
+const FEATURED_IDS = [
+  'batumi-grand', 'tbilisi-elite', 'gonio-coast',
+  'bakuriani-hills', 'tbilisi-penthouse'
+];
+
+function renderFeatured() {
+  const track = document.getElementById('featuredTrack');
+  if (!track) return;
+
+  const props = FEATURED_IDS.map(id => MAP_PROPERTIES.find(p => p.id === id)).filter(Boolean);
+
+  track.innerHTML = props.map(p => {
+    const imgs = p.imgs || [p.img];
+    const dots = imgs.map((_, i) => `<span class="card-slider-dot${i === 0 ? ' active' : ''}"></span>`).join('');
+    return `
+    <div class="catalog-card" style="flex-shrink:0;" onclick="showDetail('${p.id}')">
+      <div class="catalog-card-img-wrap" style="position:relative;overflow:hidden;">
+        <div class="card-slider" data-imgs='${JSON.stringify(imgs)}' data-idx="0">
+          <img class="catalog-img card-slider-img" src="${imgs[0]}" alt="${p.name}">
+          <button class="card-slider-btn card-slider-prev" onclick="cardSlide(event,this,-1)" aria-label="Назад">&#8249;</button>
+          <button class="card-slider-btn card-slider-next" onclick="cardSlide(event,this,1)" aria-label="Вперёд">&#8250;</button>
+          <div class="card-slider-dots">${dots}</div>
+        </div>
+        <span class="prop-badge ${p.badge}" style="position:absolute;top:12px;left:12px;z-index:2;">${p.badgeText}</span>
+        ${p.top ? '<span class="top-label" style="z-index:2;">★ ТОП</span>' : ''}
+      </div>
+      <div class="catalog-card-body">
+        <div class="catalog-city">${p.cityLabel}</div>
+        <div class="catalog-name">${p.name}</div>
+        <div class="catalog-price-block">
+          <div class="catalog-price-row">
+            <span class="catalog-price">${formatPrice(p.price)}</span>
+            ${p.deal === 'buy' && p.area ? `<span class="catalog-price-sqm">${formatSqm(p)}</span>` : ''}
+          </div>
+          ${p.oldPrice ? `<div class="catalog-price-old">${formatPrice(p.oldPrice)}</div>` : ''}
+        </div>
+        <div class="catalog-specs">
+          <span class="spec-item"><strong>${p.area}</strong> м²</span>
+          <span class="spec-sep">·</span>
+          <span class="spec-item"><strong>${p.rooms}</strong> спал.</span>
+          <span class="spec-sep">·</span>
+          <span class="spec-item"><strong>${p.floor}</strong> эт.</span>
+          ${p.year ? `<span class="spec-sep">·</span><span class="spec-item"><strong>${p.year}</strong> г.</span>` : ''}
+        </div>
+        <a class="catalog-detail-link" onclick="event.stopPropagation();showDetail('${p.id}')">Подробнее →</a>
+      </div>
+    </div>`;
+  }).join('');
+
+  if (typeof initFeaturedSlider === 'function') initFeaturedSlider();
+}
+
+// Вызов при загрузке страницы
+document.addEventListener('DOMContentLoaded', () => {
+  renderFeatured();
+});

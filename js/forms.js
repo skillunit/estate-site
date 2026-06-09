@@ -181,7 +181,7 @@ function submitManagerPopup() {
 }
 
 // ── FEATURED PROPERTIES SLIDER ──
-(function() {
+function initFeaturedSlider() {
   const track = document.getElementById('featuredTrack');
   const dotsWrap = document.getElementById('featuredDots');
   if (!track) return;
@@ -206,7 +206,6 @@ function submitManagerPopup() {
   function goTo(idx) {
     cur = Math.max(0, Math.min(idx, pages() - 1));
     const cardW = (track.parentElement.offsetWidth - gap * (perView() - 1)) / perView();
-    // Set each card width explicitly
     cards.forEach(c => { c.style.width = cardW + 'px'; });
     track.style.transform = `translateX(-${cur * (cardW + gap)}px)`;
     dotsWrap.querySelectorAll('.testi-dot').forEach((d, i) => d.classList.toggle('active', i === cur));
@@ -214,14 +213,16 @@ function submitManagerPopup() {
 
   window.featuredNav = function(dir) { goTo(cur + dir); };
 
-  // Init card widths
   function init() {
+    cur = 0;
     const cardW = (track.parentElement.offsetWidth - gap * (perView() - 1)) / perView();
     cards.forEach(c => { c.style.width = cardW + 'px'; });
     buildDots();
-    goTo(Math.min(cur, pages() - 1));
+    goTo(0);
   }
 
   init();
+  window.removeEventListener('resize', window._featuredResizeHandler);
+  window._featuredResizeHandler = init;
   window.addEventListener('resize', init);
-})();
+}
