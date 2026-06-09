@@ -403,7 +403,7 @@
 /* Pagination */
 .pagination { display: flex; align-items: center; gap: 4px; }
 .page-btn {
-  width: 36px; height: 36px; border: 1px solid var(--border);
+  width: 36px; height: 36px; border: 1.5px solid var(--gray-300);
   border-radius: var(--radius); background: var(--white);
   font-size: 0.82rem; font-weight: 600; color: var(--gray-700);
   display: flex; align-items: center; justify-content: center;
@@ -411,6 +411,10 @@
 }
 .page-btn.active { background: var(--red); color: var(--white); border-color: var(--red); }
 .page-btn:hover:not(.active) { border-color: var(--red); color: var(--red); }
+
+.recently-viewed .section-title {
+  font-size: 1.3rem !important;
+}
 
 /* ═══════════════════════════════════
    CATALOG MAP
