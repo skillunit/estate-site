@@ -642,6 +642,142 @@ function showDetail(id) {
 
   // ── Mobile slider ──
   if (typeof mobGalleryInit === 'function') mobGalleryInit(imgs);
+
+  // ── Переключение блоков: аренда vs покупка ──
+  const isRent = prop.deal === 'rent';
+
+  // 1. Инвест-карточка
+  const investTitle = page.querySelector('.invest-title');
+  const investRowsAll = page.querySelectorAll('.invest-row');
+  if (investTitle) {
+    if (isRent) {
+      investTitle.textContent = 'Об аренде';
+      const labels = ['Депозит:', 'Минимальный срок:', 'Коммунальные:'];
+      const vals   = ['1 месяц', 'от 1 месяца', 'включены'];
+      investRowsAll.forEach((row, i) => {
+        const lbl = row.querySelector('.invest-row-label');
+        const val = row.querySelector('.invest-row-val');
+        if (lbl) lbl.textContent = labels[i] ?? lbl.textContent;
+        if (val) val.textContent = vals[i] ?? '—';
+      });
+    } else {
+      investTitle.textContent = 'Потенциал для инвестиций';
+      const labels = ['Ожидаемый рост цены:', 'Доход от аренды:', 'Окупаемость:'];
+      investRowsAll.forEach((row, i) => {
+        const lbl = row.querySelector('.invest-row-label');
+        if (lbl) lbl.textContent = labels[i] ?? lbl.textContent;
+      });
+      if (investRows[0]) investRows[0].textContent = prop.growth;
+      if (investRows[1]) investRows[1].textContent = prop.roi;
+      if (investRows[2]) investRows[2].textContent = prop.payback;
+    }
+  }
+
+  // 2. Блок описания (иконки с текстом)
+  const featuresBlock = page.querySelector('.prop-desc-features');
+  if (featuresBlock) {
+    const icon = (path) => `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">${path}</svg>`;
+    if (isRent) {
+      featuresBlock.innerHTML = `
+        <div class="prop-desc-feature">
+          <div class="prop-desc-feature-icon">${icon('<path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/>')}</div>
+          <div>
+            <div class="prop-desc-feature-title">Что включено</div>
+            <div class="prop-desc-feature-text">Мебель, бытовая техника, интернет, кабельное TV. Квартира готова к заселению — приезжайте с чемоданом.</div>
+          </div>
+        </div>
+        <div class="prop-desc-feature">
+          <div class="prop-desc-feature-icon">${icon('<rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/>')}</div>
+          <div>
+            <div class="prop-desc-feature-title">Условия проживания</div>
+            <div class="prop-desc-feature-text">Некурящие жильцы. Домашние животные — по согласованию. Тихий час с 23:00. Гости — без ограничений.</div>
+          </div>
+        </div>
+        <div class="prop-desc-feature">
+          <div class="prop-desc-feature-icon">${icon('<circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>')}</div>
+          <div>
+            <div class="prop-desc-feature-title">Заезд и выезд</div>
+            <div class="prop-desc-feature-text">Заезд с 14:00, выезд до 12:00. Возможен ранний заезд или поздний выезд по согласованию с владельцем.</div>
+          </div>
+        </div>
+        <div class="prop-desc-feature">
+          <div class="prop-desc-feature-icon">${icon('<path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/>')}</div>
+          <div>
+            <div class="prop-desc-feature-title">Локация</div>
+            <div class="prop-desc-feature-text">Развитая инфраструктура района: продуктовые магазины, кафе, аптеки, банки и остановки транспорта в шаговой доступности.</div>
+          </div>
+        </div>`;
+    } else {
+      featuresBlock.innerHTML = `
+        <div class="prop-desc-feature">
+          <div class="prop-desc-feature-icon">${icon('<path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/>')}</div>
+          <div>
+            <div class="prop-desc-feature-title">Чистовая отделка</div>
+            <div class="prop-desc-feature-text">Все апартаменты сдаются с полной отделкой под ключ — кухонный гарнитур, сантехника, напольное покрытие включены.</div>
+          </div>
+        </div>
+        <div class="prop-desc-feature">
+          <div class="prop-desc-feature-icon">${icon('<rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/><line x1="12" y1="12" x2="12" y2="16"/>')}</div>
+          <div>
+            <div class="prop-desc-feature-title">Управляющая компания</div>
+            <div class="prop-desc-feature-text">Собственная УК обеспечивает сдачу в аренду, обслуживание и гарантированный доход 8–12% годовых без участия владельца.</div>
+          </div>
+        </div>
+        <div class="prop-desc-feature">
+          <div class="prop-desc-feature-icon">${icon('<circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>')}</div>
+          <div>
+            <div class="prop-desc-feature-title">Срок сдачи</div>
+            <div class="prop-desc-feature-text">IV квартал 2025 года. Строительная готовность — 85%. Возможна покупка на стадии котлована с фиксацией цены.</div>
+          </div>
+        </div>
+        <div class="prop-desc-feature">
+          <div class="prop-desc-feature-icon">${icon('<path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/>')}</div>
+          <div>
+            <div class="prop-desc-feature-title">Локация</div>
+            <div class="prop-desc-feature-text">5 минут до проспекта Руставели, 10 минут до Старого города. Рядом рестораны, кафе, банки, международные школы.</div>
+          </div>
+        </div>`;
+    }
+  }
+
+  // 3. Блок условий (правая колонка внизу)
+  const legalCard = page.querySelector('.prop-legal-card');
+  if (legalCard) {
+    const legalTitle = legalCard.querySelector('.prop-legal-title');
+    if (legalTitle) legalTitle.textContent = isRent ? 'Условия аренды' : 'Условия покупки';
+    const rows = legalCard.querySelectorAll('.prop-legal-row');
+    if (isRent) {
+      const rentData = [
+        ['Депозит', '1 месяц'],
+        ['Минимальный срок', 'от 1 месяца'],
+        ['Коммунальные платежи', 'по счётчику'],
+        ['Оформление договора', '1 день'],
+        ['Иностранным гражданам', 'без ограничений'],
+      ];
+      rows.forEach((row, i) => {
+        if (rentData[i]) {
+          const spans = row.querySelectorAll('span');
+          if (spans[0]) spans[0].textContent = rentData[i][0];
+          if (spans[1]) spans[1].textContent = rentData[i][1];
+        }
+      });
+    } else {
+      const buyData = [
+        ['Первоначальный взнос', 'от 30%'],
+        ['Рассрочка от застройщика', 'до 36 мес.'],
+        ['Ипотека', 'TBC, Bank of Georgia'],
+        ['Оформление', 'от 7 дней'],
+        ['Иностранным гражданам', 'без ограничений'],
+      ];
+      rows.forEach((row, i) => {
+        if (buyData[i]) {
+          const spans = row.querySelectorAll('span');
+          if (spans[0]) spans[0].textContent = buyData[i][0];
+          if (spans[1]) spans[1].textContent = buyData[i][1];
+        }
+      });
+    }
+  }
 }
 
 let catalogMap = null;
