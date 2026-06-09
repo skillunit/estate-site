@@ -993,7 +993,7 @@ function clusterByProximity(props, thresholdKm = 5) {
   return clusters;
 }
 
-function renderMapMarkers(countryVal, cityVal, statusVal) {
+function renderMapMarkers(countryVal, cityVal, statusVal, typeVal) {
   if (!catalogMap) return;
 
   mapMarkers.forEach(m => catalogMap.removeLayer(m));
@@ -1002,10 +1002,11 @@ function renderMapMarkers(countryVal, cityVal, statusVal) {
   let filtered = MAP_PROPERTIES.filter(p => {
     const dealType = typeof currentDealType !== 'undefined' ? currentDealType : 'buy';
     const matchDeal    = p.deal === dealType;
-    const matchCountry = countryVal === 'all' || p.country === countryVal || (countryVal === 'all' && p.country === 'all');
+    const matchCountry = countryVal === 'all' || p.country === countryVal;
     const matchCity    = cityVal === 'all' || p.city === cityVal;
     const matchStatus  = statusVal === 'all' || p.status === statusVal;
-    return matchDeal && matchCountry && matchCity && matchStatus;
+    const matchType    = !typeVal || typeVal === 'all' || p.type === typeVal;
+    return matchDeal && matchCountry && matchCity && matchStatus && matchType;
   });
 
   const clusters = clusterByProximity(filtered);
@@ -1143,7 +1144,7 @@ window.showPage = function(id) {
       initCatalogMap();
       if (catalogMap) {
         catalogMap.invalidateSize();
-        renderMapMarkers(country, city, status);
+        renderMapMarkers(country, city, status, type);
       }
     }, 50);
   }

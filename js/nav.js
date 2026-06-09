@@ -102,7 +102,7 @@ function filterCatalog() {
   const city = cityEl ? cityEl.value : 'all';
   updateCatalogHeadline(country);
   renderCatalogGrid(country, city, status, type);
-  renderMapMarkers(country, city, status);
+  renderMapMarkers(country, city, status, type);
 }
 
 // ── VIDEO ──
