@@ -351,9 +351,16 @@
     <div class="container">
       <div class="section-header">
         <div>
-          <h2 class="section-title">Топовые предложения</h2>
+          <h2 class="section-title" id="featuredTitle">Топовые предложения в Грузии</h2>
         </div>
         <span class="see-all" onclick="showPage('catalog')">Смотреть все</span>
+      </div>
+      <div class="featured-country-tabs" id="featuredCountryTabs">
+        <button class="featured-tab active" data-country="all" onclick="setFeaturedCountry(this)">🇬🇪 Грузия</button>
+        <button class="featured-tab" data-country="usa" onclick="setFeaturedCountry(this)">🇺🇸 США</button>
+        <button class="featured-tab" data-country="uae" onclick="setFeaturedCountry(this)">🇦🇪 ОАЭ</button>
+        <button class="featured-tab" data-country="cyprus" onclick="setFeaturedCountry(this)">🇨🇾 Кипр</button>
+        <button class="featured-tab" data-country="greece" onclick="setFeaturedCountry(this)">🇬🇷 Греция</button>
       </div>
       <div class="testi-track-wrap">
         <div class="testi-track" id="featuredTrack" style="gap:24px;">

@@ -47,7 +47,7 @@ const MAP_PROPERTIES = [
     specs: '210 м² · 2 спальни · 6 этаж', year: '2024', oldPrice: '$245,000',
   },
   {
-    id: 'tbilisi-penthouse',
+    id: 'tbilisi-penthouse', top: true,
     city: 'tbilisi', cityLabel: 'Тбилиси', country: 'all',
     lat: 41.7000, lng: 44.8130,
     name: 'Пентхаус «Царская Высота», Тбилиси',
@@ -62,7 +62,7 @@ const MAP_PROPERTIES = [
     specs: '310 м² · 4 спальни · 22 этаж', year: '2021',
   },
   {
-    id: 'gonio-coast',
+    id: 'gonio-coast', top: true,
     city: 'gonio', cityLabel: 'Гонио', country: 'all',
     lat: 41.5300, lng: 41.6000,
     name: 'Апартаменты у моря, Gonio Coast',
@@ -77,7 +77,7 @@ const MAP_PROPERTIES = [
     specs: '52 м² · 1 спальня · 5 этаж', year: '2023', oldPrice: '$115,000',
   },
   {
-    id: 'bakuriani-hills',
+    id: 'bakuriani-hills', top: true,
     city: 'bakuriani', cityLabel: 'Бакуриани', country: 'all',
     lat: 41.7500, lng: 43.5200,
     name: 'Коттеджный комплекс «Бакуриани Хиллс»',
@@ -167,7 +167,7 @@ const MAP_PROPERTIES = [
     specs: '160 м² · 3 спальни · 3 этажа', year: '2019', oldPrice: '$990,000',
   },
   {
-    id: 'ny-manhattan',
+    id: 'ny-manhattan', top: true,
     city: 'new-york', cityLabel: 'Нью-Йорк', country: 'usa',
     lat: 40.7128, lng: -74.0060,
     name: 'Апартаменты на Манхэттене',
@@ -182,7 +182,7 @@ const MAP_PROPERTIES = [
     specs: '120 м² · 2 спальни · 18 этаж', year: '2018',
   },
   {
-    id: 'miami-beach',
+    id: 'miami-beach', top: true,
     city: 'miami', cityLabel: 'Майами', country: 'usa',
     lat: 25.7617, lng: -80.1918,
     name: 'Вилла в Майами Бич',
@@ -227,7 +227,7 @@ const MAP_PROPERTIES = [
     specs: '280 м² · 3 спальни · 15 этаж', year: '2022',
   },
   {
-    id: 'limassol-villa',
+    id: 'limassol-villa', top: true,
     city: 'limassol', cityLabel: 'Лимасол', country: 'cyprus',
     lat: 34.6841, lng: 33.0440,
     name: 'Вилла у моря, Лимасол',
@@ -257,7 +257,7 @@ const MAP_PROPERTIES = [
     specs: '95 м² · 2 спальни · 4 этаж', year: '2019', oldPrice: '$375,000',
   },
   {
-    id: 'mykonos-villa',
+    id: 'mykonos-villa', top: true,
     city: 'mykonos', cityLabel: 'Миконос', country: 'greece',
     lat: 37.4467, lng: 25.3289,
     name: 'Вилла на Миконосе',
@@ -1144,17 +1144,42 @@ function initRelatedSlider() {
   document.getElementById('relatedNav').style.display = total <= pv() ? 'none' : 'flex';
 }
 
+
 // ── RENDER FEATURED TRACK (главная страница) ──
-const FEATURED_IDS = [
-  'batumi-grand', 'tbilisi-elite', 'gonio-coast',
-  'bakuriani-hills', 'tbilisi-penthouse'
-];
+const FEATURED_COUNTRY_LABELS = {
+  all:    'в Грузии',
+  usa:    'в США',
+  uae:    'в ОАЭ',
+  cyprus: 'на Кипре',
+  greece: 'в Греции',
+};
+
+let featuredCountry = 'all';
+
+function setFeaturedCountry(btn) {
+  featuredCountry = btn.dataset.country;
+  document.querySelectorAll('.featured-tab').forEach(b => {
+    b.classList.toggle('active', b.dataset.country === featuredCountry);
+  });
+  renderFeatured();
+}
 
 function renderFeatured() {
   const track = document.getElementById('featuredTrack');
+  const titleEl = document.getElementById('featuredTitle');
   if (!track) return;
 
-  const props = FEATURED_IDS.map(id => MAP_PROPERTIES.find(p => p.id === id)).filter(Boolean);
+  // Обновляем заголовок
+  if (titleEl) {
+    titleEl.textContent = 'Топовые предложения ' + (FEATURED_COUNTRY_LABELS[featuredCountry] || '');
+  }
+
+  // Берём только top:true, deal:'buy', нужной страны
+  const props = MAP_PROPERTIES.filter(p =>
+    p.top &&
+    p.deal === 'buy' &&
+    (featuredCountry === 'all' ? p.country === 'all' : p.country === featuredCountry)
+  ).slice(0, 6);
 
   track.innerHTML = props.map(p => {
     const imgs = p.imgs || [p.img];
@@ -1169,7 +1194,7 @@ function renderFeatured() {
           <div class="card-slider-dots">${dots}</div>
         </div>
         <span class="prop-badge ${p.badge}" style="position:absolute;top:12px;left:12px;z-index:2;">${p.badgeText}</span>
-        ${p.top ? '<span class="top-label" style="z-index:2;">★ ТОП</span>' : ''}
+        <span class="top-label" style="z-index:2;">★ ТОП</span>
       </div>
       <div class="catalog-card-body">
         <div class="catalog-city">${p.cityLabel}</div>
@@ -1177,7 +1202,7 @@ function renderFeatured() {
         <div class="catalog-price-block">
           <div class="catalog-price-row">
             <span class="catalog-price">${formatPrice(p.price)}</span>
-            ${p.deal === 'buy' && p.area ? `<span class="catalog-price-sqm">${formatSqm(p)}</span>` : ''}
+            ${p.area ? `<span class="catalog-price-sqm">${formatSqm(p)}</span>` : ''}
           </div>
           ${p.oldPrice ? `<div class="catalog-price-old">${formatPrice(p.oldPrice)}</div>` : ''}
         </div>
