@@ -732,8 +732,18 @@
 
     <!-- Recently viewed -->
     <div class="recently-viewed" id="recentlyViewedSection" style="display:none;">
-      <div class="recently-viewed-title">Недавно просмотренные</div>
-      <div class="recently-viewed-grid" id="recentlyViewedGrid"></div>
+      <div class="section-header" style="margin-bottom:20px;">
+        <h2 class="section-title" style="font-size:1.1rem;">Недавно просмотренные</h2>
+        <span class="recently-viewed-clear" onclick="clearRecentlyViewed()">Очистить</span>
+      </div>
+      <div class="testi-track-wrap">
+        <div class="testi-track" id="recentlyViewedGrid" style="gap:24px;"></div>
+      </div>
+      <div class="testi-nav" id="recentlyViewedNav" style="display:none;">
+        <button class="testi-btn" onclick="recentlyViewedNavFn(-1)">‹</button>
+        <div class="testi-dots" id="recentlyViewedDots"></div>
+        <button class="testi-btn" onclick="recentlyViewedNavFn(1)">›</button>
+      </div>
     </div>
   </div>
 

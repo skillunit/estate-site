@@ -234,10 +234,8 @@
 }
 /* ── Recently viewed + currency responsive ── */
 @media (max-width: 900px) {
-  .recently-viewed-grid { grid-template-columns: repeat(2, 1fr); }
 }
 @media (max-width: 640px) {
   .catalog-headline-tools { width: 100%; flex-wrap: wrap; }
   .currency-switch { order: 2; }
-  .recently-viewed-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
 }

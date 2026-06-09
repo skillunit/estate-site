@@ -520,22 +520,106 @@ function trackRecentlyViewed(id) {
 
 function renderRecentlyViewed() {
   const wrap = document.getElementById('recentlyViewedSection');
-  const grid = document.getElementById('recentlyViewedGrid');
-  if (!wrap || !grid) return;
+  const track = document.getElementById('recentlyViewedGrid');
+  if (!wrap || !track) return;
+
   let list = [];
   try { list = JSON.parse(localStorage.getItem('grre_recent') || '[]'); } catch (e) {}
   const props = list.map(id => MAP_PROPERTIES.find(p => p.id === id)).filter(Boolean);
+
   if (!props.length) { wrap.style.display = 'none'; return; }
   wrap.style.display = '';
-  grid.innerHTML = props.map(p => `
-    <div class="recent-card" onclick="showDetail('${p.id}')">
-      <img class="recent-card-img" src="${p.img}" alt="${p.name}">
-      <div class="recent-card-body">
-        <div class="recent-card-city">${p.cityLabel}</div>
-        <div class="recent-card-name">${p.name}</div>
-        <div class="recent-card-price">${formatPrice(p.price)}</div>
+
+  track.innerHTML = props.map(p => {
+    const imgs = p.imgs || [p.img];
+    const dots = imgs.map((_, i) => `<span class="card-slider-dot${i === 0 ? ' active' : ''}"></span>`).join('');
+    return `
+    <div class="catalog-card" style="flex-shrink:0;" onclick="showDetail('${p.id}')">
+      <div class="catalog-card-img-wrap" style="position:relative;overflow:hidden;">
+        <div class="card-slider" data-imgs='${JSON.stringify(imgs)}' data-idx="0">
+          <img class="catalog-img card-slider-img" src="${imgs[0]}" alt="${p.name}">
+          <button class="card-slider-btn card-slider-prev" onclick="cardSlide(event,this,-1)" aria-label="Назад">&#8249;</button>
+          <button class="card-slider-btn card-slider-next" onclick="cardSlide(event,this,1)" aria-label="Вперёд">&#8250;</button>
+          <div class="card-slider-dots">${dots}</div>
+        </div>
+        <span class="prop-badge ${p.badge}" style="position:absolute;top:12px;left:12px;z-index:2;">${p.badgeText}</span>
+        ${p.top ? '<span class="top-label" style="z-index:2;">★ ТОП</span>' : ''}
       </div>
-    </div>`).join('');
+      <div class="catalog-card-body">
+        <div class="catalog-city">${p.cityLabel}</div>
+        <div class="catalog-name">${p.name}</div>
+        <div class="catalog-price-block">
+          <div class="catalog-price-row">
+            <span class="catalog-price">${formatPrice(p.price)}</span>
+            ${p.deal === 'buy' && p.area ? `<span class="catalog-price-sqm">${formatSqm(p)}</span>` : ''}
+          </div>
+          ${p.oldPrice ? `<div class="catalog-price-old">${formatPrice(p.oldPrice)}</div>` : ''}
+        </div>
+        <div class="catalog-specs">
+          <span class="spec-item"><strong>${p.area}</strong> м²</span>
+          <span class="spec-sep">·</span>
+          <span class="spec-item"><strong>${p.rooms}</strong> спал.</span>
+          <span class="spec-sep">·</span>
+          <span class="spec-item"><strong>${p.floor}</strong> эт.</span>
+          ${p.year ? `<span class="spec-sep">·</span><span class="spec-item"><strong>${p.year}</strong> г.</span>` : ''}
+        </div>
+        <a class="catalog-detail-link" onclick="event.stopPropagation();showDetail('${p.id}')">Подробнее →</a>
+      </div>
+    </div>`;
+  }).join('');
+
+  initRecentlyViewedSlider();
+}
+
+function clearRecentlyViewed() {
+  localStorage.removeItem('grre_recent');
+  renderRecentlyViewed();
+}
+
+function initRecentlyViewedSlider() {
+  const track = document.getElementById('recentlyViewedGrid');
+  const dotsWrap = document.getElementById('recentlyViewedDots');
+  const nav = document.getElementById('recentlyViewedNav');
+  if (!track) return;
+  const cards = track.querySelectorAll('.catalog-card');
+  const total = cards.length;
+  if (!total) return;
+  const gap = 24;
+  let cur = 0;
+  const perView = () => window.innerWidth <= 600 ? 1 : window.innerWidth <= 900 ? 2 : 3;
+  const pages = () => Math.max(1, total - perView() + 1);
+
+  function buildDots() {
+    if (!dotsWrap) return;
+    dotsWrap.innerHTML = '';
+    for (let i = 0; i < pages(); i++) {
+      const d = document.createElement('div');
+      d.className = 'testi-dot' + (i === cur ? ' active' : '');
+      d.addEventListener('click', () => goTo(i));
+      dotsWrap.appendChild(d);
+    }
+  }
+  function goTo(idx) {
+    cur = Math.max(0, Math.min(idx, pages() - 1));
+    const w = (track.parentElement.offsetWidth - gap * (perView() - 1)) / perView();
+    cards.forEach(c => c.style.width = w + 'px');
+    track.style.transform = `translateX(-${cur * (w + gap)}px)`;
+    if (dotsWrap) dotsWrap.querySelectorAll('.testi-dot').forEach((d, i) => d.classList.toggle('active', i === cur));
+  }
+  window.recentlyViewedNavFn = dir => goTo(cur + dir);
+
+  function init() {
+    cur = 0;
+    const w = (track.parentElement.offsetWidth - gap * (perView() - 1)) / perView();
+    cards.forEach(c => c.style.width = w + 'px');
+    buildDots();
+    goTo(0);
+    if (nav) nav.style.display = total <= perView() ? 'none' : 'flex';
+  }
+  init();
+  window.removeEventListener('resize', window._recentResizeHandler);
+  window._recentResizeHandler = init;
+  window.addEventListener('resize', init);
 }
 
 const COUNTRY_VIEW = {

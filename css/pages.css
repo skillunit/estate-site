@@ -1578,53 +1578,14 @@
   padding-top: 32px;
   border-top: 1px solid var(--border);
 }
-.recently-viewed-title {
-  font-family: var(--font-head);
-  font-size: 1.1rem; font-weight: 700;
-  color: var(--dark);
-  margin-bottom: 20px;
-}
-.recently-viewed-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 16px;
-}
-.recent-card {
-  background: var(--white);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  overflow: hidden;
+.recently-viewed-clear {
+  font-size: 0.75rem; font-weight: 600;
+  color: var(--gray-400);
   cursor: pointer;
-  transition: box-shadow var(--transition), transform var(--transition);
+  letter-spacing: 0.03em;
+  transition: color var(--transition);
 }
-.recent-card:hover {
-  box-shadow: var(--shadow-md);
-  transform: translateY(-2px);
-}
-.recent-card-img {
-  width: 100%; aspect-ratio: 16/10; object-fit: cover;
-  display: block;
-}
-.recent-card-body { padding: 12px 14px; }
-.recent-card-city {
-  font-size: 0.62rem; font-weight: 700;
-  letter-spacing: 0.08em; text-transform: uppercase;
-  color: var(--gray-500); margin-bottom: 3px;
-}
-.recent-card-name {
-  font-size: 0.8rem; font-weight: 600;
-  color: var(--dark); line-height: 1.3;
-  margin-bottom: 6px;
-  display: -webkit-box;
-  -webkit-line-clamp: 1;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-}
-.recent-card-price {
-  font-family: var(--font-head);
-  font-size: 0.92rem; font-weight: 800;
-  color: var(--red);
-}
+.recently-viewed-clear:hover { color: var(--red); }
 
 /* ── Featured country tabs ── */
 .featured-country-tabs {
