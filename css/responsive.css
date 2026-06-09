@@ -227,7 +227,17 @@
     gap: 12px;
   }
   .catalog-headline-row > div { flex: none; }
-  .sort-dropdown { width: 100%; justify-content: flex-start; }
+  .catalog-headline-tools { width: 100%; }
+  .sort-dropdown { flex: 1; justify-content: flex-start; }
   .sort-dropdown-btn { min-width: 0; width: 100%; }
   .sort-dropdown-menu { width: 100%; min-width: 0; }
+}
+/* ── Recently viewed + currency responsive ── */
+@media (max-width: 900px) {
+  .recently-viewed-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 640px) {
+  .catalog-headline-tools { width: 100%; flex-wrap: wrap; }
+  .currency-switch { order: 2; }
+  .recently-viewed-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
 }

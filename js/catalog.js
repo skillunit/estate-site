@@ -470,6 +470,72 @@ const MAP_PROPERTIES = [
   },
 ];
 
+// ── CURRENCY ──
+const CURRENCY_RATES   = { USD: 1, GEL: 2.70, EUR: 0.92 };
+const CURRENCY_SYMBOLS = { USD: '$', GEL: '₾', EUR: '€' };
+let currentCurrency = localStorage.getItem('grre_currency') || 'USD';
+
+function convertUsd(num) {
+  return Math.round(num * CURRENCY_RATES[currentCurrency]);
+}
+
+// '$125,000' → '₾337,500' / '$1,200/мес' → '₾3,240/мес'
+function formatPrice(usdPriceStr) {
+  if (!usdPriceStr) return '';
+  const isRent = usdPriceStr.includes('/мес');
+  const num = parseFloat(usdPriceStr.replace(/[^0-9.]/g, ''));
+  if (isNaN(num)) return usdPriceStr;
+  return CURRENCY_SYMBOLS[currentCurrency] + convertUsd(num).toLocaleString('en-US') + (isRent ? '/мес' : '');
+}
+
+// Цена за м² в текущей валюте
+function formatSqm(p) {
+  const usd = parseFloat(p.price.replace(/[^0-9.]/g, '')) / parseFloat(p.area);
+  return convertUsd(usd).toLocaleString('ru-RU') + ' ' + CURRENCY_SYMBOLS[currentCurrency] + '/м²';
+}
+
+function setCurrency(cur) {
+  if (!CURRENCY_RATES[cur]) return;
+  currentCurrency = cur;
+  localStorage.setItem('grre_currency', cur);
+  document.querySelectorAll('.currency-btn').forEach(b => {
+    b.classList.toggle('active', b.dataset.cur === cur);
+  });
+  // Перерисовать каталог с текущими фильтрами
+  if (typeof filterCatalog === 'function') filterCatalog();
+  renderRecentlyViewed();
+}
+
+// ── RECENTLY VIEWED ──
+function trackRecentlyViewed(id) {
+  let list = [];
+  try { list = JSON.parse(localStorage.getItem('grre_recent') || '[]'); } catch (e) {}
+  list = list.filter(x => x !== id);
+  list.unshift(id);
+  list = list.slice(0, 4);
+  localStorage.setItem('grre_recent', JSON.stringify(list));
+}
+
+function renderRecentlyViewed() {
+  const wrap = document.getElementById('recentlyViewedSection');
+  const grid = document.getElementById('recentlyViewedGrid');
+  if (!wrap || !grid) return;
+  let list = [];
+  try { list = JSON.parse(localStorage.getItem('grre_recent') || '[]'); } catch (e) {}
+  const props = list.map(id => MAP_PROPERTIES.find(p => p.id === id)).filter(Boolean);
+  if (!props.length) { wrap.style.display = 'none'; return; }
+  wrap.style.display = '';
+  grid.innerHTML = props.map(p => `
+    <div class="recent-card" onclick="showDetail('${p.id}')">
+      <img class="recent-card-img" src="${p.img}" alt="${p.name}">
+      <div class="recent-card-body">
+        <div class="recent-card-city">${p.cityLabel}</div>
+        <div class="recent-card-name">${p.name}</div>
+        <div class="recent-card-price">${formatPrice(p.price)}</div>
+      </div>
+    </div>`).join('');
+}
+
 const COUNTRY_VIEW = {
   all:    { lat: 42.0, lng: 43.5, zoom: 7 },
   usa:    { lat: 37.0, lng: -95.0, zoom: 4 },
@@ -533,10 +599,10 @@ function renderCatalogGrid(countryVal, cityVal, statusVal) {
         <div class="catalog-name">${p.name}</div>
         <div class="catalog-price-block">
           <div class="catalog-price-row">
-            <span class="catalog-price">${p.price}</span>
-            ${p.deal === 'buy' && p.area ? `<span class="catalog-price-sqm">${Math.round(parseFloat(p.price.replace(/[^0-9.]/g,'')) / parseFloat(p.area)).toLocaleString('ru-RU')} $/м²</span>` : ''}
+            <span class="catalog-price">${formatPrice(p.price)}</span>
+            ${p.deal === 'buy' && p.area ? `<span class="catalog-price-sqm">${formatSqm(p)}</span>` : ''}
           </div>
-          ${p.oldPrice ? `<div class="catalog-price-old">${p.oldPrice}</div>` : ''}
+          ${p.oldPrice ? `<div class="catalog-price-old">${formatPrice(p.oldPrice)}</div>` : ''}
         </div>
         <div class="catalog-specs">
           <span class="spec-item"><strong>${p.area}</strong> м²</span>
@@ -612,14 +678,13 @@ function showDetail(id) {
 
   // Update price
   const detailPrice = document.getElementById('detailPrice');
-  if (detailPrice) detailPrice.textContent = prop.price;
+  if (detailPrice) detailPrice.textContent = formatPrice(prop.price);
 
   // Цена за м² (только для покупки)
   const detailPriceSqm = document.getElementById('detailPriceSqm');
   if (detailPriceSqm) {
     if (prop.deal === 'buy' && prop.area) {
-      const sqm = Math.round(parseFloat(prop.price.replace(/[^0-9.]/g,'')) / parseFloat(prop.area));
-      detailPriceSqm.textContent = sqm.toLocaleString('ru-RU') + ' $/м²';
+      detailPriceSqm.textContent = formatSqm(prop);
       detailPriceSqm.style.display = '';
     } else {
       detailPriceSqm.style.display = 'none';
@@ -630,12 +695,15 @@ function showDetail(id) {
   const detailPriceOld = document.getElementById('detailPriceOld');
   if (detailPriceOld) {
     if (prop.oldPrice) {
-      detailPriceOld.textContent = prop.oldPrice;
+      detailPriceOld.textContent = formatPrice(prop.oldPrice);
       detailPriceOld.style.display = '';
     } else {
       detailPriceOld.style.display = 'none';
     }
   }
+
+  // Запоминаем просмотр
+  trackRecentlyViewed(id);
 
   showPage('detail');
   renderRelated(id);
@@ -961,6 +1029,11 @@ window.showPage = function(id) {
 
     renderCatalogGrid(country, city, status);
     updateCatalogHeadline(country);
+    renderRecentlyViewed();
+    // Синхронизируем активную кнопку валюты (могла быть сохранена в localStorage)
+    document.querySelectorAll('.currency-btn').forEach(b => {
+      b.classList.toggle('active', b.dataset.cur === currentCurrency);
+    });
     setTimeout(() => {
       initCatalogMap();
       if (catalogMap) {
