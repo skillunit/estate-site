@@ -244,3 +244,10 @@
 @media (max-width: 768px) {
   .detail-inline-map { height: 220px; }
 }
+
+/* ── New filters responsive ── */
+@media (max-width: 768px) {
+  .filter-field--price .filter-range-input,
+  .filter-field--area  .filter-range-input { width: 70px; }
+  .rooms-btn { padding: 0 8px; font-size: 0.75rem; }
+}

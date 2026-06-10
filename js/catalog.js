@@ -647,10 +647,12 @@ const COUNTRY_VIEW = {
 };
 
 // ── Рендер карточек каталога из базы ──
-function renderCatalogGrid(countryVal, cityVal, statusVal, typeVal) {
-  const grid = document.getElementById('catalogGrid');
+function renderCatalogGrid(countryVal, cityVal, statusVal, typeVal, extra) {
+  const grid  = document.getElementById('catalogGrid');
+  const empty = document.getElementById('catalogEmpty');
   if (!grid) return;
   const dealType = typeof currentDealType !== 'undefined' ? currentDealType : 'buy';
+  const { priceMin = 0, priceMax = Infinity, areaMin = 0, areaMax = Infinity, rooms = 'all' } = extra || {};
 
   const filtered = MAP_PROPERTIES.filter(p => {
     const md  = p.deal === dealType;
@@ -658,8 +660,21 @@ function renderCatalogGrid(countryVal, cityVal, statusVal, typeVal) {
     const mci = cityVal === 'all' || p.city === cityVal;
     const ms  = statusVal === 'all' || p.status === statusVal;
     const mt  = !typeVal || typeVal === 'all' || p.type === typeVal;
-    return md && mc && mci && ms && mt;
+    const price = parseFloat(p.price.replace(/[^0-9.]/g, ''));
+    const area  = parseFloat(p.area) || 0;
+    const rm    = parseInt(p.rooms) || 0;
+    const mp  = price >= priceMin && price <= priceMax;
+    const ma  = area  >= areaMin  && area  <= areaMax;
+    const mr  = rooms === 'all' || (rooms === '4+' ? rm >= 4 : rm === parseInt(rooms));
+    return md && mc && mci && ms && mt && mp && ma && mr;
   });
+
+  // Empty state
+  if (empty) {
+    grid.style.display    = filtered.length ? '' : 'none';
+    empty.style.display   = filtered.length ? 'none' : '';
+  }
+  if (!filtered.length) return;
 
   // Sort
   const sortEl = document.getElementById('catalogSort');
@@ -996,11 +1011,12 @@ function clusterByProximity(props, thresholdKm = 5) {
   return clusters;
 }
 
-function renderMapMarkers(countryVal, cityVal, statusVal, typeVal) {
+function renderMapMarkers(countryVal, cityVal, statusVal, typeVal, extra) {
   if (!catalogMap) return;
 
   mapMarkers.forEach(m => catalogMap.removeLayer(m));
   mapMarkers = [];
+  const { priceMin = 0, priceMax = Infinity, areaMin = 0, areaMax = Infinity, rooms = 'all' } = extra || {};
 
   let filtered = MAP_PROPERTIES.filter(p => {
     const dealType = typeof currentDealType !== 'undefined' ? currentDealType : 'buy';
@@ -1009,7 +1025,13 @@ function renderMapMarkers(countryVal, cityVal, statusVal, typeVal) {
     const matchCity    = cityVal === 'all' || p.city === cityVal;
     const matchStatus  = statusVal === 'all' || p.status === statusVal;
     const matchType    = !typeVal || typeVal === 'all' || p.type === typeVal;
-    return matchDeal && matchCountry && matchCity && matchStatus && matchType;
+    const price = parseFloat(p.price.replace(/[^0-9.]/g, ''));
+    const area  = parseFloat(p.area) || 0;
+    const rm    = parseInt(p.rooms) || 0;
+    const matchPrice = price >= priceMin && price <= priceMax;
+    const matchArea  = area  >= areaMin  && area  <= areaMax;
+    const matchRooms = rooms === 'all' || (rooms === '4+' ? rm >= 4 : rm === parseInt(rooms));
+    return matchDeal && matchCountry && matchCity && matchStatus && matchType && matchPrice && matchArea && matchRooms;
   });
 
   const clusters = clusterByProximity(filtered);
@@ -1136,7 +1158,7 @@ window.showPage = function(id) {
     const status  = statusEl  ? statusEl.value  : 'all';
     const type    = typeEl    ? typeEl.value    : 'all';
 
-    renderCatalogGrid(country, city, status, type);
+    renderCatalogGrid(country, city, status, type, {});
     updateCatalogHeadline(country);
     renderRecentlyViewed();
     // Синхронизируем активную кнопку валюты (могла быть сохранена в localStorage)
@@ -1147,7 +1169,7 @@ window.showPage = function(id) {
       initCatalogMap();
       if (catalogMap) {
         catalogMap.invalidateSize();
-        renderMapMarkers(country, city, status, type);
+        renderMapMarkers(country, city, status, type, {});
       }
     }, 50);
   }
@@ -1169,7 +1191,27 @@ function resetHomeFilter() {
 
 function resetCatalogFilter() {
   document.querySelectorAll('#page-catalog .filter-select').forEach(s => s.selectedIndex = 0);
+  ['priceMin','priceMax','areaMin','areaMax'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.value = '';
+  });
+  const roomsVal = document.getElementById('roomsVal');
+  if (roomsVal) roomsVal.value = 'all';
+  document.querySelectorAll('.rooms-btn').forEach(b => b.classList.toggle('active', b.dataset.val === 'all'));
   filterCatalog();
+}
+
+function setRooms(btn) {
+  document.querySelectorAll('.rooms-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  const roomsVal = document.getElementById('roomsVal');
+  if (roomsVal) roomsVal.value = btn.dataset.val;
+  filterCatalog();
+}
+
+function formatPriceInput(el) {
+  // Убираем всё кроме цифр при вводе — показываем как есть
+  el.value = el.value.replace(/[^0-9]/g, '');
 }
 
 // ── RELATED PROPERTIES SLIDER ──

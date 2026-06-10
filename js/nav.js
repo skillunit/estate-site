@@ -85,11 +85,23 @@ function updateCatalogHeadline(country) {
 let _prevCountry = 'all';
 
 function filterCatalog() {
-  const cityEl   = document.getElementById('citySelect');
-  const statusEl = document.getElementById('statusSelect');
-  const typeEl   = document.getElementById('typeSelect');
-  const status = statusEl ? statusEl.value : 'all';
-  const type   = typeEl   ? typeEl.value   : 'all';
+  const cityEl     = document.getElementById('citySelect');
+  const statusEl   = document.getElementById('statusSelect');
+  const typeEl     = document.getElementById('typeSelect');
+  const priceMinEl = document.getElementById('priceMin');
+  const priceMaxEl = document.getElementById('priceMax');
+  const areaMinEl  = document.getElementById('areaMin');
+  const areaMaxEl  = document.getElementById('areaMax');
+  const roomsEl    = document.getElementById('roomsVal');
+
+  const status   = statusEl ? statusEl.value : 'all';
+  const type     = typeEl   ? typeEl.value   : 'all';
+  const rooms    = roomsEl  ? roomsEl.value  : 'all';
+  const priceMin = priceMinEl && priceMinEl.value ? parseFloat(priceMinEl.value.replace(/[^0-9.]/g, '')) || 0        : 0;
+  const priceMax = priceMaxEl && priceMaxEl.value ? parseFloat(priceMaxEl.value.replace(/[^0-9.]/g, '')) || Infinity : Infinity;
+  const areaMin  = areaMinEl  && areaMinEl.value  ? parseFloat(areaMinEl.value)  || 0        : 0;
+  const areaMax  = areaMaxEl  && areaMaxEl.value  ? parseFloat(areaMaxEl.value)  || Infinity : Infinity;
+
   const catalogFilterBar = document.querySelector('#page-catalog .filter-bar .filter-field--country .filter-select');
   const country = catalogFilterBar ? catalogFilterBar.value : 'all';
 
@@ -100,9 +112,10 @@ function filterCatalog() {
   }
 
   const city = cityEl ? cityEl.value : 'all';
+  const extra = { priceMin, priceMax, areaMin, areaMax, rooms };
   updateCatalogHeadline(country);
-  renderCatalogGrid(country, city, status, type);
-  renderMapMarkers(country, city, status, type);
+  renderCatalogGrid(country, city, status, type, extra);
+  renderMapMarkers(country, city, status, type, extra);
 }
 
 // ── VIDEO ──

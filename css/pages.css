@@ -1668,3 +1668,62 @@
   font-size: 0.95rem; font-weight: 800;
   color: var(--red);
 }
+
+/* ── New filter fields: price range, area, rooms ── */
+.filter-range-inputs {
+  display: flex; align-items: center; gap: 4px;
+}
+.filter-range-input {
+  width: 80px; height: 38px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 0 10px;
+  font-family: var(--font-body);
+  font-size: 0.8rem; color: var(--dark);
+  background: var(--white);
+  transition: border-color var(--transition);
+  outline: none;
+}
+.filter-range-input:focus { border-color: var(--red); }
+.filter-range-input::placeholder { color: var(--gray-400); }
+.filter-range-sep {
+  color: var(--gray-400); font-size: 0.8rem;
+  flex-shrink: 0;
+}
+
+.filter-rooms-btns {
+  display: flex; gap: 4px; flex-wrap: wrap;
+}
+.rooms-btn {
+  height: 38px; padding: 0 10px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--white);
+  font-family: var(--font-body);
+  font-size: 0.8rem; font-weight: 600;
+  color: var(--gray-600);
+  cursor: pointer;
+  transition: border-color var(--transition), background var(--transition), color var(--transition);
+  white-space: nowrap;
+}
+.rooms-btn:hover { border-color: var(--red); color: var(--red); }
+.rooms-btn.active { background: var(--red); border-color: var(--red); color: var(--white); }
+
+/* ── Catalog empty state ── */
+.catalog-empty {
+  text-align: center;
+  padding: 80px 24px;
+}
+.catalog-empty-icon {
+  color: var(--gray-300);
+  margin-bottom: 20px;
+}
+.catalog-empty-title {
+  font-family: var(--font-head);
+  font-size: 1.2rem; font-weight: 700;
+  color: var(--dark); margin-bottom: 8px;
+}
+.catalog-empty-text {
+  font-size: 0.88rem; color: var(--gray-500);
+  margin-bottom: 24px;
+}

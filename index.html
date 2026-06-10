@@ -564,6 +564,33 @@
             <option value="sale">Эксклюзив</option>
           </select>
         </div>
+        <div class="filter-field filter-field--price">
+          <label>Цена</label>
+          <div class="filter-range-inputs">
+            <input class="filter-range-input" type="text" id="priceMin" placeholder="От" onchange="filterCatalog()" oninput="formatPriceInput(this)">
+            <span class="filter-range-sep">—</span>
+            <input class="filter-range-input" type="text" id="priceMax" placeholder="До" onchange="filterCatalog()" oninput="formatPriceInput(this)">
+          </div>
+        </div>
+        <div class="filter-field filter-field--area">
+          <label>Площадь, м²</label>
+          <div class="filter-range-inputs">
+            <input class="filter-range-input" type="text" id="areaMin" placeholder="От" onchange="filterCatalog()">
+            <span class="filter-range-sep">—</span>
+            <input class="filter-range-input" type="text" id="areaMax" placeholder="До" onchange="filterCatalog()">
+          </div>
+        </div>
+        <div class="filter-field filter-field--rooms">
+          <label>Спальни</label>
+          <div class="filter-rooms-btns" id="roomsBtns">
+            <button class="rooms-btn active" data-val="all"   onclick="setRooms(this)">Любое</button>
+            <button class="rooms-btn"        data-val="1"     onclick="setRooms(this)">1</button>
+            <button class="rooms-btn"        data-val="2"     onclick="setRooms(this)">2</button>
+            <button class="rooms-btn"        data-val="3"     onclick="setRooms(this)">3</button>
+            <button class="rooms-btn"        data-val="4+"    onclick="setRooms(this)">4+</button>
+          </div>
+          <input type="hidden" id="roomsVal" value="all">
+        </div>
         <div class="filter-field filter-field--btn">
           <span class="filter-reset-link" onclick="resetCatalogFilter()">Сброс</span>
           <button class="btn btn-red filter-btn" onclick="filterCatalog()">Найти</button>
@@ -646,78 +673,16 @@
       </div>
     </div>
     <div class="catalog-grid" id="catalogGrid">
+    </div>
 
-      <div class="catalog-card" data-city="batumi" data-status="ready" onclick="showPage('detail')">
-        <div style="position:relative;overflow:hidden;"><img class="catalog-img" src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=600&h=375&fit=crop" alt="ЖК Гранд Панорама Батуми">
-          <span class="prop-badge badge-ready" style="position:absolute;top:12px;left:12px;">Сдан в эксплуатацию</span></div>
-        <div class="catalog-card-body">
-          <div class="catalog-city">Batumi</div>
-          <div class="catalog-name">ЖК «Гранд Панорама Батуми»</div>
-          <div class="catalog-price">$125,000</div>
-          <div class="catalog-specs"><span>45</span> м² &nbsp;·&nbsp; <span>1</span> спальня &nbsp;·&nbsp; <span>12</span> этаж</div>
-          <a class="catalog-detail-link" onclick="event.stopPropagation();showPage('detail')">Detailed Specs →</a>
-        </div>
+    <div class="catalog-empty" id="catalogEmpty" style="display:none;">
+      <div class="catalog-empty-icon">
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
       </div>
-
-      <div class="catalog-card" data-city="tbilisi" data-status="ready" onclick="showPage('detail')">
-        <div style="position:relative;overflow:hidden;"><img class="catalog-img" src="https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=600&h=375&fit=crop" alt="Элитная квартира Тбилиси">
-          <span class="prop-badge badge-build" style="position:absolute;top:12px;left:12px;">Под чистовую отделку</span></div>
-        <div class="catalog-card-body">
-          <div class="catalog-city">Tbilisi</div>
-          <div class="catalog-name">Элитная квартира в центре Тбилиси</div>
-          <div class="catalog-price">$210,000</div>
-          <div class="catalog-specs"><span>210</span> м² &nbsp;·&nbsp; <span>2</span> спальни &nbsp;·&nbsp; <span>6</span> этаж</div>
-          <a class="catalog-detail-link" onclick="event.stopPropagation();showPage('detail')">Detailed Specs →</a>
-        </div>
-      </div>
-
-      <div class="catalog-card" data-city="gonio" data-status="ready" onclick="showPage('detail')">
-        <div style="position:relative;overflow:hidden;"><img class="catalog-img" src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=600&h=375&fit=crop" alt="Апартаменты у моря Гонио">
-          <span class="prop-badge badge-ready" style="position:absolute;top:12px;left:12px;">Готовые к заселению</span></div>
-        <div class="catalog-card-body">
-          <div class="catalog-city">Gonio</div>
-          <div class="catalog-name">Апартаменты у моря, Gonio Coast</div>
-          <div class="catalog-price">$98,000</div>
-          <div class="catalog-specs"><span>1200</span> м² &nbsp;·&nbsp; <span>1</span> спальня &nbsp;·&nbsp; <span>30</span> номеров</div>
-          <a class="catalog-detail-link" onclick="event.stopPropagation();showPage('detail')">Detailed Specs →</a>
-        </div>
-      </div>
-
-      <div class="catalog-card" data-city="bakuriani" data-status="construction" onclick="showPage('detail')">
-        <div style="position:relative;overflow:hidden;"><img class="catalog-img" src="https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=600&h=375&fit=crop" alt="Коттеджный комплекс Бакуриани">
-          <span class="prop-badge badge-invest" style="position:absolute;top:12px;left:12px;">Инвестиция</span></div>
-        <div class="catalog-card-body">
-          <div class="catalog-city">Bakuriani</div>
-          <div class="catalog-name">Коттеджный комплекс «Бакуриани Хиллс»</div>
-          <div class="catalog-price">$195,000</div>
-          <div class="catalog-specs"><span>1800</span> м² &nbsp;·&nbsp; <span>1</span> спальня &nbsp;·&nbsp; <span>12</span> домов</div>
-          <a class="catalog-detail-link" onclick="event.stopPropagation();showPage('detail')">Detailed Specs →</a>
-        </div>
-      </div>
-
-      <div class="catalog-card" data-city="kakheti" data-status="construction" onclick="showPage('detail')">
-        <div style="position:relative;overflow:hidden;"><img class="catalog-img" src="https://images.unsplash.com/photo-1583608205776-bfd35f0d9f83?w=600&h=375&fit=crop" alt="Резиденция в Алазанской Долине">
-          <span class="prop-badge badge-build" style="position:absolute;top:12px;left:12px;">Строящееся</span></div>
-        <div class="catalog-card-body">
-          <div class="catalog-city">Kakheti</div>
-          <div class="catalog-name">Резиденция в Алазанской Долине</div>
-          <div class="catalog-price">$110,000</div>
-          <div class="catalog-specs"><span>110</span> м² &nbsp;·&nbsp; <span>2</span> спальни &nbsp;·&nbsp; <span>6</span> этаж</div>
-          <a class="catalog-detail-link" onclick="event.stopPropagation();showPage('detail')">Detailed Specs →</a>
-        </div>
-      </div>
-
-      <div class="catalog-card" data-city="tbilisi" data-status="ready" onclick="showPage('detail')">
-        <div style="position:relative;overflow:hidden;"><img class="catalog-img" src="https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=600&h=375&fit=crop" alt="Пентхаус Тбилиси">
-          <span class="prop-badge badge-sale" style="position:absolute;top:12px;left:12px;">Эксклюзив</span></div>
-        <div class="catalog-card-body">
-          <div class="catalog-city">Tbilisi luxury</div>
-          <div class="catalog-name">Пентхаус «Царская Высота», Тбилиси</div>
-          <div class="catalog-price">$650,000</div>
-          <div class="catalog-specs"><span>310</span> м² &nbsp;·&nbsp; <span>4</span> спальни &nbsp;·&nbsp; <span>16</span> этаж</div>
-          <a class="catalog-detail-link" onclick="event.stopPropagation();showPage('detail')">Detailed Specs →</a>
-        </div>
-      </div>
+      <div class="catalog-empty-title">Объектов не найдено</div>
+      <div class="catalog-empty-text">Попробуйте изменить параметры поиска или сбросьте фильтры</div>
+      <button class="btn btn-red" onclick="resetCatalogFilter()">Сбросить фильтры</button>
+    </div>
 
     </div>
 
