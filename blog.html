@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" type="image/x-icon" href="favicon.ico">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Блог — Georgia Real Estate</title>
+<meta name="description" content="Статьи об инвестициях в недвижимость Грузии, советы покупателям, аналитика рынка.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/pages.css">
+<link rel="stylesheet" href="css/components.css">
+<link rel="stylesheet" href="css/responsive.css">
+<style>
+  body { background: var(--white); }
+  .page { display: block !important; }
+</style>
+</head>
+<body>
+
+<header id="header">
+  <div class="header-inner">
+    <div class="logo" onclick="location.href='index.html'">
+      <svg class="logo-icon" viewBox="0 0 36 36" fill="none">
+        <rect width="36" height="36" fill="white"/>
+        <rect x="15.5" y="2" width="5" height="32" fill="#C0392B"/>
+        <rect x="2" y="15.5" width="32" height="5" fill="#C0392B"/>
+        <rect x="4" y="4" width="2.5" height="8" fill="#C0392B"/>
+        <rect x="1.5" y="6" width="7.5" height="2.5" fill="#C0392B"/>
+        <rect x="29.5" y="4" width="2.5" height="8" fill="#C0392B"/>
+        <rect x="27" y="6" width="7.5" height="2.5" fill="#C0392B"/>
+        <rect x="4" y="24" width="2.5" height="8" fill="#C0392B"/>
+        <rect x="1.5" y="27.5" width="7.5" height="2.5" fill="#C0392B"/>
+        <rect x="29.5" y="24" width="2.5" height="8" fill="#C0392B"/>
+        <rect x="27" y="27.5" width="7.5" height="2.5" fill="#C0392B"/>
+      </svg>
+      <div class="logo-text">
+        <span class="logo-text-top">Georgia</span>
+        <span class="logo-text-bot">Real Estate</span>
+      </div>
+    </div>
+    <nav class="header-nav" id="mainNav">
+      <a href="index.html">Главная</a>
+      <span class="nav-sep">|</span>
+      <a href="team.html">Команда</a>
+      <span class="nav-sep">|</span>
+      <a href="index.html">Проекты</a>
+      <span class="nav-sep">|</span>
+      <a href="blog.html" class="active">Блог</a>
+      <span class="nav-sep">|</span>
+      <a href="contact.html" class="nav-contact-link">Связаться с нами</a>
+    </nav>
+    <div class="header-right">
+      <div class="header-phone">+995 32 2 123 456</div>
+      <div class="lang-switch">
+        <button class="lang-btn active">RU</button>
+        <span class="lang-sep-char">|</span>
+        <button class="lang-btn">EN</button>
+        <span class="lang-sep-char">|</span>
+        <button class="lang-btn">HE</button>
+      </div>
+      <button class="hamburger" id="hamburger" onclick="toggleMenu()">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<div class="page page-body" id="page-blog">
+  <div class="blog-hero">
+    <div class="blog-hero-bg"></div>
+    <div class="blog-hero-overlay"></div>
+    <div class="blog-hero-content"><h1>Блог</h1></div>
+  </div>
+
+  <div class="blog-section-inner">
+    <div class="blog-filters">
+      <button class="blog-filter-btn active" data-tag="all">Все</button>
+      <button class="blog-filter-btn" data-tag="Инвестиции">Инвестиции</button>
+      <button class="blog-filter-btn" data-tag="Рынок">Рынок</button>
+      <button class="blog-filter-btn" data-tag="Советы">Советы</button>
+      <button class="blog-filter-btn" data-tag="Тбилиси">Тбилиси</button>
+      <button class="blog-filter-btn" data-tag="Батуми">Батуми</button>
+    </div>
+
+    <div class="blog-grid" id="blogGrid">
+
+      <div class="blog-card blog-featured" data-tag="Инвестиции" onclick="location.href='article.html'" style="cursor:pointer;">
+        <div class="blog-card-img-wrap">
+          <img class="blog-card-img" src="https://picsum.photos/seed/tbilisi-invest/800/500" alt="">
+        </div>
+        <div class="blog-card-body">
+          <span class="blog-card-tag">Инвестиции</span>
+          <div class="blog-card-title">Почему Тбилиси остаётся одним из лучших городов для инвестиций в недвижимость в 2024 году</div>
+          <div class="blog-card-excerpt">Грузия продолжает привлекать иностранных инвесторов: низкие налоги, простая процедура покупки и стабильный рост цен делают рынок особенно привлекательным для международного капитала.</div>
+          <div class="blog-card-meta">
+            <span>15 ноября 2024</span>
+            <span class="blog-card-meta-dot"></span>
+            <span>8 мин чтения</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="blog-card" data-tag="Батуми" onclick="location.href='article.html'" style="cursor:pointer;">
+        <div class="blog-card-img-wrap">
+          <img class="blog-card-img" src="https://picsum.photos/seed/batumi-sea/600/400" alt="">
+        </div>
+        <div class="blog-card-body">
+          <span class="blog-card-tag">Батуми</span>
+          <div class="blog-card-title">Батуми 2024: новые проекты и прогноз цен на курортную недвижимость</div>
+          <div class="blog-card-excerpt">Обзор самых ожидаемых жилых комплексов на черноморском побережье и анализ динамики арендного дохода за последние два года.</div>
+          <div class="blog-card-meta">
+            <span>2 ноября 2024</span>
+            <span class="blog-card-meta-dot"></span>
+            <span>6 мин чтения</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="blog-card" data-tag="Советы" onclick="location.href='article.html'" style="cursor:pointer;">
+        <div class="blog-card-img-wrap">
+          <img class="blog-card-img" src="https://picsum.photos/seed/georgia-law/600/400" alt="">
+        </div>
+        <div class="blog-card-body">
+          <span class="blog-card-tag">Советы</span>
+          <div class="blog-card-title">Покупка недвижимости в Грузии для иностранцев: пошаговый гайд</div>
+          <div class="blog-card-excerpt">Разбираем весь процесс — от выбора объекта до регистрации права собственности. Что нужно знать о налогах, документах и возможных подводных камнях.</div>
+          <div class="blog-card-meta">
+            <span>18 октября 2024</span>
+            <span class="blog-card-meta-dot"></span>
+            <span>10 мин чтения</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="blog-card" data-tag="Рынок" onclick="location.href='article.html'" style="cursor:pointer;">
+        <div class="blog-card-img-wrap">
+          <img class="blog-card-img" src="https://picsum.photos/seed/market-georgia/600/400" alt="">
+        </div>
+        <div class="blog-card-body">
+          <span class="blog-card-tag">Рынок</span>
+          <div class="blog-card-title">Итоги рынка недвижимости Грузии за III квартал 2024</div>
+          <div class="blog-card-excerpt">Цены выросли в среднем на 9% год к году. Разбираем статистику по районам Тбилиси и объясняем, какие факторы определили тенденции.</div>
+          <div class="blog-card-meta">
+            <span>5 октября 2024</span>
+            <span class="blog-card-meta-dot"></span>
+            <span>5 мин чтения</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="blog-card" data-tag="Тбилиси" onclick="location.href='article.html'" style="cursor:pointer;">
+        <div class="blog-card-img-wrap">
+          <img class="blog-card-img" src="https://picsum.photos/seed/vake-tbilisi/600/400" alt="">
+        </div>
+        <div class="blog-card-body">
+          <span class="blog-card-tag">Тбилиси</span>
+          <div class="blog-card-title">Районы Тбилиси: где покупать жильё в 2024-м</div>
+          <div class="blog-card-excerpt">Ваке, Мтацминда, Сабуртало или Диди Дигоми — сравниваем районы по цене, инфраструктуре и потенциалу роста стоимости.</div>
+          <div class="blog-card-meta">
+            <span>22 сентября 2024</span>
+            <span class="blog-card-meta-dot"></span>
+            <span>7 мин чтения</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="blog-card" data-tag="Инвестиции" onclick="location.href='article.html'" style="cursor:pointer;">
+        <div class="blog-card-img-wrap">
+          <img class="blog-card-img" src="https://picsum.photos/seed/rental-yield/600/400" alt="">
+        </div>
+        <div class="blog-card-body">
+          <span class="blog-card-tag">Инвестиции</span>
+          <div class="blog-card-title">Арендный бизнес в Грузии: какую доходность ожидать в реальности</div>
+          <div class="blog-card-excerpt">Анализируем реальные кейсы наших клиентов: краткосрочная vs долгосрочная аренда, управление объектом и налогообложение дохода.</div>
+          <div class="blog-card-meta">
+            <span>10 сентября 2024</span>
+            <span class="blog-card-meta-dot"></span>
+            <span>9 мин чтения</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;margin-top:40px;">
+      <div class="catalog-count">Статей в блоге — <span>18</span></div>
+      <div class="pagination">
+        <button class="page-btn">‹</button>
+        <button class="page-btn active">1</button>
+        <button class="page-btn">2</button>
+        <button class="page-btn">3</button>
+        <button class="page-btn">›</button>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-grid">
+        <div>
+          <div class="footer-brand-name">
+            <svg width="22" height="22" viewBox="0 0 36 36" fill="none"><rect width="36" height="36" fill="transparent"/><rect x="15.5" y="2" width="5" height="32" fill="#C0392B"/><rect x="2" y="15.5" width="32" height="5" fill="#C0392B"/><rect x="4" y="4" width="2.5" height="8" fill="#C0392B"/><rect x="1.5" y="6" width="7.5" height="2.5" fill="#C0392B"/><rect x="29.5" y="4" width="2.5" height="8" fill="#C0392B"/><rect x="27" y="6" width="7.5" height="2.5" fill="#C0392B"/><rect x="4" y="24" width="2.5" height="8" fill="#C0392B"/><rect x="1.5" y="27.5" width="7.5" height="2.5" fill="#C0392B"/><rect x="29.5" y="24" width="2.5" height="8" fill="#C0392B"/><rect x="27" y="27.5" width="7.5" height="2.5" fill="#C0392B"/></svg>
+            Georgia Real Estate
+          </div>
+          <div class="footer-brand-desc">Ваш надёжный партнёр на рынке недвижимости в Грузии.</div>
+        </div>
+        <div>
+          <div class="footer-col-title">Меню</div>
+          <ul class="footer-links">
+            <li><a href="index.html">О компании</a></li>
+            <li><a href="index.html">Недвижимость</a></li>
+            <li>Услуги</li>
+            <li><a href="blog.html">Блог</a></li>
+            <li><a href="contact.html">Контакты</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="footer-col-title">Услуги</div>
+          <ul class="footer-links">
+            <li>Подбор недвижимости</li>
+            <li>Юридическое сопровождение</li>
+            <li>Управление недвижимостью</li>
+            <li>Инвестиционные консультации</li>
+          </ul>
+        </div>
+        <div>
+          <div class="footer-col-title">Контакты</div>
+          <div class="footer-contact">
+            <span><a href="tel:+995322123456">+995 32 2 123 456</a></span>
+            <span><a href="mailto:info@georgia-re.com">info@georgia-re.com</a></span>
+            <span>г. Тбилиси, ул. Руставели 15</span>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span class="footer-copy">© 2026 Georgia Real Estate</span>
+        <a class="footer-policy" href="index.html">Политика конфиденциальности</a>
+      </div>
+    </div>
+  </footer>
+</div>
+
+<script>
+function toggleMenu() {
+  document.getElementById('mainNav').classList.toggle('open');
+  document.getElementById('hamburger').classList.toggle('open');
+}
+
+// Blog filter
+document.addEventListener('click', function(e) {
+  if (!e.target.classList.contains('blog-filter-btn')) return;
+  document.querySelectorAll('.blog-filter-btn').forEach(b => b.classList.remove('active'));
+  e.target.classList.add('active');
+  const tag = e.target.dataset.tag;
+  const featured = document.querySelector('.blog-featured');
+
+  if (featured) {
+    if (tag === 'all') {
+      featured.classList.add('blog-featured');
+      delete featured.dataset.wasFeatured;
+    } else {
+      featured.classList.remove('blog-featured');
+      featured.dataset.wasFeatured = '1';
+    }
+  }
+
+  document.querySelectorAll('#page-blog .blog-card').forEach(card => {
+    card.style.display = (tag === 'all' || card.dataset.tag === tag) ? '' : 'none';
+  });
+});
+</script>
+</body>
+</html>
