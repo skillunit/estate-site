@@ -179,7 +179,7 @@
         <p>Мы — команда профессионалов с многолетним опытом на рынке недвижимости Грузии. С 2014 года помогаем клиентам из более чем 30 стран найти идеальный объект для жизни или инвестиций.</p>
         <p>Наш офис расположен в Тбилиси, но мы работаем по всей Грузии — от Батуми до Бакуриани. Каждый проект проходит юридическую проверку и личный осмотр нашими экспертами.</p>
 
-        <div class="about-expandable" id="teamAboutExpand" style="display:none;">
+        <div class="about-expandable" id="teamAboutExpand">
           <p>Georgia Real Estate — аккредитованный партнёр ведущих застройщиков Грузии. Напрямую сотрудничаем с TBC Bank, Bank of Georgia и рядом международных ипотечных программ, что позволяет нашим клиентам получать ипотеку на выгодных условиях.</p>
           <p>За 10 лет работы закрыли более 2 000 сделок, запустили собственное подразделение управления недвижимостью и открыли представительства в Батуми и Тбилиси. Каждый год мы помогаем более 200 семьям найти дом мечты или выгодный инвестиционный объект.</p>
           <p>Мы работаем прозрачно: фиксированная комиссия, полное юридическое сопровождение от проверки объекта до регистрации права собственности. Среди наших клиентов — граждане России, Израиля, США, Германии, ОАЭ и ещё 25 стран.</p>
@@ -317,9 +317,10 @@ function toggleAbout() {
   const block = document.getElementById('teamAboutExpand');
   const btn   = document.getElementById('teamAboutBtnText');
   const icon  = document.getElementById('teamAboutBtnIcon');
-  const open  = block.style.display === 'block';
-  block.style.display = open ? 'none' : 'block';
-  btn.textContent     = open ? 'Читать далее' : 'Свернуть';
+  const open  = block.classList.contains('open');
+  block.classList.toggle('open');
+  block.style.display  = '';
+  btn.textContent      = open ? 'Читать далее' : 'Свернуть';
   icon.style.transform = open ? '' : 'rotate(180deg)';
 }
 </script>
