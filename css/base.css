@@ -37,7 +37,7 @@ a { text-decoration:none; color:inherit; }
    PAGE SYSTEM
 ═══════════════════════════════════ */
 .page { display:none; overflow: clip; }
-.page.active { display:block; overflow: clip; }
+.page.active { display:block; overflow: clip; background: var(--white); }
 
 /* ═══════════════════════════════════
    HEADER
