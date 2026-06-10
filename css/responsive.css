@@ -16,9 +16,9 @@
   .catalog-filter-inner { grid-template-columns:1fr 1fr; }
   .catalog-filter-inner .btn { grid-column:span 2; }
   /* unified filter */
-  .filter-form { grid-template-columns: 1fr 1fr 1fr; gap:10px; padding: 16px 32px; }
-  .filter-field + .filter-field::before { display:none; }
-  .filter-btn { grid-column: span 3; width:100%; }
+  .filter-form { padding: 16px 24px; }
+  .filter-row-1 { gap: 8px; }
+  .filter-row-2 { gap: 8px; }
   .catalog-grid { grid-template-columns:repeat(2,1fr); }
   .about-strip-inner { grid-template-columns:1fr; gap:40px; }
   .team-grid { grid-template-columns:repeat(2,1fr); }
@@ -100,12 +100,12 @@
   /* ── Filter bar (unified) ── */
   .filter-tabs { padding: 0 16px; }
   .filter-tab { padding: 14px 16px; }
-  .filter-form {
-    grid-template-columns: 1fr 1fr;
-    padding: 14px 16px;
-    gap: 10px;
-  }
-  .filter-btn { grid-column: span 2; width:100%; }
+  .filter-form { padding: 12px 16px; }
+  .filter-row-1 { flex-wrap: wrap; gap: 8px; }
+  .filter-row-2 { flex-wrap: wrap; gap: 8px; }
+  .filter-row-2-actions { margin-left: 0; width: 100%; flex-direction: row; align-items: center; justify-content: space-between; }
+  .filter-btn { flex: 1; }
+  .filter-sep-v { display: none; }
 
   /* ── Directions ── */
   .directions-grid { grid-template-columns:repeat(2,1fr); gap:10px; }
@@ -187,8 +187,10 @@
   .hero { min-height:480px; }
 
   /* ── Filter ── */
-  .filter-form { grid-template-columns: 1fr; }
-  .filter-btn { grid-column: auto; }
+  .filter-row-1 > .filter-field { flex: 1 1 calc(50% - 8px); }
+  .filter-field--price .filter-range-input,
+  .filter-field--area  .filter-range-input { width: 64px; }
+  .rooms-btn { padding: 0 8px; }
 
   /* ── Search ── */
   .search-form { grid-template-columns:1fr; }

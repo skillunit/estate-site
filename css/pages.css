@@ -32,11 +32,29 @@
 .filter-form {
   max-width: 1200px; margin: 0 auto;
   padding: 20px 32px;
-  display: grid;
-  /* Страна(1.1) Регион(1.3) Город(1.2) Тип(1.1) Цена(1) Кнопка(auto) */
-  grid-template-columns: 1.1fr 1.3fr 1.2fr 1.1fr 1fr auto;
-  gap: 12px; align-items: end;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
 }
+/* Строка 1: toggle + базовые фильтры */
+.filter-row-1 {
+  display: flex;
+  align-items: flex-end;
+  gap: 10px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border);
+  flex-wrap: wrap;
+}
+/* Строка 2: цена, площадь, спальни, кнопки */
+.filter-row-2 {
+  display: flex;
+  align-items: flex-end;
+  gap: 10px;
+  padding-top: 14px;
+  flex-wrap: wrap;
+}
+/* Разделитель убираем — теперь на строках */
+.filter-field + .filter-field::before { display: none; }
 
 /* Разделитель между группами */
 .filter-field {
@@ -1726,4 +1744,25 @@
 .catalog-empty-text {
   font-size: 0.88rem; color: var(--gray-500);
   margin-bottom: 24px;
+}
+
+/* ── Filter rows layout ── */
+.filter-field--country { min-width: 140px; flex: 1.1; }
+.filter-field--price   { flex-shrink: 0; }
+.filter-field--area    { flex-shrink: 0; }
+.filter-field--rooms   { flex-shrink: 0; }
+
+.filter-sep-v {
+  width: 1px; height: 32px;
+  background: var(--border);
+  align-self: flex-end;
+  margin-bottom: 6px;
+  flex-shrink: 0;
+}
+
+.filter-row-2-actions {
+  display: flex; flex-direction: column;
+  align-items: flex-start; gap: 5px;
+  margin-left: auto;
+  align-self: flex-end;
 }
