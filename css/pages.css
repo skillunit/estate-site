@@ -730,7 +730,22 @@
 /* ═══════════════════════════════════
    ████ PAGE: CONTACTS ████
 ═══════════════════════════════════ */
-.contacts-body { max-width:1200px; margin:0 auto; padding:64px 32px 80px; }
+.contacts-hero {
+  height: 260px; position: relative;
+  display: flex; align-items: flex-end; overflow: hidden;
+}
+.contacts-hero-bg {
+  position: absolute; inset: 0;
+  background: url('https://images.unsplash.com/photo-1625566360146-918001e76064?w=1400&h=600&fit=crop') center/cover no-repeat;
+}
+.contacts-hero-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.65) 0%, rgba(0,0,0,0.2) 100%);
+}
+.contacts-hero-content { position:relative; z-index:1; padding:0 32px 40px; max-width:1200px; margin:0 auto; width:100%; }
+.contacts-hero h1 { font-family:var(--font-head); font-size:clamp(2rem,4vw,3rem); font-weight:800; color:var(--white); }
+
+.contacts-body { max-width:1200px; margin:0 auto; padding:48px 32px 80px; }
 .contacts-grid { display:grid; grid-template-columns:1fr 1fr; gap:40px; align-items:stretch; }
 .contacts-left { display:flex; flex-direction:column; }
 .office-card--stretch {
