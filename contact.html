@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" type="image/x-icon" href="favicon.ico">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Контакты — Georgia Real Estate</title>
+<meta name="description" content="Свяжитесь с нами. Офис в Тбилиси, ул. Шота Руставели 15. Телефон: +995 32 2 123 456">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/pages.css">
+<link rel="stylesheet" href="css/components.css">
+<link rel="stylesheet" href="css/responsive.css">
+<style>
+  /* Standalone page — без SPA-логики */
+  body { background: var(--white); }
+  .page { display: block !important; }
+  /* Навбар — ссылки ведут на index.html */
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header id="header">
+  <div class="header-inner">
+    <div class="logo" onclick="location.href='index.html'">
+      <svg class="logo-icon" viewBox="0 0 36 36" fill="none">
+        <rect width="36" height="36" fill="white"/>
+        <rect x="15.5" y="2" width="5" height="32" fill="#C0392B"/>
+        <rect x="2" y="15.5" width="32" height="5" fill="#C0392B"/>
+        <rect x="4" y="4" width="2.5" height="8" fill="#C0392B"/>
+        <rect x="1.5" y="6" width="7.5" height="2.5" fill="#C0392B"/>
+        <rect x="29.5" y="4" width="2.5" height="8" fill="#C0392B"/>
+        <rect x="27" y="6" width="7.5" height="2.5" fill="#C0392B"/>
+        <rect x="4" y="24" width="2.5" height="8" fill="#C0392B"/>
+        <rect x="1.5" y="27.5" width="7.5" height="2.5" fill="#C0392B"/>
+        <rect x="29.5" y="24" width="2.5" height="8" fill="#C0392B"/>
+        <rect x="27" y="27.5" width="7.5" height="2.5" fill="#C0392B"/>
+      </svg>
+      <div class="logo-text">
+        <span class="logo-text-top">Georgia</span>
+        <span class="logo-text-bot">Real Estate</span>
+      </div>
+    </div>
+
+    <nav class="header-nav" id="mainNav">
+      <a href="index.html">Главная</a>
+      <span class="nav-sep">|</span>
+      <a href="index.html#team">Команда</a>
+      <span class="nav-sep">|</span>
+      <a href="index.html#catalog">Проекты</a>
+      <span class="nav-sep">|</span>
+      <a href="index.html#blog">Блог</a>
+      <span class="nav-sep">|</span>
+      <a href="contact.html" class="nav-contact-link active">Связаться с нами</a>
+    </nav>
+
+    <div class="header-right">
+      <div class="header-phone">+995 32 2 123 456</div>
+      <div class="lang-switch">
+        <button class="lang-btn active">RU</button>
+        <span class="lang-sep-char">|</span>
+        <button class="lang-btn">EN</button>
+        <span class="lang-sep-char">|</span>
+        <button class="lang-btn">HE</button>
+      </div>
+      <button class="hamburger" id="hamburger" onclick="toggleMenu()">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- PAGE CONTENT -->
+<div class="page page-body" id="page-contact">
+
+  <!-- Hero -->
+  <div class="contacts-hero">
+    <div class="contacts-hero-bg"></div>
+    <div class="contacts-hero-overlay"></div>
+    <div class="contacts-hero-content"><h1>Контакты</h1></div>
+  </div>
+
+  <!-- Body -->
+  <div class="contacts-body">
+    <div class="contacts-grid">
+
+      <!-- Left: office info -->
+      <div class="contacts-left">
+        <div class="office-card office-card--stretch">
+          <div class="office-title">Офис в Тбилиси</div>
+          <div class="office-row">
+            <span class="office-row-label">Адрес:</span>
+            <span class="office-row-val">ул. Шота Руставели 15,<br>Тбилиси, Грузия</span>
+          </div>
+          <div class="office-row">
+            <span class="office-row-label">Телефон:</span>
+            <span class="office-row-val"><a href="tel:+995322123456">+995 32 2 123 456</a></span>
+          </div>
+          <div class="office-row">
+            <span class="office-row-label">Email:</span>
+            <span class="office-row-val"><a href="mailto:info@georgia-re.com">info@georgia-re.com</a></span>
+          </div>
+          <div class="office-row">
+            <span class="office-row-label">Часы работы:</span>
+            <span class="office-row-val">Пн–Пт 9:00 – 18:00</span>
+          </div>
+          <div class="office-socials">
+            <a class="office-social-btn" href="https://t.me/" target="_blank">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221l-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12L7.19 13.67l-2.96-.924c-.643-.204-.657-.643.136-.953l11.57-4.461c.537-.194 1.006.131.958.889z"/></svg>
+              Telegram
+            </a>
+            <a class="office-social-btn" href="https://wa.me/99532123456" target="_blank">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+              WhatsApp
+            </a>
+            <a class="office-social-btn" href="https://instagram.com/" target="_blank">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+              Instagram
+            </a>
+            <a class="office-social-btn" href="https://facebook.com/" target="_blank">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+              Facebook
+            </a>
+          </div>
+          <div class="office-action">
+            <a href="https://maps.google.com/?q=Shota+Rustaveli+15+Tbilisi+Georgia" target="_blank" class="btn btn-red">📍 Открыть на карте</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: contact form -->
+      <div style="display:flex;flex-direction:column;">
+        <div class="form-card" style="flex:1;display:flex;flex-direction:column;">
+          <div class="form-card-title">Форма обратной связи</div>
+          <div class="form-row">
+            <div class="form-group" style="margin-bottom:0;">
+              <label>Ваше имя</label>
+              <input class="form-input" type="text" id="contactName" placeholder="Ваше Имя">
+            </div>
+            <div class="form-group" style="margin-bottom:0;">
+              <label>Email</label>
+              <input class="form-input" type="email" id="contactEmail" placeholder="Ваш Email">
+            </div>
+          </div>
+          <div class="form-group" style="margin-top:14px;margin-bottom:0;">
+            <label>Телефон</label>
+            <input class="form-input" type="tel" id="contactPhone" placeholder="Ваш Телефон">
+          </div>
+          <div class="form-group" style="margin-top:14px;">
+            <label>Сообщение</label>
+            <textarea class="form-textarea" id="contactMessage" placeholder="Ваше сообщение..."></textarea>
+          </div>
+          <button class="btn btn-red form-submit" onclick="submitContactForm()">Отправить сообщение</button>
+          <div class="form-success" id="formSuccess" style="display:none;">✓ Сообщение отправлено! Мы свяжемся с вами в течение 24 часов.</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-grid">
+        <div>
+          <div class="footer-brand-name">
+            <svg width="22" height="22" viewBox="0 0 36 36" fill="none">
+              <rect width="36" height="36" fill="transparent"/>
+              <rect x="15.5" y="2" width="5" height="32" fill="#C0392B"/>
+              <rect x="2" y="15.5" width="32" height="5" fill="#C0392B"/>
+              <rect x="4" y="4" width="2.5" height="8" fill="#C0392B"/>
+              <rect x="1.5" y="6" width="7.5" height="2.5" fill="#C0392B"/>
+              <rect x="29.5" y="4" width="2.5" height="8" fill="#C0392B"/>
+              <rect x="27" y="6" width="7.5" height="2.5" fill="#C0392B"/>
+              <rect x="4" y="24" width="2.5" height="8" fill="#C0392B"/>
+              <rect x="1.5" y="27.5" width="7.5" height="2.5" fill="#C0392B"/>
+              <rect x="29.5" y="24" width="2.5" height="8" fill="#C0392B"/>
+              <rect x="27" y="27.5" width="7.5" height="2.5" fill="#C0392B"/>
+            </svg>
+            Georgia Real Estate
+          </div>
+          <div class="footer-brand-desc">Ваш надёжный партнёр на рынке недвижимости в Грузии.</div>
+          <div class="footer-socials">
+            <a class="footer-social" href="https://facebook.com/" target="_blank">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+            </a>
+            <a class="footer-social" href="https://t.me/" target="_blank">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221l-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12L7.19 13.67l-2.96-.924c-.643-.204-.657-.643.136-.953l11.57-4.461c.537-.194 1.006.131.958.889z"/></svg>
+            </a>
+            <a class="footer-social" href="https://instagram.com/" target="_blank">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+            </a>
+            <a class="footer-social" href="https://wa.me/99532123456" target="_blank">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            </a>
+          </div>
+        </div>
+        <div>
+          <div class="footer-col-title">Меню</div>
+          <ul class="footer-links">
+            <li><a href="index.html">О компании</a></li>
+            <li><a href="index.html#catalog">Недвижимость</a></li>
+            <li>Услуги</li>
+            <li><a href="index.html#blog">Блог</a></li>
+            <li><a href="contact.html">Контакты</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="footer-col-title">Услуги</div>
+          <ul class="footer-links">
+            <li>Подбор недвижимости</li>
+            <li>Юридическое сопровождение</li>
+            <li>Управление недвижимостью</li>
+            <li>Инвестиционные консультации</li>
+          </ul>
+        </div>
+        <div>
+          <div class="footer-col-title">Контакты</div>
+          <div class="footer-contact">
+            <span><a href="tel:+995322123456">+995 32 2 123 456</a></span>
+            <span><a href="mailto:info@georgia-re.com">info@georgia-re.com</a></span>
+            <span>г. Тбилиси, ул. Руставели 15</span>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span class="footer-copy">© 2026 Georgia Real Estate</span>
+        <a class="footer-policy" href="index.html#privacy">Политика конфиденциальности</a>
+      </div>
+    </div>
+  </footer>
+
+</div><!-- /page-contact -->
+
+<script>
+// Hamburger menu
+function toggleMenu() {
+  document.getElementById('mainNav').classList.toggle('open');
+  document.getElementById('hamburger').classList.toggle('open');
+}
+
+// Contact form submit
+function submitContactForm() {
+  const name    = document.getElementById('contactName').value.trim();
+  const email   = document.getElementById('contactEmail').value.trim();
+  const phone   = document.getElementById('contactPhone').value.trim();
+  const message = document.getElementById('contactMessage').value.trim();
+
+  if (!name || !email || !message) {
+    alert('Пожалуйста, заполните имя, email и сообщение.');
+    return;
+  }
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    alert('Введите корректный email.');
+    return;
+  }
+
+  const successEl = document.getElementById('formSuccess');
+  successEl.style.display = 'block';
+  setTimeout(() => { successEl.style.display = 'none'; }, 5000);
+}
+</script>
+
+</body>
+</html>
