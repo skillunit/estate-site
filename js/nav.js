@@ -434,3 +434,16 @@ function cardSlide(e, btn, dir) {
     d.classList.toggle('active', i === idx);
   });
 }
+
+// ── URL PARAM: ?page=catalog открывает нужную страницу ──
+(function() {
+  const params = new URLSearchParams(window.location.search);
+  const page = params.get('page');
+  if (page) {
+    window.addEventListener('DOMContentLoaded', function() {
+      if (document.getElementById('page-' + page)) {
+        showPage(page);
+      }
+    });
+  }
+})();
