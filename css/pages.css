@@ -1767,93 +1767,12 @@
   align-self: flex-end;
 }
 
-/* ── Unified filter grid (projects.html only) ── */
-.filter-grid-unified {
-  display: grid;
-  grid-template-columns: auto 1fr 1fr 1fr 1fr auto;
-  gap: 0 10px;
-  align-items: start;
-  padding: 20px 0;
+
+/* ── projects.html: строка 2 фильтра начинается под "Страна" (не под toggle) ── */
+.filter-row-2--projects {
+  padding-left: calc(var(--projects-toggle-w, 170px) + 10px);
 }
 
-.fg-col {
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-}
-
-/* Высота строки фиксирована чтобы верхние и нижние поля выравнивались */
-.fg-col > .filter-field,
-.fg-col > .filter-deal-toggle,
-.fg-col > .fg-spacer {
-  min-height: 62px;
-}
-
-.fg-spacer {
-  flex: 1;
-}
-
-.fg-col--toggle {
-  flex-shrink: 0;
-}
-
-.fg-col--actions {
-  flex-shrink: 0;
-  align-self: stretch;
-}
-
-.fg-col--actions .filter-row-2-actions {
-  margin-left: 0;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 5px;
-}
-
-/* Разделитель между строками внутри колонки */
-.fg-col > .filter-field:first-child {
-  padding-bottom: 14px;
-  border-bottom: 1px solid var(--border);
-}
-
-/* Горизонтальный разделитель под первой строкой */
-.filter-grid-unified::after {
-  content: '';
-  grid-column: 1 / -1;
-  display: none; /* скрыт — разделители делаем через border на .fg-col */
-}
-
-/* Responsive: на средних экранах 3 колонки */
-@media (max-width: 1100px) {
-  .filter-grid-unified {
-    grid-template-columns: auto 1fr 1fr;
-  }
-  .fg-col--actions {
-    grid-column: 3;
-    align-items: flex-end;
-  }
-}
-
-/* Responsive: на мобильных 2 колонки */
-@media (max-width: 640px) {
-  .filter-grid-unified {
-    grid-template-columns: 1fr 1fr;
-    gap: 0 8px;
-  }
-  .fg-col--actions {
-    grid-column: 1 / -1;
-  }
-  .fg-col--actions .filter-row-2-actions {
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    width: 100%;
-  }
-  .fg-col--actions .filter-btn { flex: 1; }
-}
-
-@media (max-width: 400px) {
-  .filter-grid-unified {
-    grid-template-columns: 1fr;
-  }
-  .fg-col--actions { grid-column: 1; }
+@media (max-width: 768px) {
+  .filter-row-2--projects { padding-left: 0; }
 }

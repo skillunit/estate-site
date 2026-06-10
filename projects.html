@@ -117,113 +117,90 @@
   <div class="filter-bar">
     <div class="filter-form">
 
-      <!-- Единая сетка фильтров: toggle | страна | город | тип | статус | сброс+найти
-                                           цена  | цена  | площадь | спальни | спальни | -->
-      <div class="filter-grid-unified">
+      <!-- Строка 1: deal toggle + основные фильтры -->
+      <div class="filter-row-1">
+        <div class="filter-deal-toggle">
+          <button class="deal-btn active" id="dealBtnBuy" onclick="setDealType('buy')">Покупка</button>
+          <button class="deal-btn" id="dealBtnRent" onclick="setDealType('rent')">Аренда</button>
+        </div>
+        <div class="filter-field filter-field--country">
+          <label>Страна</label>
+          <select class="filter-select" onchange="filterCatalog()">
+            <option value="all">🇬🇪 Грузия</option>
+            <option value="usa">🇺🇸 США</option>
+            <option value="uae">🇦🇪 ОАЭ</option>
+            <option value="cyprus">🇨🇾 Кипр</option>
+            <option value="greece">🇬🇷 Греция</option>
+          </select>
+        </div>
+        <div class="filter-field">
+          <label>Город</label>
+          <select class="filter-select" id="citySelect" onchange="filterCatalog()">
+            <option value="all">Любой город</option>
+            <option value="tbilisi">Тбилиси</option>
+            <option value="batumi">Батуми</option>
+            <option value="gonio">Гонио</option>
+            <option value="kakheti">Кахетия</option>
+            <option value="bakuriani">Бакуриани</option>
+          </select>
+        </div>
+        <div class="filter-field">
+          <label>Тип недвижимости</label>
+          <select class="filter-select" id="typeSelect" onchange="filterCatalog()">
+            <option value="all">Любой</option>
+            <option value="apartment">Квартира</option>
+            <option value="apart">Апартаменты</option>
+            <option value="villa">Вилла</option>
+            <option value="commercial">Коммерческая</option>
+          </select>
+        </div>
+        <div class="filter-field">
+          <label>Статус</label>
+          <select class="filter-select" id="statusSelect" onchange="filterCatalog()">
+            <option value="all">Любой статус</option>
+            <option value="ready">Сдан в эксплуатацию</option>
+            <option value="construction">На стадии строительства</option>
+            <option value="investment">Инвестиция</option>
+            <option value="sale">Эксклюзив</option>
+          </select>
+        </div>
+      </div>
 
-        <!-- Кол 1: Покупка/Аренда + Цена -->
-        <div class="fg-col fg-col--toggle">
-          <div class="filter-deal-toggle">
-            <button class="deal-btn active" id="dealBtnBuy" onclick="setDealType('buy')">Покупка</button>
-            <button class="deal-btn" id="dealBtnRent" onclick="setDealType('rent')">Аренда</button>
-          </div>
-          <div class="filter-field filter-field--price">
-            <label>Цена, $</label>
-            <div class="filter-range-inputs">
-              <input class="filter-range-input" type="text" id="priceMin" placeholder="От" onchange="filterCatalog()" oninput="formatPriceInput(this)">
-              <span class="filter-range-sep">—</span>
-              <input class="filter-range-input" type="text" id="priceMax" placeholder="До" onchange="filterCatalog()" oninput="formatPriceInput(this)">
-            </div>
+      <!-- Строка 2: цена, площадь, спальни, кнопки -->
+      <div class="filter-row-2 filter-row-2--projects">
+        <div class="filter-field filter-field--price">
+          <label>Цена, $</label>
+          <div class="filter-range-inputs">
+            <input class="filter-range-input" type="text" id="priceMin" placeholder="От" onchange="filterCatalog()" oninput="formatPriceInput(this)">
+            <span class="filter-range-sep">—</span>
+            <input class="filter-range-input" type="text" id="priceMax" placeholder="До" onchange="filterCatalog()" oninput="formatPriceInput(this)">
           </div>
         </div>
-
-        <!-- Кол 2: Страна + Площадь -->
-        <div class="fg-col">
-          <div class="filter-field filter-field--country">
-            <label>Страна</label>
-            <select class="filter-select" onchange="filterCatalog()">
-              <option value="all">🇬🇪 Грузия</option>
-              <option value="usa">🇺🇸 США</option>
-              <option value="uae">🇦🇪 ОАЭ</option>
-              <option value="cyprus">🇨🇾 Кипр</option>
-              <option value="greece">🇬🇷 Греция</option>
-            </select>
-          </div>
-          <div class="filter-field filter-field--area">
-            <label>Площадь, м²</label>
-            <div class="filter-range-inputs">
-              <input class="filter-range-input" type="text" id="areaMin" placeholder="От" onchange="filterCatalog()">
-              <span class="filter-range-sep">—</span>
-              <input class="filter-range-input" type="text" id="areaMax" placeholder="До" onchange="filterCatalog()">
-            </div>
+        <div class="filter-sep-v"></div>
+        <div class="filter-field filter-field--area">
+          <label>Площадь, м²</label>
+          <div class="filter-range-inputs">
+            <input class="filter-range-input" type="text" id="areaMin" placeholder="От" onchange="filterCatalog()">
+            <span class="filter-range-sep">—</span>
+            <input class="filter-range-input" type="text" id="areaMax" placeholder="До" onchange="filterCatalog()">
           </div>
         </div>
-
-        <!-- Кол 3: Город + Спальни -->
-        <div class="fg-col">
-          <div class="filter-field">
-            <label>Город</label>
-            <select class="filter-select" id="citySelect" onchange="filterCatalog()">
-              <option value="all">Любой город</option>
-              <option value="tbilisi">Тбилиси</option>
-              <option value="batumi">Батуми</option>
-              <option value="gonio">Гонио</option>
-              <option value="kakheti">Кахетия</option>
-              <option value="bakuriani">Бакуриани</option>
-            </select>
+        <div class="filter-sep-v"></div>
+        <div class="filter-field filter-field--rooms">
+          <label>Спальни</label>
+          <div class="filter-rooms-btns" id="roomsBtns">
+            <button class="rooms-btn active" data-val="all" onclick="setRooms(this)">Любое</button>
+            <button class="rooms-btn" data-val="1"  onclick="setRooms(this)">1</button>
+            <button class="rooms-btn" data-val="2"  onclick="setRooms(this)">2</button>
+            <button class="rooms-btn" data-val="3"  onclick="setRooms(this)">3</button>
+            <button class="rooms-btn" data-val="4+" onclick="setRooms(this)">4+</button>
           </div>
-          <div class="filter-field filter-field--rooms">
-            <label>Спальни</label>
-            <div class="filter-rooms-btns" id="roomsBtns">
-              <button class="rooms-btn active" data-val="all" onclick="setRooms(this)">Любое</button>
-              <button class="rooms-btn" data-val="1"  onclick="setRooms(this)">1</button>
-              <button class="rooms-btn" data-val="2"  onclick="setRooms(this)">2</button>
-              <button class="rooms-btn" data-val="3"  onclick="setRooms(this)">3</button>
-              <button class="rooms-btn" data-val="4+" onclick="setRooms(this)">4+</button>
-            </div>
-            <input type="hidden" id="roomsVal" value="all">
-          </div>
+          <input type="hidden" id="roomsVal" value="all">
         </div>
-
-        <!-- Кол 4: Тип + пусто -->
-        <div class="fg-col">
-          <div class="filter-field">
-            <label>Тип недвижимости</label>
-            <select class="filter-select" id="typeSelect" onchange="filterCatalog()">
-              <option value="all">Любой</option>
-              <option value="apartment">Квартира</option>
-              <option value="apart">Апартаменты</option>
-              <option value="villa">Вилла</option>
-              <option value="commercial">Коммерческая</option>
-            </select>
-          </div>
-          <div class="fg-spacer"></div>
+        <div class="filter-row-2-actions">
+          <span class="filter-reset-link" onclick="resetCatalogFilter()">Сброс</span>
+          <button class="btn btn-red filter-btn" onclick="filterCatalog()">Найти</button>
         </div>
-
-        <!-- Кол 5: Статус + пусто -->
-        <div class="fg-col">
-          <div class="filter-field">
-            <label>Статус</label>
-            <select class="filter-select" id="statusSelect" onchange="filterCatalog()">
-              <option value="all">Любой статус</option>
-              <option value="ready">Сдан в эксплуатацию</option>
-              <option value="construction">На стадии строительства</option>
-              <option value="investment">Инвестиция</option>
-              <option value="sale">Эксклюзив</option>
-            </select>
-          </div>
-          <div class="fg-spacer"></div>
-        </div>
-
-        <!-- Кол 6: Сброс + Найти -->
-        <div class="fg-col fg-col--actions">
-          <div class="fg-spacer"></div>
-          <div class="filter-row-2-actions">
-            <span class="filter-reset-link" onclick="resetCatalogFilter()">Сброс</span>
-            <button class="btn btn-red filter-btn" onclick="filterCatalog()">Найти</button>
-          </div>
-        </div>
-
       </div>
 
       <!-- скрытый input для совместимости с catalog.js -->
@@ -998,5 +975,19 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 </script>
 
+<script>
+// Выравниваем filter-row-2 под "Страна" (после toggle)
+(function() {
+  function alignFilterRow2() {
+    var toggle = document.querySelector('.filter-deal-toggle');
+    var row2 = document.querySelector('.filter-row-2--projects');
+    if (!toggle || !row2) return;
+    if (window.innerWidth <= 768) { row2.style.paddingLeft = ''; return; }
+    row2.style.paddingLeft = (toggle.offsetWidth + 10) + 'px';
+  }
+  document.addEventListener('DOMContentLoaded', alignFilterRow2);
+  window.addEventListener('resize', alignFilterRow2);
+})();
+</script>
 </body>
 </html>
