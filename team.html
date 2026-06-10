@@ -171,35 +171,90 @@
     </div>
   </div>
 
-  <!-- About strip -->
+  <!-- About strip — как в оригинале -->
   <div class="about-strip">
     <div class="about-strip-inner">
+
       <div class="about-text">
         <h2>О компании</h2>
         <p>Мы — команда профессионалов с многолетним опытом на рынке недвижимости Грузии. С 2014 года помогаем клиентам из более чем 30 стран найти идеальный объект для жизни или инвестиций.</p>
         <p>Наш офис расположен в Тбилиси, но мы работаем по всей Грузии — от Батуми до Бакуриани. Каждый проект проходит юридическую проверку и личный осмотр нашими экспертами.</p>
-        <p>Georgia Real Estate — аккредитованный партнёр ведущих застройщиков Грузии. Напрямую сотрудничаем с TBC Bank, Bank of Georgia и рядом международных ипотечных программ.</p>
-        <p>За 10 лет работы закрыли более 2 000 сделок, запустили собственное подразделение управления недвижимостью и открыли представительства в Батуми и Тбилиси.</p>
+
+        <div class="about-expandable" id="teamAboutExpand" style="display:none;">
+          <p>Georgia Real Estate — аккредитованный партнёр ведущих застройщиков Грузии. Напрямую сотрудничаем с TBC Bank, Bank of Georgia и рядом международных ипотечных программ.</p>
+          <p>За 10 лет работы закрыли более 2 000 сделок, запустили собственное подразделение управления недвижимостью и открыли представительства в Батуми и Тбилиси.</p>
+        </div>
+
+        <button class="about-expand-btn" id="teamAboutBtn" onclick="toggleAbout()">
+          <span id="teamAboutBtnText">Читать далее</span>
+          <svg id="teamAboutBtnIcon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
       </div>
 
       <div class="stats-row stats-row--2col">
         <div class="stat-item">
+          <div class="stat-icon">
+            <svg class="stat-svg" viewBox="0 0 56 56" fill="none">
+              <rect x="6" y="48" width="44" height="3" rx="1.5" fill="#C0392B" opacity="0.25"/>
+              <rect x="12" y="22" width="32" height="26" rx="1" fill="none" stroke="#C0392B" stroke-width="2"/>
+              <polyline points="8,22 28,8 48,22" fill="none" stroke="#C0392B" stroke-width="2" stroke-linejoin="round"/>
+              <line x1="28" y1="8" x2="28" y2="4" stroke="#C0392B" stroke-width="1.5"/>
+              <path d="M28 4 L34 6 L28 8 Z" fill="#C0392B"/>
+              <rect x="22" y="37" width="12" height="11" rx="1" fill="none" stroke="#C0392B" stroke-width="1.5"/>
+              <circle cx="32" cy="43" r="1" fill="#C0392B"/>
+              <rect x="15" y="27" width="7" height="6" rx="0.5" fill="#C0392B" opacity="0.9"/>
+              <rect x="34" y="27" width="7" height="6" rx="0.5" fill="#C0392B" opacity="0.4"/>
+              <rect x="15" y="37" width="7" height="6" rx="0.5" fill="#C0392B" opacity="0.6"/>
+            </svg>
+          </div>
           <div class="stat-num">10+</div>
-          <div class="stat-label">лет на рынке</div>
+          <div class="stat-label">лет на рынке недвижимости</div>
         </div>
         <div class="stat-item">
+          <div class="stat-icon">
+            <svg class="stat-svg" viewBox="0 0 56 56" fill="none">
+              <ellipse cx="28" cy="50" rx="16" ry="2.5" fill="#C0392B" opacity="0.12"/>
+              <circle cx="28" cy="18" r="10" fill="none" stroke="#C0392B" stroke-width="2"/>
+              <path d="M10 48c0-10 8-17 18-17s18 7 18 17" fill="none" stroke="#C0392B" stroke-width="2" stroke-linecap="round"/>
+              <circle cx="22" cy="15" r="2.5" fill="#C0392B" opacity="0.4"/>
+              <circle cx="34" cy="15" r="2.5" fill="#C0392B" opacity="0.4"/>
+            </svg>
+          </div>
           <div class="stat-num">1000+</div>
           <div class="stat-label">довольных клиентов</div>
         </div>
         <div class="stat-item">
-          <div class="stat-num">2000+</div>
-          <div class="stat-label">закрытых сделок</div>
+          <div class="stat-icon">
+            <svg class="stat-svg" viewBox="0 0 56 56" fill="none">
+              <rect x="15.5" y="2" width="5" height="52" fill="#C0392B"/>
+              <rect x="2" y="25.5" width="52" height="5" fill="#C0392B"/>
+              <rect x="4" y="4" width="4" height="12" fill="#C0392B"/>
+              <rect x="2" y="6" width="12" height="4" fill="#C0392B"/>
+              <rect x="48" y="4" width="4" height="12" fill="#C0392B"/>
+              <rect x="42" y="6" width="12" height="4" fill="#C0392B"/>
+              <rect x="4" y="40" width="4" height="12" fill="#C0392B"/>
+              <rect x="2" y="46" width="12" height="4" fill="#C0392B"/>
+              <rect x="48" y="40" width="4" height="12" fill="#C0392B"/>
+              <rect x="42" y="46" width="12" height="4" fill="#C0392B"/>
+            </svg>
+          </div>
+          <div class="stat-num">33</div>
+          <div class="stat-label">Общее количество предложений</div>
         </div>
         <div class="stat-item">
+          <div class="stat-icon">
+            <svg class="stat-svg" viewBox="0 0 56 56" fill="none">
+              <path d="M28 6C18 6 10 14 10 23c0 13 18 27 18 27s18-14 18-27C46 14 38 6 28 6z" fill="none" stroke="#C0392B" stroke-width="2.2"/>
+              <circle cx="28" cy="23" r="5.5" fill="#C0392B"/>
+              <circle cx="28" cy="23" r="2.5" fill="white"/>
+              <ellipse cx="28" cy="47" rx="7" ry="2" fill="#C0392B" opacity="0.15"/>
+            </svg>
+          </div>
           <div class="stat-num">20+</div>
           <div class="stat-label">лучших локаций</div>
         </div>
       </div>
+
     </div>
   </div>
 
@@ -255,6 +310,16 @@
 function toggleMenu() {
   document.getElementById('mainNav').classList.toggle('open');
   document.getElementById('hamburger').classList.toggle('open');
+}
+
+function toggleAbout() {
+  const block = document.getElementById('teamAboutExpand');
+  const btn   = document.getElementById('teamAboutBtnText');
+  const icon  = document.getElementById('teamAboutBtnIcon');
+  const open  = block.style.display === 'block';
+  block.style.display = open ? 'none' : 'block';
+  btn.textContent     = open ? 'Читать далее' : 'Свернуть';
+  icon.style.transform = open ? '' : 'rotate(180deg)';
 }
 </script>
 
