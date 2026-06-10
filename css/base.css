@@ -265,3 +265,37 @@ header {
 
 .section-text { font-size:0.9rem; color:var(--gray-700); line-height:1.8; margin-bottom:12px; }
 .section-text:last-child { margin-bottom:0; }
+
+/* ════════════════════════════════════════════════════
+   ANIMATIONS
+   ════════════════════════════════════════════════════ */
+
+/* ── Sticky header transition ── */
+header.header-anim {
+  transition: transform 0.32s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform;
+}
+
+/* ── Scroll reveal ── */
+
+/* Начальное скрытое состояние */
+.reveal-init {
+  opacity: 0;
+  transform: translateY(24px);
+  transition:
+    opacity  0.55s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+    transform 0.55s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  will-change: opacity, transform;
+}
+
+/* Финальное видимое состояние */
+.reveal-in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Отключаем анимации для пользователей которые их не хотят */
+@media (prefers-reduced-motion: reduce) {
+  .header-anim { transition: none; }
+  .reveal-init { opacity: 1; transform: none; transition: none; }
+}
