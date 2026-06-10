@@ -1617,33 +1617,17 @@
   color: var(--white);
 }
 
-/* ── Detail location map ── */
-.detail-location-section {
-  padding: 0 0 56px;
-}
-.detail-location-header {
-  margin-bottom: 20px;
-}
-.detail-location-eyebrow {
-  font-size: 0.7rem; font-weight: 700; letter-spacing: 0.1em;
-  text-transform: uppercase; color: var(--red);
-  margin-bottom: 4px;
-}
-.detail-location-title {
-  font-family: var(--font-head);
-  font-size: 1.35rem; font-weight: 700;
-  color: var(--dark);
-}
-.detail-location-wrap {
+/* ── Detail inline map ── */
+.detail-inline-map-wrap {
+  margin-top: 28px;
   border-radius: var(--radius);
   overflow: hidden;
   border: 1px solid var(--border);
   box-shadow: var(--shadow-sm);
 }
-.detail-map {
-  height: 420px;
+.detail-inline-map {
+  height: 300px;
   width: 100%;
-  background: var(--gray-100);
 }
 
 /* ── Detail map marker & popup ── */
