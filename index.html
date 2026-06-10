@@ -59,7 +59,7 @@
         Команда
       </a>
       <span class="nav-sep">|</span>
-      <a onclick="showPage('catalog')" data-page="catalog">
+      <a href="projects.html" data-page="catalog">
         Проекты
       </a>
       <span class="nav-sep">|</span>
@@ -118,7 +118,7 @@
         <h1>Недвижимость<br>в Грузии</h1>
         <p class="hero-sub">Для жизни и инвестиций</p>
         <div class="hero-actions">
-          <button class="btn btn-red" onclick="showPage('catalog')">Смотреть проекты</button>
+          <button class="btn btn-red" onclick="window.location.href='projects.html'">Смотреть проекты</button>
           <button class="btn btn-white" onclick="openContactPopup()">Связаться с нами</button>
         </div>
       </div>
@@ -185,7 +185,7 @@
       </div>
       <div class="filter-field filter-field--btn">
         <span class="filter-reset-link" onclick="resetHomeFilter()">Сброс</span>
-        <button class="btn btn-red filter-btn" onclick="showPage('catalog')">Найти</button>
+        <button class="btn btn-red filter-btn" onclick="window.location.href='projects.html'">Найти</button>
       </div>
     </div>
   </div>
@@ -197,7 +197,7 @@
         <div>
           <h2 class="section-title">Популярные направления</h2>
         </div>
-        <span class="see-all" onclick="showPage('catalog')">Смотреть все</span>
+        <span class="see-all" onclick="window.location.href='projects.html'">Смотреть все</span>
       </div>
       <div class="directions-grid">
         <div class="direction-card" onclick="goToCountry('georgia')">
@@ -353,7 +353,7 @@
         <div>
           <h2 class="section-title" id="featuredTitle">Топовые предложения в Грузии</h2>
         </div>
-        <span class="see-all" onclick="showPage('catalog')">Смотреть все</span>
+        <span class="see-all" onclick="window.location.href='projects.html'">Смотреть все</span>
       </div>
       <div class="featured-country-tabs" id="featuredCountryTabs">
         <button class="featured-tab active" data-country="all" onclick="setFeaturedCountry(this)">🇬🇪 Грузия</button>
@@ -469,7 +469,7 @@
           <div class="footer-col-title">Меню</div>
           <ul class="footer-links">
             <li onclick="showPage('home')">О компании</li>
-            <li onclick="showPage('catalog')">Недвижимость</li>
+            <li onclick="window.location.href='projects.html'">Недвижимость</li>
             <li>Услуги</li>
             <li>Блог</li>
             <li onclick="showPage('contact')">Контакты</li>
@@ -495,282 +495,6 @@
       </div>
       <div class="footer-bottom">
         <span class="footer-copy">© 2026 Georgia Real Estate</span>
-        <span class="footer-policy" onclick="showPage('privacy')">Политика конфиденциальности</span>
-      </div>
-    </div>
-  </footer>
-</div>
-
-<!-- ══════════════════════════
-     PAGE: CATALOG
-══════════════════════════ -->
-<div class="page page-body" id="page-catalog">
-  <div class="catalog-hero">
-    <div class="catalog-hero-bg"></div>
-    <div class="catalog-hero-overlay"></div>
-    <div class="catalog-hero-content">
-      <h1>Наши проекты</h1>
-    </div>
-  </div>
-
-  <div class="filter-bar">
-    <div class="filter-form">
-
-      <!-- Строка 1: deal toggle + основные фильтры -->
-      <div class="filter-row-1">
-        <div class="filter-deal-toggle">
-          <button class="deal-btn active" id="dealBtnBuy" onclick="setDealType('buy')">Покупка</button>
-          <button class="deal-btn" id="dealBtnRent" onclick="setDealType('rent')">Аренда</button>
-        </div>
-        <div class="filter-field filter-field--country">
-          <label>Страна</label>
-          <select class="filter-select" onchange="filterCatalog()">
-            <option value="all">🇬🇪 Грузия</option>
-            <option value="usa">🇺🇸 США</option>
-            <option value="uae">🇦🇪 ОАЭ</option>
-            <option value="cyprus">🇨🇾 Кипр</option>
-            <option value="greece">🇬🇷 Греция</option>
-          </select>
-        </div>
-        <div class="filter-field">
-          <label>Город</label>
-          <select class="filter-select" id="citySelect" onchange="filterCatalog()">
-            <option value="all">Любой город</option>
-            <option value="tbilisi">Тбилиси</option>
-            <option value="batumi">Батуми</option>
-            <option value="gonio">Гонио</option>
-            <option value="kakheti">Кахетия</option>
-            <option value="bakuriani">Бакуриани</option>
-          </select>
-        </div>
-        <div class="filter-field">
-          <label>Тип недвижимости</label>
-          <select class="filter-select" id="typeSelect" onchange="filterCatalog()">
-            <option value="all">Любой</option>
-            <option value="apartment">Квартира</option>
-            <option value="apart">Апартаменты</option>
-            <option value="villa">Вилла</option>
-            <option value="commercial">Коммерческая</option>
-          </select>
-        </div>
-        <div class="filter-field">
-          <label>Статус</label>
-          <select class="filter-select" id="statusSelect" onchange="filterCatalog()">
-            <option value="all">Любой статус</option>
-            <option value="ready">Сдан в эксплуатацию</option>
-            <option value="construction">На стадии строительства</option>
-            <option value="investment">Инвестиция</option>
-            <option value="sale">Эксклюзив</option>
-          </select>
-        </div>
-      </div>
-
-      <!-- Строка 2: цена, площадь, спальни, кнопки -->
-      <div class="filter-row-2">
-        <div class="filter-field filter-field--price">
-          <label>Цена, $</label>
-          <div class="filter-range-inputs">
-            <input class="filter-range-input" type="text" id="priceMin" placeholder="От" onchange="filterCatalog()" oninput="formatPriceInput(this)">
-            <span class="filter-range-sep">—</span>
-            <input class="filter-range-input" type="text" id="priceMax" placeholder="До" onchange="filterCatalog()" oninput="formatPriceInput(this)">
-          </div>
-        </div>
-        <div class="filter-sep-v"></div>
-        <div class="filter-field filter-field--area">
-          <label>Площадь, м²</label>
-          <div class="filter-range-inputs">
-            <input class="filter-range-input" type="text" id="areaMin" placeholder="От" onchange="filterCatalog()">
-            <span class="filter-range-sep">—</span>
-            <input class="filter-range-input" type="text" id="areaMax" placeholder="До" onchange="filterCatalog()">
-          </div>
-        </div>
-        <div class="filter-sep-v"></div>
-        <div class="filter-field filter-field--rooms">
-          <label>Спальни</label>
-          <div class="filter-rooms-btns" id="roomsBtns">
-            <button class="rooms-btn active" data-val="all" onclick="setRooms(this)">Любое</button>
-            <button class="rooms-btn" data-val="1"  onclick="setRooms(this)">1</button>
-            <button class="rooms-btn" data-val="2"  onclick="setRooms(this)">2</button>
-            <button class="rooms-btn" data-val="3"  onclick="setRooms(this)">3</button>
-            <button class="rooms-btn" data-val="4+" onclick="setRooms(this)">4+</button>
-          </div>
-          <input type="hidden" id="roomsVal" value="all">
-        </div>
-        <div class="filter-row-2-actions">
-          <span class="filter-reset-link" onclick="resetCatalogFilter()">Сброс</span>
-          <button class="btn btn-red filter-btn" onclick="filterCatalog()">Найти</button>
-        </div>
-      </div>
-
-    </div>
-  </div>
-
-  <!-- ══ MAP ══ -->
-  <div class="catalog-map-wrap" id="catalogMapWrap">
-    <div id="catalogMap"></div>
-    <div class="map-toggle-btn" onclick="toggleCatalogMap()" id="mapToggleBtn">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 6l7-3 8 3 7-3v15l-7 3-8-3-7 3V6z"/><line x1="8" y1="3" x2="8" y2="18"/><line x1="16" y1="6" x2="16" y2="21"/></svg>
-      Скрыть карту
-    </div>
-  </div>
-  <div class="map-show-row" id="mapShowRow">
-    <button class="map-show-btn" onclick="toggleCatalogMap()">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 6l7-3 8 3 7-3v15l-7 3-8-3-7 3V6z"/><line x1="8" y1="3" x2="8" y2="18"/><line x1="16" y1="6" x2="16" y2="21"/></svg>
-      Показать карту
-    </button>
-  </div>
-
-  <div class="catalog-body">
-    <div class="catalog-headline-row">
-      <div>
-        <div class="catalog-headline" id="catalogHeadline">Покупка в Грузии</div>
-        <p class="catalog-count-line">Найдено предложений: <span id="catalogCount">—</span></p>
-      </div>
-      <div class="catalog-headline-tools">
-        <div class="currency-switch" id="currencySwitch">
-          <button class="currency-btn active" data-cur="USD" onclick="setCurrency('USD')">$</button>
-          <button class="currency-btn" data-cur="GEL" onclick="setCurrency('GEL')">₾</button>
-          <button class="currency-btn" data-cur="EUR" onclick="setCurrency('EUR')">€</button>
-        </div>
-        <div class="sort-dropdown" id="sortDropdown">
-        <button class="sort-dropdown-btn" onclick="toggleSortDropdown(event)" type="button">
-          <span class="sort-dropdown-label">
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="6" y1="12" x2="18" y2="12"/><line x1="9" y1="18" x2="15" y2="18"/></svg>
-            <span id="sortCurrentLabel">Топ продаж</span>
-          </span>
-          <svg class="sort-dropdown-arrow" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
-        </button>
-        <div class="sort-dropdown-menu" id="sortDropdownMenu">
-          <div class="sort-option active" data-value="top" onclick="selectSort(this)">
-            <span class="sort-option-check">
-              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-            </span>
-            Топ продаж
-          </div>
-          <div class="sort-option" data-value="price-asc" onclick="selectSort(this)">
-            <span class="sort-option-check">
-              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-            </span>
-            Цена: от низкой к высокой
-          </div>
-          <div class="sort-option" data-value="price-desc" onclick="selectSort(this)">
-            <span class="sort-option-check">
-              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-            </span>
-            Цена: от высокой к низкой
-          </div>
-          <div class="sort-option" data-value="name-asc" onclick="selectSort(this)">
-            <span class="sort-option-check">
-              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-            </span>
-            Название: А → Я
-          </div>
-          <div class="sort-option" data-value="name-desc" onclick="selectSort(this)">
-            <span class="sort-option-check">
-              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-            </span>
-            Название: Я → А
-          </div>
-        </div>
-        <!-- скрытый input для совместимости с catalog.js -->
-        <input type="hidden" id="catalogSort" value="top">
-      </div>
-      </div>
-    </div>
-    <div class="catalog-grid" id="catalogGrid">
-    </div>
-
-    <div class="catalog-empty" id="catalogEmpty" style="display:none;">
-      <div class="catalog-empty-icon">
-        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-      </div>
-      <div class="catalog-empty-title">Объектов не найдено</div>
-      <div class="catalog-empty-text">Попробуйте изменить параметры поиска или сбросьте фильтры</div>
-      <button class="btn btn-red" onclick="resetCatalogFilter()">Сбросить фильтры</button>
-    </div>
-
-    <div style="display:flex;align-items:center;justify-content:flex-end;flex-wrap:wrap;gap:16px;margin-top:32px;">
-      <div class="pagination">
-        <button class="page-btn">‹</button>
-        <button class="page-btn active">2</button>
-        <button class="page-btn">3</button>
-        <button class="page-btn">›</button>
-      </div>
-    </div>
-
-    <!-- Recently viewed -->
-    <div class="recently-viewed" id="recentlyViewedSection" style="display:none;">
-      <div class="section-header" style="margin-bottom:20px;">
-        <h2 class="section-title">Недавно просмотренные</h2>
-        <span class="recently-viewed-clear" onclick="clearRecentlyViewed()">Очистить</span>
-      </div>
-      <div class="testi-track-wrap">
-        <div class="testi-track" id="recentlyViewedGrid" style="gap:24px;"></div>
-      </div>
-      <div class="testi-nav" id="recentlyViewedNav" style="display:none;">
-        <button class="testi-btn" onclick="recentlyViewedNavFn(-1)">‹</button>
-        <div class="testi-dots" id="recentlyViewedDots"></div>
-        <button class="testi-btn" onclick="recentlyViewedNavFn(1)">›</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- SEO TEXT -->
-  <section class="section-sm" style="background:var(--gray-100);">
-    <div class="container">
-      <h2 class="section-title" style="margin-bottom:16px;">Недвижимость в Грузии — инвестиции с высокой доходностью</h2>
-      <p class="section-text">Грузия входит в число наиболее привлекательных стран для покупки недвижимости среди иностранных инвесторов. Низкие налоги, упрощённая процедура оформления и стабильный рост цен делают грузинский рынок недвижимости выгодным вложением средств.</p>
-      <p class="section-text">Наши проекты расположены в лучших районах Тбилиси, Батуми и Кобулети — городах с развитой инфраструктурой и высоким туристическим потоком. Квартиры и апартаменты от Georgia Real Estate подходят как для постоянного проживания, так и для сдачи в аренду с доходностью 8–12% годовых.</p>
-      <p class="section-text">Мы сопровождаем клиентов на каждом этапе сделки: от выбора объекта до получения ключей и управления недвижимостью. Свяжитесь с нами, чтобы получить персональную консультацию и актуальный каталог объектов.</p>
-    </div>
-  </section>
-
-    <footer>
-    <div class="footer-inner">
-      <div class="footer-grid">
-        <div>
-          <div class="footer-brand-name">
-            <svg width="22" height="22" viewBox="0 0 36 36" fill="none"><rect width="36" height="36" fill="transparent"/><rect x="15.5" y="2" width="5" height="32" fill="#C0392B"/><rect x="2" y="15.5" width="32" height="5" fill="#C0392B"/><rect x="4" y="4" width="2.5" height="8" fill="#C0392B"/><rect x="1.5" y="6" width="7.5" height="2.5" fill="#C0392B"/><rect x="29.5" y="4" width="2.5" height="8" fill="#C0392B"/><rect x="27" y="6" width="7.5" height="2.5" fill="#C0392B"/><rect x="4" y="24" width="2.5" height="8" fill="#C0392B"/><rect x="1.5" y="27.5" width="7.5" height="2.5" fill="#C0392B"/><rect x="29.5" y="24" width="2.5" height="8" fill="#C0392B"/><rect x="27" y="27.5" width="7.5" height="2.5" fill="#C0392B"/></svg>
-            Georgia Real Estate
-          </div>
-          <div class="footer-brand-desc">Ваш надёжный партнёр на рынке недвижимости в Грузии.</div>
-          <div class="footer-socials">
-            <div class="footer-social">f</div>
-            <div class="footer-social">in</div>
-            <div class="footer-social">✈</div>
-            <div class="footer-social">▶</div>
-          </div>
-        </div>
-        <div>
-          <div class="footer-col-title">Меню</div>
-          <ul class="footer-links">
-            <li onclick="showPage('home')">О компании</li>
-            <li onclick="showPage('catalog')">Недвижимость</li>
-            <li>Услуги</li>
-            <li>Блог</li>
-            <li onclick="showPage('contact')">Контакты</li>
-          </ul>
-        </div>
-        <div>
-          <div class="footer-col-title">Услуги</div>
-          <ul class="footer-links">
-            <li>Подбор недвижимости</li>
-            <li>Юридическое сопровождение</li>
-            <li>Управление недвижимостью</li>
-            <li>Инвестиционные консультации</li>
-          </ul>
-        </div>
-        <div>
-          <div class="footer-col-title">Контакты</div>
-          <div class="footer-contact">
-            <span>+995 32 2 123 456</span>
-            <span>info@georgia-re.com</span>
-            <span>г. Тбилиси,<br>ул. Чаокаедзе, 37</span>
-          </div>
-        </div>
-      </div>
-      <div class="footer-bottom">
-        <span class="footer-copy">© 2024 Georgia Real Estate</span>
         <span class="footer-policy" onclick="showPage('privacy')">Политика конфиденциальности</span>
       </div>
     </div>
@@ -958,7 +682,7 @@
           <div class="footer-col-title">Меню</div>
           <ul class="footer-links">
             <li onclick="showPage('home')">О компании</li>
-            <li onclick="showPage('catalog')">Недвижимость</li>
+            <li onclick="window.location.href='projects.html'">Недвижимость</li>
             <li>Услуги</li>
             <li>Блог</li>
             <li onclick="showPage('contact')">Контакты</li>
@@ -1278,7 +1002,7 @@
     <div class="container">
       <div class="section-header">
         <h2 class="section-title" id="relatedTitle">Другие объекты в этом регионе</h2>
-        <span class="see-all" onclick="showPage('catalog')">Смотреть все</span>
+        <span class="see-all" onclick="window.location.href='projects.html'">Смотреть все</span>
       </div>
       <div class="testi-track-wrap">
         <div class="testi-track" id="relatedTrack" style="gap:24px;"></div>
@@ -1311,7 +1035,7 @@
           <div class="footer-col-title">Меню</div>
           <ul class="footer-links">
             <li onclick="showPage('home')">О компании</li>
-            <li onclick="showPage('catalog')">Недвижимость</li>
+            <li onclick="window.location.href='projects.html'">Недвижимость</li>
             <li>Услуги</li>
             <li>Блог</li>
             <li onclick="showPage('contact')">Контакты</li>
@@ -1501,7 +1225,7 @@
           <div class="footer-col-title">Меню</div>
           <ul class="footer-links">
             <li onclick="showPage('home')">О компании</li>
-            <li onclick="showPage('catalog')">Недвижимость</li>
+            <li onclick="window.location.href='projects.html'">Недвижимость</li>
             <li>Услуги</li>
             <li onclick="showPage('blog')">Блог</li>
             <li onclick="showPage('contact')">Контакты</li>
@@ -1616,7 +1340,7 @@
           <div class="footer-col-title">Меню</div>
           <ul class="footer-links">
             <li onclick="showPage('home')">О компании</li>
-            <li onclick="showPage('catalog')">Недвижимость</li>
+            <li onclick="window.location.href='projects.html'">Недвижимость</li>
             <li>Услуги</li><li>Блог</li>
             <li onclick="showPage('contact')">Контакты</li>
           </ul>
@@ -1766,7 +1490,7 @@
 
         <div class="blog-article-cta">
           <button class="btn btn-red" onclick="openContactPopup()">Получить консультацию</button>
-          <button class="btn btn-outline" onclick="showPage('catalog')">Смотреть объекты</button>
+          <button class="btn btn-outline" onclick="window.location.href='projects.html'">Смотреть объекты</button>
         </div>
       </div>
 
@@ -1848,7 +1572,7 @@
           <div class="footer-col-title">Меню</div>
           <ul class="footer-links">
             <li onclick="showPage('home')">О компании</li>
-            <li onclick="showPage('catalog')">Недвижимость</li>
+            <li onclick="window.location.href='projects.html'">Недвижимость</li>
             <li>Услуги</li>
             <li onclick="showPage('blog')">Блог</li>
             <li onclick="showPage('contact')">Контакты</li>
@@ -2051,7 +1775,7 @@
           <div class="footer-col-title">Меню</div>
           <ul class="footer-links">
             <li onclick="showPage('home')">О компании</li>
-            <li onclick="showPage('catalog')">Недвижимость</li>
+            <li onclick="window.location.href='projects.html'">Недвижимость</li>
             <li>Услуги</li>
             <li>Блог</li>
             <li onclick="showPage('contact')">Контакты</li>

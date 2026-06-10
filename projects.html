@@ -1,0 +1,817 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" type="image/x-icon" href="favicon.ico">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Проекты — Georgia Real Estate</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/pages.css">
+<link rel="stylesheet" href="css/components.css">
+<link rel="stylesheet" href="css/responsive.css">
+<style>
+/* ── MODAL STYLES ── */
+.modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 1000;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.modal.active {
+  display: flex;
+}
+
+.modal-content {
+  background: white;
+  border-radius: 12px;
+  max-width: 900px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  position: relative;
+}
+
+.modal-wide {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  padding: 40px;
+}
+
+.modal-close {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--gray-400);
+  z-index: 10;
+}
+
+.modal-close:hover {
+  color: var(--gray-600);
+}
+
+.modal-project-gallery {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.modal-main-image {
+  width: 100%;
+  aspect-ratio: 4/3;
+  border-radius: 8px;
+  overflow: hidden;
+  background: var(--gray-100);
+}
+
+.modal-main-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.modal-thumbs {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+
+.modal-thumbs img {
+  width: 100%;
+  aspect-ratio: 4/3;
+  object-fit: cover;
+  border-radius: 6px;
+  cursor: pointer;
+  opacity: 0.6;
+  transition: opacity 0.2s;
+}
+
+.modal-thumbs img:hover {
+  opacity: 1;
+}
+
+.modal-project-info {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.modal-project-top {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid var(--gray-200);
+}
+
+.modal-project-info h2 {
+  font-size: 24px;
+  font-weight: 700;
+  margin: 0;
+  line-height: 1.2;
+}
+
+.modal-project-specs {
+  font-size: 14px;
+  color: var(--gray-500);
+  margin: 8px 0 0;
+}
+
+.modal-project-badge {
+  margin-top: 8px;
+}
+
+.modal-project-badge .badge {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.badge {
+  display: inline-block;
+}
+
+.badge-ready {
+  background: #E8F5E9;
+  color: #2E7D32;
+}
+
+.badge-build {
+  background: #FFF3E0;
+  color: #E65100;
+}
+
+.badge-invest {
+  background: #E3F2FD;
+  color: #1565C0;
+}
+
+.badge-sale {
+  background: #FCE4EC;
+  color: #C2185B;
+}
+
+.modal-project-price {
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--red);
+}
+
+.modal-project-old-price {
+  font-size: 14px;
+  color: var(--gray-400);
+  text-decoration: line-through;
+  display: none;
+  margin-top: 4px;
+}
+
+.modal-project-desc {
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--gray-600);
+}
+
+.modal-project-invest {
+  background: var(--gray-50);
+  border-radius: 8px;
+  padding: 20px;
+}
+
+.modal-invest-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.invest-item {
+  text-align: center;
+}
+
+.invest-label {
+  font-size: 12px;
+  color: var(--gray-500);
+  text-transform: uppercase;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.invest-value {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--red);
+}
+
+.btn-large {
+  width: 100%;
+  padding: 14px 20px;
+  font-size: 16px;
+}
+
+/* Responsive для модалки */
+@media (max-width: 768px) {
+  .modal-wide {
+    grid-template-columns: 1fr;
+    gap: 24px;
+    padding: 20px;
+  }
+
+  .modal-content {
+    max-height: 95vh;
+  }
+
+  .modal-project-info h2 {
+    font-size: 20px;
+  }
+
+  .modal-project-price {
+    font-size: 24px;
+  }
+
+  .modal-invest-grid {
+    grid-template-columns: 1fr;
+  }
+}
+</style>
+
+</head>
+<body>
+
+<!-- ══════════════════════════
+     HEADER
+══════════════════════════ -->
+<header id="header">
+  <div class="header-inner">
+    <!-- Logo -->
+    <div class="logo" onclick="window.location.href='index.html'">
+      <svg class="logo-icon" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect width="36" height="36" fill="white"/>
+        <rect x="15.5" y="2" width="5" height="32" fill="#C0392B"/>
+        <rect x="2" y="15.5" width="32" height="5" fill="#C0392B"/>
+        <rect x="4" y="4" width="2.5" height="8" fill="#C0392B"/>
+        <rect x="1.5" y="6" width="7.5" height="2.5" fill="#C0392B"/>
+        <rect x="29.5" y="4" width="2.5" height="8" fill="#C0392B"/>
+        <rect x="27" y="6" width="7.5" height="2.5" fill="#C0392B"/>
+        <rect x="4" y="24" width="2.5" height="8" fill="#C0392B"/>
+        <rect x="1.5" y="27.5" width="7.5" height="2.5" fill="#C0392B"/>
+        <rect x="29.5" y="24" width="2.5" height="8" fill="#C0392B"/>
+        <rect x="27" y="27.5" width="7.5" height="2.5" fill="#C0392B"/>
+      </svg>
+      <div class="logo-text">
+        <span class="logo-text-top">Georgia</span>
+        <span class="logo-text-bot">Real Estate</span>
+      </div>
+    </div>
+
+    <!-- Nav -->
+    <nav class="header-nav" id="mainNav">
+      <a href="index.html" data-page="home">
+        Главная
+      </a>
+      <span class="nav-sep">|</span>
+      <a href="team.html" data-page="team">
+        Команда
+      </a>
+      <span class="nav-sep">|</span>
+      <a href="projects.html" data-page="catalog" class="active">
+        Проекты
+      </a>
+      <span class="nav-sep">|</span>
+      <a href="blog.html" data-page="blog">
+        Блог
+      </a>
+      <span class="nav-sep">|</span>
+      <a href="contact.html" data-page="contact" class="nav-contact-link">
+        Связаться с нами
+      </a>
+      <div class="nav-mobile-footer">
+        <a href="tel:+995322123456" class="nav-mobile-phone">+995 32 2 123 456</a>
+        <div class="nav-mobile-socials">
+          <a class="nav-mobile-social" href="#">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M9.78 18.65l.28-4.23 7.68-6.92c.34-.31-.07-.46-.52-.19L7.74 13.3 3.64 12c-.88-.25-.89-.86.2-1.3l15.97-6.16c.73-.33 1.43.18 1.15 1.3l-2.72 12.81c-.19.91-.74 1.13-1.5.71L12.6 16.3l-1.99 1.93c-.23.23-.42.42-.83.42z"/></svg>
+          </a>
+          <a class="nav-mobile-social" href="#">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          </a>
+          <a class="nav-mobile-social" href="#">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+          </a>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Right -->
+    <div class="header-right">
+      <div class="header-phone">+995 32 2 123 456</div>
+      <div class="lang-switch">
+        <button class="lang-btn active">RU</button>
+        <span class="lang-sep-char">|</span>
+        <button class="lang-btn">EN</button>
+        <span class="lang-sep-char">|</span>
+        <button class="lang-btn">HE</button>
+      </div>
+      <button class="hamburger" id="hamburger" onclick="toggleMenu()">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- ══════════════════════════
+     PAGE: CATALOG (PROJECTS)
+══════════════════════════ -->
+<div class="page-body">
+  <div class="catalog-hero">
+    <div class="catalog-hero-bg"></div>
+    <div class="catalog-hero-overlay"></div>
+    <div class="catalog-hero-content">
+      <h1>Наши проекты</h1>
+    </div>
+  </div>
+
+  <div class="filter-bar">
+    <div class="filter-form">
+
+      <!-- Строка 1: deal toggle + основные фильтры -->
+      <div class="filter-row-1">
+        <div class="filter-deal-toggle">
+          <button class="deal-btn active" id="dealBtnBuy" onclick="setDealType('buy')">Покупка</button>
+          <button class="deal-btn" id="dealBtnRent" onclick="setDealType('rent')">Аренда</button>
+        </div>
+        <div class="filter-field filter-field--country">
+          <label>Страна</label>
+          <select class="filter-select" onchange="filterCatalog()">
+            <option value="all">🇬🇪 Грузия</option>
+            <option value="usa">🇺🇸 США</option>
+            <option value="uae">🇦🇪 ОАЭ</option>
+            <option value="cyprus">🇨🇾 Кипр</option>
+            <option value="greece">🇬🇷 Греция</option>
+          </select>
+        </div>
+        <div class="filter-field">
+          <label>Город</label>
+          <select class="filter-select" id="citySelect" onchange="filterCatalog()">
+            <option value="all">Любой город</option>
+            <option value="tbilisi">Тбилиси</option>
+            <option value="batumi">Батуми</option>
+            <option value="gonio">Гонио</option>
+            <option value="kakheti">Кахетия</option>
+            <option value="bakuriani">Бакуриани</option>
+          </select>
+        </div>
+        <div class="filter-field">
+          <label>Тип недвижимости</label>
+          <select class="filter-select" id="typeSelect" onchange="filterCatalog()">
+            <option value="all">Любой</option>
+            <option value="apartment">Квартира</option>
+            <option value="apart">Апартаменты</option>
+            <option value="villa">Вилла</option>
+            <option value="commercial">Коммерческая</option>
+          </select>
+        </div>
+        <div class="filter-field">
+          <label>Статус</label>
+          <select class="filter-select" id="statusSelect" onchange="filterCatalog()">
+            <option value="all">Любой статус</option>
+            <option value="ready">Сдан в эксплуатацию</option>
+            <option value="construction">На стадии строительства</option>
+            <option value="investment">Инвестиция</option>
+            <option value="sale">Эксклюзив</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Строка 2: цена, площадь, спальни, кнопки -->
+      <div class="filter-row-2">
+        <div class="filter-field filter-field--price">
+          <label>Цена, $</label>
+          <div class="filter-range-inputs">
+            <input class="filter-range-input" type="text" id="priceMin" placeholder="От" onchange="filterCatalog()" oninput="formatPriceInput(this)">
+            <span class="filter-range-sep">—</span>
+            <input class="filter-range-input" type="text" id="priceMax" placeholder="До" onchange="filterCatalog()" oninput="formatPriceInput(this)">
+          </div>
+        </div>
+        <div class="filter-sep-v"></div>
+        <div class="filter-field filter-field--area">
+          <label>Площадь, м²</label>
+          <div class="filter-range-inputs">
+            <input class="filter-range-input" type="text" id="areaMin" placeholder="От" onchange="filterCatalog()">
+            <span class="filter-range-sep">—</span>
+            <input class="filter-range-input" type="text" id="areaMax" placeholder="До" onchange="filterCatalog()">
+          </div>
+        </div>
+        <div class="filter-sep-v"></div>
+        <div class="filter-field filter-field--rooms">
+          <label>Спальни</label>
+          <div class="filter-rooms-btns" id="roomsBtns">
+            <button class="rooms-btn active" data-val="all" onclick="setRooms(this)">Любое</button>
+            <button class="rooms-btn" data-val="1"  onclick="setRooms(this)">1</button>
+            <button class="rooms-btn" data-val="2"  onclick="setRooms(this)">2</button>
+            <button class="rooms-btn" data-val="3"  onclick="setRooms(this)">3</button>
+            <button class="rooms-btn" data-val="4+" onclick="setRooms(this)">4+</button>
+          </div>
+          <input type="hidden" id="roomsVal" value="all">
+        </div>
+        <div class="filter-row-2-actions">
+          <span class="filter-reset-link" onclick="resetCatalogFilter()">Сброс</span>
+          <button class="btn btn-red filter-btn" onclick="filterCatalog()">Найти</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ══ MAP ══ -->
+  <div class="catalog-map-wrap" id="catalogMapWrap">
+    <div id="catalogMap"></div>
+    <div class="map-toggle-btn" onclick="toggleCatalogMap()" id="mapToggleBtn">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 6l7-3 8 3 7-3v15l-7 3-8-3-7 3V6z"/><line x1="8" y1="3" x2="8" y2="18"/><line x1="16" y1="6" x2="16" y2="21"/></svg>
+      Скрыть карту
+    </div>
+  </div>
+  <div class="map-show-row" id="mapShowRow">
+    <button class="map-show-btn" onclick="toggleCatalogMap()">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 6l7-3 8 3 7-3v15l-7 3-8-3-7 3V6z"/><line x1="8" y1="3" x2="8" y2="18"/><line x1="16" y1="6" x2="16" y2="21"/></svg>
+      Показать карту
+    </button>
+  </div>
+
+  <div class="catalog-body">
+    <div class="catalog-headline-row">
+      <div>
+        <div class="catalog-headline" id="catalogHeadline">Покупка в Грузии</div>
+        <p class="catalog-count-line">Найдено предложений: <span id="catalogCount">—</span></p>
+      </div>
+      <div class="catalog-headline-tools">
+        <div class="currency-switch" id="currencySwitch">
+          <button class="currency-btn active" data-cur="USD" onclick="setCurrency('USD')">$</button>
+          <button class="currency-btn" data-cur="GEL" onclick="setCurrency('GEL')">₾</button>
+          <button class="currency-btn" data-cur="EUR" onclick="setCurrency('EUR')">€</button>
+        </div>
+        <div class="sort-dropdown" id="sortDropdown">
+        <button class="sort-dropdown-btn" onclick="toggleSortDropdown(event)" type="button">
+          <span class="sort-dropdown-label">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="6" y1="12" x2="18" y2="12"/><line x1="9" y1="18" x2="15" y2="18"/></svg>
+            <span id="sortCurrentLabel">Топ продаж</span>
+          </span>
+          <svg class="sort-dropdown-arrow" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="sort-dropdown-menu" id="sortDropdownMenu">
+          <div class="sort-option active" data-value="top" onclick="selectSort(this)">
+            <span class="sort-option-check">
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            </span>
+            Топ продаж
+          </div>
+          <div class="sort-option" data-value="price-asc" onclick="selectSort(this)">
+            <span class="sort-option-check">
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            </span>
+            Цена: от низкой к высокой
+          </div>
+          <div class="sort-option" data-value="price-desc" onclick="selectSort(this)">
+            <span class="sort-option-check">
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            </span>
+            Цена: от высокой к низкой
+          </div>
+          <div class="sort-option" data-value="name-asc" onclick="selectSort(this)">
+            <span class="sort-option-check">
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            </span>
+            Название: А → Я
+          </div>
+          <div class="sort-option" data-value="name-desc" onclick="selectSort(this)">
+            <span class="sort-option-check">
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            </span>
+            Название: Я → А
+          </div>
+        </div>
+        <!-- скрытый input для совместимости с catalog.js -->
+        <input type="hidden" id="catalogSort" value="top">
+      </div>
+      </div>
+    </div>
+    <div class="catalog-grid" id="catalogGrid">
+    </div>
+
+    <div class="catalog-empty" id="catalogEmpty" style="display:none;">
+      <div class="catalog-empty-icon">
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+      </div>
+      <div class="catalog-empty-title">Объектов не найдено</div>
+      <div class="catalog-empty-text">Попробуйте изменить параметры поиска или сбросьте фильтры</div>
+      <button class="btn btn-red" onclick="resetCatalogFilter()">Сбросить фильтры</button>
+    </div>
+
+    <div style="display:flex;align-items:center;justify-content:flex-end;flex-wrap:wrap;gap:16px;margin-top:32px;">
+      <div class="pagination">
+        <button class="page-btn">‹</button>
+        <button class="page-btn active">2</button>
+        <button class="page-btn">3</button>
+        <button class="page-btn">›</button>
+      </div>
+    </div>
+
+    <!-- Recently viewed -->
+    <div class="recently-viewed" id="recentlyViewedSection" style="display:none;">
+      <div class="section-header" style="margin-bottom:20px;">
+        <h2 class="section-title">Недавно просмотренные</h2>
+        <span class="recently-viewed-clear" onclick="clearRecentlyViewed()">Очистить</span>
+      </div>
+      <div class="testi-track-wrap">
+        <div class="testi-track" id="recentlyViewedGrid" style="gap:24px;"></div>
+      </div>
+      <div class="testi-nav" id="recentlyViewedNav" style="display:none;">
+        <button class="testi-btn" onclick="recentlyViewedNavFn(-1)">‹</button>
+        <div class="testi-dots" id="recentlyViewedDots"></div>
+        <button class="testi-btn" onclick="recentlyViewedNavFn(1)">›</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- SEO TEXT -->
+  <section class="section-sm" style="background:var(--gray-100);">
+    <div class="container">
+      <h2 class="section-title" style="margin-bottom:16px;">Недвижимость в Грузии — инвестиции с высокой доходностью</h2>
+      <p class="section-text">Грузия входит в число наиболее привлекательных стран для покупки недвижимости среди иностранных инвесторов. Низкие налоги, упрощённая процедура оформления и стабильный рост цен делают грузинский рынок недвижимости выгодным вложением средств.</p>
+      <p class="section-text">Наши проекты расположены в лучших районах Тбилиси, Батуми и Кобулети — городах с развитой инфраструктурой и высоким туристическим потоком. Квартиры и апартаменты от Georgia Real Estate подходят как для постоянного проживания, так и для сдачи в аренду с доходностью 8–12% годовых.</p>
+      <p class="section-text">Мы сопровождаем клиентов на каждом этапе сделки: от выбора объекта до получения ключей и управления недвижимостью. Свяжитесь с нами, чтобы получить персональную консультацию и актуальный каталог объектов.</p>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-grid">
+        <div>
+          <div class="footer-brand-name">
+            <svg width="22" height="22" viewBox="0 0 36 36" fill="none"><rect width="36" height="36" fill="transparent"/><rect x="15.5" y="2" width="5" height="32" fill="#C0392B"/><rect x="2" y="15.5" width="32" height="5" fill="#C0392B"/><rect x="4" y="4" width="2.5" height="8" fill="#C0392B"/><rect x="1.5" y="6" width="7.5" height="2.5" fill="#C0392B"/><rect x="29.5" y="4" width="2.5" height="8" fill="#C0392B"/><rect x="27" y="6" width="7.5" height="2.5" fill="#C0392B"/><rect x="4" y="24" width="2.5" height="8" fill="#C0392B"/><rect x="1.5" y="27.5" width="7.5" height="2.5" fill="#C0392B"/><rect x="29.5" y="24" width="2.5" height="8" fill="#C0392B"/><rect x="27" y="27.5" width="7.5" height="2.5" fill="#C0392B"/></svg>
+            Georgia Real Estate
+          </div>
+          <div class="footer-brand-desc">Ваш надёжный партнёр на рынке недвижимости в Грузии.</div>
+          <div class="footer-socials">
+            <div class="footer-social">f</div>
+            <div class="footer-social">in</div>
+            <div class="footer-social">✈</div>
+            <div class="footer-social">▶</div>
+          </div>
+        </div>
+        <div>
+          <div class="footer-col-title">Меню</div>
+          <ul class="footer-links">
+            <li><a href="index.html">О компании</a></li>
+            <li><a href="projects.html">Недвижимость</a></li>
+            <li>Услуги</li>
+            <li><a href="blog.html">Блог</a></li>
+            <li><a href="contact.html">Контакты</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="footer-col-title">Услуги</div>
+          <ul class="footer-links">
+            <li>Подбор недвижимости</li>
+            <li>Юридическое сопровождение</li>
+            <li>Управление недвижимостью</li>
+            <li>Инвестиционные консультации</li>
+          </ul>
+        </div>
+        <div>
+          <div class="footer-col-title">Контакты</div>
+          <ul class="footer-links">
+            <li><a href="tel:+995322123456">+995 (32) 2-123-456</a></li>
+            <li><a href="mailto:info@georgiareal.estate">info@georgiareal.estate</a></li>
+            <li>Тбилиси, ул. Руставели, 10</li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2024 Georgia Real Estate. Все права защищены.</span>
+      </div>
+    </div>
+  </footer>
+
+</div>
+
+<!-- ══════════════════════════
+     PROJECT DETAIL MODAL
+══════════════════════════ -->
+<div class="modal" id="projectModal">
+  <div class="modal-content modal-wide">
+    <button class="modal-close" onclick="closeProjectModal()">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+    
+    <div class="modal-project-gallery">
+      <div class="modal-main-image">
+        <img id="modalMainImg" src="" alt="">
+      </div>
+      <div class="modal-thumbs">
+        <div id="modalThumbs"></div>
+      </div>
+    </div>
+
+    <div class="modal-project-info">
+      <div class="modal-project-top">
+        <div>
+          <h2 id="modalProjectName"></h2>
+          <div class="modal-project-specs" id="modalProjectSpecs"></div>
+          <div class="modal-project-badge" id="modalProjectBadge"></div>
+        </div>
+        <div class="modal-project-price">
+          <span id="modalProjectPrice"></span>
+          <div class="modal-project-old-price" id="modalProjectOldPrice"></div>
+        </div>
+      </div>
+
+      <div class="modal-project-desc" id="modalProjectDesc"></div>
+
+      <div class="modal-project-invest" id="modalProjectInvest"></div>
+
+      <button class="btn btn-red btn-large" onclick="showContactForm()">Связаться по этому проекту</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════
+     SCRIPTS
+══════════════════════════ -->
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="js/catalog.js"></script>
+<script src="js/forms.js"></script>
+
+<script>
+// ── NAVIGATION SETUP FOR PROJECTS PAGE ──
+function toggleMenu() {
+  document.getElementById('mainNav').classList.toggle('open');
+  document.getElementById('hamburger').classList.toggle('open');
+}
+
+// ── LANGUAGE SWITCH ──
+document.querySelectorAll('.lang-btn').forEach(b => {
+  b.addEventListener('click', function(){
+    document.querySelectorAll('.lang-btn').forEach(x => x.classList.remove('active'));
+    this.classList.add('active');
+  });
+});
+
+// ── OVERRIDE showDetail FOR MODAL ──
+// Переопределяем функцию showDetail из catalog.js для открытия модалки вместо страницы
+function showDetail(id) {
+  openProjectModal(id);
+  if (typeof trackRecentlyViewed === 'function') {
+    trackRecentlyViewed(id);
+  }
+}
+
+// ── INIT PAGE ──
+document.addEventListener('DOMContentLoaded', function() {
+  renderCatalogGrid('all', 'all', 'all');
+  renderMapMarkers('all', 'all', 'all');
+  initCatalogMap();
+  loadRecentlyViewed();
+});
+
+// ── PROJECT MODAL ──
+function openProjectModal(projectId) {
+  const project = MAP_PROPERTIES.find(p => p.id === projectId);
+  if (!project) return;
+
+  addRecentlyViewed(projectId);
+
+  document.getElementById('modalProjectName').textContent = project.name;
+  document.getElementById('modalProjectSpecs').textContent = project.specs;
+  document.getElementById('modalProjectDesc').textContent = project.desc;
+
+  const badgeEl = document.getElementById('modalProjectBadge');
+  badgeEl.innerHTML = `<span class="badge ${project.badge}">${project.badgeText}</span>`;
+
+  document.getElementById('modalProjectPrice').textContent = formatPrice(project.price);
+  const oldPriceEl = document.getElementById('modalProjectOldPrice');
+  if (project.oldPrice) {
+    oldPriceEl.textContent = formatPrice(project.oldPrice);
+    oldPriceEl.style.display = 'block';
+  } else {
+    oldPriceEl.style.display = 'none';
+  }
+
+  const investEl = document.getElementById('modalProjectInvest');
+  if (project.roi) {
+    investEl.innerHTML = `
+      <div class="modal-invest-grid">
+        <div class="invest-item">
+          <div class="invest-label">Ожидаемая доходность</div>
+          <div class="invest-value">${project.roi}</div>
+        </div>
+        <div class="invest-item">
+          <div class="invest-label">Рост стоимости</div>
+          <div class="invest-value">${project.growth}</div>
+        </div>
+        <div class="invest-item">
+          <div class="invest-label">Срок окупаемости</div>
+          <div class="invest-value">${project.payback}</div>
+        </div>
+      </div>
+    `;
+  }
+
+  const mainImg = document.getElementById('modalMainImg');
+  mainImg.src = project.imgs[0];
+  
+  const thumbsEl = document.getElementById('modalThumbs');
+  thumbsEl.innerHTML = project.imgs.map((img, idx) => `
+    <img src="${img}" alt="" onclick="document.getElementById('modalMainImg').src='${img}'" style="${idx === 0 ? 'opacity: 1;' : ''}">
+  `).join('');
+
+  document.getElementById('projectModal').classList.add('active');
+}
+
+function closeProjectModal() {
+  document.getElementById('projectModal').classList.remove('active');
+}
+
+function addRecentlyViewed(projectId) {
+  let recent = JSON.parse(localStorage.getItem('recentlyViewed') || '[]');
+  recent = recent.filter(id => id !== projectId);
+  recent.unshift(projectId);
+  recent = recent.slice(0, 6);
+  localStorage.setItem('recentlyViewed', JSON.stringify(recent));
+}
+
+function loadRecentlyViewed() {
+  const recent = JSON.parse(localStorage.getItem('recentlyViewed') || '[]');
+  if (recent.length === 0) return;
+
+  const section = document.getElementById('recentlyViewedSection');
+  const grid = document.getElementById('recentlyViewedGrid');
+  
+  const projects = recent
+    .map(id => MAP_PROPERTIES.find(p => p.id === id))
+    .filter(Boolean);
+
+  if (projects.length === 0) {
+    if (section) section.style.display = 'none';
+    return;
+  }
+
+  grid.innerHTML = projects.map(p => `
+    <div class="catalog-card" onclick="showDetail('${p.id}')">
+      <div class="catalog-card-img-wrap" style="position:relative;overflow:hidden;">
+        <img class="catalog-img" src="${p.img}" alt="${p.name}">
+        <span class="prop-badge ${p.badge}">${p.badgeText}</span>
+      </div>
+      <div class="catalog-card-body">
+        <div class="catalog-city">${p.cityLabel}</div>
+        <div class="catalog-name">${p.name}</div>
+        <div class="catalog-price">${formatPrice(p.price)}</div>
+      </div>
+    </div>
+  `).join('');
+
+  if (section) section.style.display = 'block';
+}
+
+function clearRecentlyViewed() {
+  localStorage.removeItem('recentlyViewed');
+  const section = document.getElementById('recentlyViewedSection');
+  if (section) section.style.display = 'none';
+}
+
+function showContactForm() {
+  alert('Переход на контактную форму');
+}
+
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') closeProjectModal();
+});
+
+document.getElementById('projectModal')?.addEventListener('click', function(e) {
+  if (e.target === this) closeProjectModal();
+});
+</script>
+
+</body>
+</html>
