@@ -1206,7 +1206,6 @@ function setRooms(btn) {
   btn.classList.add('active');
   const roomsVal = document.getElementById('roomsVal');
   if (roomsVal) roomsVal.value = btn.dataset.val;
-  filterCatalog();
 }
 
 function formatPriceInput(el) {

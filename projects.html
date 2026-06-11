@@ -125,7 +125,7 @@
         </div>
         <div class="filter-field filter-field--country">
           <label>Страна</label>
-          <select class="filter-select" onchange="filterCatalog()">
+          <select class="filter-select">
             <option value="all">🇬🇪 Грузия</option>
             <option value="usa">🇺🇸 США</option>
             <option value="uae">🇦🇪 ОАЭ</option>
@@ -135,7 +135,7 @@
         </div>
         <div class="filter-field">
           <label>Город</label>
-          <select class="filter-select" id="citySelect" onchange="filterCatalog()">
+          <select class="filter-select" id="citySelect">
             <option value="all">Любой город</option>
             <option value="tbilisi">Тбилиси</option>
             <option value="batumi">Батуми</option>
@@ -146,7 +146,7 @@
         </div>
         <div class="filter-field">
           <label>Тип недвижимости</label>
-          <select class="filter-select" id="typeSelect" onchange="filterCatalog()">
+          <select class="filter-select" id="typeSelect">
             <option value="all">Любой</option>
             <option value="apartment">Квартира</option>
             <option value="apart">Апартаменты</option>
@@ -156,7 +156,7 @@
         </div>
         <div class="filter-field">
           <label>Статус</label>
-          <select class="filter-select" id="statusSelect" onchange="filterCatalog()">
+          <select class="filter-select" id="statusSelect">
             <option value="all">Любой статус</option>
             <option value="ready">Сдан в эксплуатацию</option>
             <option value="construction">На стадии строительства</option>
@@ -171,18 +171,18 @@
         <div class="filter-field filter-field--price">
           <label>Цена, $</label>
           <div class="filter-range-inputs">
-            <input class="filter-range-input" type="text" id="priceMin" placeholder="От" onchange="filterCatalog()" oninput="formatPriceInput(this)">
+            <input class="filter-range-input" type="text" id="priceMin" placeholder="От" oninput="formatPriceInput(this)">
             <span class="filter-range-sep">—</span>
-            <input class="filter-range-input" type="text" id="priceMax" placeholder="До" onchange="filterCatalog()" oninput="formatPriceInput(this)">
+            <input class="filter-range-input" type="text" id="priceMax" placeholder="До" oninput="formatPriceInput(this)">
           </div>
         </div>
         <div class="filter-sep-v"></div>
         <div class="filter-field filter-field--area">
           <label>Площадь, м²</label>
           <div class="filter-range-inputs">
-            <input class="filter-range-input" type="text" id="areaMin" placeholder="От" onchange="filterCatalog()">
+            <input class="filter-range-input" type="text" id="areaMin" placeholder="От">
             <span class="filter-range-sep">—</span>
-            <input class="filter-range-input" type="text" id="areaMax" placeholder="До" onchange="filterCatalog()">
+            <input class="filter-range-input" type="text" id="areaMax" placeholder="До">
           </div>
         </div>
         <div class="filter-sep-v"></div>
