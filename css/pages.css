@@ -349,8 +349,8 @@
 }
 .catalog-grid.catalog-list-view .catalog-card {
   display: grid;
-  grid-template-columns: 240px 1fr;
-  min-height: 180px;
+  grid-template-columns: 380px 1fr;
+  min-height: 220px;
   height: auto;
   transform: none !important;
 }
@@ -359,7 +359,7 @@
 }
 .catalog-grid.catalog-list-view .catalog-card-img-wrap {
   height: 100%;
-  min-height: 180px;
+  min-height: 220px;
   flex-shrink: 0;
   position: relative;
   overflow: hidden;
@@ -367,7 +367,7 @@
 .catalog-grid.catalog-list-view .catalog-img {
   aspect-ratio: unset;
   height: 100%;
-  min-height: 180px;
+  min-height: 220px;
   width: 100%;
   object-fit: cover;
 }

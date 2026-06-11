@@ -127,20 +127,40 @@
   .catalog-body { padding: 24px 16px 60px; }
   .catalog-grid { grid-template-columns:1fr; }
 
-  /* List view на мобиле — горизонтальная карточка адаптируется */
+  /* List view на мобиле — вертикальная карточка (как плитка, но full-width) */
   .catalog-grid.catalog-list-view .catalog-card {
-    grid-template-columns: 120px 1fr;
-    height: 130px;
+    grid-template-columns: 1fr;
+    min-height: unset;
+    height: auto;
   }
-  .catalog-grid.catalog-list-view .catalog-card-img-wrap,
+  .catalog-grid.catalog-list-view .catalog-card-img-wrap {
+    height: 200px;
+    min-height: unset;
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+  }
   .catalog-grid.catalog-list-view .catalog-img {
-    height: 130px;
+    height: 200px;
+    min-height: unset;
+    width: 100%;
+    aspect-ratio: unset;
+    object-fit: cover;
+  }
+  .catalog-grid.catalog-list-view .card-fav-inline {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    z-index: 4;
   }
   .catalog-grid.catalog-list-view .catalog-card-body {
-    padding: 10px 12px;
+    padding: 14px 16px;
   }
   .catalog-grid.catalog-list-view .catalog-name {
-    font-size: 0.85rem;
+    font-size: 0.95rem;
+  }
+  .catalog-grid.catalog-list-view .catalog-specs {
+    margin-top: auto;
   }
   .catalog-grid.catalog-list-view .catalog-card-desc { display: none !important; }
 
