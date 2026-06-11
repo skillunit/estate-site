@@ -157,11 +157,14 @@
         <div class="filter-field">
           <label>Статус</label>
           <select class="filter-select" id="statusSelect">
-            <option value="all">Любой статус</option>
-            <option value="ready">Сдан в эксплуатацию</option>
-            <option value="construction">На стадии строительства</option>
-            <option value="investment">Инвестиция</option>
-            <option value="sale">Эксклюзив</option>
+            <option value="all" data-deal="all">Любой статус</option>
+            <option value="ready" data-deal="buy">Сдан в эксплуатацию</option>
+            <option value="construction" data-deal="buy">На стадии строительства</option>
+            <option value="investment" data-deal="buy">Инвестиция</option>
+            <option value="sale" data-deal="buy">Эксклюзив</option>
+            <option value="longterm" data-deal="rent">Долгосрочная аренда</option>
+            <option value="shortterm" data-deal="rent">Краткосрочная аренда</option>
+            <option value="daily" data-deal="rent">Посуточно</option>
           </select>
         </div>
       </div>
@@ -958,10 +961,10 @@
 </div>
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-<script src="js/nav.js?v=3"></script>
-<script src="js/forms.js?v=3"></script>
-<script src="js/catalog.js?v=3"></script>
-<script src="js/animations.js?v=3"></script>
+<script src="js/nav.js?v=4"></script>
+<script src="js/forms.js?v=4"></script>
+<script src="js/catalog.js?v=4"></script>
+<script src="js/animations.js?v=4"></script>
 
 <script>
 // На projects.html начальная страница — catalog, не home

@@ -376,6 +376,17 @@ function setDealType(type) {
   currentDealType = type;
   document.getElementById('dealBtnBuy').classList.toggle('active', type === 'buy');
   document.getElementById('dealBtnRent').classList.toggle('active', type === 'rent');
+
+  // Show only relevant status options
+  const statusSelect = document.getElementById('statusSelect');
+  if (statusSelect) {
+    Array.from(statusSelect.options).forEach(opt => {
+      const deal = opt.dataset.deal;
+      opt.hidden = deal !== 'all' && deal !== type;
+    });
+    statusSelect.value = 'all';
+  }
+
   filterCatalog();
 }
 
