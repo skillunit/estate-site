@@ -2106,6 +2106,9 @@
 }
 
 /* Content body slides up over the hero */
+/* toolbar и body — одинаковый эффект наезда на hero */
+.fav-toolbar,
+.hist-toolbar,
 .fav-body,
 .hist-body {
   position: relative; z-index: 2;
@@ -2117,18 +2120,19 @@
 
 .fav-toolbar,
 .hist-toolbar {
-  position: relative; z-index: 3;
-  background: var(--white);
-  border-radius: 18px 18px 0 0;
-  margin-top: -32px;
-  box-shadow: 0 -8px 32px rgba(0,0,0,0.10);
+  z-index: 3;
   padding: 28px 32px 0;
   max-width: 100%;
 }
 
-/* When toolbar is shown, body follows normally */
-.fav-body { border-radius: 0; margin-top: 0; box-shadow: none; padding-top: 20px; }
-.hist-body { border-radius: 0; margin-top: 0; box-shadow: none; padding-top: 20px; }
+/* Когда toolbar виден — body идёт следом без повторного наезда */
+.fav-body.toolbar-active,
+.hist-body.toolbar-active {
+  border-radius: 0;
+  margin-top: 0;
+  box-shadow: none;
+  padding-top: 20px;
+}
 
 @media (max-width: 768px) {
   .fav-hero, .hist-hero { height: 220px; }

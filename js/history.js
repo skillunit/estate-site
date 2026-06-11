@@ -89,11 +89,14 @@ function renderHistoryPage() {
     }
     if (countEl) countEl.textContent = '0 объектов';
     if (toolbar) toolbar.style.display = 'none';
+    const histBody = document.getElementById('histBody');
+    if (histBody) histBody.classList.remove('toolbar-active');
     return;
   }
 
   if (toolbar) toolbar.style.display = '';
-
+  const histBody = document.getElementById('histBody');
+  if (histBody) histBody.classList.add('toolbar-active');
   let entries = getHistoryList(); // [{id, ts}, ...]
   const sort = sortSel ? sortSel.value : 'newest';
   if (sort === 'newest')      entries = [...entries].sort((a, b) => b.ts - a.ts);

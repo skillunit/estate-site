@@ -167,11 +167,14 @@ function renderFavoritesPage() {
     }
     if (countEl) countEl.textContent = '0 объектов';
     if (toolbar) toolbar.style.display = 'none';
+    const favBody = document.getElementById('favBody');
+    if (favBody) favBody.classList.remove('toolbar-active');
     return;
   }
 
   if (toolbar) toolbar.style.display = '';
-
+  const favBody = document.getElementById('favBody');
+  if (favBody) favBody.classList.add('toolbar-active');
   const m = getFavsMap();
   const userFavs = m[u.email] || {};
   const sort = sortSel ? sortSel.value : 'newest';
