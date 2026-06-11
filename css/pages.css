@@ -807,7 +807,7 @@
 /* SIDEBAR */
 .detail-sidebar { position:sticky; top:80px; }
 .invest-card {
-  background:var(--white); border:1px solid var(--border);
+  background:var(--white); box-shadow:var(--shadow-card);
   border-radius:var(--radius-sm); padding:24px; margin-bottom:20px;
 }
 .invest-badge {
@@ -1040,7 +1040,7 @@
 .prop-amenities-card,
 .prop-legal-card {
   background: var(--white);
-  border: 1px solid var(--border);
+  box-shadow: var(--shadow-card);
   border-radius: var(--radius-sm);
   padding: 24px;
   margin-bottom: 20px;
@@ -1420,7 +1420,7 @@
 /* Sidebar */
 .blog-article-sidebar { position:sticky; top:90px; }
 .blog-sidebar-block {
-  background:var(--white); border:1px solid var(--border);
+  background:var(--white); box-shadow:var(--shadow-card);
   border-radius:var(--radius-sm); padding:20px; margin-bottom:20px;
 }
 .blog-sidebar-title {
