@@ -743,9 +743,13 @@ function renderCatalogGrid(countryVal, cityVal, statusVal, typeVal, extra) {
           <span class="spec-item"><strong>${p.floor}</strong> эт.</span>
           ${p.year ? `<span class="spec-sep">·</span><span class="spec-item"><strong>${p.year}</strong> г.</span>` : ''}
         </div>
+        ${p.desc ? `<p class="catalog-card-desc">${p.desc}</p>` : ''}
         <a class="catalog-detail-link" onclick="event.stopPropagation();showDetail('${p.id}')">Подробнее →</a>
       </div>
     </div>`).join('');
+
+  // Восстанавливаем сохранённый вид после перерендера грида
+  if (typeof initViewMode === 'function') initViewMode();
 }
 
 // ── Открыть страницу детали для конкретного объекта ──
@@ -1174,6 +1178,7 @@ window.showPage = function(id) {
     renderCatalogGrid(country, city, status, type, {});
     updateCatalogHeadline(country);
     renderRecentlyViewed();
+    initViewMode();
     // Синхронизируем активную кнопку валюты (могла быть сохранена в localStorage)
     document.querySelectorAll('.currency-btn').forEach(b => {
       b.classList.toggle('active', b.dataset.cur === currentCurrency);
@@ -1445,11 +1450,31 @@ function initDetailMap(prop) {
   }));
 }
 
-function popupContent(prop) {
-  return `
-    <div class="dmp-inner">
-      <div class="dmp-name">${prop.name}</div>
-      <div class="dmp-city">${prop.cityLabel}</div>
-      <div class="dmp-price">${formatPrice(prop.price)}</div>
-    </div>`;
+
+// ── Переключатель вид: сетка / список ──
+let currentViewMode = localStorage.getItem('grre_viewmode') || 'grid';
+
+function setViewMode(mode) {
+  currentViewMode = mode;
+  localStorage.setItem('grre_viewmode', mode);
+
+  const grid    = document.getElementById('catalogGrid');
+  const btnGrid = document.getElementById('viewBtnGrid');
+  const btnList = document.getElementById('viewBtnList');
+  if (!grid) return;
+
+  if (mode === 'list') {
+    grid.classList.add('catalog-list-view');
+    btnGrid && btnGrid.classList.remove('active');
+    btnList && btnList.classList.add('active');
+  } else {
+    grid.classList.remove('catalog-list-view');
+    btnGrid && btnGrid.classList.add('active');
+    btnList && btnList.classList.remove('active');
+  }
 }
+
+function initViewMode() {
+  setViewMode(currentViewMode);
+}
+

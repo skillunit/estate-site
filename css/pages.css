@@ -313,10 +313,96 @@
   font-family: var(--font-head); font-size: 1.5rem; font-weight: 800;
   color: var(--dark); margin-bottom: 0;
 }
+/* ── View toggle (grid / list) ── */
+.view-toggle {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  overflow: hidden;
+  background: var(--white);
+}
+.view-toggle-btn {
+  display: flex; align-items: center; justify-content: center;
+  width: 34px; height: 34px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: var(--gray-500);
+  transition: background 0.15s, color 0.15s;
+}
+.view-toggle-btn:hover { background: var(--gray-100); color: var(--dark); }
+.view-toggle-btn.active { background: var(--dark); color: #fff; }
+
+/* ── Catalog grid ── */
 .catalog-grid {
   display: grid; grid-template-columns: repeat(3, 1fr);
   gap: 24px; margin-bottom: 40px;
 }
+
+/* ── List view ── */
+.catalog-grid.catalog-list-view {
+  grid-template-columns: 1fr;
+  gap: 12px;
+}
+.catalog-grid.catalog-list-view .catalog-card {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  height: 180px;
+  transform: none !important;
+}
+.catalog-grid.catalog-list-view .catalog-card:hover {
+  box-shadow: var(--shadow-lg);
+  transform: none !important;
+}
+.catalog-grid.catalog-list-view .catalog-card-img-wrap {
+  height: 180px;
+  flex-shrink: 0;
+}
+.catalog-grid.catalog-list-view .catalog-img {
+  aspect-ratio: unset;
+  height: 180px;
+  width: 100%;
+  object-fit: cover;
+}
+.catalog-grid.catalog-list-view .catalog-card-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 16px 20px;
+}
+.catalog-grid.catalog-list-view .catalog-specs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0;
+  padding-top: 8px;
+}
+.catalog-grid.catalog-list-view .catalog-name {
+  font-size: 1.05rem;
+  -webkit-line-clamp: 2;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+/* список: описание объекта (только в list-view) */
+.catalog-card-desc {
+  display: none;
+  font-size: 0.78rem;
+  color: var(--gray-500);
+  line-height: 1.5;
+  margin: 4px 0 0;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+.catalog-grid:not(.catalog-list-view) .catalog-card-desc { display: none; }
+.catalog-grid.catalog-list-view .catalog-card-desc { display: -webkit-box; }
+
+/* список: карточка в одну строку — прячем слайдер-кнопки */
+.catalog-grid.catalog-list-view .card-slider-btn { display: none; }
+.catalog-grid.catalog-list-view .card-slider-dots { display: none; }
 .catalog-card {
   background: var(--white);
   border: 1px solid var(--border);

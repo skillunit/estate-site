@@ -275,6 +275,17 @@
         <!-- скрытый input для совместимости с catalog.js -->
         <input type="hidden" id="catalogSort" value="top">
       </div>
+
+      <!-- Переключатель вид -->
+      <div class="view-toggle" id="viewToggle">
+        <button class="view-toggle-btn active" id="viewBtnGrid" onclick="setViewMode('grid')" title="Сетка" aria-label="Вид: сетка">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+        </button>
+        <button class="view-toggle-btn" id="viewBtnList" onclick="setViewMode('list')" title="Список" aria-label="Вид: список">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        </button>
+      </div>
+
       </div>
     </div>
     <div class="catalog-grid" id="catalogGrid">
