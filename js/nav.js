@@ -84,6 +84,15 @@ function updateCatalogHeadline(country) {
 
 let _prevCountry = 'all';
 
+function onCountryChange(select) {
+  const country = select.value;
+  _prevCountry = country;
+  updateCityOptions(country);
+  const citySelect = document.getElementById('citySelect');
+  if (citySelect) citySelect.value = 'all';
+  updateCatalogHeadline(country);
+}
+
 function filterCatalog() {
   const cityEl     = document.getElementById('citySelect');
   const statusEl   = document.getElementById('statusSelect');
@@ -104,13 +113,6 @@ function filterCatalog() {
 
   const catalogFilterBar = document.querySelector('#page-catalog .filter-bar .filter-field--country .filter-select');
   const country = catalogFilterBar ? catalogFilterBar.value : 'all';
-
-  if (country !== _prevCountry) {
-    _prevCountry = country;
-    updateCityOptions(country);
-    if (cityEl) cityEl.value = 'all';
-  }
-
   const city = cityEl ? cityEl.value : 'all';
   const extra = { priceMin, priceMax, areaMin, areaMax, rooms };
   updateCatalogHeadline(country);
