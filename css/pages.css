@@ -1788,7 +1788,7 @@
 .blog-hero,
 .contacts-hero,
 .blog-article-hero {
-  height: 380px;
+  height: 280px;
   position: relative;
   z-index: 0;
 }
