@@ -583,13 +583,11 @@ function renderRecentlyViewed() {
         </div>
         <span class="prop-badge ${getPropBadge(p).cls}" style="position:absolute;top:12px;left:12px;z-index:2;">${getPropBadge(p).text}</span>
         ${p.top ? '<span class="top-label" style="z-index:2;">★ ТОП</span>' : ''}
+        ${favCardBtn(p.id)}
       </div>
       <div class="catalog-card-body">
         <div class="catalog-city">${p.cityLabel}</div>
-        <div class="catalog-name-row">
-          <div class="catalog-name">${p.name}</div>
-          ${favCardBtn(p.id)}
-        </div>
+        <div class="catalog-name">${p.name}</div>
         <div class="catalog-price-block">
           <div class="catalog-price-row">
             <span class="catalog-price">${formatPrice(p.price)}</span>
@@ -737,13 +735,11 @@ function renderCatalogGrid(countryVal, cityVal, statusVal, typeVal, extra) {
         </div>
         <span class="prop-badge ${getPropBadge(p).cls}" style="position:absolute;top:12px;left:12px;z-index:2;">${getPropBadge(p).text}</span>
         ${p.top ? '<span class="top-label" style="z-index:2;">★ ТОП</span>' : ''}
+        ${favCardBtn(p.id)}
       </div>
       <div class="catalog-card-body">
         <div class="catalog-city">${p.cityLabel}</div>
-        <div class="catalog-name-row">
-          <div class="catalog-name">${p.name}</div>
-          ${favCardBtn(p.id)}
-        </div>
+        <div class="catalog-name">${p.name}</div>
         <div class="catalog-price-block">
           <div class="catalog-price-row">
             <span class="catalog-price">${formatPrice(p.price)}</span>
@@ -1275,13 +1271,11 @@ function renderRelated(currentId) {
       <div style="position:relative;overflow:hidden;">
         <img class="catalog-img" src="${p.img}" alt="${p.name}">
         <span class="prop-badge ${getPropBadge(p).cls}" style="position:absolute;top:12px;left:12px;">${getPropBadge(p).text}</span>
+        ${favCardBtn(p.id)}
       </div>
       <div class="catalog-card-body">
         <div class="catalog-city">${p.cityLabel}</div>
-        <div class="catalog-name-row">
-          <div class="catalog-name">${p.name}</div>
-          ${favCardBtn(p.id)}
-        </div>
+        <div class="catalog-name">${p.name}</div>
         <div class="catalog-price">${p.price}</div>
         <div class="catalog-specs"><span>${p.area}</span> м² &nbsp;·&nbsp; <span>${p.rooms}</span> спальн${p.rooms === '1' ? 'я' : 'и'} &nbsp;·&nbsp; <span>${p.floor}</span> этаж</div>
         <a class="catalog-detail-link" onclick="event.stopPropagation();showDetail('${p.id}')">Подробнее →</a>
@@ -1382,13 +1376,11 @@ function renderFeatured() {
         </div>
         <span class="prop-badge ${getPropBadge(p).cls}" style="position:absolute;top:12px;left:12px;z-index:2;">${getPropBadge(p).text}</span>
         <span class="top-label" style="z-index:2;">★ ТОП</span>
+        ${favCardBtn(p.id)}
       </div>
       <div class="catalog-card-body">
         <div class="catalog-city">${p.cityLabel}</div>
-        <div class="catalog-name-row">
-          <div class="catalog-name">${p.name}</div>
-          ${favCardBtn(p.id)}
-        </div>
+        <div class="catalog-name">${p.name}</div>
         <div class="catalog-price-block">
           <div class="catalog-price-row">
             <span class="catalog-price">${formatPrice(p.price)}</span>

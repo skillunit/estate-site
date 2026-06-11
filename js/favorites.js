@@ -62,10 +62,12 @@ function handleFavClick(e, id) {
     btn.addEventListener('animationend', () => btn.classList.remove('fav-pop'), { once: true });
   });
 
-  // Update detail page button
+  // Update detail page gallery fav button
   const detailBtn = document.getElementById('detailFavBtn');
   if (detailBtn && detailBtn.dataset.favId === id) {
-    detailBtn.innerHTML = heartSVG(added) + `<span>${added ? 'В избранном' : 'В избранное'}</span>`;
+    detailBtn.innerHTML = added
+      ? `<svg width="18" height="18" viewBox="0 0 24 24" fill="#C0392B" stroke="#C0392B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>`
+      : `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>`;
     detailBtn.classList.toggle('fav-active', added);
   }
 
@@ -127,7 +129,9 @@ document.addEventListener('DOMContentLoaded', () => {
         const btn = document.getElementById('detailFavBtn');
         if (btn) {
           const filled = isFavById(id);
-          btn.innerHTML = heartSVG(filled) + `<span>${filled ? 'В избранном' : 'В избранное'}</span>`;
+          btn.innerHTML = filled
+            ? `<svg width="18" height="18" viewBox="0 0 24 24" fill="#C0392B" stroke="#C0392B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>`
+            : `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>`;
           btn.classList.toggle('fav-active', filled);
           btn.dataset.favId = id;
           btn.onclick = (e) => { e.stopPropagation(); handleFavClick(e, id); };
