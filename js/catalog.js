@@ -1204,6 +1204,8 @@ function resetHomeFilter() {
 
 function resetCatalogFilter() {
   document.querySelectorAll('#page-catalog .filter-select').forEach(s => s.selectedIndex = 0);
+  // После сброса страны — обновляем список городов под Грузию
+  updateCityOptions('all');
   ['priceMin','priceMax','areaMin','areaMax'].forEach(id => {
     const el = document.getElementById(id);
     if (el) el.value = '';
