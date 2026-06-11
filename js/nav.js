@@ -228,6 +228,7 @@ function onCountryChange(select) {
   updateCatalogHeadline(country);
   renderCatalogGrid(country, 'all', 'all', 'all', {});
   renderMapMarkers(country, 'all', 'all', 'all', {});
+  updateURLParams();
 }
 
 function filterCatalog() {
@@ -528,7 +529,6 @@ function setDealType(type) {
   document.getElementById('dealBtnRent').classList.toggle('active', type === 'rent');
   updateStatusOptions(type);
   filterCatalog();
-  updateURLParams();
 }
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -606,16 +606,5 @@ function cardSlide(e, btn, dir) {
   });
 }
 
-// ── URL PARAM: ?page=catalog открывает нужную страницу ──
-(function() {
-  const params = new URLSearchParams(window.location.search);
-  const page = params.get('page');
-  if (page) {
-    window.addEventListener('DOMContentLoaded', function() {
-      if (document.getElementById('page-' + page)) {
-        showPage(page);
-      }
-    });
-  }
-})();
+// URL params handled by applyFiltersFromURL()
 
