@@ -1174,6 +1174,8 @@ window.showPage = function(id) {
     renderCatalogGrid(country, city, status, type, {});
     updateCatalogHeadline(country);
     renderRecentlyViewed();
+    // Обновляем URL и мета-теги при каждом открытии каталога
+    if (typeof updateURLParams === 'function') updateURLParams();
     // Синхронизируем активную кнопку валюты (могла быть сохранена в localStorage)
     document.querySelectorAll('.currency-btn').forEach(b => {
       b.classList.toggle('active', b.dataset.cur === currentCurrency);
