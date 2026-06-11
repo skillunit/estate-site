@@ -1137,22 +1137,35 @@
 
   // Патчим filterCatalog чтобы он учитывал поисковый запрос
   document.addEventListener('DOMContentLoaded', function() {
-    var originalFilter = window.renderCatalogGrid;
-    if (!originalFilter) return;
-    window.renderCatalogGrid = function(countryVal, cityVal, statusVal, typeVal, extra) {
+    var origFilterCatalog = window.filterCatalog;
+    window.filterCatalog = function() {
+      // Сначала стандартная фильтрация
+      origFilterCatalog && origFilterCatalog();
+      // Затем дополнительно фильтруем по поиску
       var q = normalize(_searchQuery);
-      if (q) {
-        // временно фильтруем MAP_PROPERTIES через прокси
-        var orig = window.MAP_PROPERTIES;
-        window.MAP_PROPERTIES = orig.filter(function(p) {
-          return normalize(p.name).includes(q)
-              || normalize(p.cityLabel).includes(q)
-              || (p.desc && normalize(p.desc).includes(q));
-        });
-        originalFilter(countryVal, cityVal, statusVal, typeVal, extra);
-        window.MAP_PROPERTIES = orig;
-      } else {
-        originalFilter(countryVal, cityVal, statusVal, typeVal, extra);
+      if (!q) return;
+      var grid = document.getElementById('catalogGrid');
+      var empty = document.getElementById('catalogEmpty');
+      if (!grid) return;
+      var cards = grid.querySelectorAll('.catalog-card');
+      var visible = 0;
+      cards.forEach(function(card) {
+        var id = card.dataset.id;
+        var p = MAP_PROPERTIES.find(function(x) { return x.id === id; });
+        if (!p) { card.classList.add('hidden'); return; }
+        var match = normalize(p.name).includes(q)
+                 || normalize(p.cityLabel).includes(q)
+                 || (p.desc && normalize(p.desc).includes(q));
+        card.classList.toggle('hidden', !match);
+        if (match) visible++;
+      });
+      // обновляем счётчик
+      var countEl = document.getElementById('catalogCount');
+      if (countEl) countEl.textContent = visible;
+      // пустое состояние
+      if (empty) {
+        grid.style.display = visible ? '' : 'none';
+        empty.style.display = visible ? 'none' : '';
       }
     };
 
