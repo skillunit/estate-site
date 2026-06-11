@@ -491,6 +491,19 @@ const CURRENCY_RATES   = { USD: 1, GEL: 2.70, EUR: 0.92 };
 const CURRENCY_SYMBOLS = { USD: '$', GEL: '₾', EUR: '€' };
 let currentCurrency = localStorage.getItem('grre_currency') || 'USD';
 
+// ── BADGE HELPER ──
+const RENT_BADGE = {
+  longterm:  { cls: 'badge-ready',  text: 'Долгосрочная аренда' },
+  shortterm: { cls: 'badge-invest', text: 'Краткосрочная аренда' },
+  daily:     { cls: 'badge-build',  text: 'Посуточно' },
+};
+function getPropBadge(p) {
+  if (p.deal === 'rent' && RENT_BADGE[p.status]) {
+    return RENT_BADGE[p.status];
+  }
+  return { cls: p.badge, text: p.badgeText };
+}
+
 function convertUsd(num) {
   return Math.round(num * CURRENCY_RATES[currentCurrency]);
 }
@@ -558,7 +571,7 @@ function renderRecentlyViewed() {
           <button class="card-slider-btn card-slider-next" onclick="cardSlide(event,this,1)" aria-label="Вперёд">&#8250;</button>
           <div class="card-slider-dots">${dots}</div>
         </div>
-        <span class="prop-badge ${p.badge}" style="position:absolute;top:12px;left:12px;z-index:2;">${p.badgeText}</span>
+        <span class="prop-badge ${getPropBadge(p).cls}" style="position:absolute;top:12px;left:12px;z-index:2;">${getPropBadge(p).text}</span>
         ${p.top ? '<span class="top-label" style="z-index:2;">★ ТОП</span>' : ''}
       </div>
       <div class="catalog-card-body">
@@ -709,7 +722,7 @@ function renderCatalogGrid(countryVal, cityVal, statusVal, typeVal, extra) {
           <button class="card-slider-btn card-slider-next" onclick="cardSlide(event,this,1)" aria-label="Вперёд">&#8250;</button>
           <div class="card-slider-dots">${(p.imgs || [p.img]).map((_,i) => `<span class="card-slider-dot${i===0?' active':''}"></span>`).join('')}</div>
         </div>
-        <span class="prop-badge ${p.badge}" style="position:absolute;top:12px;left:12px;z-index:2;">${p.badgeText}</span>
+        <span class="prop-badge ${getPropBadge(p).cls}" style="position:absolute;top:12px;left:12px;z-index:2;">${getPropBadge(p).text}</span>
         ${p.top ? '<span class="top-label" style="z-index:2;">★ ТОП</span>' : ''}
       </div>
       <div class="catalog-card-body">
@@ -1238,7 +1251,7 @@ function renderRelated(currentId) {
     <div class="catalog-card" style="flex-shrink:0;" onclick="showDetail('${p.id}')">
       <div style="position:relative;overflow:hidden;">
         <img class="catalog-img" src="${p.img}" alt="${p.name}">
-        <span class="prop-badge ${p.badge || 'badge-ready'}" style="position:absolute;top:12px;left:12px;">${p.badgeText || ''}</span>
+        <span class="prop-badge ${getPropBadge(p).cls}" style="position:absolute;top:12px;left:12px;">${getPropBadge(p).text}</span>
       </div>
       <div class="catalog-card-body">
         <div class="catalog-city">${p.cityLabel}</div>
@@ -1341,7 +1354,7 @@ function renderFeatured() {
           <button class="card-slider-btn card-slider-next" onclick="cardSlide(event,this,1)" aria-label="Вперёд">&#8250;</button>
           <div class="card-slider-dots">${dots}</div>
         </div>
-        <span class="prop-badge ${p.badge}" style="position:absolute;top:12px;left:12px;z-index:2;">${p.badgeText}</span>
+        <span class="prop-badge ${getPropBadge(p).cls}" style="position:absolute;top:12px;left:12px;z-index:2;">${getPropBadge(p).text}</span>
         <span class="top-label" style="z-index:2;">★ ТОП</span>
       </div>
       <div class="catalog-card-body">
