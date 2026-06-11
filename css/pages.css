@@ -1849,7 +1849,7 @@
 }
 
 /* ── Filter rows layout ── */
-.filter-field--country { min-width: 140px; flex: 1.1; }
+.filter-field--country { min-width: 100px; flex: 0.6; }
 .filter-field--price   { flex-shrink: 0; }
 .filter-field--area    { flex-shrink: 0; }
 .filter-field--rooms   { flex-shrink: 0; }
@@ -2191,7 +2191,7 @@
    ████ УМНЫЙ ПОИСК (projects.html) ████
 ═══════════════════════════════════ */
 .filter-field--search {
-  flex: 1;
+  flex: 2.5;
   min-width: 180px;
 }
 .search-field-wrap {
@@ -2201,20 +2201,18 @@
 }
 .search-field-icon {
   position: absolute;
-  left: 12px;
+  left: 11px;
   color: var(--gray-400);
   pointer-events: none;
   flex-shrink: 0;
   z-index: 1;
   transition: color var(--transition);
 }
-.search-field-wrap:focus-within .search-field-icon {
-  color: var(--red);
-}
+.search-field-wrap:focus-within .search-field-icon { color: var(--red); }
 .search-field-input {
   width: 100%;
   height: 44px;
-  padding: 0 34px 0 36px;
+  padding: 0 32px 0 34px;
   border: 1px solid var(--border);
   border-radius: var(--radius-sm);
   font-size: 0.875rem;
@@ -2239,7 +2237,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 22px; height: 22px;
+  width: 20px; height: 20px;
   border-radius: 50%;
   transition: background var(--transition), color var(--transition);
   padding: 0;
