@@ -42,7 +42,7 @@ footer {
   background: var(--dark); color: rgba(255,255,255,0.6);
   padding: 56px 0 28px;
 }
-.footer-inner { max-width:1200px; margin:0 auto; padding:0 32px; }
+.footer-inner { max-width:1400px; margin:0 auto; padding:0 32px; }
 .footer-grid {
   display:grid; grid-template-columns:260px 1fr 1fr 1fr;
   gap:40px; margin-bottom:48px;
@@ -290,7 +290,7 @@ footer {
 .cpopup-input, .cpopup-textarea {
   font-family: var(--font-body); font-size: 0.875rem;
   color: var(--dark); background: var(--white);
-  border: 1.5px solid var(--border); border-radius: var(--radius); outline: none;
+  border: 1.5px solid var(--border); border-radius: var(--radius-sm); outline: none;
   width: 100%; min-width: 0;
   transition: border-color var(--transition), box-shadow var(--transition);
 }
@@ -324,12 +324,12 @@ footer {
   position: absolute; top: 0; left: 0; right: 0;
   height: 3px; background: linear-gradient(90deg, var(--red) 0%, transparent 100%);
 }
-.privacy-hero-content { position: relative; z-index: 1; padding: 0 32px 36px; max-width: 1200px; margin: 0 auto; width: 100%; }
+.privacy-hero-content { position: relative; z-index: 1; padding: 0 32px 36px; max-width: 1400px; margin: 0 auto; width: 100%; }
 .privacy-hero h1 { font-family: var(--font-head); font-size: clamp(2rem,4vw,3rem); font-weight: 800; color: var(--white); }
 .privacy-hero-sub { font-size: 0.8rem; color: rgba(255,255,255,0.5); margin-top: 6px; letter-spacing: 0.04em; }
 
 .privacy-body { max-width: 860px; margin: 0 auto; padding: 56px 32px 96px; }
-.privacy-toc { background: var(--gray-100); border-left: 3px solid var(--red); border-radius: var(--radius); padding: 20px 24px; margin-bottom: 48px; }
+.privacy-toc { background: var(--gray-100); border-left: 3px solid var(--red); border-radius: var(--radius-sm); padding: 20px 24px; margin-bottom: 48px; }
 .privacy-toc-title { font-family: var(--font-head); font-size: 0.72rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gray-500); margin-bottom: 12px; }
 .privacy-toc ol { padding-left: 18px; display: flex; flex-direction: column; gap: 6px; }
 .privacy-toc li { font-size: 0.82rem; color: var(--gray-700); cursor: pointer; transition: color var(--transition); }
@@ -344,7 +344,7 @@ footer {
 .privacy-section ul li { font-size: 0.9rem; color: var(--gray-700); line-height: 1.7; }
 .privacy-divider { height: 1px; background: var(--border); margin: 44px 0; }
 .privacy-highlight { background: var(--red-light); border-left: 3px solid var(--red); border-radius: 0 var(--radius) var(--radius) 0; padding: 14px 18px; margin: 16px 0; font-size: 0.875rem; color: var(--dark); line-height: 1.7; }
-.privacy-contact-box { border: 1px solid var(--border); border-radius: var(--radius); padding: 24px 28px; display: flex; gap: 20px; align-items: flex-start; margin-top: 16px; }
+.privacy-contact-box { border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 24px 28px; display: flex; gap: 20px; align-items: flex-start; margin-top: 16px; }
 .privacy-contact-icon { font-size: 1.8rem; flex-shrink: 0; }
 .privacy-contact-box h3 { font-family: var(--font-head); font-size: 0.95rem; font-weight: 700; color: var(--dark); margin-bottom: 6px; }
 .privacy-contact-box p { font-size: 0.82rem; color: var(--gray-700); line-height: 1.7; margin: 0; }
@@ -578,7 +578,7 @@ footer {
 .auth-field input {
   width: 100%; height: 44px; padding: 0 14px;
   border: 1.5px solid var(--border);
-  border-radius: var(--radius); font-size: 0.88rem;
+  border-radius: var(--radius-sm); font-size: 0.88rem;
   font-family: var(--font-body); color: var(--dark);
   background: var(--white); transition: border-color var(--transition);
   box-sizing: border-box;
