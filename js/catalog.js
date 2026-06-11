@@ -497,6 +497,16 @@ const RENT_BADGE = {
   shortterm: { cls: 'badge-invest', text: 'Краткосрочная аренда' },
   daily:     { cls: 'badge-build',  text: 'Посуточно' },
 };
+/* ── Fav button helper — inline in card body ── */
+function favCardBtn(id) {
+  // isFavById is defined in favorites.js; safe to call after DOMContentLoaded
+  const filled = (typeof isFavById === 'function') ? isFavById(id) : false;
+  const icon = filled
+    ? `<svg width="15" height="15" viewBox="0 0 24 24" fill="#C0392B" stroke="#C0392B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>`
+    : `<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>`;
+  return `<button class="card-fav-inline${filled ? ' fav-active' : ''}" data-fav-id="${id}" onclick="handleFavClick(event,'${id}')" aria-label="В избранное">${icon}</button>`;
+}
+
 function getPropBadge(p) {
   if (p.deal === 'rent' && RENT_BADGE[p.status]) {
     return RENT_BADGE[p.status];
@@ -576,7 +586,10 @@ function renderRecentlyViewed() {
       </div>
       <div class="catalog-card-body">
         <div class="catalog-city">${p.cityLabel}</div>
-        <div class="catalog-name">${p.name}</div>
+        <div class="catalog-name-row">
+          <div class="catalog-name">${p.name}</div>
+          ${favCardBtn(p.id)}
+        </div>
         <div class="catalog-price-block">
           <div class="catalog-price-row">
             <span class="catalog-price">${formatPrice(p.price)}</span>
@@ -727,7 +740,10 @@ function renderCatalogGrid(countryVal, cityVal, statusVal, typeVal, extra) {
       </div>
       <div class="catalog-card-body">
         <div class="catalog-city">${p.cityLabel}</div>
-        <div class="catalog-name">${p.name}</div>
+        <div class="catalog-name-row">
+          <div class="catalog-name">${p.name}</div>
+          ${favCardBtn(p.id)}
+        </div>
         <div class="catalog-price-block">
           <div class="catalog-price-row">
             <span class="catalog-price">${formatPrice(p.price)}</span>
@@ -1262,7 +1278,10 @@ function renderRelated(currentId) {
       </div>
       <div class="catalog-card-body">
         <div class="catalog-city">${p.cityLabel}</div>
-        <div class="catalog-name">${p.name}</div>
+        <div class="catalog-name-row">
+          <div class="catalog-name">${p.name}</div>
+          ${favCardBtn(p.id)}
+        </div>
         <div class="catalog-price">${p.price}</div>
         <div class="catalog-specs"><span>${p.area}</span> м² &nbsp;·&nbsp; <span>${p.rooms}</span> спальн${p.rooms === '1' ? 'я' : 'и'} &nbsp;·&nbsp; <span>${p.floor}</span> этаж</div>
         <a class="catalog-detail-link" onclick="event.stopPropagation();showDetail('${p.id}')">Подробнее →</a>
@@ -1366,7 +1385,10 @@ function renderFeatured() {
       </div>
       <div class="catalog-card-body">
         <div class="catalog-city">${p.cityLabel}</div>
-        <div class="catalog-name">${p.name}</div>
+        <div class="catalog-name-row">
+          <div class="catalog-name">${p.name}</div>
+          ${favCardBtn(p.id)}
+        </div>
         <div class="catalog-price-block">
           <div class="catalog-price-row">
             <span class="catalog-price">${formatPrice(p.price)}</span>
