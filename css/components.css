@@ -382,3 +382,9 @@ footer {
 #relatedDots .testi-dot.active { background: var(--red); }
 #relatedSection .testi-btn { border-color: var(--border); color: var(--gray-700); }
 #relatedSection .testi-btn:hover { background: var(--red); border-color: var(--red); color: var(--white); }
+
+/* Recently viewed slider dots — light background override */
+#recentlyViewedDots .testi-dot { background: var(--gray-300); }
+#recentlyViewedDots .testi-dot.active { background: var(--red); }
+#recentlyViewedNav .testi-btn { border-color: var(--border); color: var(--gray-700); }
+#recentlyViewedNav .testi-btn:hover { background: var(--red); border-color: var(--red); color: var(--white); }
