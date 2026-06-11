@@ -149,3 +149,51 @@
   });
 
 })();
+
+
+// ── 3. PARALLAX PAGE HERO ─────────────────────────────
+(function() {
+  // All subpage hero bg selectors
+  var BG_SELECTORS = [
+    '.catalog-hero-bg',
+    '.team-hero-bg',
+    '.blog-hero-bg',
+    '.contacts-hero-bg',
+    '.blog-article-hero-bg',
+  ];
+
+  var PARALLAX_FACTOR = 0.38; // bg moves at 38% of scroll speed
+  var bgEls = [];
+
+  function init() {
+    bgEls = [];
+    BG_SELECTORS.forEach(function(sel) {
+      var el = document.querySelector(sel);
+      if (el) bgEls.push(el);
+    });
+    if (bgEls.length) tick();
+  }
+
+  var ticking = false;
+
+  function tick() {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(function() {
+      var y = window.scrollY;
+      bgEls.forEach(function(el) {
+        el.style.transform = 'translateY(' + (y * PARALLAX_FACTOR) + 'px)';
+      });
+      ticking = false;
+    });
+  }
+
+  window.addEventListener('scroll', tick, { passive: true });
+  window.addEventListener('resize', tick, { passive: true });
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();

@@ -1776,3 +1776,133 @@
 @media (max-width: 768px) {
   .filter-row-2--projects { padding-left: 0; }
 }
+
+
+/* ═══════════════════════════════════
+   ████ PARALLAX PAGE HERO (all subpages) ████
+═══════════════════════════════════ */
+
+/* ── Increased hero height for parallax space ── */
+.catalog-hero,
+.team-hero,
+.blog-hero,
+.contacts-hero,
+.blog-article-hero {
+  height: 380px;
+  overflow: visible; /* allow bg to extend */
+  position: relative;
+  z-index: 0;
+}
+
+/* ── Parallax bg base ── */
+.catalog-hero-bg,
+.team-hero-bg,
+.blog-hero-bg,
+.contacts-hero-bg,
+.blog-article-hero-bg {
+  position: absolute;
+  top: -60px; /* extra space for parallax travel */
+  left: 0; right: 0;
+  bottom: -60px;
+  will-change: transform;
+  transform: translateY(0px);
+  background-size: cover !important;
+  background-repeat: no-repeat !important;
+}
+
+/* Clip overflow at the hero boundary */
+.catalog-hero,
+.team-hero,
+.blog-hero,
+.contacts-hero,
+.blog-article-hero {
+  clip-path: inset(0 0 0 0);
+}
+
+/* ── Content slide-over effect ── */
+.team-section-inner,
+.blog-section-inner,
+.contacts-body,
+.blog-article-body {
+  position: relative;
+  z-index: 2;
+  background: var(--white);
+  border-radius: 18px 18px 0 0;
+  margin-top: -32px;
+  padding-top: 44px;
+  box-shadow: 0 -8px 32px rgba(0,0,0,0.10);
+}
+
+/* catalog: filter bar is the first thing after hero — it starts the slide-over */
+.filter-bar {
+  position: relative;
+  z-index: 3;
+}
+
+/* When filter-bar directly follows a hero, give it the rounded top treatment */
+.catalog-hero + .filter-bar {
+  border-radius: 18px 18px 0 0;
+  margin-top: -32px;
+  box-shadow: 0 -8px 32px rgba(0,0,0,0.10), var(--shadow-md);
+  overflow: hidden;
+}
+
+/* catalog body then follows normally (no extra margin) */
+.catalog-hero + .filter-bar + .catalog-map-wrap,
+.catalog-hero + .filter-bar + * + .catalog-body,
+.catalog-map-wrap,
+.catalog-body {
+  position: relative;
+  z-index: 2;
+}
+
+/* Hero content stays on top of bg */
+.catalog-hero-content,
+.team-hero-content,
+.blog-hero-content,
+.contacts-hero-content,
+.blog-article-hero-content {
+  position: relative;
+  z-index: 2;
+}
+
+/* Overlay stays visible */
+.catalog-hero-overlay,
+.team-hero-overlay,
+.blog-hero-overlay,
+.contacts-hero-overlay,
+.blog-article-hero-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
+/* ── Subtle breadcrumb / subtitle under h1 ── */
+.page-hero-subtitle {
+  font-size: 0.85rem;
+  color: rgba(255,255,255,0.65);
+  margin-top: 6px;
+  font-weight: 400;
+  letter-spacing: 0.04em;
+}
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+  .catalog-hero,
+  .team-hero,
+  .blog-hero,
+  .contacts-hero,
+  .blog-article-hero {
+    height: 260px;
+  }
+
+  .catalog-body,
+  .team-section-inner,
+  .blog-section-inner,
+  .contacts-body,
+  .blog-article-body {
+    border-radius: 12px 12px 0 0;
+    margin-top: -20px;
+    padding-top: 32px;
+  }
+}
