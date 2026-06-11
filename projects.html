@@ -155,16 +155,39 @@
             <option value="commercial">Коммерческая</option>
           </select>
         </div>
-        <div class="filter-field">
-          <label>Статус</label>
-          <select class="filter-select" id="statusSelect">
-            <option value="all">Любой статус</option>
-          </select>
+        <!-- Умный поиск по названию -->
+        <div class="filter-field filter-field--search" style="flex:2; min-width:200px;">
+          <label>Поиск по названию</label>
+          <div class="search-field-wrap" id="searchFieldWrap">
+            <svg class="search-field-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            <input
+              class="search-field-input"
+              id="nameSearch"
+              type="text"
+              placeholder="Название, район, тип…"
+              autocomplete="off"
+              oninput="onNameSearchInput(this.value)"
+              onkeydown="onNameSearchKey(event)"
+              onfocus="showSearchSuggestions()"
+              onblur="hideSearchSuggestions()"
+            >
+            <button class="search-field-clear" id="nameSearchClear" onclick="clearNameSearch()" title="Очистить" style="display:none;">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+            </button>
+            <div class="search-suggestions" id="searchSuggestions"></div>
+          </div>
         </div>
       </div>
 
-      <!-- Строка 2: цена, площадь, спальни, кнопки -->
+      <!-- Строка 2: статус, цена, площадь, спальни, кнопки -->
       <div class="filter-row-2 filter-row-2--projects">
+        <div class="filter-field">
+          <label>Статус</label>
+          <select class="filter-select" id="statusSelect" style="min-width:150px;">
+            <option value="all">Любой статус</option>
+          </select>
+        </div>
+        <div class="filter-sep-v"></div>
         <div class="filter-field filter-field--price">
           <label>Цена, $</label>
           <div class="filter-range-inputs">
@@ -969,6 +992,179 @@
 <script src="js/nav.js?v=6"></script>
 <script src="js/forms.js?v=6"></script>
 <script src="js/catalog.js?v=3"></script>
+<script>
+/* ══════════════════════════════════
+   УМНЫЙ ПОИСК ПО НАЗВАНИЮ
+══════════════════════════════════ */
+(function() {
+  var _searchQuery = '';
+  var _highlightIdx = -1;
+
+  // Нормализация строки для поиска
+  function normalize(s) {
+    return s.toLowerCase().replace(/[«»"'`]/g, '');
+  }
+
+  // Подсветка совпадения в тексте
+  function highlight(text, query) {
+    if (!query) return text;
+    var re = new RegExp('(' + query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + ')', 'gi');
+    return text.replace(re, '<mark>$1</mark>');
+  }
+
+  // Получить текущий поисковый запрос (для filterCatalog)
+  window.getNameSearchQuery = function() { return _searchQuery; };
+
+  // Ввод в поле
+  window.onNameSearchInput = function(val) {
+    _searchQuery = val.trim();
+    _highlightIdx = -1;
+    var clearBtn = document.getElementById('nameSearchClear');
+    if (clearBtn) clearBtn.style.display = _searchQuery ? '' : 'none';
+    renderSuggestions(_searchQuery);
+    filterCatalog();
+  };
+
+  // Клавиши — стрелки + Enter
+  window.onNameSearchKey = function(e) {
+    var list = document.querySelectorAll('.search-suggestion-item');
+    if (!list.length) return;
+    if (e.key === 'ArrowDown') {
+      e.preventDefault();
+      _highlightIdx = Math.min(_highlightIdx + 1, list.length - 1);
+      updateHighlight(list);
+    } else if (e.key === 'ArrowUp') {
+      e.preventDefault();
+      _highlightIdx = Math.max(_highlightIdx - 1, -1);
+      updateHighlight(list);
+    } else if (e.key === 'Enter') {
+      if (_highlightIdx >= 0 && list[_highlightIdx]) {
+        list[_highlightIdx].click();
+      }
+      hideSuggestions();
+    } else if (e.key === 'Escape') {
+      hideSuggestions();
+    }
+  };
+
+  function updateHighlight(list) {
+    list.forEach(function(el, i) {
+      el.classList.toggle('highlighted', i === _highlightIdx);
+    });
+    if (_highlightIdx >= 0 && list[_highlightIdx]) {
+      // обновляем инпут текстом подсветки
+      var name = list[_highlightIdx].dataset.name;
+      if (name) {
+        var inp = document.getElementById('nameSearch');
+        if (inp) inp.value = name;
+        _searchQuery = name;
+      }
+    }
+  }
+
+  window.showSearchSuggestions = function() {
+    if (_searchQuery) renderSuggestions(_searchQuery);
+  };
+
+  window.hideSearchSuggestions = function() {
+    // небольшая задержка чтобы успел сработать клик по подсказке
+    setTimeout(hideSuggestions, 180);
+  };
+
+  function hideSuggestions() {
+    var box = document.getElementById('searchSuggestions');
+    if (box) box.classList.remove('open');
+  }
+
+  window.clearNameSearch = function() {
+    _searchQuery = '';
+    _highlightIdx = -1;
+    var inp = document.getElementById('nameSearch');
+    if (inp) { inp.value = ''; inp.focus(); }
+    var clearBtn = document.getElementById('nameSearchClear');
+    if (clearBtn) clearBtn.style.display = 'none';
+    hideSuggestions();
+    filterCatalog();
+  };
+
+  function renderSuggestions(query) {
+    var box = document.getElementById('searchSuggestions');
+    if (!box) return;
+
+    if (!query) { box.classList.remove('open'); return; }
+
+    var q = normalize(query);
+    var dealType = typeof currentDealType !== 'undefined' ? currentDealType : 'buy';
+    var matches = MAP_PROPERTIES.filter(function(p) {
+      if (p.deal !== dealType) return false;
+      return normalize(p.name).includes(q)
+          || normalize(p.cityLabel).includes(q)
+          || (p.desc && normalize(p.desc).includes(q));
+    }).slice(0, 6);
+
+    if (!matches.length) {
+      box.innerHTML = '<div class="search-no-results">Ничего не найдено</div>';
+      box.classList.add('open');
+      return;
+    }
+
+    box.innerHTML = matches.map(function(p) {
+      return '<div class="search-suggestion-item" data-name="' + p.name.replace(/"/g, '&quot;') + '" onmousedown="pickSuggestion('' + p.id + '', '' + p.name.replace(/'/g, "\'") + '')">'
+        + '<img class="search-suggestion-img" src="' + p.img + '" alt="">'
+        + '<div class="search-suggestion-info">'
+        +   '<div class="search-suggestion-name">' + highlight(p.name, query) + '</div>'
+        +   '<div class="search-suggestion-meta">' + p.cityLabel + ' · ' + p.area + ' м²</div>'
+        + '</div>'
+        + '<span class="search-suggestion-price">' + p.price + '</span>'
+        + '</div>';
+    }).join('');
+
+    box.classList.add('open');
+  }
+
+  window.pickSuggestion = function(id, name) {
+    _searchQuery = name;
+    _highlightIdx = -1;
+    var inp = document.getElementById('nameSearch');
+    if (inp) inp.value = name;
+    var clearBtn = document.getElementById('nameSearchClear');
+    if (clearBtn) clearBtn.style.display = '';
+    hideSuggestions();
+    filterCatalog();
+    // Открыть карточку
+    if (typeof showDetail === 'function') showDetail(id);
+  };
+
+  // Патчим filterCatalog чтобы он учитывал поисковый запрос
+  document.addEventListener('DOMContentLoaded', function() {
+    var originalFilter = window.renderCatalogGrid;
+    if (!originalFilter) return;
+    window.renderCatalogGrid = function(countryVal, cityVal, statusVal, typeVal, extra) {
+      var q = normalize(_searchQuery);
+      if (q) {
+        // временно фильтруем MAP_PROPERTIES через прокси
+        var orig = window.MAP_PROPERTIES;
+        window.MAP_PROPERTIES = orig.filter(function(p) {
+          return normalize(p.name).includes(q)
+              || normalize(p.cityLabel).includes(q)
+              || (p.desc && normalize(p.desc).includes(q));
+        });
+        originalFilter(countryVal, cityVal, statusVal, typeVal, extra);
+        window.MAP_PROPERTIES = orig;
+      } else {
+        originalFilter(countryVal, cityVal, statusVal, typeVal, extra);
+      }
+    };
+
+    // Сброс поиска при общем resetCatalogFilter
+    var origReset = window.resetCatalogFilter;
+    window.resetCatalogFilter = function() {
+      window.clearNameSearch && window.clearNameSearch();
+      origReset && origReset();
+    };
+  });
+})();
+</script>
 <script src="js/animations.js?v=6"></script>
 
 <script>
