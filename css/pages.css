@@ -249,6 +249,7 @@
   position: absolute; top: 12px; left: 12px;
   font-size: 0.6rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
   padding: 4px 10px; border-radius: 2px; color: var(--white);
+  pointer-events: none;
 }
 .badge-sale   { background: var(--red); }
 .badge-rent   { background: #2980B9; }
@@ -352,7 +353,7 @@
   height: 180px;
   transform: none !important;
 }
-.catalog-grid.catalog-list-view .catalog-card.is-hovered {
+.catalog-grid.catalog-list-view .catalog-card:hover {
   box-shadow: var(--shadow-lg);
 }
 .catalog-grid.catalog-list-view .catalog-card-img-wrap {
@@ -409,7 +410,7 @@
   overflow: hidden; cursor: pointer;
   transition: box-shadow 0.06s ease;
 }
-.catalog-card.is-hovered { box-shadow: var(--shadow-lg); }
+.catalog-card:hover { box-shadow: var(--shadow-lg); }
 .catalog-card.hidden { display: none; }
 
 /* Slider wrapper */
@@ -419,7 +420,7 @@
   transition: opacity 0.15s ease, transform 0.15s ease;
   display: block;
 }
-.catalog-card.is-hovered .catalog-img { transform: scale(1.03); }
+.catalog-card:hover .catalog-img { transform: scale(1.03); }
 
 .catalog-card-body { padding: 18px; }
 .catalog-city { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--gray-500); margin-bottom: 4px; }
@@ -467,7 +468,7 @@
   padding: 0;
 }
 .card-slider-btn:hover { background: rgba(192,57,43,0.82); border-color: transparent; }
-.catalog-card.is-hovered .card-slider-btn { opacity: 1; }
+.catalog-card:hover .card-slider-btn { opacity: 1; }
 .card-slider-prev { left: 8px; }
 .card-slider-next { right: 8px; }
 
@@ -478,7 +479,7 @@
   z-index: 3;
   opacity: 0; transition: opacity 0.12s ease;
 }
-.catalog-card.is-hovered .card-slider-dots { opacity: 1; }
+.catalog-card:hover .card-slider-dots { opacity: 1; }
 .card-slider-dot {
   width: 5px; height: 5px; border-radius: 50%;
   background: rgba(255,255,255,0.5);
@@ -1624,6 +1625,7 @@
   background: var(--red); color: var(--white);
   font-size: 0.62rem; font-weight: 700; letter-spacing: 0.08em;
   padding: 4px 10px; border-radius: 2px; text-transform: uppercase;
+  pointer-events: none;
 }
 
 /* Detail price block in sidebar */

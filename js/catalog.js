@@ -750,7 +750,6 @@ function renderCatalogGrid(countryVal, cityVal, statusVal, typeVal, extra) {
 
   // Восстанавливаем сохранённый вид после перерендера грида
   if (typeof initViewMode === 'function') initViewMode();
-  bindCardHover();
 }
 
 // ── Открыть страницу детали для конкретного объекта ──
@@ -1452,16 +1451,7 @@ function initDetailMap(prop) {
 }
 
 
-// ── Hover на карточках каталога ──
-// mouseenter/mouseleave не всплывают → нет ложных срабатываний от дочерних элементов
-function bindCardHover() {
-  const grid = document.getElementById('catalogGrid');
-  if (!grid) return;
-  grid.querySelectorAll('.catalog-card').forEach(card => {
-    card.addEventListener('mouseenter', () => card.classList.add('is-hovered'));
-    card.addEventListener('mouseleave', () => card.classList.remove('is-hovered'));
-  });
-}
+// ── Переключатель вид: сетка / список ──
 let currentViewMode = localStorage.getItem('grre_viewmode') || 'grid';
 
 function setViewMode(mode) {
