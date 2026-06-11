@@ -1451,7 +1451,28 @@ function initDetailMap(prop) {
 }
 
 
-// ── Переключатель вид: сетка / список ──
+// ── Надёжный hover на карточках каталога (через JS-делегирование) ──
+// CSS :hover глючит когда overflow:hidden + абсолютные дочерние элементы
+(function() {
+  let hoveredCard = null;
+
+  document.addEventListener('mouseover', function(e) {
+    const card = e.target.closest('#catalogGrid .catalog-card');
+    if (card === hoveredCard) return;
+    if (hoveredCard) hoveredCard.classList.remove('is-hovered');
+    hoveredCard = card;
+    if (hoveredCard) hoveredCard.classList.add('is-hovered');
+  });
+
+  document.addEventListener('mouseout', function(e) {
+    if (!hoveredCard) return;
+    // Проверяем что мышь ушла именно из карточки, а не просто в дочерний элемент
+    const to = e.relatedTarget;
+    if (to && hoveredCard.contains(to)) return;
+    hoveredCard.classList.remove('is-hovered');
+    hoveredCard = null;
+  });
+})();
 let currentViewMode = localStorage.getItem('grre_viewmode') || 'grid';
 
 function setViewMode(mode) {

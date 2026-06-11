@@ -410,7 +410,7 @@
   overflow: hidden; cursor: pointer;
   transition: box-shadow 0.06s ease;
 }
-.catalog-card:hover { box-shadow: var(--shadow-lg); }
+.catalog-card.is-hovered { box-shadow: var(--shadow-lg); }
 .catalog-card.hidden { display: none; }
 
 /* Slider wrapper */
@@ -420,7 +420,7 @@
   transition: opacity 0.15s ease, transform 0.15s ease;
   display: block;
 }
-.catalog-card:hover .catalog-img { transform: scale(1.03); }
+.catalog-card.is-hovered .catalog-img { transform: scale(1.03); }
 
 .catalog-card-body { padding: 18px; }
 .catalog-city { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--gray-500); margin-bottom: 4px; }
@@ -468,7 +468,7 @@
   padding: 0;
 }
 .card-slider-btn:hover { background: rgba(192,57,43,0.82); border-color: transparent; }
-.catalog-card:hover .card-slider-btn { opacity: 1; }
+.catalog-card.is-hovered .card-slider-btn { opacity: 1; }
 .card-slider-prev { left: 8px; }
 .card-slider-next { right: 8px; }
 
@@ -479,7 +479,7 @@
   z-index: 3;
   opacity: 0; transition: opacity 0.12s ease;
 }
-.catalog-card:hover .card-slider-dots { opacity: 1; }
+.catalog-card.is-hovered .card-slider-dots { opacity: 1; }
 .card-slider-dot {
   width: 5px; height: 5px; border-radius: 50%;
   background: rgba(255,255,255,0.5);
