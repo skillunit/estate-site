@@ -87,38 +87,33 @@ function updatePageMeta(country, city, deal) {
 
 function applyFiltersFromURL() {
   const params = new URLSearchParams(window.location.search);
+  if (!params.has('country') && !params.has('city') && !params.has('status') && !params.has('deal') && !params.has('type')) return;
+
   const country = params.get('country') || 'all';
-  const city = params.get('city') || 'all';
-  const status = params.get('status') || 'all';
-  const type = params.get('type') || 'all';
-  const deal = params.get('deal') || 'buy';
-  
-  // Если есть параметры - открываем каталог
-  if (params.has('country') || params.has('city') || params.has('status') || params.has('deal') || params.has('type')) {
-    // Устанавливаем селекты
-    const countryEl = document.querySelector('#page-catalog .filter-field--country .filter-select');
-    const cityEl = document.getElementById('citySelect');
-    const statusEl = document.getElementById('statusSelect');
-    const typeEl = document.getElementById('typeSelect');
-    const dealBtnBuy = document.getElementById('dealBtnBuy');
-    const dealBtnRent = document.getElementById('dealBtnRent');
-    
-    if (countryEl) countryEl.value = country;
-    if (cityEl) cityEl.value = city;
-    if (statusEl) statusEl.value = status;
-    if (typeEl) typeEl.value = type;
-    
-    // Переключаем deal type
-    if (deal === 'rent' && dealBtnRent) {
-      setDealType('rent');
-    } else if (dealBtnBuy) {
-      setDealType('buy');
-    }
-    
-    // Открываем каталог и фильтруем
-    showPage('catalog');
-    setTimeout(filterCatalog, 100);
-  }
+  const city    = params.get('city')    || 'all';
+  const status  = params.get('status')  || 'all';
+  const type    = params.get('type')    || 'all';
+  const deal    = params.get('deal')    || 'buy';
+
+  // Только заполняем DOM-элементы фильтров — showPage и filterCatalog вызовет страница сама
+  const countryEl = document.querySelector('#page-catalog .filter-field--country .filter-select');
+  const cityEl    = document.getElementById('citySelect');
+  const statusEl  = document.getElementById('statusSelect');
+  const typeEl    = document.getElementById('typeSelect');
+
+  if (countryEl) countryEl.value = country;
+  updateCityOptions(country);
+  if (cityEl)    cityEl.value    = city;
+  if (statusEl)  statusEl.value  = status;
+  if (typeEl)    typeEl.value    = type;
+
+  // deal type — только переключаем переменную и кнопки, без вызова filterCatalog
+  if (typeof currentDealType !== 'undefined') currentDealType = deal;
+  const dealBtnBuy  = document.getElementById('dealBtnBuy');
+  const dealBtnRent = document.getElementById('dealBtnRent');
+  if (dealBtnBuy)  dealBtnBuy.classList.toggle('active',  deal === 'buy');
+  if (dealBtnRent) dealBtnRent.classList.toggle('active', deal === 'rent');
+  updateStatusOptions(deal);
 }
 
 
