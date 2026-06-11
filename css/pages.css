@@ -1849,7 +1849,12 @@
   margin-top: -32px;
   box-shadow: 0 -8px 32px rgba(0,0,0,0.10);
   overflow: hidden;
-  border-top: none;  /* убираем красную полосу — скруглённые углы дают достаточно разделения */
+  border-top: none;
+}
+
+/* Компенсируем сдвиг — padding-top чтобы лейблы не попадали в зону перекрытия с hero */
+.catalog-hero + .filter-bar .filter-form {
+  padding-top: 44px;
 }
 
 /* catalog body then follows normally (no extra margin) */
