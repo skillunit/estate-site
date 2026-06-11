@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" type="image/x-icon" href="favicon.ico">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Избранное — Georgia Real Estate</title>
+<meta name="description" content="Ваши сохранённые объекты недвижимости в Грузии">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/pages.css">
+<link rel="stylesheet" href="css/components.css">
+<link rel="stylesheet" href="css/responsive.css">
+<style>
+  body { background: var(--white); }
+  .page { display: block !important; }
+
+  /* ── Favorites page hero ── */
+  .fav-hero {
+    background: var(--dark);
+    padding: 56px 0 48px;
+    position: relative;
+    overflow: hidden;
+  }
+  .fav-hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: linear-gradient(135deg, rgba(192,57,43,0.18) 0%, transparent 60%);
+    pointer-events: none;
+  }
+  .fav-hero-inner {
+    max-width: 1200px; margin: 0 auto; padding: 0 32px;
+    display: flex; align-items: flex-end; justify-content: space-between;
+    gap: 24px; flex-wrap: wrap;
+  }
+  .fav-hero-left {}
+  .fav-hero-label {
+    font-family: var(--font-head);
+    font-size: 0.65rem; font-weight: 700;
+    letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--red); margin-bottom: 10px;
+  }
+  .fav-hero-title {
+    font-family: var(--font-head);
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    font-weight: 800; color: var(--white);
+    line-height: 1.15; margin: 0;
+  }
+  .fav-hero-title svg {
+    display: inline-block; vertical-align: middle;
+    margin-right: 10px; margin-top: -4px;
+  }
+  .fav-hero-sub {
+    font-size: 0.9rem; color: rgba(255,255,255,0.5);
+    margin-top: 10px;
+  }
+  .fav-hero-count {
+    font-family: var(--font-head);
+    font-size: 0.8rem; font-weight: 600;
+    color: rgba(255,255,255,0.6);
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.1);
+    padding: 8px 18px; border-radius: 40px;
+    white-space: nowrap;
+    display: flex; align-items: center; gap: 8px;
+    align-self: flex-end;
+  }
+
+  /* ── Toolbar ── */
+  .fav-toolbar {
+    max-width: 1200px; margin: 0 auto; padding: 24px 32px 0;
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 16px; flex-wrap: wrap;
+  }
+  .fav-toolbar-left {
+    display: flex; align-items: center; gap: 12px;
+  }
+  .fav-sort-label {
+    font-size: 0.78rem; color: var(--gray-500);
+    font-weight: 500; white-space: nowrap;
+  }
+  .fav-sort-select {
+    height: 38px; padding: 0 32px 0 12px;
+    border: 1.5px solid var(--border); border-radius: 8px;
+    font-size: 0.82rem; font-family: var(--font-body);
+    color: var(--dark); background: var(--white);
+    cursor: pointer; appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23999' stroke-width='2.5'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    transition: border-color var(--transition);
+  }
+  .fav-sort-select:focus { outline: none; border-color: var(--red); }
+
+  .fav-clear-btn {
+    height: 38px; padding: 0 16px;
+    border: 1.5px solid var(--border); border-radius: 8px;
+    background: none; font-size: 0.78rem;
+    color: var(--gray-500); cursor: pointer;
+    display: flex; align-items: center; gap: 6px;
+    transition: var(--transition);
+    font-family: var(--font-body);
+  }
+  .fav-clear-btn:hover { border-color: var(--red); color: var(--red); }
+
+  /* ── Grid ── */
+  .fav-body {
+    max-width: 1200px; margin: 0 auto; padding: 24px 32px 80px;
+  }
+  .fav-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+  @media (max-width: 1024px) { .fav-grid { grid-template-columns: repeat(2,1fr); } }
+  @media (max-width: 600px)  { .fav-grid { grid-template-columns: 1fr; } }
+
+  /* ── Card extras ── */
+  .fav-card-added {
+    font-size: 0.7rem; color: var(--gray-400);
+    font-style: italic; margin-bottom: 4px;
+  }
+  .fav-card-actions {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-top: 12px;
+  }
+  .fav-delete-btn {
+    display: flex; align-items: center; gap: 5px;
+    background: none; border: 1px solid var(--border);
+    border-radius: 6px; padding: 6px 10px;
+    font-size: 0.72rem; color: var(--gray-500);
+    cursor: pointer; transition: var(--transition);
+    font-family: var(--font-body);
+  }
+  .fav-delete-btn:hover { border-color: var(--red); color: var(--red); }
+
+  /* ── Empty state ── */
+  #favEmpty {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 80px 20px;
+  }
+  .fav-empty-icon {
+    margin-bottom: 20px;
+    opacity: 0.2;
+    transform: scale(2.5);
+    display: inline-block;
+  }
+  .fav-empty-title {
+    font-family: var(--font-head);
+    font-size: 1.4rem; font-weight: 700;
+    color: var(--dark); margin-bottom: 10px;
+  }
+  .fav-empty-sub {
+    font-size: 0.9rem; color: var(--gray-500);
+    max-width: 340px; margin: 0 auto;
+    line-height: 1.6;
+  }
+
+  /* ── Confirm clear dialog ── */
+  .fav-confirm {
+    position: fixed; inset: 0; z-index: 4500;
+    background: rgba(0,0,0,0.5); backdrop-filter: blur(4px);
+    display: none; align-items: center; justify-content: center;
+    padding: 20px;
+  }
+  .fav-confirm.open { display: flex; }
+  .fav-confirm-box {
+    background: var(--white); border-radius: 16px;
+    padding: 36px; max-width: 380px; width: 100%;
+    text-align: center;
+    box-shadow: 0 24px 64px rgba(0,0,0,0.18);
+    animation: authModalIn 0.2s ease;
+  }
+  .fav-confirm-icon { font-size: 2rem; margin-bottom: 14px; }
+  .fav-confirm-title { font-family: var(--font-head); font-size: 1.1rem; font-weight: 700; color: var(--dark); margin-bottom: 10px; }
+  .fav-confirm-sub { font-size: 0.84rem; color: var(--gray-500); margin-bottom: 24px; }
+  .fav-confirm-btns { display: flex; gap: 10px; justify-content: center; }
+
+  @media (max-width: 768px) {
+    .fav-hero-inner { padding: 0 16px; }
+    .fav-toolbar { padding: 16px 16px 0; }
+    .fav-body { padding: 20px 16px 60px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header id="header">
+  <div class="header-inner">
+    <div class="logo" onclick="location.href='index.html'">
+      <svg class="logo-icon" viewBox="0 0 36 36" fill="none">
+        <rect width="36" height="36" fill="white"/>
+        <rect x="15.5" y="2" width="5" height="32" fill="#C0392B"/>
+        <rect x="2" y="15.5" width="32" height="5" fill="#C0392B"/>
+        <rect x="4" y="4" width="2.5" height="8" fill="#C0392B"/>
+        <rect x="1.5" y="6" width="7.5" height="2.5" fill="#C0392B"/>
+        <rect x="29.5" y="4" width="2.5" height="8" fill="#C0392B"/>
+        <rect x="27" y="6" width="7.5" height="2.5" fill="#C0392B"/>
+        <rect x="4" y="24" width="2.5" height="8" fill="#C0392B"/>
+        <rect x="1.5" y="27.5" width="7.5" height="2.5" fill="#C0392B"/>
+        <rect x="29.5" y="24" width="2.5" height="8" fill="#C0392B"/>
+        <rect x="27" y="27.5" width="7.5" height="2.5" fill="#C0392B"/>
+      </svg>
+      <div class="logo-text">
+        <span class="logo-text-top">Georgia</span>
+        <span class="logo-text-bot">Real Estate</span>
+      </div>
+    </div>
+
+    <nav class="header-nav" id="mainNav">
+      <a href="index.html">Главная</a>
+      <span class="nav-sep">|</span>
+      <a href="team.html">Команда</a>
+      <span class="nav-sep">|</span>
+      <a href="projects.html">Проекты</a>
+      <span class="nav-sep">|</span>
+      <a href="blog.html">Блог</a>
+      <span class="nav-sep">|</span>
+      <a href="contact.html" class="nav-contact-link">Связаться с нами</a>
+    </nav>
+
+    <div class="header-right">
+      <div class="header-phone">+995 32 2 123 456</div>
+      <div class="lang-switch">
+        <button class="lang-btn active">RU</button>
+        <span class="lang-sep-char">|</span>
+        <button class="lang-btn">EN</button>
+        <span class="lang-sep-char">|</span>
+        <button class="lang-btn">HE</button>
+      </div>
+      <div id="authBtnWrap"></div>
+      <button class="hamburger" id="hamburger" onclick="toggleMenu()">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- PAGE -->
+<div class="page page-body">
+
+  <!-- Hero -->
+  <div class="fav-hero">
+    <div class="fav-hero-inner">
+      <div class="fav-hero-left">
+        <div class="fav-hero-label">Личный кабинет</div>
+        <h1 class="fav-hero-title">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="#C0392B" stroke="#C0392B" stroke-width="0"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+          Избранное
+        </h1>
+        <div class="fav-hero-sub">Сохранённые объекты недвижимости</div>
+      </div>
+      <div class="fav-hero-count" id="favHeroCount">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+        <span id="favCount">0 объектов</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toolbar -->
+  <div class="fav-toolbar" id="favToolbar" style="display:none;">
+    <div class="fav-toolbar-left">
+      <span class="fav-sort-label">Сортировка:</span>
+      <select class="fav-sort-select" id="favSort" onchange="renderFavoritesPage()">
+        <option value="newest">Сначала новые</option>
+        <option value="oldest">Сначала старые</option>
+        <option value="price-asc">Цена: по возрастанию</option>
+        <option value="price-desc">Цена: по убыванию</option>
+      </select>
+    </div>
+    <button class="fav-clear-btn" onclick="openClearConfirm()">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/><path d="M9 6V4h6v2"/></svg>
+      Очистить всё
+    </button>
+  </div>
+
+  <!-- Grid -->
+  <div class="fav-body">
+    <div class="fav-grid" id="favGrid">
+      <div id="favEmpty" style="display:none;"></div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-grid">
+        <div>
+          <div class="footer-brand-name">
+            <svg width="22" height="22" viewBox="0 0 36 36" fill="none">
+              <rect width="36" height="36" fill="transparent"/>
+              <rect x="15.5" y="2" width="5" height="32" fill="#C0392B"/>
+              <rect x="2" y="15.5" width="32" height="5" fill="#C0392B"/>
+              <rect x="4" y="4" width="2.5" height="8" fill="#C0392B"/>
+              <rect x="1.5" y="6" width="7.5" height="2.5" fill="#C0392B"/>
+              <rect x="29.5" y="4" width="2.5" height="8" fill="#C0392B"/>
+              <rect x="27" y="6" width="7.5" height="2.5" fill="#C0392B"/>
+              <rect x="4" y="24" width="2.5" height="8" fill="#C0392B"/>
+              <rect x="1.5" y="27.5" width="7.5" height="2.5" fill="#C0392B"/>
+              <rect x="29.5" y="24" width="2.5" height="8" fill="#C0392B"/>
+              <rect x="27" y="27.5" width="7.5" height="2.5" fill="#C0392B"/>
+            </svg>
+            Georgia Real Estate
+          </div>
+          <div class="footer-brand-desc">Ваш надёжный партнёр на рынке недвижимости в Грузии.</div>
+          <div class="footer-socials">
+            <a class="footer-social" href="https://facebook.com/" target="_blank"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></a>
+            <a class="footer-social" href="https://t.me/" target="_blank"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221l-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12L7.19 13.67l-2.96-.924c-.643-.204-.657-.643.136-.953l11.57-4.461c.537-.194 1.006.131.958.889z"/></svg></a>
+            <a class="footer-social" href="https://instagram.com/" target="_blank"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></a>
+          </div>
+        </div>
+        <div>
+          <div class="footer-col-title">Меню</div>
+          <ul class="footer-links">
+            <li><a href="index.html">О компании</a></li>
+            <li><a href="projects.html">Недвижимость</a></li>
+            <li><a href="blog.html">Блог</a></li>
+            <li><a href="contact.html">Контакты</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="footer-col-title">Услуги</div>
+          <ul class="footer-links">
+            <li>Подбор недвижимости</li>
+            <li>Юридическое сопровождение</li>
+            <li>Управление недвижимостью</li>
+            <li>Инвестиционные консультации</li>
+          </ul>
+        </div>
+        <div>
+          <div class="footer-col-title">Контакты</div>
+          <div class="footer-contact">
+            <span><a href="tel:+995322123456">+995 32 2 123 456</a></span>
+            <span><a href="mailto:info@georgia-re.com">info@georgia-re.com</a></span>
+            <span>г. Тбилиси, ул. Руставели 15</span>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span class="footer-copy">© 2026 Georgia Real Estate</span>
+        <a class="footer-policy" href="index.html#privacy">Политика конфиденциальности</a>
+      </div>
+    </div>
+  </footer>
+</div>
+
+<!-- Clear confirm dialog -->
+<div class="fav-confirm" id="favConfirm">
+  <div class="fav-confirm-box">
+    <div class="fav-confirm-icon">🗑️</div>
+    <div class="fav-confirm-title">Очистить избранное?</div>
+    <div class="fav-confirm-sub">Все сохранённые объекты будут удалены. Это действие нельзя отменить.</div>
+    <div class="fav-confirm-btns">
+      <button class="btn" style="border:1.5px solid var(--border);background:none;color:var(--gray-700);" onclick="closeClearConfirm()">Отмена</button>
+      <button class="btn btn-primary" onclick="confirmClearAll()">Очистить</button>
+    </div>
+  </div>
+</div>
+
+<script>
+function toggleMenu() {
+  document.getElementById('mainNav').classList.toggle('open');
+  document.getElementById('hamburger').classList.toggle('open');
+}
+function openClearConfirm() {
+  document.getElementById('favConfirm').classList.add('open');
+}
+function closeClearConfirm() {
+  document.getElementById('favConfirm').classList.remove('open');
+}
+function confirmClearAll() {
+  const u = typeof Auth !== 'undefined' ? Auth.currentUser() : null;
+  if (!u) return;
+  const m = getFavsMap();
+  m[u.email] = {};
+  saveFavsMap(m);
+  closeClearConfirm();
+  renderFavoritesPage();
+  updateFavBadge();
+}
+</script>
+
+<!-- Load catalog data first (MAP_PROPERTIES), then favorites logic -->
+<script src="js/catalog.js"></script>
+<script src="js/auth.js"></script>
+<script src="js/favorites.js"></script>
+<script src="js/animations.js"></script>
+<script>
+// Init page after all scripts loaded
+document.addEventListener('DOMContentLoaded', () => {
+  // Wait for Auth to render, then render favorites
+  setTimeout(() => {
+    const toolbar = document.getElementById('favToolbar');
+    const u = typeof Auth !== 'undefined' ? Auth.currentUser() : null;
+    if (u && toolbar) toolbar.style.display = '';
+    renderFavoritesPage();
+
+    // Update count element
+    const countEl = document.getElementById('favCount');
+    if (countEl) {
+      const n = getFavsCount();
+      countEl.textContent = plural(n, 'объект', 'объекта', 'объектов');
+    }
+  }, 100);
+});
+</script>
+</body>
+</html>
