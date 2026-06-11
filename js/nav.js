@@ -372,23 +372,41 @@ function openArticle(imgUrl) {
 // ── DEAL TYPE TOGGLE ──
 let currentDealType = 'buy';
 
+const STATUS_OPTIONS = {
+  buy:  [
+    ['all',          'Любой статус'],
+    ['ready',        'Сдан в эксплуатацию'],
+    ['construction', 'На стадии строительства'],
+    ['investment',   'Инвестиция'],
+    ['sale',         'Эксклюзив'],
+  ],
+  rent: [
+    ['all',       'Любой статус'],
+    ['longterm',  'Долгосрочная аренда'],
+    ['shortterm', 'Краткосрочная аренда'],
+    ['daily',     'Посуточно'],
+  ],
+};
+
+function updateStatusOptions(type) {
+  const statusSelect = document.getElementById('statusSelect');
+  if (!statusSelect) return;
+  statusSelect.innerHTML = STATUS_OPTIONS[type]
+    .map(([v, l]) => `<option value="${v}">${l}</option>`)
+    .join('');
+}
+
 function setDealType(type) {
   currentDealType = type;
   document.getElementById('dealBtnBuy').classList.toggle('active', type === 'buy');
   document.getElementById('dealBtnRent').classList.toggle('active', type === 'rent');
-
-  // Show only relevant status options
-  const statusSelect = document.getElementById('statusSelect');
-  if (statusSelect) {
-    Array.from(statusSelect.options).forEach(opt => {
-      const deal = opt.dataset.deal;
-      opt.hidden = deal !== 'all' && deal !== type;
-    });
-    statusSelect.value = 'all';
-  }
-
+  updateStatusOptions(type);
   filterCatalog();
 }
+
+document.addEventListener('DOMContentLoaded', function() {
+  updateStatusOptions('buy');
+});
 
 // ── CUSTOM SORT DROPDOWN ──
 function toggleSortDropdown(e) {
