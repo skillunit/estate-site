@@ -361,6 +361,8 @@
   height: 100%;
   min-height: 180px;
   flex-shrink: 0;
+  position: relative;
+  overflow: hidden;
 }
 .catalog-grid.catalog-list-view .catalog-img {
   aspect-ratio: unset;
@@ -2172,3 +2174,11 @@
 .fav-body > *, .hist-body > * { max-width: 1200px; margin-left: auto; margin-right: auto; }
 .fav-body { padding: 8px 32px 80px; }
 .hist-body { padding: 8px 32px 80px; }
+
+/* list-view: кнопка избранного — правый нижний угол фото */
+.catalog-grid.catalog-list-view .card-fav-inline {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  z-index: 4;
+}
