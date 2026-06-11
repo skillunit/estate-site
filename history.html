@@ -20,133 +20,29 @@
   body { background: var(--white); }
   .page { display: block !important; }
 
-  /* ── Hero ── */
-  .hist-hero {
-    background: var(--dark);
-    padding: 56px 0 48px;
-    position: relative; overflow: hidden;
-  }
-  .hist-hero::before {
-    content: '';
-    position: absolute; inset: 0;
-    background: linear-gradient(135deg, rgba(41,128,185,0.15) 0%, transparent 60%);
-    pointer-events: none;
-  }
-  .hist-hero-inner {
-    max-width: 1200px; margin: 0 auto; padding: 0 32px;
-    display: flex; align-items: flex-end; justify-content: space-between;
-    gap: 24px; flex-wrap: wrap;
-  }
-  .hist-hero-label {
-    font-family: var(--font-head); font-size: 0.65rem; font-weight: 700;
-    letter-spacing: 0.18em; text-transform: uppercase;
-    color: #5DADE2; margin-bottom: 10px;
-  }
-  .hist-hero-title {
-    font-family: var(--font-head);
-    font-size: clamp(1.8rem, 4vw, 2.8rem);
-    font-weight: 800; color: var(--white); line-height: 1.15; margin: 0;
-  }
-  .hist-hero-title svg {
-    display: inline-block; vertical-align: middle;
-    margin-right: 10px; margin-top: -4px;
-  }
-  .hist-hero-sub { font-size: 0.9rem; color: rgba(255,255,255,0.5); margin-top: 10px; }
-  .hist-hero-count {
-    font-family: var(--font-head); font-size: 0.8rem; font-weight: 600;
-    color: rgba(255,255,255,0.6);
-    background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.1);
-    padding: 8px 18px; border-radius: 40px; white-space: nowrap;
-    display: flex; align-items: center; gap: 8px; align-self: flex-end;
-  }
-
-  /* ── Toolbar ── */
-  .hist-toolbar {
-    max-width: 1200px; margin: 0 auto; padding: 24px 32px 0;
-    display: flex; align-items: center; justify-content: space-between;
-    gap: 16px; flex-wrap: wrap;
-  }
-  .hist-sort-label { font-size: 0.78rem; color: var(--gray-500); font-weight: 500; white-space: nowrap; }
-  .hist-sort-select {
-    height: 38px; padding: 0 32px 0 12px;
-    border: 1.5px solid var(--border); border-radius: 8px;
-    font-size: 0.82rem; font-family: var(--font-body);
-    color: var(--dark); background: var(--white); cursor: pointer; appearance: none;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23999' stroke-width='2.5'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
-    background-repeat: no-repeat; background-position: right 10px center;
-    transition: border-color var(--transition);
-  }
-  .hist-sort-select:focus { outline: none; border-color: #2980B9; }
-
-  .hist-clear-btn {
-    height: 38px; padding: 0 16px;
-    border: 1.5px solid var(--border); border-radius: 8px;
-    background: none; font-size: 0.78rem; color: var(--gray-500);
-    cursor: pointer; display: flex; align-items: center; gap: 6px;
-    transition: var(--transition); font-family: var(--font-body);
-  }
-  .hist-clear-btn:hover { border-color: var(--red); color: var(--red); }
-
   /* ── Grid ── */
-  .hist-body { max-width: 1200px; margin: 0 auto; padding: 24px 32px 80px; }
-  .hist-grid {
-    display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
-  }
+  .hist-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
   @media (max-width: 1024px) { .hist-grid { grid-template-columns: repeat(2,1fr); } }
   @media (max-width: 600px)  { .hist-grid { grid-template-columns: 1fr; } }
 
   /* ── Card extras ── */
-  .hist-viewed-at {
-    display: flex; align-items: center; gap: 5px;
-    font-size: 0.7rem; color: #5DADE2; font-weight: 500;
-    margin-bottom: 5px;
-  }
-  .hist-card-actions {
-    display: flex; align-items: center; justify-content: space-between;
-    margin-top: 12px;
-  }
+  .hist-viewed-at { display: flex; align-items: center; gap: 5px; font-size: 0.7rem; color: #5DADE2; font-weight: 500; margin-bottom: 5px; }
+  .hist-card-actions { display: flex; align-items: center; justify-content: space-between; margin-top: 12px; }
 
   /* ── Empty state ── */
-  #histEmpty {
-    grid-column: 1 / -1; text-align: center; padding: 80px 20px;
-  }
-  .hist-empty-icon {
-    margin-bottom: 24px; opacity: 0.18;
-    transform: scale(2.5); display: inline-block;
-    color: var(--gray-500);
-  }
-  .hist-empty-title {
-    font-family: var(--font-head); font-size: 1.4rem; font-weight: 700;
-    color: var(--dark); margin-bottom: 10px;
-  }
-  .hist-empty-sub {
-    font-size: 0.9rem; color: var(--gray-500);
-    max-width: 340px; margin: 0 auto; line-height: 1.6;
-  }
+  #histEmpty { grid-column: 1 / -1; text-align: center; padding: 80px 20px; }
+  .hist-empty-icon { margin-bottom: 24px; opacity: 0.18; transform: scale(2.5); display: inline-block; color: var(--gray-500); }
+  .hist-empty-title { font-family: var(--font-head); font-size: 1.4rem; font-weight: 700; color: var(--dark); margin-bottom: 10px; }
+  .hist-empty-sub { font-size: 0.9rem; color: var(--gray-500); max-width: 340px; margin: 0 auto; line-height: 1.6; }
 
   /* ── Confirm dialog ── */
-  .hist-confirm {
-    position: fixed; inset: 0; z-index: 4500;
-    background: rgba(0,0,0,0.5); backdrop-filter: blur(4px);
-    display: none; align-items: center; justify-content: center; padding: 20px;
-  }
+  .hist-confirm { position: fixed; inset: 0; z-index: 4500; background: rgba(0,0,0,0.5); backdrop-filter: blur(4px); display: none; align-items: center; justify-content: center; padding: 20px; }
   .hist-confirm.open { display: flex; }
-  .hist-confirm-box {
-    background: var(--white); border-radius: 16px; padding: 36px;
-    max-width: 380px; width: 100%; text-align: center;
-    box-shadow: 0 24px 64px rgba(0,0,0,0.18);
-    animation: authModalIn 0.2s ease;
-  }
+  .hist-confirm-box { background: var(--white); border-radius: 16px; padding: 36px; max-width: 380px; width: 100%; text-align: center; box-shadow: 0 24px 64px rgba(0,0,0,0.18); animation: authModalIn 0.2s ease; }
   .hist-confirm-icon { font-size: 2rem; margin-bottom: 14px; }
   .hist-confirm-title { font-family: var(--font-head); font-size: 1.1rem; font-weight: 700; color: var(--dark); margin-bottom: 10px; }
   .hist-confirm-sub { font-size: 0.84rem; color: var(--gray-500); margin-bottom: 24px; }
   .hist-confirm-btns { display: flex; gap: 10px; justify-content: center; }
-
-  @media (max-width: 768px) {
-    .hist-hero-inner { padding: 0 16px; }
-    .hist-toolbar { padding: 16px 16px 0; }
-    .hist-body { padding: 20px 16px 60px; }
-  }
 </style>
 </head>
 <body>
@@ -206,20 +102,22 @@
 <!-- PAGE -->
 <div class="page page-body">
 
-  <!-- Hero -->
+  <!-- Hero with parallax -->
   <div class="hist-hero">
-    <div class="hist-hero-inner">
+    <div class="hist-hero-bg"></div>
+    <div class="hist-hero-overlay"></div>
+    <div class="hist-hero-content">
       <div>
         <div class="hist-hero-label">Личный кабинет</div>
         <h1 class="hist-hero-title">
-          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#5DADE2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#7EC8E3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
           </svg>
           История просмотров
         </h1>
         <div class="hist-hero-sub">Объекты, которые вы смотрели</div>
       </div>
-      <div class="hist-hero-count">
+      <div class="hist-hero-badge">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
         <span id="histCount">0 объектов</span>
       </div>

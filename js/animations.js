@@ -160,6 +160,8 @@
     '.blog-hero-bg',
     '.contacts-hero-bg',
     '.blog-article-hero-bg',
+    '.fav-hero-bg',
+    '.hist-hero-bg',
   ];
 
   var PARALLAX_FACTOR = 0.38; // bg moves at 38% of scroll speed
