@@ -30,7 +30,6 @@ function updateURLParams() {
   const deal = dealBuy?.classList.contains('active') ? 'buy' : 'rent';
   
   const params = new URLSearchParams();
-  params.set('page', 'catalog');
   params.set('deal', deal);
   
   if (country !== 'all') params.set('country', country);
@@ -95,7 +94,7 @@ function applyFiltersFromURL() {
   const deal = params.get('deal') || 'buy';
   
   // Если есть параметры - открываем каталог
-  if (params.has('country') || params.has('city') || params.has('status') || params.get('page') === 'catalog') {
+  if (params.has('country') || params.has('city') || params.has('status') || params.has('deal') || params.has('type')) {
     // Устанавливаем селекты
     const countryEl = document.querySelector('#page-catalog .filter-field--country .filter-select');
     const cityEl = document.getElementById('citySelect');
