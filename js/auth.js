@@ -73,8 +73,13 @@ const Auth = (() => {
      UI
   ───────────────────────────────── */
 
-  /* Inject modal + overlay HTML once */
+  /* Inject modal + overlay HTML — always rebuild to avoid stale cache */
   function injectModal() {
+    // Remove stale injected elements so updated HTML is always used
+    ['authOverlay', 'userDropdown'].forEach(id => {
+      const el = document.getElementById(id);
+      if (el) el.remove();
+    });
     if (document.getElementById('authModal')) return;
     const html = `
     <!-- Auth Overlay -->
