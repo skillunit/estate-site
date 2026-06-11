@@ -408,7 +408,7 @@
   border: 1px solid var(--border);
   border-radius: var(--radius);
   overflow: hidden; cursor: pointer;
-  transition: box-shadow 0.15s ease, transform 0.15s ease;
+  transition: box-shadow 0.06s ease, transform 0.15s ease;
 }
 .catalog-card:hover { box-shadow: var(--shadow-lg); transform: translateY(-3px); }
 .catalog-card.hidden { display: none; }
