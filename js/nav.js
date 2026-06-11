@@ -90,7 +90,19 @@ function onCountryChange(select) {
   updateCityOptions(country);
   const citySelect = document.getElementById('citySelect');
   if (citySelect) citySelect.value = 'all';
+  const statusSelect = document.getElementById('statusSelect');
+  if (statusSelect) statusSelect.value = 'all';
+  const typeSelect = document.getElementById('typeSelect');
+  if (typeSelect) typeSelect.value = 'all';
+  ['priceMin','priceMax','areaMin','areaMax'].forEach(id => {
+    const el = document.getElementById(id); if (el) el.value = '';
+  });
+  const roomsVal = document.getElementById('roomsVal');
+  if (roomsVal) roomsVal.value = 'all';
+  document.querySelectorAll('.rooms-btn').forEach(b => b.classList.toggle('active', b.dataset.val === 'all'));
   updateCatalogHeadline(country);
+  renderCatalogGrid(country, 'all', 'all', 'all', {});
+  renderMapMarkers(country, 'all', 'all', 'all', {});
 }
 
 function filterCatalog() {
