@@ -1,122 +1,4 @@
 // ── NAVIGATION ──
-
-// ── SEO: URL PARAMS & META TAGS ──
-const CITY_LABELS = {
-  'tbilisi': 'Тбилиси',
-  'batumi': 'Батуми',
-  'gonio': 'Гонио',
-  'kakheti': 'Кахетия',
-  'bakuriani': 'Бакуриани',
-  'new-york': 'Нью-Йорк',
-  'miami': 'Майами',
-  'dubai': 'Дубай',
-  'limassol': 'Лимасол',
-  'paphos': 'Пафос',
-  'athens': 'Афины',
-  'mykonos': 'Миконос',
-};
-
-function updateURLParams() {
-  const countryEl = document.querySelector('#page-catalog .filter-field--country .filter-select');
-  const cityEl = document.getElementById('citySelect');
-  const statusEl = document.getElementById('statusSelect');
-  const typeEl = document.getElementById('typeSelect');
-  const dealBuy = document.getElementById('dealBtnBuy');
-  
-  const country = countryEl?.value || 'all';
-  const city = cityEl?.value || 'all';
-  const status = statusEl?.value || 'all';
-  const type = typeEl?.value || 'all';
-  const deal = dealBuy?.classList.contains('active') ? 'buy' : 'rent';
-  
-  const params = new URLSearchParams();
-  params.set('deal', deal);
-  
-  if (country !== 'all') params.set('country', country);
-  if (city !== 'all') params.set('city', city);
-  if (status !== 'all') params.set('status', status);
-  if (type !== 'all') params.set('type', type);
-  
-  // Меняем URL без перезагрузки
-  window.history.replaceState({}, '', '?' + params.toString());
-  
-  // Обновляем мета-теги для SEO
-  updatePageMeta(country, city, deal);
-}
-
-function updatePageMeta(country, city, deal) {
-  const countryNames = COUNTRY_LABELS;
-  const dealLabel = deal === 'rent' ? 'Аренда' : 'Покупка';
-  const cityName = CITY_LABELS[city] || city;
-  const countryName = COUNTRY_LABELS[country] || country;
-  
-  let title, description;
-  
-  if (city !== 'all') {
-    title = `${dealLabel} ${city === 'all' ? '' : 'в ' + cityName} | Georgia Real Estate`;
-    description = `${dealLabel} недвижимости в ${cityName}. Выгодные предложения квартир, апартаментов и вилл на Georgia Real Estate. Инвестиции и жилье.`;
-  } else if (country !== 'all') {
-    title = `${dealLabel} недвижимости в ${countryName} | Georgia Real Estate`;
-    description = `${dealLabel} недвижимости в ${countryName}. Качественные объекты на Georgia Real Estate. Инвестиции, апартаменты и коттеджи.`;
-  } else {
-    title = `${dealLabel} недвижимости | Georgia Real Estate`;
-    description = `${dealLabel} недвижимости в Грузии, США, ОАЭ и других странах. Georgia Real Estate - надежный партнер в инвестициях.`;
-  }
-  
-  // Обновляем title
-  document.title = title;
-  
-  // Обновляем meta description
-  const metaDesc = document.querySelector('meta[name="description"]');
-  if (metaDesc) metaDesc.setAttribute('content', description);
-  
-  // Обновляем Open Graph для соцсетей
-  const ogTitle = document.querySelector('meta[property="og:title"]');
-  if (ogTitle) ogTitle.setAttribute('content', title);
-  
-  const ogDesc = document.querySelector('meta[property="og:description"]');
-  if (ogDesc) ogDesc.setAttribute('content', description);
-  
-  const ogUrl = document.querySelector('meta[property="og:url"]');
-  if (ogUrl) ogUrl.setAttribute('content', window.location.href);
-  
-  // Обновляем canonical
-  const canonical = document.querySelector('link[rel="canonical"]');
-  if (canonical) canonical.setAttribute('href', window.location.href);
-}
-
-function applyFiltersFromURL() {
-  const params = new URLSearchParams(window.location.search);
-  if (!params.has('country') && !params.has('city') && !params.has('status') && !params.has('deal') && !params.has('type')) return;
-
-  const country = params.get('country') || 'all';
-  const city    = params.get('city')    || 'all';
-  const status  = params.get('status')  || 'all';
-  const type    = params.get('type')    || 'all';
-  const deal    = params.get('deal')    || 'buy';
-
-  // Только заполняем DOM-элементы фильтров — showPage и filterCatalog вызовет страница сама
-  const countryEl = document.querySelector('#page-catalog .filter-field--country .filter-select');
-  const cityEl    = document.getElementById('citySelect');
-  const statusEl  = document.getElementById('statusSelect');
-  const typeEl    = document.getElementById('typeSelect');
-
-  if (countryEl) countryEl.value = country;
-  updateCityOptions(country);
-  if (cityEl)    cityEl.value    = city;
-  if (statusEl)  statusEl.value  = status;
-  if (typeEl)    typeEl.value    = type;
-
-  // deal type — только переключаем переменную и кнопки, без вызова filterCatalog
-  if (typeof currentDealType !== 'undefined') currentDealType = deal;
-  const dealBtnBuy  = document.getElementById('dealBtnBuy');
-  const dealBtnRent = document.getElementById('dealBtnRent');
-  if (dealBtnBuy)  dealBtnBuy.classList.toggle('active',  deal === 'buy');
-  if (dealBtnRent) dealBtnRent.classList.toggle('active', deal === 'rent');
-  updateStatusOptions(deal);
-}
-
-
 function showPage(id) {
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
   document.getElementById('page-' + id).classList.add('active');
@@ -172,7 +54,6 @@ function goToCountry(country) {
   showPage('catalog');
   renderCatalogGrid(dataCountry, 'all', 'all');
   renderMapMarkers(dataCountry, 'all', 'all');
-  updateURLParams();
 }
 
 const COUNTRY_LABELS = { 'all': 'Грузии', 'usa': 'США', 'uae': 'ОАЭ', 'cyprus': 'Кипре', 'greece': 'Греции' };
@@ -222,7 +103,6 @@ function onCountryChange(select) {
   updateCatalogHeadline(country);
   renderCatalogGrid(country, 'all', 'all', 'all', {});
   renderMapMarkers(country, 'all', 'all', 'all', {});
-  updateURLParams();
 }
 
 function filterCatalog() {
@@ -250,7 +130,6 @@ function filterCatalog() {
   updateCatalogHeadline(country);
   renderCatalogGrid(country, city, status, type, extra);
   renderMapMarkers(country, city, status, type, extra);
-  updateURLParams();
 }
 
 // ── VIDEO ──
@@ -527,7 +406,6 @@ function setDealType(type) {
 
 document.addEventListener('DOMContentLoaded', function() {
   updateStatusOptions('buy');
-  applyFiltersFromURL();
 });
 
 // ── CUSTOM SORT DROPDOWN ──
@@ -600,5 +478,15 @@ function cardSlide(e, btn, dir) {
   });
 }
 
-// URL params handled by applyFiltersFromURL()
-
+// ── URL PARAM: ?page=catalog открывает нужную страницу ──
+(function() {
+  const params = new URLSearchParams(window.location.search);
+  const page = params.get('page');
+  if (page) {
+    window.addEventListener('DOMContentLoaded', function() {
+      if (document.getElementById('page-' + page)) {
+        showPage(page);
+      }
+    });
+  }
+})();
