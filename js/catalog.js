@@ -750,6 +750,7 @@ function renderCatalogGrid(countryVal, cityVal, statusVal, typeVal, extra) {
 
   // Восстанавливаем сохранённый вид после перерендера грида
   if (typeof initViewMode === 'function') initViewMode();
+  bindCardHover();
 }
 
 // ── Открыть страницу детали для конкретного объекта ──
@@ -1451,28 +1452,16 @@ function initDetailMap(prop) {
 }
 
 
-// ── Надёжный hover на карточках каталога (через JS-делегирование) ──
-// CSS :hover глючит когда overflow:hidden + абсолютные дочерние элементы
-(function() {
-  let hoveredCard = null;
-
-  document.addEventListener('mouseover', function(e) {
-    const card = e.target.closest('#catalogGrid .catalog-card');
-    if (card === hoveredCard) return;
-    if (hoveredCard) hoveredCard.classList.remove('is-hovered');
-    hoveredCard = card;
-    if (hoveredCard) hoveredCard.classList.add('is-hovered');
+// ── Hover на карточках каталога ──
+// mouseenter/mouseleave не всплывают → нет ложных срабатываний от дочерних элементов
+function bindCardHover() {
+  const grid = document.getElementById('catalogGrid');
+  if (!grid) return;
+  grid.querySelectorAll('.catalog-card').forEach(card => {
+    card.addEventListener('mouseenter', () => card.classList.add('is-hovered'));
+    card.addEventListener('mouseleave', () => card.classList.remove('is-hovered'));
   });
-
-  document.addEventListener('mouseout', function(e) {
-    if (!hoveredCard) return;
-    // Проверяем что мышь ушла именно из карточки, а не просто в дочерний элемент
-    const to = e.relatedTarget;
-    if (to && hoveredCard.contains(to)) return;
-    hoveredCard.classList.remove('is-hovered');
-    hoveredCard = null;
-  });
-})();
+}
 let currentViewMode = localStorage.getItem('grre_viewmode') || 'grid';
 
 function setViewMode(mode) {
