@@ -538,14 +538,27 @@
    CATALOG MAP
 ═══════════════════════════════════ */
 .catalog-map-wrap {
-  position: sticky;
-  top: 64px; /* = header height */
-  z-index: 100;
+  position: relative;
   border-bottom: 1px solid var(--border);
   overflow: hidden;
   transition: height 0.4s cubic-bezier(0.4,0,0.2,1);
-  height: 360px;
+  height: 260px;
   box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+}
+/* JS adds this class when map should be fixed */
+.catalog-map-wrap.map-is-sticky {
+  position: fixed;
+  top: 64px;
+  left: 0;
+  right: 0;
+  z-index: 200;
+  border-bottom: 1px solid var(--border);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+}
+/* Placeholder keeps the space when map is fixed */
+#catalogMapPlaceholder {
+  display: none;
+  height: 260px;
 }
 .catalog-map-wrap.collapsed { height: 0; border-bottom: none; }
 #catalogMap {
@@ -602,8 +615,7 @@
   background: #fff;
   color: var(--red, #C0392B);
   border-color: var(--red, #C0392B);
-  transform: scale(1.25);
-  box-shadow: 0 6px 24px rgba(192,57,43,0.65);
+  box-shadow: 0 4px 16px rgba(192,57,43,0.55);
   z-index: 9999 !important;
 }
 .leaflet-popup-content-wrapper {
@@ -623,7 +635,9 @@
 .map-popup-link { display: inline-block; font-size: 0.65rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--red, #C0392B); cursor: pointer; }
 .map-popup-link:hover { text-decoration: underline; }
 @media (max-width: 768px) {
-  .catalog-map-wrap { height: 260px; position: relative; top: auto; box-shadow: none; }
+  .catalog-map-wrap,
+  .catalog-map-wrap.map-is-sticky { position: relative; top: auto; left: auto; right: auto; height: 240px; box-shadow: none; }
+  #catalogMapPlaceholder { display: none !important; }
   .map-show-row { padding: 10px 16px 0; }
 }
 
@@ -2322,4 +2336,5 @@
   color: var(--gray-500);
   text-align: center;
 }
+
 
