@@ -189,7 +189,7 @@
         </div>
         <div class="filter-sep-v"></div>
         <div class="filter-field filter-field--price">
-          <label>Цена, $</label>
+          <label id="priceCurrencyLabel">Цена, $</label>
           <div class="filter-range-inputs">
             <input class="filter-range-input" type="text" id="priceMin" placeholder="От" oninput="formatPriceInput(this)">
             <span class="filter-range-sep">—</span>
@@ -1158,6 +1158,11 @@ window.resetCatalogFilter = function() {
 // На projects.html начальная страница — catalog, не home
 document.addEventListener('DOMContentLoaded', function() {
   showPage('catalog');
+  // Восстанавливаем подпись фильтра цены по сохранённой валюте
+  var priceLabel = document.getElementById('priceCurrencyLabel');
+  if (priceLabel && typeof currentCurrency !== 'undefined' && typeof CURRENCY_SYMBOLS !== 'undefined') {
+    priceLabel.textContent = 'Цена, ' + CURRENCY_SYMBOLS[currentCurrency];
+  }
 });
 </script>
 
@@ -1180,3 +1185,4 @@ document.addEventListener('DOMContentLoaded', function() {
 <script src="js/history.js?v=1"></script>
 </body>
 </html>
+
