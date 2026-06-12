@@ -1215,7 +1215,6 @@ function toggleCatalogMap() {
   const wrap = document.getElementById('catalogMapWrap');
   const btn  = document.getElementById('mapToggleBtn');
   const showRow = document.getElementById('mapShowRow');
-  const placeholder = document.getElementById('catalogMapPlaceholder');
   mapVisible = !mapVisible;
   if (mapVisible) {
     wrap.classList.remove('collapsed');
@@ -1223,9 +1222,6 @@ function toggleCatalogMap() {
     btn.innerHTML = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 6l7-3 8 3 7-3v15l-7 3-8-3-7 3V6z"/><line x1="8" y1="3" x2="8" y2="18"/><line x1="16" y1="6" x2="16" y2="21"/></svg> Скрыть карту`;
     setTimeout(() => catalogMap && catalogMap.invalidateSize(), 420);
   } else {
-    // Remove sticky state before collapsing
-    wrap.classList.remove('map-is-sticky');
-    if (placeholder) placeholder.style.display = 'none';
     wrap.classList.add('collapsed');
     showRow.classList.add('visible');
     btn.innerHTML = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 6l7-3 8 3 7-3v15l-7 3-8-3-7 3V6z"/><line x1="8" y1="3" x2="8" y2="18"/><line x1="16" y1="6" x2="16" y2="21"/></svg> Показать карту`;
@@ -1467,61 +1463,6 @@ function renderFeatured() {
 // Вызов при загрузке страницы
 document.addEventListener('DOMContentLoaded', () => {
   renderFeatured();
-
-  // ── Sticky map via scroll (works around overflow:clip on .page) ──
-  (function() {
-    var wrap = document.getElementById('catalogMapWrap');
-    if (!wrap) return;
-
-    // Insert placeholder right after the map wrap
-    var placeholder = document.createElement('div');
-    placeholder.id = 'catalogMapPlaceholder';
-    wrap.parentNode.insertBefore(placeholder, wrap.nextSibling);
-
-    var HEADER_H = 64;
-    var ticking = false;
-
-    function onScroll() {
-      if (ticking) return;
-      ticking = true;
-      requestAnimationFrame(function() {
-        ticking = false;
-        // Only on desktop and when map is visible
-        if (window.innerWidth <= 768) {
-          wrap.classList.remove('map-is-sticky');
-          placeholder.style.display = 'none';
-          return;
-        }
-        if (wrap.classList.contains('collapsed')) {
-          wrap.classList.remove('map-is-sticky');
-          placeholder.style.display = 'none';
-          return;
-        }
-
-        var mapH = wrap.offsetHeight;
-        var placeholderTop = placeholder.getBoundingClientRect().top + window.scrollY;
-        var triggerY = placeholderTop - HEADER_H;
-
-        if (window.scrollY >= triggerY) {
-          if (!wrap.classList.contains('map-is-sticky')) {
-            wrap.classList.add('map-is-sticky');
-            placeholder.style.display = 'block';
-            placeholder.style.height = mapH + 'px';
-            if (catalogMap) setTimeout(function(){ catalogMap.invalidateSize(); }, 20);
-          }
-        } else {
-          if (wrap.classList.contains('map-is-sticky')) {
-            wrap.classList.remove('map-is-sticky');
-            placeholder.style.display = 'none';
-            if (catalogMap) setTimeout(function(){ catalogMap.invalidateSize(); }, 20);
-          }
-        }
-      });
-    }
-
-    window.addEventListener('scroll', onScroll, { passive: true });
-    window.addEventListener('resize', onScroll, { passive: true });
-  })();
 });
 
 // ── DETAIL MAP ──
@@ -1606,6 +1547,7 @@ function setViewMode(mode) {
 function initViewMode() {
   setViewMode(currentViewMode);
 }
+
 
 
 
