@@ -571,6 +571,10 @@ function favCardBtn(id) {
   return `<button class="card-fav-inline${filled ? ' fav-active' : ''}" data-fav-id="${id}" onclick="handleFavClick(event,'${id}')" aria-label="В избранное">${icon}</button>`;
 }
 
+function shareCardBtn(id) {
+  return `<button class="card-share-inline" onclick="event.stopPropagation();openSharePopup('${id}')" aria-label="Поделиться"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></button>`;
+}
+
 function getPropBadge(p) {
   if (p.deal === 'rent' && RENT_BADGE[p.status]) {
     return RENT_BADGE[p.status];
@@ -664,6 +668,7 @@ function renderRecentlyViewed() {
         </div>
         <span class="prop-badge ${getPropBadge(p).cls}" style="position:absolute;top:12px;left:12px;z-index:2;">${getPropBadge(p).text}</span>
         ${p.top ? '<span class="top-label" style="z-index:2;">★ ТОП</span>' : ''}
+        ${shareCardBtn(p.id)}
         ${favCardBtn(p.id)}
       </div>
       <div class="catalog-card-body">
@@ -817,6 +822,7 @@ function renderCatalogGrid(countryVal, cityVal, statusVal, typeVal, extra) {
         </div>
         <span class="prop-badge ${getPropBadge(p).cls}" style="position:absolute;top:12px;left:12px;z-index:2;">${getPropBadge(p).text}</span>
         ${p.top ? '<span class="top-label" style="z-index:2;">★ ТОП</span>' : ''}
+        ${shareCardBtn(p.id)}
         ${favCardBtn(p.id)}
       </div>
       <div class="catalog-card-body">
@@ -1472,6 +1478,7 @@ function renderRelated(currentId) {
       <div style="position:relative;overflow:hidden;">
         <img class="catalog-img" src="${p.img}" alt="${p.name}">
         <span class="prop-badge ${getPropBadge(p).cls}" style="position:absolute;top:12px;left:12px;">${getPropBadge(p).text}</span>
+        ${shareCardBtn(p.id)}
         ${favCardBtn(p.id)}
       </div>
       <div class="catalog-card-body">
@@ -1577,6 +1584,7 @@ function renderFeatured() {
         </div>
         <span class="prop-badge ${getPropBadge(p).cls}" style="position:absolute;top:12px;left:12px;z-index:2;">${getPropBadge(p).text}</span>
         <span class="top-label" style="z-index:2;">★ ТОП</span>
+        ${shareCardBtn(p.id)}
         ${favCardBtn(p.id)}
       </div>
       <div class="catalog-card-body">
@@ -1692,6 +1700,7 @@ function setViewMode(mode) {
 function initViewMode() {
   setViewMode(currentViewMode);
 }
+
 
 
 
