@@ -31,6 +31,14 @@ function setSearchTab(el) {
 
 // ── CATALOG FILTER ──
 function goToCountry(country) {
+  // Если нет страницы каталога в DOM (index.html) — редирект на projects.html
+  if (!document.getElementById('page-catalog')) {
+    var dataCountry = country === 'georgia' ? 'all' : country;
+    var params = 'deal=buy&country=' + dataCountry;
+    window.location.href = 'projects.html?' + params;
+    return;
+  }
+
   const countrySelect = document.querySelector('#page-catalog .filter-field--country .filter-select');
   // Georgian properties have country:'all' in data, treat 'georgia' as 'all'
   const dataCountry = country === 'georgia' ? 'all' : country;
@@ -746,5 +754,6 @@ function cardSlide(e, btn, dir) {
   });
 
 })();
+
 
 
