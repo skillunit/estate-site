@@ -331,7 +331,18 @@ document.addEventListener('click', function(e) {
 });
 
 // ── SHARE POPUP ──
-function openSharePopup() {
+function openSharePopup(propId) {
+  // Build the shareable URL
+  if (propId) {
+    const base = window.location.origin + window.location.pathname.replace(/\/[^/]*$/, '/') + 'index.html';
+    window._shareUrl = base + '?prop=' + propId;
+    // Also grab the prop name for title
+    const prop = typeof MAP_PROPERTIES !== 'undefined' ? MAP_PROPERTIES.find(p => p.id === propId) : null;
+    window._shareTitle = prop ? prop.name : 'Georgia Real Estate';
+  } else {
+    window._shareUrl = window.location.href;
+    window._shareTitle = document.querySelector('.detail-title') ? document.querySelector('.detail-title').textContent : 'Georgia Real Estate';
+  }
   const ov = document.getElementById('shareOverlay');
   ov.classList.add('open');
   document.body.style.overflow = 'hidden';
@@ -343,8 +354,8 @@ function closeSharePopup(e) {
   document.getElementById('shareCopied').classList.remove('show');
 }
 function shareAction(type) {
-  const url = window.location.href;
-  const title = document.querySelector('.detail-title') ? document.querySelector('.detail-title').textContent : 'Georgia Real Estate';
+  const url = window._shareUrl || window.location.href;
+  const title = window._shareTitle || (document.querySelector('.detail-title') ? document.querySelector('.detail-title').textContent : 'Georgia Real Estate');
   if (type === 'copy') {
     navigator.clipboard.writeText(url).then(() => {
       document.getElementById('shareCopied').classList.add('show');
