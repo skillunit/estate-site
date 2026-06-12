@@ -122,7 +122,7 @@
   .section-header { flex-direction:column; align-items:flex-start; gap:8px; margin-bottom:20px; }
 
   /* ── Inner page heroes — одинаковая высота ── */
-  .catalog-hero, .team-hero, .contacts-hero { height: 180px; }
+  .catalog-hero, .team-hero, .contacts-hero, .blog-hero { height: 180px; }
   .catalog-hero-content { padding: 0 16px 24px; }
   .team-hero-content { padding: 0 16px 24px; }
   /* catalog filter → handled by .filter-form above */
