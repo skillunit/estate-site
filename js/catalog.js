@@ -17,7 +17,7 @@ const MAP_PROPERTIES = [
     specs: '45 м² · 1 спальня · 12 этаж', year: '2022', oldPrice: '$149,000', year: '2022',
   },
   {
-    id: 'batumi-rustaveli', type: 'apartment', agentId: 'chase',
+    id: 'batumi-rustaveli', type: 'apartment', agentId: 'janelidze',
     city: 'batumi', cityLabel: 'Батуми', country: 'all',
     lat: 41.6440, lng: 41.6370,
     name: 'Апартаменты на Руставели, Батуми',
@@ -153,7 +153,7 @@ const MAP_PROPERTIES = [
     specs: '95 м² · 2 спальни · 2 этажа', year: '2021',
   },
   {
-    id: 'limassol-apart', type: 'apartment', agentId: 'levi',
+    id: 'limassol-apart', type: 'apartment', agentId: 'solovieva',
     city: 'limassol', cityLabel: 'Лимасол', country: 'cyprus',
     lat: 34.6851, lng: 33.0332,
     name: 'Апартаменты в центре Лимасола',
@@ -168,7 +168,7 @@ const MAP_PROPERTIES = [
     specs: '85 м² · 2 спальни · 5 этаж', year: '2020', oldPrice: '$369,000',
   },
   {
-    id: 'ny-brooklyn', type: 'apartment', agentId: 'cohen',
+    id: 'ny-brooklyn', type: 'apartment', agentId: 'solovieva',
     city: 'new-york', cityLabel: 'Нью-Йорк', country: 'usa',
     lat: 40.6501, lng: -73.9496,
     name: 'Таунхаус в Бруклине',
@@ -198,7 +198,7 @@ const MAP_PROPERTIES = [
     specs: '120 м² · 2 спальни · 18 этаж', year: '2018',
   },
   {
-    id: 'miami-beach', type: 'apart', top: true, agentId: 'cohen',
+    id: 'miami-beach', type: 'apart', top: true, agentId: 'verin',
     city: 'miami', cityLabel: 'Майами', country: 'usa',
     lat: 25.7617, lng: -80.1918,
     name: 'Вилла в Майами Бич',
@@ -213,7 +213,7 @@ const MAP_PROPERTIES = [
     specs: '420 м² · 5 спален · 1 этаж', year: '2020',
   },
   {
-    id: 'dubai-marina', type: 'apart', top: true, agentId: 'cohen',
+    id: 'dubai-marina', type: 'apart', top: true, agentId: 'levi',
     city: 'dubai', cityLabel: 'Дубай', country: 'uae',
     lat: 25.2048, lng: 55.2708,
     name: 'Апартаменты в Dubai Marina',
@@ -228,7 +228,7 @@ const MAP_PROPERTIES = [
     specs: '85 м² · 1 спальня · 24 этаж', year: '2023', oldPrice: '$520,000',
   },
   {
-    id: 'dubai-palm', type: 'villa', agentId: 'cohen',
+    id: 'dubai-palm', type: 'villa', agentId: 'verin',
     city: 'dubai', cityLabel: 'Дубай', country: 'uae',
     lat: 25.1972, lng: 55.2744,
     name: 'Пентхаус Palm Jumeirah',
@@ -273,7 +273,7 @@ const MAP_PROPERTIES = [
     specs: '95 м² · 2 спальни · 4 этаж', year: '2019', oldPrice: '$375,000',
   },
   {
-    id: 'mykonos-villa', type: 'villa', top: true, agentId: 'levi',
+    id: 'mykonos-villa', type: 'villa', top: true, agentId: 'verin',
     city: 'mykonos', cityLabel: 'Миконос', country: 'greece',
     lat: 37.4467, lng: 25.3289,
     name: 'Вилла на Миконосе',
@@ -303,7 +303,7 @@ const MAP_PROPERTIES = [
     specs: '65 м² · 2 спальни · 4 этаж', year: '2020',
   },
   {
-    id: 'rent-batumi-sea', type: 'apart', top: true, agentId: 'chase',
+    id: 'rent-batumi-sea', type: 'apart', top: true, agentId: 'solovieva',
     city: 'batumi', cityLabel: 'Батуми', country: 'all',
     lat: 41.6450, lng: 41.6380,
     name: 'Студия с видом на море, Батуми',
@@ -359,7 +359,7 @@ const MAP_PROPERTIES = [
     specs: '95 м² · 2 спальни · 18 этаж', year: '2022',
   },
   {
-    id: 'rent-ny-manhattan', type: 'apartment', agentId: 'cohen',
+    id: 'rent-ny-manhattan', type: 'apartment', agentId: 'levi',
     city: 'new-york', cityLabel: 'Нью-Йорк', country: 'usa',
     lat: 40.7549, lng: -73.9840,
     name: 'Апартаменты на Манхэттене, Мидтаун',
@@ -373,7 +373,7 @@ const MAP_PROPERTIES = [
     specs: '75 м² · 2 спальни · 22 этаж', year: '2017',
   },
   {
-    id: 'rent-ny-brooklyn', type: 'apartment', agentId: 'cohen',
+    id: 'rent-ny-brooklyn', type: 'apartment', agentId: 'solovieva',
     city: 'new-york', cityLabel: 'Нью-Йорк', country: 'usa',
     lat: 40.6782, lng: -73.9442,
     name: 'Лофт в Бруклине, DUMBO',
@@ -443,7 +443,7 @@ const MAP_PROPERTIES = [
     specs: '80 м² · 2 спальни · 1 этаж', year: '2015',
   },
   {
-    id: 'rent-limassol', type: 'apartment', agentId: 'levi',
+    id: 'rent-limassol', type: 'apartment', agentId: 'solovieva',
     city: 'limassol', cityLabel: 'Лимасол', country: 'cyprus',
     lat: 34.6780, lng: 33.0440,
     name: 'Вилла с бассейном, Лимасол',
@@ -457,7 +457,7 @@ const MAP_PROPERTIES = [
     specs: '180 м² · 3 спальни · 1 этаж', year: '2020',
   },
   {
-    id: 'rent-athens', type: 'apartment', agentId: 'levi',
+    id: 'rent-athens', type: 'apartment', agentId: 'janelidze',
     city: 'athens', cityLabel: 'Афины', country: 'greece',
     lat: 37.9755, lng: 23.7348,
     name: 'Апартаменты в Колонаки, Афины',
@@ -1692,6 +1692,7 @@ function setViewMode(mode) {
 function initViewMode() {
   setViewMode(currentViewMode);
 }
+
 
 
 
