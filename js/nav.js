@@ -722,7 +722,7 @@ function cardSlide(e, btn, dir) {
 
   // Патчим filterCatalog — после каждого вызова обновляем URL
   document.addEventListener('DOMContentLoaded', function() {
-    // Восстановление из URL
+    // Восстановление из URL (если есть параметры)
     restoreFilterFromUrl();
 
     // Патчим filterCatalog чтобы после него всегда синхронизировался URL
@@ -754,6 +754,7 @@ function cardSlide(e, btn, dir) {
   });
 
 })();
+
 
 
 
