@@ -18,17 +18,8 @@ function toggleMenu() {
   btn.classList.toggle('open');
 }
 
-// Резервный обработчик через addEventListener (для надёжности на iOS)
 document.addEventListener('DOMContentLoaded', function() {
-  const btn = document.getElementById('hamburger');
-  if (btn) {
-    btn.addEventListener('click', toggleMenu);
-    btn.addEventListener('touchend', function(e) {
-      e.preventDefault();
-      toggleMenu();
-    });
-  }
-  // Закрывать меню при клике вне его
+  // Закрывать меню при клике вне него
   document.addEventListener('click', function(e) {
     const nav = document.getElementById('mainNav');
     const btn = document.getElementById('hamburger');
