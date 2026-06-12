@@ -87,7 +87,7 @@
   <div class="team-section-inner">
     <div class="team-grid">
 
-      <div class="team-card">
+      <div class="team-card" data-agent-id="verin">
         <img class="team-photo" src="https://randomuser.me/api/portraits/men/32.jpg" alt="Александр Верин">
         <div class="team-body">
           <div class="team-name">Александр Верин</div>
@@ -101,7 +101,7 @@
         </div>
       </div>
 
-      <div class="team-card">
+      <div class="team-card" data-agent-id="solovieva">
         <img class="team-photo" src="https://randomuser.me/api/portraits/women/44.jpg" alt="Наталья Соловьёва">
         <div class="team-body">
           <div class="team-name">Наталья Соловьёва</div>
@@ -115,7 +115,7 @@
         </div>
       </div>
 
-      <div class="team-card">
+      <div class="team-card" data-agent-id="janelidze">
         <img class="team-photo" src="https://randomuser.me/api/portraits/women/68.jpg" alt="Мариам Джанелидзе">
         <div class="team-body">
           <div class="team-name">Мариам Джанелидзе</div>
@@ -129,7 +129,7 @@
         </div>
       </div>
 
-      <div class="team-card">
+      <div class="team-card" data-agent-id="cohen">
         <img class="team-photo" src="https://randomuser.me/api/portraits/men/75.jpg" alt="Дэвид Коэн">
         <div class="team-body">
           <div class="team-name">Дэвид Коэн</div>
@@ -142,7 +142,7 @@
         </div>
       </div>
 
-      <div class="team-card">
+      <div class="team-card" data-agent-id="chase">
         <img class="team-photo" src="https://randomuser.me/api/portraits/men/22.jpg" alt="Роберт Чейз">
         <div class="team-body">
           <div class="team-name">Роберт Чейз</div>
@@ -155,7 +155,7 @@
         </div>
       </div>
 
-      <div class="team-card">
+      <div class="team-card" data-agent-id="levi">
         <img class="team-photo" src="https://randomuser.me/api/portraits/men/85.jpg" alt="Яков Леви">
         <div class="team-body">
           <div class="team-name">Яков Леви</div>
@@ -330,5 +330,32 @@ function toggleAbout() {
 <script src="js/auth.js?v=4"></script>
 <script src="js/favorites.js?v=3"></script>
 <script src="js/history.js?v=1"></script>
+
+<script>
+// Кнопка "Объекты агента" на карточках команды
+document.querySelectorAll('.team-card[data-agent-id]').forEach(function(card) {
+  var agentId = card.dataset.agentId;
+  var body = card.querySelector('.team-body');
+  if (!body) return;
+  var btn = document.createElement('a');
+  btn.className = 'team-agent-btn';
+  btn.href = 'projects.html';
+  btn.textContent = 'Объекты агента →';
+  btn.addEventListener('click', function(e) {
+    e.preventDefault();
+    // Если мы уже на projects.html — filterByAgent напрямую
+    if (typeof filterByAgent === 'function') {
+      filterByAgent(agentId);
+    } else {
+      // Передаём agentId через sessionStorage и открываем projects.html
+      sessionStorage.setItem('filterAgent', agentId);
+      window.location.href = 'projects.html';
+    }
+  });
+  body.appendChild(btn);
+});
+</script>
+
 </body>
 </html>
+
