@@ -535,11 +535,28 @@ function formatSqm(p) {
 
 function setCurrency(cur) {
   if (!CURRENCY_RATES[cur]) return;
+  const prevCurrency = currentCurrency;
+  const prevRate = CURRENCY_RATES[prevCurrency];
   currentCurrency = cur;
   localStorage.setItem('grre_currency', cur);
   document.querySelectorAll('.currency-btn').forEach(b => {
     b.classList.toggle('active', b.dataset.cur === cur);
   });
+
+  // Обновляем подпись фильтра цены
+  const priceLabel = document.getElementById('priceCurrencyLabel');
+  if (priceLabel) priceLabel.textContent = 'Цена, ' + CURRENCY_SYMBOLS[cur];
+
+  // Пересчитываем значения в полях прайс-фильтра
+  ['priceMin','priceMax'].forEach(function(id) {
+    const el = document.getElementById(id);
+    if (!el || !el.value) return;
+    const valInPrev = parseFloat(el.value.replace(/[^0-9.]/g, ''));
+    if (isNaN(valInPrev)) return;
+    const usd = valInPrev / prevRate;
+    el.value = Math.round(usd * CURRENCY_RATES[cur]);
+  });
+
   // Перерисовать каталог с текущими фильтрами
   if (typeof filterCatalog === 'function') filterCatalog();
   renderRecentlyViewed();
@@ -1547,6 +1564,7 @@ function setViewMode(mode) {
 function initViewMode() {
   setViewMode(currentViewMode);
 }
+
 
 
 
