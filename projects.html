@@ -174,7 +174,6 @@
             <button class="search-field-clear" id="nameSearchClear" onclick="clearNameSearch()" title="Очистить" style="display:none;">
               <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
             </button>
-            <div class="search-suggestions" id="searchSuggestions"></div>
           </div>
         </div>
       </div>
@@ -1014,6 +1013,16 @@ function _hilite(text, q) {
   return text.slice(0,i) + '<mark>' + text.slice(i, i+q.length) + '</mark>' + text.slice(i+q.length);
 }
 
+function _positionSug() {
+  var inp = document.getElementById('nameSearch');
+  var box = document.getElementById('searchSuggestions');
+  if (!inp || !box) return;
+  var r = inp.getBoundingClientRect();
+  box.style.top  = (r.bottom + 6) + 'px';
+  box.style.left = r.left + 'px';
+  box.style.width = r.width + 'px';
+}
+
 function _hideSug() {
   var b = document.getElementById('searchSuggestions');
   if (b) b.classList.remove('open');
@@ -1061,6 +1070,7 @@ function _renderSug(query) {
 
   if (!found.length) {
     box.innerHTML = '<div class="search-no-results">Ничего не найдено</div>';
+    _positionSug();
     box.classList.add('open');
     return;
   }
@@ -1080,6 +1090,7 @@ function _renderSug(query) {
     html += '</div>';
   }
   box.innerHTML = html;
+  _positionSug();
   box.classList.add('open');
 
   // вешаем клики через addEventListener — без inline onmousedown
@@ -1200,7 +1211,11 @@ document.addEventListener('DOMContentLoaded', function() {
 <script src="js/auth.js?v=4"></script>
 <script src="js/favorites.js?v=3"></script>
 <script src="js/history.js?v=1"></script>
+<!-- Search suggestions portal — вне любых stacking context -->
+<div class="search-suggestions" id="searchSuggestions"></div>
+
 </body>
 </html>
+
 
 
