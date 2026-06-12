@@ -626,7 +626,7 @@ function cardSlide(e, btn, dir) {
       var s = readFilterState();
       var p = new URLSearchParams();
 
-      if (s.deal && s.deal !== 'buy')        p.set('deal', s.deal);
+      if (s.deal)                            p.set('deal', s.deal);
       if (s.country && s.country !== 'all')  p.set('country', s.country);
       if (s.city && s.city !== 'all')        p.set('city', s.city);
       if (s.status && s.status !== 'all')    p.set('status', s.status);
