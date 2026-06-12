@@ -35,7 +35,8 @@ function goToCountry(country) {
 
   // Если нет страницы каталога в DOM (index.html) — редирект на projects.html
   if (!document.getElementById('page-catalog')) {
-    window.location.href = 'projects.html?country=' + dataCountry;
+    var qs = dataCountry !== 'all' ? '?country=' + dataCountry : '';
+    window.location.href = 'projects.html' + qs;
     return;
   }
 
@@ -136,6 +137,8 @@ function filterCatalog() {
   updateCatalogHeadline(country);
   renderCatalogGrid(country, city, status, type, extra);
   renderMapMarkers(country, city, status, type, extra);
+  // Синхронизируем URL после каждой фильтрации
+  if (typeof window.syncFilterToUrl === 'function') window.syncFilterToUrl();
 }
 
 // ── VIDEO ──
@@ -683,6 +686,7 @@ function cardSlide(e, btn, dir) {
   };
 
 })();
+
 
 
 
