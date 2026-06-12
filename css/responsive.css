@@ -37,7 +37,7 @@
     display:flex; flex-direction:column;
     position:fixed; inset:0; top:64px;
     background:var(--white); padding:0;
-    gap:0; z-index:999; border-top:2px solid var(--red);
+    gap:0; z-index:1100; border-top:2px solid var(--red);
     overflow-y:auto;
   }
   .header-nav.open .nav-sep { display:none; }
