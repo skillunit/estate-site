@@ -605,18 +605,21 @@ function cardSlide(e, btn, dir) {
     _urlTimer = setTimeout(function() {
       var s = readFilterState();
       var p = new URLSearchParams();
-      p.set('deal', s.deal);
-      if (s.country  && s.country  !== 'all') p.set('country',  s.country);
-      if (s.city     && s.city     !== 'all') p.set('city',     s.city);
-      if (s.status   && s.status   !== 'all') p.set('status',   s.status);
-      if (s.type     && s.type     !== 'all') p.set('type',     s.type);
-      if (s.priceMin) p.set('priceMin', s.priceMin);
-      if (s.priceMax) p.set('priceMax', s.priceMax);
-      if (s.areaMin)  p.set('areaMin',  s.areaMin);
-      if (s.areaMax)  p.set('areaMax',  s.areaMax);
-      if (s.rooms && s.rooms !== 'all') p.set('rooms', s.rooms);
-      if (s.currency && s.currency !== 'USD') p.set('currency', s.currency);
-      history.replaceState(null, '', window.location.pathname + '?' + p.toString());
+      // Только не-дефолтные параметры
+      if (s.deal && s.deal !== 'buy')             p.set('deal',     s.deal);
+      if (s.country  && s.country  !== 'all')     p.set('country',  s.country);
+      if (s.city     && s.city     !== 'all')     p.set('city',     s.city);
+      if (s.status   && s.status   !== 'all')     p.set('status',   s.status);
+      if (s.type     && s.type     !== 'all')     p.set('type',     s.type);
+      if (s.priceMin)                             p.set('priceMin', s.priceMin);
+      if (s.priceMax)                             p.set('priceMax', s.priceMax);
+      if (s.areaMin)                              p.set('areaMin',  s.areaMin);
+      if (s.areaMax)                              p.set('areaMax',  s.areaMax);
+      if (s.rooms && s.rooms !== 'all')           p.set('rooms',    s.rooms);
+      if (s.currency && s.currency !== 'USD')     p.set('currency', s.currency);
+      // Если всё дефолтное — чистый URL, иначе с параметрами
+      var qs = p.toString();
+      history.replaceState(null, '', window.location.pathname + (qs ? '?' + qs : ''));
     }, 150);
   };
 
@@ -687,6 +690,7 @@ function cardSlide(e, btn, dir) {
   };
 
 })();
+
 
 
 
