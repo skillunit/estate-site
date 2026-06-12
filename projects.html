@@ -1196,11 +1196,6 @@ document.addEventListener('DOMContentLoaded', function() {
       if (typeof filterByAgent === 'function') filterByAgent(pendingAgent);
     }, 100);
   }
-
-  // Записываем итоговое состояние в URL
-  setTimeout(function() {
-    if (typeof window.syncFilterToUrl === 'function') window.syncFilterToUrl();
-  }, 200);
 });
 </script>
 
@@ -1226,6 +1221,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 </body>
 </html>
+
 
 
 
