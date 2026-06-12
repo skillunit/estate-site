@@ -1070,8 +1070,8 @@ function renderMapMarkers(countryVal, cityVal, statusVal, typeVal, extra) {
   clusters.forEach(cluster => {
     const count = cluster.items.length;
     const isCluster = count > 1;
-    const size = count >= 5 ? 52 : 44;
-    const fontSize = count >= 5 ? '14px' : '13px';
+    const size = count >= 5 ? 44 : 36;
+    const fontSize = count >= 5 ? '12px' : '11px';
 
     const icon = L.divIcon({
       className: '',
@@ -1547,6 +1547,7 @@ function setViewMode(mode) {
 function initViewMode() {
   setViewMode(currentViewMode);
 }
+
 
 
 
