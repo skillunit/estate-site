@@ -105,6 +105,7 @@ function onCountryChange(select) {
   updateCatalogHeadline(country);
   renderCatalogGrid(country, 'all', 'all', 'all', {});
   renderMapMarkers(country, 'all', 'all', 'all', {});
+  if (typeof window.syncFilterToUrl === 'function') window.syncFilterToUrl();
 }
 
 function filterCatalog() {
@@ -686,6 +687,7 @@ function cardSlide(e, btn, dir) {
   };
 
 })();
+
 
 
 
