@@ -762,6 +762,8 @@ function renderCatalogGrid(countryVal, cityVal, statusVal, typeVal, extra) {
 
   // Восстанавливаем сохранённый вид после перерендера грида
   if (typeof initViewMode === 'function') initViewMode();
+  // Attach hover-to-highlight after rendering
+  setTimeout(attachCardMapHover, 60);
 }
 
 // ── Открыть страницу детали для конкретного объекта ──
@@ -1140,6 +1142,7 @@ function renderMapMarkers(countryVal, cityVal, statusVal, typeVal, extra) {
       }
     });
 
+    marker._propertyIds = cluster.items.map(x => x.id);
     marker.addTo(catalogMap);
     mapMarkers.push(marker);
   });
@@ -1153,6 +1156,59 @@ function renderMapMarkers(countryVal, cityVal, statusVal, typeVal, extra) {
       catalogMap.setView([view.lat, view.lng], view.zoom, { animate: true });
     }
   }
+}
+
+// ── Highlight map marker on card hover ──
+function highlightMapMarker(propId) {
+  mapMarkers.forEach(function(marker) {
+    if (!marker._propertyIds) return;
+    const el = marker.getElement && marker.getElement();
+    if (!el) return;
+    const icon = el.querySelector('.map-cluster-icon');
+    if (!icon) return;
+    if (marker._propertyIds.indexOf(propId) !== -1) {
+      icon.classList.add('map-marker-highlighted');
+      el.style.zIndex = 9999;
+    }
+  });
+}
+
+function unhighlightMapMarkers() {
+  mapMarkers.forEach(function(marker) {
+    const el = marker.getElement && marker.getElement();
+    if (!el) return;
+    const icon = el.querySelector('.map-cluster-icon');
+    if (!icon) return;
+    icon.classList.remove('map-marker-highlighted');
+    el.style.zIndex = '';
+  });
+}
+
+// ── Attach hover listeners to catalog cards ──
+function attachCardMapHover() {
+  const grid = document.getElementById('catalogGrid');
+  if (!grid) return;
+  grid.querySelectorAll('.catalog-card[data-id]').forEach(function(card) {
+    card.addEventListener('mouseenter', function() {
+      highlightMapMarker(card.dataset.id);
+      // Smooth map pan to marker
+      if (catalogMap && mapVisible) {
+        const prop = MAP_PROPERTIES.find(function(p) { return p.id === card.dataset.id; });
+        if (prop) {
+          const currentCenter = catalogMap.getCenter();
+          const dist = Math.sqrt(
+            Math.pow((currentCenter.lat - prop.lat) * 111, 2) +
+            Math.pow((currentCenter.lng - prop.lng) * 111, 2)
+          );
+          if (dist > 50) return; // don't fly to another country
+          catalogMap.panTo([prop.lat, prop.lng], { animate: true, duration: 0.4 });
+        }
+      }
+    });
+    card.addEventListener('mouseleave', function() {
+      unhighlightMapMarkers();
+    });
+  });
 }
 
 function toggleCatalogMap() {
@@ -1491,4 +1547,5 @@ function setViewMode(mode) {
 function initViewMode() {
   setViewMode(currentViewMode);
 }
+
 
