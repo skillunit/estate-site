@@ -993,163 +993,164 @@
 <script src="js/forms.js?v=6"></script>
 <script src="js/catalog.js?v=3"></script>
 <script>
-/* ══════════════════════════════════
-   УМНЫЙ ПОИСК ПО НАЗВАНИЮ
-══════════════════════════════════ */
-(function() {
-  var _searchQuery = '';
-  var _highlightIdx = -1;
+/* УМНЫЙ ПОИСК */
+var _sq = '';
+var _hi = -1;
 
-  function normalize(s) {
-    return (s || '').toLowerCase().replace(/[«»"'`]/g, '');
+function _norm(s) { return (s||'').toLowerCase(); }
+
+function _hilite(text, q) {
+  if (!q) return text;
+  var i = text.toLowerCase().indexOf(q.toLowerCase());
+  if (i < 0) return text;
+  return text.slice(0,i) + '<mark>' + text.slice(i, i+q.length) + '</mark>' + text.slice(i+q.length);
+}
+
+function _hideSug() {
+  var b = document.getElementById('searchSuggestions');
+  if (b) b.classList.remove('open');
+}
+
+function _applySearch() {
+  var q = _norm(_sq);
+  var grid = document.getElementById('catalogGrid');
+  var empty = document.getElementById('catalogEmpty');
+  if (!grid) return;
+  var cards = grid.querySelectorAll('.catalog-card');
+  if (!q) {
+    cards.forEach(function(c){ c.classList.remove('hidden'); });
+    var cnt = grid.querySelectorAll('.catalog-card:not(.hidden)').length;
+    var el = document.getElementById('catalogCount');
+    if (el) el.textContent = cnt;
+    return;
   }
+  var vis = 0;
+  cards.forEach(function(card) {
+    var id = card.dataset.id;
+    var p = MAP_PROPERTIES.find(function(x){ return x.id === id; });
+    if (!p) { card.classList.add('hidden'); return; }
+    var ok = _norm(p.name).indexOf(q) >= 0
+          || _norm(p.cityLabel).indexOf(q) >= 0
+          || _norm(p.desc||'').indexOf(q) >= 0;
+    card.classList.toggle('hidden', !ok);
+    if (ok) vis++;
+  });
+  var el = document.getElementById('catalogCount');
+  if (el) el.textContent = vis;
+  if (empty) { grid.style.display = vis ? '' : 'none'; empty.style.display = vis ? 'none' : ''; }
+}
 
-  function highlight(text, query) {
-    if (!query) return text;
-    var re = new RegExp('(' + query.replace(/[.*+?^${}()|[\]\]/g, '\$&') + ')', 'gi');
-    return text.replace(re, '<mark>$1</mark>');
-  }
+function _renderSug(query) {
+  var box = document.getElementById('searchSuggestions');
+  if (!box) return;
+  if (!query) { box.classList.remove('open'); return; }
+  var q = _norm(query);
+  var found = MAP_PROPERTIES.filter(function(p) {
+    return _norm(p.name).indexOf(q) >= 0
+        || _norm(p.cityLabel).indexOf(q) >= 0
+        || _norm(p.desc||'').indexOf(q) >= 0;
+  }).slice(0, 6);
 
-  function applySearchFilter() {
-    var q = normalize(_searchQuery);
-    var grid = document.getElementById('catalogGrid');
-    var empty = document.getElementById('catalogEmpty');
-    if (!grid) return;
-    var cards = grid.querySelectorAll('.catalog-card');
-    if (!q) {
-      cards.forEach(function(c) { c.classList.remove('hidden'); });
-      return;
-    }
-    var visible = 0;
-    cards.forEach(function(card) {
-      var id = card.dataset.id;
-      var p = MAP_PROPERTIES.find(function(x) { return x.id === id; });
-      if (!p) { card.classList.add('hidden'); return; }
-      var match = normalize(p.name).includes(q)
-               || normalize(p.cityLabel).includes(q)
-               || normalize(p.desc || '').includes(q);
-      card.classList.toggle('hidden', !match);
-      if (match) visible++;
-    });
-    var countEl = document.getElementById('catalogCount');
-    if (countEl) countEl.textContent = visible;
-    if (empty) {
-      grid.style.display = visible ? '' : 'none';
-      empty.style.display = visible ? 'none' : '';
-    }
-  }
-
-  window.onNameSearchInput = function(val) {
-    _searchQuery = val.trim();
-    var clearBtn = document.getElementById('nameSearchClear');
-    if (clearBtn) clearBtn.style.display = _searchQuery ? '' : 'none';
-    renderSuggestions(_searchQuery);
-    filterCatalog();
-    applySearchFilter();
-  };
-
-  window.onNameSearchKey = function(e) {
-    var list = document.querySelectorAll('.search-suggestion-item');
-    if (e.key === 'ArrowDown') {
-      e.preventDefault();
-      _highlightIdx = Math.min(_highlightIdx + 1, list.length - 1);
-      updateHighlight(list);
-    } else if (e.key === 'ArrowUp') {
-      e.preventDefault();
-      _highlightIdx = Math.max(_highlightIdx - 1, -1);
-      updateHighlight(list);
-    } else if (e.key === 'Enter') {
-      if (_highlightIdx >= 0 && list[_highlightIdx]) list[_highlightIdx].click();
-      hideSuggestions();
-    } else if (e.key === 'Escape') {
-      hideSuggestions();
-    }
-  };
-
-  function updateHighlight(list) {
-    list.forEach(function(el, i) { el.classList.toggle('highlighted', i === _highlightIdx); });
-    if (_highlightIdx >= 0 && list[_highlightIdx]) {
-      var name = list[_highlightIdx].dataset.name;
-      if (name) {
-        var inp = document.getElementById('nameSearch');
-        if (inp) inp.value = name;
-        _searchQuery = name;
-      }
-    }
-  }
-
-  window.showSearchSuggestions = function() { if (_searchQuery) renderSuggestions(_searchQuery); };
-  window.hideSearchSuggestions = function() { setTimeout(hideSuggestions, 180); };
-
-  function hideSuggestions() {
-    var box = document.getElementById('searchSuggestions');
-    if (box) box.classList.remove('open');
-  }
-
-  window.clearNameSearch = function() {
-    _searchQuery = '';
-    var inp = document.getElementById('nameSearch');
-    if (inp) { inp.value = ''; inp.focus(); }
-    var clearBtn = document.getElementById('nameSearchClear');
-    if (clearBtn) clearBtn.style.display = 'none';
-    hideSuggestions();
-    filterCatalog();
-    applySearchFilter();
-  };
-
-  function renderSuggestions(query) {
-    var box = document.getElementById('searchSuggestions');
-    if (!box) return;
-    if (!query) { box.classList.remove('open'); return; }
-    var q = normalize(query);
-    var matches = MAP_PROPERTIES.filter(function(p) {
-      return normalize(p.name).includes(q)
-          || normalize(p.cityLabel).includes(q)
-          || normalize(p.desc || '').includes(q);
-    }).slice(0, 6);
-    if (!matches.length) {
-      box.innerHTML = '<div class="search-no-results">Ничего не найдено</div>';
-      box.classList.add('open');
-      return;
-    }
-    box.innerHTML = matches.map(function(p) {
-      return '<div class="search-suggestion-item" data-name="' + p.name.replace(/"/g, '&quot;') + '" onmousedown="pickSuggestion('' + p.id + '','' + p.name.replace(/'/g, "\'") + '')">'
-        + '<img class="search-suggestion-img" src="' + p.img + '" alt="">'
-        + '<div class="search-suggestion-info">'
-        +   '<div class="search-suggestion-name">' + highlight(p.name, query) + '</div>'
-        +   '<div class="search-suggestion-meta">' + p.cityLabel + ' · ' + p.area + ' м²</div>'
-        + '</div>'
-        + '<span class="search-suggestion-price">' + p.price + '</span>'
-        + '</div>';
-    }).join('');
+  if (!found.length) {
+    box.innerHTML = '<div class="search-no-results">Ничего не найдено</div>';
     box.classList.add('open');
+    return;
   }
 
-  window.pickSuggestion = function(id, name) {
-    _searchQuery = name;
-    var inp = document.getElementById('nameSearch');
-    if (inp) inp.value = name;
-    var clearBtn = document.getElementById('nameSearchClear');
-    if (clearBtn) clearBtn.style.display = '';
-    hideSuggestions();
-    filterCatalog();
-    applySearchFilter();
-  };
+  var html = '';
+  for (var i = 0; i < found.length; i++) {
+    var p = found[i];
+    var safeId = p.id.replace(/'/g, '');
+    var safeName = p.name.replace(/'/g, '').replace(/"/g, '');
+    html += '<div class="search-suggestion-item" data-id="' + safeId + '" data-name="' + safeName + '">';
+    html += '<img class="search-suggestion-img" src="' + p.img + '" alt="">';
+    html += '<div class="search-suggestion-info">';
+    html += '<div class="search-suggestion-name">' + _hilite(p.name, query) + '</div>';
+    html += '<div class="search-suggestion-meta">' + p.cityLabel + ' &middot; ' + p.area + ' м²</div>';
+    html += '</div>';
+    html += '<span class="search-suggestion-price">' + p.price + '</span>';
+    html += '</div>';
+  }
+  box.innerHTML = html;
+  box.classList.add('open');
 
-  // Сброс поиска при общем resetCatalogFilter
-  var _origReset = window.resetCatalogFilter;
-  window.resetCatalogFilter = function() {
-    _searchQuery = '';
-    var inp = document.getElementById('nameSearch');
-    if (inp) inp.value = '';
-    var clearBtn = document.getElementById('nameSearchClear');
-    if (clearBtn) clearBtn.style.display = 'none';
-    hideSuggestions();
-    if (_origReset) _origReset();
-    else filterCatalog();
-  };
+  // вешаем клики через addEventListener — без inline onmousedown
+  var items = box.querySelectorAll('.search-suggestion-item');
+  items.forEach(function(item) {
+    item.addEventListener('mousedown', function(e) {
+      e.preventDefault();
+      var pid = this.dataset.id;
+      var pname = this.dataset.name;
+      _sq = pname;
+      var inp = document.getElementById('nameSearch');
+      if (inp) inp.value = pname;
+      var clr = document.getElementById('nameSearchClear');
+      if (clr) clr.style.display = '';
+      _hideSug();
+      filterCatalog();
+      _applySearch();
+      if (typeof showDetail === 'function') showDetail(pid);
+    });
+  });
+}
 
-})();
+window.onNameSearchInput = function(val) {
+  _sq = val.trim();
+  var clr = document.getElementById('nameSearchClear');
+  if (clr) clr.style.display = _sq ? '' : 'none';
+  _renderSug(_sq);
+  filterCatalog();
+  _applySearch();
+};
+
+window.onNameSearchKey = function(e) {
+  var list = document.querySelectorAll('.search-suggestion-item');
+  if (!list.length) return;
+  if (e.key === 'ArrowDown') {
+    e.preventDefault();
+    _hi = Math.min(_hi + 1, list.length - 1);
+  } else if (e.key === 'ArrowUp') {
+    e.preventDefault();
+    _hi = Math.max(_hi - 1, -1);
+  } else if (e.key === 'Enter') {
+    if (_hi >= 0 && list[_hi]) list[_hi].dispatchEvent(new MouseEvent('mousedown'));
+    _hideSug();
+    return;
+  } else if (e.key === 'Escape') {
+    _hideSug(); return;
+  } else { return; }
+  list.forEach(function(el, i){ el.classList.toggle('highlighted', i === _hi); });
+  if (_hi >= 0 && list[_hi]) {
+    var n = list[_hi].dataset.name;
+    if (n) { _sq = n; var inp = document.getElementById('nameSearch'); if (inp) inp.value = n; }
+  }
+};
+
+window.showSearchSuggestions = function() { if (_sq) _renderSug(_sq); };
+window.hideSearchSuggestions = function() { setTimeout(_hideSug, 180); };
+
+window.clearNameSearch = function() {
+  _sq = ''; _hi = -1;
+  var inp = document.getElementById('nameSearch');
+  if (inp) { inp.value = ''; inp.focus(); }
+  var clr = document.getElementById('nameSearchClear');
+  if (clr) clr.style.display = 'none';
+  _hideSug();
+  filterCatalog();
+  _applySearch();
+};
+
+// Сброс при нажатии "Сброс" в фильтрах
+var _origReset = window.resetCatalogFilter;
+window.resetCatalogFilter = function() {
+  _sq = ''; _hi = -1;
+  var inp = document.getElementById('nameSearch');
+  if (inp) inp.value = '';
+  var clr = document.getElementById('nameSearchClear');
+  if (clr) clr.style.display = 'none';
+  _hideSug();
+  if (_origReset) _origReset(); else filterCatalog();
+};
 </script>
 <script src="js/animations.js?v=6"></script>
 
