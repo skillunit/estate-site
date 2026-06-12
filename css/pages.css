@@ -1805,7 +1805,7 @@
   outline: none;
 }
 .filter-range-input:focus { border-color: var(--red); }
-.filter-range-input::placeholder { color: var(--gray-400); }
+.filter-range-input::placeholder { color: var(--gray-300); }
 .filter-range-sep {
   color: var(--gray-400); font-size: 0.8rem;
   flex-shrink: 0;
@@ -2226,7 +2226,7 @@
   border-color: var(--red);
   box-shadow: 0 0 0 3px rgba(192,57,43,0.1);
 }
-.search-field-input::placeholder { color: var(--gray-400); }
+.search-field-input::placeholder { color: var(--gray-300); }
 .search-field-clear {
   position: absolute;
   right: 10px;
