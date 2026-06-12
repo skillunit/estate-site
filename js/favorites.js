@@ -277,9 +277,37 @@ function favCardSlide(e, btn, dir) {
   idx = (idx + imgs.length) % imgs.length;
   slider.dataset.idx = idx;
   const img = slider.querySelector('.card-slider-img');
-  if (img) img.src = imgs[idx];
+  if (img) { img.style.opacity = '0'; setTimeout(() => { img.src = imgs[idx]; img.onload = () => { img.style.opacity = '1'; }; if (img.complete) img.style.opacity = '1'; }, 180); }
   slider.querySelectorAll('.card-slider-dot').forEach((d, i) => d.classList.toggle('active', i === idx));
 }
+
+// ── FAV CARD SLIDER TOUCH SWIPE ──
+(function() {
+  let touchStartX = 0, touchStartY = 0, activeSlider = null;
+  document.addEventListener('touchstart', function(e) {
+    const slider = e.target.closest('.card-slider');
+    if (!slider) return;
+    activeSlider = slider;
+    touchStartX = e.touches[0].clientX;
+    touchStartY = e.touches[0].clientY;
+  }, { passive: true });
+  document.addEventListener('touchend', function(e) {
+    if (!activeSlider) return;
+    const dx = e.changedTouches[0].clientX - touchStartX;
+    const dy = e.changedTouches[0].clientY - touchStartY;
+    activeSlider = null;
+    if (Math.abs(dx) < 30 || Math.abs(dy) > Math.abs(dx)) return;
+    const slider = e.target.closest('.card-slider');
+    if (!slider) return;
+    const imgs = JSON.parse(slider.dataset.imgs || '[]');
+    if (imgs.length <= 1) return;
+    let idx = (parseInt(slider.dataset.idx || 0) + (dx < 0 ? 1 : -1) + imgs.length) % imgs.length;
+    slider.dataset.idx = idx;
+    const img = slider.querySelector('.card-slider-img');
+    if (img) { img.style.opacity = '0'; setTimeout(() => { img.src = imgs[idx]; img.onload = () => { img.style.opacity = '1'; }; if (img.complete) img.style.opacity = '1'; }, 180); }
+    slider.querySelectorAll('.card-slider-dot').forEach((d, i) => d.classList.toggle('active', i === idx));
+  }, { passive: true });
+})();
 
 /* ── Helpers ── */
 function priceNum(id) {

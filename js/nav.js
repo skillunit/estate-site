@@ -451,6 +451,50 @@ function selectSort(el) {
   document.getElementById('sortDropdown').classList.remove('open');
 }
 
+// ── CARD SLIDER TOUCH SWIPE ──
+(function() {
+  let touchStartX = 0;
+  let touchStartY = 0;
+  let activeSlider = null;
+
+  document.addEventListener('touchstart', function(e) {
+    const slider = e.target.closest('.card-slider');
+    if (!slider) return;
+    activeSlider = slider;
+    touchStartX = e.touches[0].clientX;
+    touchStartY = e.touches[0].clientY;
+  }, { passive: true });
+
+  document.addEventListener('touchend', function(e) {
+    if (!activeSlider) return;
+    const dx = e.changedTouches[0].clientX - touchStartX;
+    const dy = e.changedTouches[0].clientY - touchStartY;
+    activeSlider = null;
+    // ignore mostly-vertical swipes
+    if (Math.abs(dx) < 30 || Math.abs(dy) > Math.abs(dx)) return;
+    const dir = dx < 0 ? 1 : -1;
+    const slider = e.target.closest('.card-slider');
+    if (!slider) return;
+    const imgs = JSON.parse(slider.dataset.imgs || '[]');
+    if (imgs.length <= 1) return;
+    let idx = parseInt(slider.dataset.idx || 0) + dir;
+    if (idx < 0) idx = imgs.length - 1;
+    if (idx >= imgs.length) idx = 0;
+    slider.dataset.idx = idx;
+    const img = slider.querySelector('.card-slider-img');
+    img.style.transition = 'opacity 0.22s ease-in-out';
+    img.style.opacity = '0';
+    setTimeout(() => {
+      img.src = imgs[idx];
+      img.onload = () => { img.style.opacity = '1'; };
+      if (img.complete) img.style.opacity = '1';
+    }, 180);
+    slider.querySelectorAll('.card-slider-dot').forEach((d, i) => {
+      d.classList.toggle('active', i === idx);
+    });
+  }, { passive: true });
+})();
+
 // ── CARD IMAGE SLIDER ──
 function cardSlide(e, btn, dir) {
   e.stopPropagation();
