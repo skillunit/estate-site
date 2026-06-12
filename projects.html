@@ -991,7 +991,7 @@
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script src="js/nav.js?v=8"></script>
 <script src="js/forms.js?v=6"></script>
-<script src="js/catalog.js?v=3"></script>
+<script src="js/catalog.js?v=4"></script>
 <script>
 /* УМНЫЙ ПОИСК */
 var _sq = '';
@@ -1159,10 +1159,10 @@ window.resetCatalogFilter = function() {
 document.addEventListener('DOMContentLoaded', function() {
   showPage('catalog');
   // Восстанавливаем подпись фильтра цены по сохранённой валюте
+  var _symbols = { USD: '$', GEL: '₾', EUR: '€' };
+  var _cur = localStorage.getItem('grre_currency') || 'USD';
   var priceLabel = document.getElementById('priceCurrencyLabel');
-  if (priceLabel && typeof currentCurrency !== 'undefined' && typeof CURRENCY_SYMBOLS !== 'undefined') {
-    priceLabel.textContent = 'Цена, ' + CURRENCY_SYMBOLS[currentCurrency];
-  }
+  if (priceLabel) priceLabel.textContent = 'Цена, ' + (_symbols[_cur] || '$');
 });
 </script>
 
@@ -1185,4 +1185,5 @@ document.addEventListener('DOMContentLoaded', function() {
 <script src="js/history.js?v=1"></script>
 </body>
 </html>
+
 
