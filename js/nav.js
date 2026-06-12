@@ -689,8 +689,6 @@ function cardSlide(e, btn, dir) {
 })();
 
 
-})();
-
 
 
 
