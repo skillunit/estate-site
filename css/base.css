@@ -118,7 +118,7 @@ header {
 
 /* Header right */
 .header-right {
-  display: flex; align-items: center; gap: 20px; flex-shrink:0;
+  display: flex; align-items: center; gap: 20px; flex-shrink:0; touch-action: manipulation;
 }
 .header-phone {
   font-size: 0.82rem; font-weight: 600;
@@ -141,7 +141,7 @@ header {
 .lang-sep-char { color: var(--gray-300); font-size: 0.75rem; }
 
 /* Mobile hamburger */
-.hamburger { display:none; flex-direction:column; gap:5px; padding:4px; background:none; border:none; }
+.hamburger { display:none; flex-direction:column; gap:5px; padding:10px; background:none; border:none; cursor:pointer; touch-action:manipulation; position:relative; z-index:1001; }
 .hamburger span { display:block; width:22px; height:2px; background:var(--dark); transition:var(--transition); }
 
 /* ═══════════════════════════════════
