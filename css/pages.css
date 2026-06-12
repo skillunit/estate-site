@@ -583,7 +583,7 @@
   background: var(--red, #C0392B);
   color: #fff;
   border-radius: 50%;
-  border: 3px solid #fff;
+  border: 2px solid #fff;
   box-shadow: 0 3px 12px rgba(192,57,43,0.45);
   font-family: 'Montserrat', sans-serif;
   font-weight: 800;
@@ -2318,6 +2318,7 @@
   color: var(--gray-500);
   text-align: center;
 }
+
 
 
 
