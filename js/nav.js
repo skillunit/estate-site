@@ -31,32 +31,25 @@ function setSearchTab(el) {
 
 // ── CATALOG FILTER ──
 function goToCountry(country) {
+  var dataCountry = country === 'georgia' ? 'all' : country;
+
   // Если нет страницы каталога в DOM (index.html) — редирект на projects.html
   if (!document.getElementById('page-catalog')) {
-    var dataCountry = country === 'georgia' ? 'all' : country;
-    var params = 'deal=buy&country=' + dataCountry;
-    window.location.href = 'projects.html?' + params;
+    window.location.href = 'projects.html?country=' + dataCountry;
     return;
   }
 
-  const countrySelect = document.querySelector('#page-catalog .filter-field--country .filter-select');
-  // Georgian properties have country:'all' in data, treat 'georgia' as 'all'
-  const dataCountry = country === 'georgia' ? 'all' : country;
+  var countrySelect = document.querySelector('#page-catalog .filter-field--country .filter-select');
   if (countrySelect) countrySelect.value = dataCountry;
-  const citySelect = document.getElementById('citySelect');
-  const statusSelect = document.getElementById('statusSelect');
-  const typeSelect = document.getElementById('typeSelect');
+  var citySelect   = document.getElementById('citySelect');
+  var statusSelect = document.getElementById('statusSelect');
+  var typeSelect   = document.getElementById('typeSelect');
   if (statusSelect) statusSelect.value = 'all';
-  if (typeSelect) typeSelect.value = 'all';
+  if (typeSelect)   typeSelect.value   = 'all';
 
-  // Синхронизируем _prevCountry чтобы filterCatalog не сбросил состояние
   _prevCountry = dataCountry;
-
-  // Обновляем список городов под выбранную страну
   updateCityOptions(dataCountry);
   if (citySelect) citySelect.value = 'all';
-
-  // Обновляем заголовок «Покупка в ОАЭ» и т.д.
   updateCatalogHeadline(dataCountry);
 
   showPage('catalog');
@@ -690,6 +683,7 @@ function cardSlide(e, btn, dir) {
   };
 
 })();
+
 
 
 
