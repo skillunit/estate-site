@@ -2267,6 +2267,12 @@
   right: 10px;
   z-index: 4;
 }
+.catalog-grid.catalog-list-view .card-share-inline {
+  position: absolute;
+  bottom: 10px;
+  right: 52px;
+  z-index: 4;
+}
 
 /* ═══════════════════════════════════
    ████ УМНЫЙ ПОИСК (projects.html) ████
@@ -2391,6 +2397,7 @@
   color: var(--gray-500);
   text-align: center;
 }
+
 
 
 
