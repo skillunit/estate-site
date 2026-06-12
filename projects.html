@@ -996,7 +996,7 @@
 </div>
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-<script src="js/nav.js?v=8"></script>
+<script src="js/nav.js?v=9"></script>
 <script src="js/forms.js?v=6"></script>
 <script src="js/catalog.js?v=4"></script>
 <script>
@@ -1176,8 +1176,13 @@ window.resetCatalogFilter = function() {
 <script>
 // На projects.html начальная страница — catalog, не home
 document.addEventListener('DOMContentLoaded', function() {
+  // Восстанавливаем значения фильтров из URL ДО первого рендера
+  if (typeof window._restoreFilterFromUrl === 'function') window._restoreFilterFromUrl();
+
+  // Первый рендер каталога
   showPage('catalog');
-  // Восстанавливаем подпись фильтра цены по сохранённой валюте
+
+  // Восстанавливаем подпись фильтра цены
   var _symbols = { USD: '$', GEL: '₾', EUR: '€' };
   var _cur = localStorage.getItem('grre_currency') || 'USD';
   var priceLabel = document.getElementById('priceCurrencyLabel');
@@ -1192,10 +1197,10 @@ document.addEventListener('DOMContentLoaded', function() {
     }, 100);
   }
 
-  // Записываем начальное состояние в URL после полной инициализации
+  // Записываем итоговое состояние в URL
   setTimeout(function() {
     if (typeof window.syncFilterToUrl === 'function') window.syncFilterToUrl();
-  }, 400);
+  }, 200);
 });
 </script>
 
@@ -1221,6 +1226,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 </body>
 </html>
+
 
 
 
