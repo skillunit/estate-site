@@ -230,6 +230,13 @@
   </div>
 
   <!-- ══ MAP ══ -->
+  <!-- Баннер фильтра по агенту -->
+  <div id="agentFilterBanner" style="display:none;align-items:center;gap:12px;padding:10px 32px;background:var(--gray-50,#f8f8f6);border-bottom:1px solid var(--border);">
+    <img id="agentFilterPhoto" src="" alt="" style="width:32px;height:32px;border-radius:50%;object-fit:cover;">
+    <span style="font-size:0.85rem;color:var(--dark);">Объекты агента: <strong id="agentFilterName"></strong></span>
+    <button onclick="clearAgentFilter()" style="margin-left:auto;font-size:0.8rem;color:var(--red);background:none;border:none;cursor:pointer;padding:4px 8px;">✕ Сбросить</button>
+  </div>
+
   <div class="catalog-map-wrap" id="catalogMapWrap">
     <div id="catalogMap"></div>
     <div class="map-toggle-btn" onclick="toggleCatalogMap()" id="mapToggleBtn">
@@ -588,6 +595,7 @@
         </div>
         <div class="detail-actions">
           <div class="detail-price-block">
+            <div id="detailAgentBlock" class="detail-agent-block" style="display:none;"></div>
             <div class="detail-price-label">Стоимость</div>
             <div class="detail-price-row">
               <div class="detail-price-value" id="detailPrice">$125,000</div>
@@ -1163,6 +1171,15 @@ document.addEventListener('DOMContentLoaded', function() {
   var _cur = localStorage.getItem('grre_currency') || 'USD';
   var priceLabel = document.getElementById('priceCurrencyLabel');
   if (priceLabel) priceLabel.textContent = 'Цена, ' + (_symbols[_cur] || '$');
+
+  // Если пришли со страницы команды — применяем фильтр агента
+  var pendingAgent = sessionStorage.getItem('filterAgent');
+  if (pendingAgent) {
+    sessionStorage.removeItem('filterAgent');
+    setTimeout(function() {
+      if (typeof filterByAgent === 'function') filterByAgent(pendingAgent);
+    }, 100);
+  }
 });
 </script>
 
