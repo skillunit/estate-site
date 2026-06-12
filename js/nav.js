@@ -554,7 +554,6 @@ function cardSlide(e, btn, dir) {
   const propId = params.get('prop');
   if (propId) {
     window.addEventListener('DOMContentLoaded', function() {
-      // Ждём пока catalog.js инициализируется и showDetail станет доступен
       var attempts = 0;
       function tryShow() {
         if (typeof showDetail === 'function' && typeof MAP_PROPERTIES !== 'undefined') {
@@ -567,4 +566,185 @@ function cardSlide(e, btn, dir) {
     });
   }
 })();
+
+// ── FILTER URL SYNC ──
+// Записывает текущее состояние фильтров в URL без перезагрузки страницы.
+// Только projects.html — определяем по наличию #page-catalog в DOM.
+
+(function() {
+
+  // Параметры которые синхронизируем
+  var FILTER_PARAMS = ['deal','country','city','status','type','priceMin','priceMax','areaMin','areaMax','rooms','currency'];
+
+  // Читаем текущее состояние фильтров из DOM
+  function readFilterState() {
+    var s = {};
+    s.deal = typeof currentDealType !== 'undefined' ? currentDealType : 'buy';
+
+    var countryEl = document.querySelector('#page-catalog .filter-field--country .filter-select');
+    s.country = countryEl ? countryEl.value : 'all';
+
+    var cityEl = document.getElementById('citySelect');
+    s.city = cityEl ? cityEl.value : 'all';
+
+    var statusEl = document.getElementById('statusSelect');
+    s.status = statusEl ? statusEl.value : 'all';
+
+    var typeEl = document.getElementById('typeSelect');
+    s.type = typeEl ? typeEl.value : 'all';
+
+    var priceMinEl = document.getElementById('priceMin');
+    s.priceMin = priceMinEl ? priceMinEl.value : '';
+
+    var priceMaxEl = document.getElementById('priceMax');
+    s.priceMax = priceMaxEl ? priceMaxEl.value : '';
+
+    var areaMinEl = document.getElementById('areaMin');
+    s.areaMin = areaMinEl ? areaMinEl.value : '';
+
+    var areaMaxEl = document.getElementById('areaMax');
+    s.areaMax = areaMaxEl ? areaMaxEl.value : '';
+
+    var roomsEl = document.getElementById('roomsVal');
+    s.rooms = roomsEl ? roomsEl.value : 'all';
+
+    s.currency = typeof currentCurrency !== 'undefined' ? currentCurrency : 'USD';
+
+    return s;
+  }
+
+  // Пишем состояние в URL (только ненулевые/не-default значения)
+  var _urlTimer = null;
+  window.syncFilterToUrl = function() {
+    // Только на странице каталога
+    if (!document.getElementById('page-catalog')) return;
+    var activePage = document.querySelector('.page.active');
+    if (!activePage || activePage.id !== 'page-catalog') return;
+
+    clearTimeout(_urlTimer);
+    _urlTimer = setTimeout(function() {
+      var s = readFilterState();
+      var p = new URLSearchParams();
+
+      if (s.deal && s.deal !== 'buy')        p.set('deal', s.deal);
+      if (s.country && s.country !== 'all')  p.set('country', s.country);
+      if (s.city && s.city !== 'all')        p.set('city', s.city);
+      if (s.status && s.status !== 'all')    p.set('status', s.status);
+      if (s.type && s.type !== 'all')        p.set('type', s.type);
+      if (s.priceMin)                        p.set('priceMin', s.priceMin);
+      if (s.priceMax)                        p.set('priceMax', s.priceMax);
+      if (s.areaMin)                         p.set('areaMin', s.areaMin);
+      if (s.areaMax)                         p.set('areaMax', s.areaMax);
+      if (s.rooms && s.rooms !== 'all')      p.set('rooms', s.rooms);
+      if (s.currency && s.currency !== 'USD') p.set('currency', s.currency);
+
+      var qs = p.toString();
+      var newUrl = window.location.pathname + (qs ? '?' + qs : '');
+      history.replaceState(null, '', newUrl);
+    }, 150);
+  };
+
+  // Восстанавливаем фильтры из URL при загрузке
+  function restoreFilterFromUrl() {
+    if (!document.getElementById('page-catalog')) return;
+
+    var params = new URLSearchParams(window.location.search);
+
+    // Только если есть хоть один наш фильтр-параметр
+    var hasFilter = FILTER_PARAMS.some(function(k) { return params.has(k); });
+    if (!hasFilter) return;
+
+    // Открываем каталог
+    if (typeof showPage === 'function') showPage('catalog');
+
+    // deal
+    var deal = params.get('deal') || 'buy';
+    if (typeof setDealType === 'function') setDealType(deal);
+
+    // currency — до восстановления цен
+    var currency = params.get('currency');
+    if (currency && typeof setCurrency === 'function') setCurrency(currency);
+
+    // country
+    var countryEl = document.querySelector('#page-catalog .filter-field--country .filter-select');
+    var country = params.get('country') || 'all';
+    if (countryEl) {
+      countryEl.value = country;
+      if (typeof updateCityOptions === 'function') updateCityOptions(country);
+    }
+
+    // city
+    var cityEl = document.getElementById('citySelect');
+    var city = params.get('city') || 'all';
+    if (cityEl) cityEl.value = city;
+
+    // status
+    var statusEl = document.getElementById('statusSelect');
+    if (statusEl && params.get('status')) statusEl.value = params.get('status');
+
+    // type
+    var typeEl = document.getElementById('typeSelect');
+    if (typeEl && params.get('type')) typeEl.value = params.get('type');
+
+    // price
+    var priceMinEl = document.getElementById('priceMin');
+    var priceMaxEl = document.getElementById('priceMax');
+    if (priceMinEl && params.get('priceMin')) priceMinEl.value = params.get('priceMin');
+    if (priceMaxEl && params.get('priceMax')) priceMaxEl.value = params.get('priceMax');
+
+    // area
+    var areaMinEl = document.getElementById('areaMin');
+    var areaMaxEl = document.getElementById('areaMax');
+    if (areaMinEl && params.get('areaMin')) areaMinEl.value = params.get('areaMin');
+    if (areaMaxEl && params.get('areaMax')) areaMaxEl.value = params.get('areaMax');
+
+    // rooms
+    var roomsVal = params.get('rooms');
+    if (roomsVal) {
+      var roomsEl = document.getElementById('roomsVal');
+      if (roomsEl) roomsEl.value = roomsVal;
+      document.querySelectorAll('.rooms-btn').forEach(function(b) {
+        b.classList.toggle('active', b.dataset.val === roomsVal);
+      });
+    }
+
+    // запускаем фильтрацию
+    if (typeof filterCatalog === 'function') filterCatalog();
+  }
+
+  // Патчим filterCatalog — после каждого вызова обновляем URL
+  document.addEventListener('DOMContentLoaded', function() {
+    // Восстановление из URL
+    restoreFilterFromUrl();
+
+    // Патчим filterCatalog чтобы после него всегда синхронизировался URL
+    var _origFilter = window.filterCatalog;
+    if (typeof _origFilter === 'function') {
+      window.filterCatalog = function() {
+        _origFilter.apply(this, arguments);
+        window.syncFilterToUrl();
+      };
+    }
+
+    // Патчим setDealType
+    var _origDeal = window.setDealType;
+    if (typeof _origDeal === 'function') {
+      window.setDealType = function(type) {
+        _origDeal.apply(this, arguments);
+        window.syncFilterToUrl();
+      };
+    }
+
+    // Патчим setCurrency
+    var _origCurrency = window.setCurrency;
+    if (typeof _origCurrency === 'function') {
+      window.setCurrency = function(cur) {
+        _origCurrency.apply(this, arguments);
+        window.syncFilterToUrl();
+      };
+    }
+  });
+
+})();
+
 
