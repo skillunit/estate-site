@@ -120,13 +120,18 @@ function filterCatalog() {
   const rooms    = roomsEl  ? roomsEl.value  : 'all';
   const priceMin = priceMinEl && priceMinEl.value ? parseFloat(priceMinEl.value.replace(/[^0-9.]/g, '')) || 0        : 0;
   const priceMax = priceMaxEl && priceMaxEl.value ? parseFloat(priceMaxEl.value.replace(/[^0-9.]/g, '')) || Infinity : Infinity;
+  // Конвертируем в USD (данные хранятся в USD)
+  const _rate = (typeof CURRENCY_RATES !== 'undefined' && typeof currentCurrency !== 'undefined')
+    ? (CURRENCY_RATES[currentCurrency] || 1) : 1;
+  const priceMinUsd = priceMin > 0       ? priceMin / _rate : 0;
+  const priceMaxUsd = priceMax < Infinity ? priceMax / _rate : Infinity;
   const areaMin  = areaMinEl  && areaMinEl.value  ? parseFloat(areaMinEl.value)  || 0        : 0;
   const areaMax  = areaMaxEl  && areaMaxEl.value  ? parseFloat(areaMaxEl.value)  || Infinity : Infinity;
 
   const catalogFilterBar = document.querySelector('#page-catalog .filter-bar .filter-field--country .filter-select');
   const country = catalogFilterBar ? catalogFilterBar.value : 'all';
   const city = cityEl ? cityEl.value : 'all';
-  const extra = { priceMin, priceMax, areaMin, areaMax, rooms };
+  const extra = { priceMin: priceMinUsd, priceMax: priceMaxUsd, areaMin, areaMax, rooms };
   updateCatalogHeadline(country);
   renderCatalogGrid(country, city, status, type, extra);
   renderMapMarkers(country, city, status, type, extra);
@@ -534,3 +539,4 @@ function cardSlide(e, btn, dir) {
     });
   }
 })();
+
