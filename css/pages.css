@@ -1849,7 +1849,9 @@
 }
 
 /* ── Filter rows layout ── */
-.filter-field--country { min-width: 100px; flex: 0.6; }
+.filter-field--country { min-width: 120px; flex: 1; }
+.filter-field--city    { min-width: 130px; flex: 1.2; }
+.filter-field--type    { min-width: 140px; flex: 1.2; }
 .filter-field--price   { flex-shrink: 0; }
 .filter-field--area    { flex-shrink: 0; }
 .filter-field--rooms   { flex-shrink: 0; }
@@ -2191,8 +2193,8 @@
    ████ УМНЫЙ ПОИСК (projects.html) ████
 ═══════════════════════════════════ */
 .filter-field--search {
-  flex: 2.5;
-  min-width: 180px;
+  flex: 1.4;
+  min-width: 160px;
 }
 .search-field-wrap {
   position: relative;
