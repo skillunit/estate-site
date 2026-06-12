@@ -2280,6 +2280,8 @@
 .filter-field--search {
   flex: 1.4;
   min-width: 160px;
+  position: relative;
+  z-index: 1201;
 }
 .search-field-wrap {
   position: relative;
@@ -2340,11 +2342,12 @@
   background: var(--white);
   border-radius: var(--radius);
   box-shadow: 0 8px 32px rgba(0,0,0,0.13), 0 2px 8px rgba(0,0,0,0.06);
-  z-index: 500;
-  overflow: hidden;
+  z-index: 1200;
   display: none;
-  max-height: 320px;
+  max-height: 360px;
   overflow-y: auto;
+  overflow-x: hidden;
+  overscroll-behavior: contain;
 }
 .search-suggestions.open { display: block; }
 .search-suggestion-item {
