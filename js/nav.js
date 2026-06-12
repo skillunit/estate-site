@@ -538,5 +538,22 @@ function cardSlide(e, btn, dir) {
       }
     });
   }
+
+  // ── URL PARAM: ?prop=tbilisi-elite открывает страницу объекта ──
+  const propId = params.get('prop');
+  if (propId) {
+    window.addEventListener('DOMContentLoaded', function() {
+      // Ждём пока catalog.js инициализируется и showDetail станет доступен
+      var attempts = 0;
+      function tryShow() {
+        if (typeof showDetail === 'function' && typeof MAP_PROPERTIES !== 'undefined') {
+          showDetail(propId);
+        } else if (attempts++ < 20) {
+          setTimeout(tryShow, 100);
+        }
+      }
+      tryShow();
+    });
+  }
 })();
 
