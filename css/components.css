@@ -187,6 +187,13 @@ footer {
 }
 .testimonials-title span { color: var(--red); }
 .testi-track-wrap { overflow: hidden; }
+#featuredSection .testi-track-wrap,
+#featuredRentSection .testi-track-wrap {
+  overflow: visible;
+  padding-bottom: 20px;
+  margin-bottom: -20px;
+  clip-path: inset(-20px -100px -20px -100px);
+}
 .testi-track {
   display: flex; gap: 24px;
   transition: transform 0.5s cubic-bezier(0.4,0,0.2,1);

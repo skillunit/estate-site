@@ -181,10 +181,10 @@ function submitManagerPopup() {
 }
 
 // ── FEATURED PROPERTIES SLIDER ──
-function initFeaturedSlider() {
-  const track = document.getElementById('featuredTrack');
-  const dotsWrap = document.getElementById('featuredDots');
-  if (!track) return;
+function createFeaturedSlider(trackId, dotsId, navFunc) {
+  const track = document.getElementById(trackId);
+  const dotsWrap = document.getElementById(dotsId);
+  if (!track) return null;
   const cards = track.querySelectorAll('.catalog-card');
   const total = cards.length;
   const gap = 24;
@@ -211,7 +211,7 @@ function initFeaturedSlider() {
     dotsWrap.querySelectorAll('.testi-dot').forEach((d, i) => d.classList.toggle('active', i === cur));
   }
 
-  window.featuredNav = function(dir) { goTo(cur + dir); };
+  window[navFunc] = function(dir) { goTo(cur + dir); };
 
   function init() {
     cur = 0;
@@ -221,8 +221,26 @@ function initFeaturedSlider() {
     goTo(0);
   }
 
-  init();
-  window.removeEventListener('resize', window._featuredResizeHandler);
-  window._featuredResizeHandler = init;
-  window.addEventListener('resize', init);
+  return init;
+}
+
+function initFeaturedSlider(deal) {
+  if (!deal || deal === 'buy') {
+    const init = createFeaturedSlider('featuredTrack', 'featuredDots', 'featuredNav');
+    if (init) {
+      init();
+      window.removeEventListener('resize', window._featuredResizeHandler);
+      window._featuredResizeHandler = init;
+      window.addEventListener('resize', window._featuredResizeHandler);
+    }
+  }
+  if (!deal || deal === 'rent') {
+    const initRent = createFeaturedSlider('featuredRentTrack', 'featuredRentDots', 'featuredRentNav');
+    if (initRent) {
+      initRent();
+      window.removeEventListener('resize', window._featuredRentResizeHandler);
+      window._featuredRentResizeHandler = initRent;
+      window.addEventListener('resize', window._featuredRentResizeHandler);
+    }
+  }
 }

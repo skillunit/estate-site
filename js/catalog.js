@@ -317,7 +317,7 @@ const MAP_PROPERTIES = [
     specs: '35 м² · 1 спальня · 9 этаж', year: '2023',
   },
   {
-    id: 'rent-tbilisi-saburtalo', type: 'apartment', agentId: 'solovieva',
+    id: 'rent-tbilisi-saburtalo', type: 'apartment', top: true, agentId: 'solovieva',
     city: 'tbilisi', cityLabel: 'Тбилиси', country: 'all',
     lat: 41.7200, lng: 44.7650,
     name: 'Квартира в Сабуртало, Тбилиси',
@@ -331,7 +331,7 @@ const MAP_PROPERTIES = [
     specs: '80 м² · 3 спальни · 6 этаж', year: '2018',
   },
   {
-    id: 'rent-bakuriani-chalet', type: 'villa', agentId: 'chase',
+    id: 'rent-bakuriani-chalet', type: 'villa', top: true, agentId: 'chase',
     city: 'bakuriani', cityLabel: 'Бакуриани', country: 'all',
     lat: 41.7500, lng: 43.5300,
     name: 'Шале в Бакуриани, посуточно',
@@ -359,7 +359,7 @@ const MAP_PROPERTIES = [
     specs: '95 м² · 2 спальни · 18 этаж', year: '2022',
   },
   {
-    id: 'rent-ny-manhattan', type: 'apartment', agentId: 'levi',
+    id: 'rent-ny-manhattan', type: 'apartment', top: true, agentId: 'levi',
     city: 'new-york', cityLabel: 'Нью-Йорк', country: 'usa',
     lat: 40.7549, lng: -73.9840,
     name: 'Апартаменты на Манхэттене, Мидтаун',
@@ -373,7 +373,7 @@ const MAP_PROPERTIES = [
     specs: '75 м² · 2 спальни · 22 этаж', year: '2017',
   },
   {
-    id: 'rent-ny-brooklyn', type: 'apartment', agentId: 'solovieva',
+    id: 'rent-ny-brooklyn', type: 'apartment', top: true, agentId: 'solovieva',
     city: 'new-york', cityLabel: 'Нью-Йорк', country: 'usa',
     lat: 40.6782, lng: -73.9442,
     name: 'Лофт в Бруклине, DUMBO',
@@ -387,7 +387,7 @@ const MAP_PROPERTIES = [
     specs: '110 м² · 2 спальни · 3 этаж', year: '2016',
   },
   {
-    id: 'rent-miami-beach', type: 'apart', agentId: 'cohen',
+    id: 'rent-miami-beach', type: 'apart', top: true, agentId: 'cohen',
     city: 'miami', cityLabel: 'Майами', country: 'usa',
     lat: 25.7617, lng: -80.1918,
     name: 'Вилла у океана, Майами Бич',
@@ -415,7 +415,7 @@ const MAP_PROPERTIES = [
     specs: '85 м² · 2 спальни · 15 этаж', year: '2021',
   },
   {
-    id: 'rent-gonio', type: 'apart', agentId: 'chase',
+    id: 'rent-gonio', type: 'apart', top: true, agentId: 'chase',
     city: 'gonio', cityLabel: 'Гонио', country: 'all',
     lat: 41.5210, lng: 41.6480,
     name: 'Апартаменты у моря, Гонио',
@@ -443,7 +443,7 @@ const MAP_PROPERTIES = [
     specs: '80 м² · 2 спальни · 1 этаж', year: '2015',
   },
   {
-    id: 'rent-limassol', type: 'apartment', agentId: 'solovieva',
+    id: 'rent-limassol', type: 'apartment', top: true, agentId: 'solovieva',
     city: 'limassol', cityLabel: 'Лимасол', country: 'cyprus',
     lat: 34.6780, lng: 33.0440,
     name: 'Вилла с бассейном, Лимасол',
@@ -457,7 +457,7 @@ const MAP_PROPERTIES = [
     specs: '180 м² · 3 спальни · 1 этаж', year: '2020',
   },
   {
-    id: 'rent-athens', type: 'apartment', agentId: 'janelidze',
+    id: 'rent-athens', type: 'apartment', top: true, agentId: 'janelidze',
     city: 'athens', cityLabel: 'Афины', country: 'greece',
     lat: 37.9755, lng: 23.7348,
     name: 'Апартаменты в Колонаки, Афины',
@@ -471,7 +471,7 @@ const MAP_PROPERTIES = [
     specs: '90 м² · 2 спальни · 4 этаж', year: '2018',
   },
   {
-    id: 'rent-mykonos', type: 'villa', agentId: 'levi',
+    id: 'rent-mykonos', type: 'villa', top: true, agentId: 'levi',
     city: 'mykonos', cityLabel: 'Миконос', country: 'greece',
     lat: 37.4467, lng: 25.3289,
     name: 'Вилла с видом на море, Миконос',
@@ -1544,33 +1544,26 @@ const FEATURED_COUNTRY_LABELS = {
 };
 
 let featuredCountry = 'all';
+let featuredRentCountry = 'all';
 
-function setFeaturedCountry(btn) {
-  featuredCountry = btn.dataset.country;
-  document.querySelectorAll('.featured-tab').forEach(b => {
-    b.classList.toggle('active', b.dataset.country === featuredCountry);
-  });
-  renderFeatured();
+function setFeaturedCountry(btn, deal) {
+  if (deal === 'rent') {
+    featuredRentCountry = btn.dataset.country;
+    document.querySelectorAll('#featuredRentCountryTabs .featured-tab').forEach(b => {
+      b.classList.toggle('active', b.dataset.country === featuredRentCountry);
+    });
+    renderFeaturedDeal('rent');
+  } else {
+    featuredCountry = btn.dataset.country;
+    document.querySelectorAll('#featuredCountryTabs .featured-tab').forEach(b => {
+      b.classList.toggle('active', b.dataset.country === featuredCountry);
+    });
+    renderFeaturedDeal('buy');
+  }
 }
 
-function renderFeatured() {
-  const track = document.getElementById('featuredTrack');
-  const titleEl = document.getElementById('featuredTitle');
-  if (!track) return;
-
-  // Обновляем заголовок
-  if (titleEl) {
-    titleEl.textContent = 'Топовые предложения ' + (FEATURED_COUNTRY_LABELS[featuredCountry] || '');
-  }
-
-  // Берём только top:true, deal:'buy', нужной страны
-  const props = MAP_PROPERTIES.filter(p =>
-    p.top &&
-    p.deal === 'buy' &&
-    (featuredCountry === 'all' ? p.country === 'all' : p.country === featuredCountry)
-  ).slice(0, 6);
-
-  track.innerHTML = props.map(p => {
+function buildFeaturedCards(props) {
+  return props.map(p => {
     const imgs = p.imgs || [p.img];
     const dots = imgs.map((_, i) => `<span class="card-slider-dot${i === 0 ? ' active' : ''}"></span>`).join('');
     return `
@@ -1609,8 +1602,37 @@ function renderFeatured() {
       </div>
     </div>`;
   }).join('');
+}
 
-  if (typeof initFeaturedSlider === 'function') initFeaturedSlider();
+function renderFeaturedDeal(deal) {
+  const isBuy = deal === 'buy';
+  const country = isBuy ? featuredCountry : featuredRentCountry;
+  const trackId = isBuy ? 'featuredTrack' : 'featuredRentTrack';
+  const titleId = isBuy ? 'featuredTitle' : 'featuredRentTitle';
+  const titlePrefix = isBuy ? 'Топовые предложения покупки' : 'Топовые предложения аренды';
+
+  const track = document.getElementById(trackId);
+  const titleEl = document.getElementById(titleId);
+  if (!track) return;
+
+  if (titleEl) {
+    titleEl.textContent = titlePrefix + ' ' + (FEATURED_COUNTRY_LABELS[country] || '');
+  }
+
+  const props = MAP_PROPERTIES.filter(p =>
+    p.top &&
+    p.deal === deal &&
+    (country === 'all' ? p.country === 'all' : p.country === country)
+  ).slice(0, 6);
+
+  track.innerHTML = buildFeaturedCards(props);
+
+  if (typeof initFeaturedSlider === 'function') initFeaturedSlider(isBuy ? 'buy' : 'rent');
+}
+
+function renderFeatured() {
+  renderFeaturedDeal('buy');
+  renderFeaturedDeal('rent');
 }
 
 // Вызов при загрузке страницы

@@ -348,21 +348,21 @@
     </div>
   </div>
 
-  <!-- PROPERTY LISTING -->
+  <!-- PROPERTY LISTING — ПОКУПКА -->
   <section class="section" id="featuredSection">
     <div class="container">
       <div class="section-header">
         <div>
-          <h2 class="section-title" id="featuredTitle">Топовые предложения в Грузии</h2>
+          <h2 class="section-title" id="featuredTitle">Топовые предложения покупки в Грузии</h2>
         </div>
         <span class="see-all" onclick="window.location.href='projects.html'">Смотреть все</span>
       </div>
       <div class="featured-country-tabs" id="featuredCountryTabs">
-        <button class="featured-tab active" data-country="all" onclick="setFeaturedCountry(this)">🇬🇪 Грузия</button>
-        <button class="featured-tab" data-country="usa" onclick="setFeaturedCountry(this)">🇺🇸 США</button>
-        <button class="featured-tab" data-country="uae" onclick="setFeaturedCountry(this)">🇦🇪 ОАЭ</button>
-        <button class="featured-tab" data-country="cyprus" onclick="setFeaturedCountry(this)">🇨🇾 Кипр</button>
-        <button class="featured-tab" data-country="greece" onclick="setFeaturedCountry(this)">🇬🇷 Греция</button>
+        <button class="featured-tab active" data-country="all" onclick="setFeaturedCountry(this, 'buy')">🇬🇪 Грузия</button>
+        <button class="featured-tab" data-country="usa" onclick="setFeaturedCountry(this, 'buy')">🇺🇸 США</button>
+        <button class="featured-tab" data-country="uae" onclick="setFeaturedCountry(this, 'buy')">🇦🇪 ОАЭ</button>
+        <button class="featured-tab" data-country="cyprus" onclick="setFeaturedCountry(this, 'buy')">🇨🇾 Кипр</button>
+        <button class="featured-tab" data-country="greece" onclick="setFeaturedCountry(this, 'buy')">🇬🇷 Греция</button>
       </div>
       <div class="testi-track-wrap">
         <div class="testi-track" id="featuredTrack" style="gap:24px;">
@@ -373,6 +373,35 @@
         <button class="testi-btn" id="featuredBtnPrev" onclick="featuredNav(-1)">‹</button>
         <div class="testi-dots" id="featuredDots"></div>
         <button class="testi-btn" id="featuredBtnNext" onclick="featuredNav(1)">›</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROPERTY LISTING — АРЕНДА -->
+  <section class="section" id="featuredRentSection" style="padding-top:0;">
+    <div class="container">
+      <div class="section-header">
+        <div>
+          <h2 class="section-title" id="featuredRentTitle">Топовые предложения аренды в Грузии</h2>
+        </div>
+        <span class="see-all" onclick="window.location.href='projects.html?deal=rent'">Смотреть все</span>
+      </div>
+      <div class="featured-country-tabs" id="featuredRentCountryTabs">
+        <button class="featured-tab active" data-country="all" onclick="setFeaturedCountry(this, 'rent')">🇬🇪 Грузия</button>
+        <button class="featured-tab" data-country="usa" onclick="setFeaturedCountry(this, 'rent')">🇺🇸 США</button>
+        <button class="featured-tab" data-country="uae" onclick="setFeaturedCountry(this, 'rent')">🇦🇪 ОАЭ</button>
+        <button class="featured-tab" data-country="cyprus" onclick="setFeaturedCountry(this, 'rent')">🇨🇾 Кипр</button>
+        <button class="featured-tab" data-country="greece" onclick="setFeaturedCountry(this, 'rent')">🇬🇷 Греция</button>
+      </div>
+      <div class="testi-track-wrap">
+        <div class="testi-track" id="featuredRentTrack" style="gap:24px;">
+
+                </div>
+      </div>
+      <div class="testi-nav">
+        <button class="testi-btn" id="featuredRentBtnPrev" onclick="featuredRentNav(-1)">‹</button>
+        <div class="testi-dots" id="featuredRentDots"></div>
+        <button class="testi-btn" id="featuredRentBtnNext" onclick="featuredRentNav(1)">›</button>
       </div>
     </div>
   </section>
