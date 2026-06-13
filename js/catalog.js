@@ -1331,11 +1331,18 @@ function attachCardMapHover() {
 function filterByAgent(agentId) {
   // Переходим на страницу каталога
   if (typeof showPage === 'function') showPage('catalog');
-  // Небольшая задержка чтобы страница отрисовалась
+  // Задержка больше чем таймаут инициализации карты (80ms)
   setTimeout(function() {
-    // Сбрасываем обычные фильтры
-    if (typeof resetCatalogFilter === 'function') resetCatalogFilter();
-    // Применяем фильтр агента через глобальную переменную
+    // Сбрасываем обычные фильтры НЕ трогая _activeAgentId
+    document.querySelectorAll('#page-catalog .filter-select').forEach(s => s.selectedIndex = 0);
+    if (typeof updateCityOptions === 'function') updateCityOptions('all');
+    ['priceMin','priceMax','areaMin','areaMax'].forEach(id => {
+      const el = document.getElementById(id); if (el) el.value = '';
+    });
+    const roomsVal = document.getElementById('roomsVal');
+    if (roomsVal) roomsVal.value = 'all';
+    document.querySelectorAll('.rooms-btn').forEach(b => b.classList.toggle('active', b.dataset.val === 'all'));
+    // Применяем фильтр агента
     window._activeAgentId = agentId;
     if (typeof filterCatalog === 'function') filterCatalog();
     // Показываем баннер с именем агента
@@ -1348,7 +1355,7 @@ function filterByAgent(agentId) {
         banner.style.display = 'flex';
       }
     }
-  }, 50);
+  }, 200);
 }
 
 function clearAgentFilter() {
@@ -1398,13 +1405,25 @@ window.showPage = function(id) {
     document.querySelectorAll('.currency-btn').forEach(b => {
       b.classList.toggle('active', b.dataset.cur === currentCurrency);
     });
+    // Инициализируем карту с небольшой задержкой чтобы контейнер
+    // успел отрисоваться в DOM, затем повторно вызываем invalidateSize
     setTimeout(() => {
       initCatalogMap();
       if (catalogMap) {
         catalogMap.invalidateSize();
         renderMapMarkers(country, city, status, type, {});
+        // Повторный invalidateSize — страховка на случай медленного рендера
+        setTimeout(() => {
+          if (catalogMap) {
+            catalogMap.invalidateSize();
+            // Если маркеры не были добавлены — рендерим снова
+            if (mapMarkers.length === 0) {
+              renderMapMarkers(country, city, status, type, {});
+            }
+          }
+        }, 400);
       }
-    }, 50);
+    }, 80);
   }
 };
 

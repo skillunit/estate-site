@@ -998,7 +998,7 @@
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script src="js/nav.js?v=9"></script>
 <script src="js/forms.js?v=6"></script>
-<script src="js/catalog.js?v=4"></script>
+<script src="js/catalog.js?v=5"></script>
 <script>
 /* УМНЫЙ ПОИСК */
 var _sq = '';
@@ -1192,9 +1192,27 @@ document.addEventListener('DOMContentLoaded', function() {
   var pendingAgent = sessionStorage.getItem('filterAgent');
   if (pendingAgent) {
     sessionStorage.removeItem('filterAgent');
+    // Устанавливаем _activeAgentId ДО первого рендера каталога
+    // чтобы renderCatalogGrid/renderMapMarkers уже видели фильтр
+    window._activeAgentId = pendingAgent;
+    // Показываем баннер агента после того как DOM готов
     setTimeout(function() {
-      if (typeof filterByAgent === 'function') filterByAgent(pendingAgent);
-    }, 100);
+      if (typeof AGENTS !== 'undefined') {
+        var agent = AGENTS.find(function(a) { return a.id === pendingAgent; });
+        if (agent) {
+          var banner = document.getElementById('agentFilterBanner');
+          if (banner) {
+            var nameEl = document.getElementById('agentFilterName');
+            var photoEl = document.getElementById('agentFilterPhoto');
+            if (nameEl) nameEl.textContent = agent.name;
+            if (photoEl) photoEl.src = agent.photo;
+            banner.style.display = 'flex';
+          }
+        }
+      }
+      // Перерисовываем с уже инициализированной картой
+      if (typeof filterCatalog === 'function') filterCatalog();
+    }, 200);
   }
 });
 </script>
