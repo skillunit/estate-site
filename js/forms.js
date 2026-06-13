@@ -194,10 +194,10 @@ function createFeaturedSlider(trackId, dotsId, navFunc) {
   function pages() { return Math.max(1, total - perView() + 1); }
 
   function getWrapWidth() {
-    // Use the .testi-track-wrap's actual rendered width via getBoundingClientRect
-    // which is accurate after layout, unlike clientWidth which can be stale
-    const wrap = track.parentElement;
-    return Math.floor(wrap.getBoundingClientRect().width);
+    // Measure the outer clip wrapper, not the inner wrap which has negative margins
+    const outer = track.closest('.featured-track-outer');
+    if (outer) return Math.floor(outer.getBoundingClientRect().width);
+    return Math.floor(track.parentElement.getBoundingClientRect().width);
   }
 
   function buildDots() {

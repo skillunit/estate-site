@@ -187,12 +187,16 @@ footer {
 }
 .testimonials-title span { color: var(--red); }
 .testi-track-wrap { overflow: hidden; }
+/* Outer wrapper clips overflowing cards horizontally */
+.featured-track-outer {
+  overflow: hidden;
+}
+/* Inner wrap is visible with padding on all sides for shadow room */
 #featuredSection .testi-track-wrap,
 #featuredRentSection .testi-track-wrap {
-  overflow: hidden;
-  /* shadow-lg = 0 8px 40px — need ~50px to not clip hover shadow */
-  padding-bottom: 50px;
-  margin-bottom: -50px;
+  overflow: visible;
+  padding: 16px;
+  margin: -16px;
 }
 .testi-track {
   display: flex; gap: 24px;
