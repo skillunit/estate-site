@@ -193,6 +193,17 @@ function createFeaturedSlider(trackId, dotsId, navFunc) {
 
   function pages() { return Math.max(1, total - perView() + 1); }
 
+  function getWrapWidth() {
+    // Walk up to find the nearest block ancestor with a reliable width
+    // (.testi-track-wrap might have overflow:visible + padding, use .container)
+    let el = track.parentElement;
+    while (el && el !== document.body) {
+      if (el.classList.contains('container')) return el.clientWidth;
+      el = el.parentElement;
+    }
+    return track.parentElement.clientWidth;
+  }
+
   function buildDots() {
     dotsWrap.innerHTML = '';
     for (let i = 0; i < pages(); i++) {
@@ -205,7 +216,8 @@ function createFeaturedSlider(trackId, dotsId, navFunc) {
 
   function goTo(idx) {
     cur = Math.max(0, Math.min(idx, pages() - 1));
-    const cardW = (track.parentElement.offsetWidth - gap * (perView() - 1)) / perView();
+    const wrapW = getWrapWidth();
+    const cardW = (wrapW - gap * (perView() - 1)) / perView();
     cards.forEach(c => { c.style.width = cardW + 'px'; });
     track.style.transform = `translateX(-${cur * (cardW + gap)}px)`;
     dotsWrap.querySelectorAll('.testi-dot').forEach((d, i) => d.classList.toggle('active', i === cur));
@@ -215,7 +227,8 @@ function createFeaturedSlider(trackId, dotsId, navFunc) {
 
   function init() {
     cur = 0;
-    const cardW = (track.parentElement.offsetWidth - gap * (perView() - 1)) / perView();
+    const wrapW = getWrapWidth();
+    const cardW = (wrapW - gap * (perView() - 1)) / perView();
     cards.forEach(c => { c.style.width = cardW + 'px'; });
     buildDots();
     goTo(0);
