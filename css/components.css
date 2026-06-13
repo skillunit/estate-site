@@ -189,11 +189,10 @@ footer {
 .testi-track-wrap { overflow: hidden; }
 #featuredSection .testi-track-wrap,
 #featuredRentSection .testi-track-wrap {
-  overflow: visible;
-  /* Allow shadow/border-radius on all card edges; negative insets = expand visible area */
-  clip-path: inset(-4px -4px -30px -4px);
-  padding-bottom: 30px;
-  margin-bottom: -30px;
+  overflow: hidden;
+  /* Extra space at bottom so card shadow isn't clipped */
+  padding-bottom: 24px;
+  margin-bottom: -24px;
 }
 .testi-track {
   display: flex; gap: 24px;
