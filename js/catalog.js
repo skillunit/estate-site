@@ -781,30 +781,14 @@ function renderCatalogGrid(countryVal, cityVal, statusVal, typeVal, extra) {
   });
 
   // Empty state
+  const countEl = document.getElementById('catalogCount');
+  if (countEl) countEl.textContent = filtered.length;
+
   if (empty) {
     grid.style.display    = filtered.length ? '' : 'none';
     empty.style.display   = filtered.length ? 'none' : '';
   }
   if (!filtered.length) return;
-
-  // Sort
-  const sortEl = document.getElementById('catalogSort');
-  const sortVal = sortEl ? sortEl.value : 'top';
-  if (sortVal === 'top') {
-    filtered.sort((a, b) => (b.top ? 1 : 0) - (a.top ? 1 : 0));
-  } else if (sortVal === 'price-asc') {
-    filtered.sort((a, b) => parseFloat(a.price.replace(/[^0-9.]/g,'')) - parseFloat(b.price.replace(/[^0-9.]/g,'')));
-  } else if (sortVal === 'price-desc') {
-    filtered.sort((a, b) => parseFloat(b.price.replace(/[^0-9.]/g,'')) - parseFloat(a.price.replace(/[^0-9.]/g,'')));
-  } else if (sortVal === 'name-asc') {
-    filtered.sort((a, b) => a.name.localeCompare(b.name, 'ru'));
-  } else if (sortVal === 'name-desc') {
-    filtered.sort((a, b) => b.name.localeCompare(a.name, 'ru'));
-  }
-
-  // Update count
-  const countEl = document.getElementById('catalogCount');
-  if (countEl) countEl.textContent = filtered.length;
 
   if (filtered.length === 0) {
     grid.innerHTML = `<div style="grid-column:1/-1;text-align:center;padding:48px 0;color:var(--gray-500);font-size:0.875rem;">По выбранным фильтрам объектов не найдено</div>`;
