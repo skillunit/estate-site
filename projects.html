@@ -998,7 +998,7 @@
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script src="js/nav.js?v=9"></script>
 <script src="js/forms.js?v=6"></script>
-<script src="js/catalog.js?v=5"></script>
+<script src="js/catalog.js?v=6"></script>
 <script>
 /* УМНЫЙ ПОИСК */
 var _sq = '';
@@ -1209,6 +1209,10 @@ document.addEventListener('DOMContentLoaded', function() {
             banner.style.display = 'flex';
           }
         }
+      }
+      // Скрываем карту — объекты агента могут быть в разных странах
+      if (typeof mapVisible !== 'undefined' && mapVisible && typeof toggleCatalogMap === 'function') {
+        toggleCatalogMap();
       }
       // Перерисовываем с уже инициализированной картой
       if (typeof filterCatalog === 'function') filterCatalog();

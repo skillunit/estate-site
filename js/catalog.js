@@ -1342,6 +1342,9 @@ function filterByAgent(agentId) {
     const roomsVal = document.getElementById('roomsVal');
     if (roomsVal) roomsVal.value = 'all';
     document.querySelectorAll('.rooms-btn').forEach(b => b.classList.toggle('active', b.dataset.val === 'all'));
+    // Скрываем карту — при фильтре по агенту объекты могут быть
+    // разбросаны по разным странам, карта выглядит некорректно
+    if (mapVisible) toggleCatalogMap();
     // Применяем фильтр агента
     window._activeAgentId = agentId;
     if (typeof filterCatalog === 'function') filterCatalog();
