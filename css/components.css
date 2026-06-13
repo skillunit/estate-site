@@ -190,9 +190,9 @@ footer {
 #featuredSection .testi-track-wrap,
 #featuredRentSection .testi-track-wrap {
   overflow: hidden;
-  /* Extra space at bottom so card shadow isn't clipped */
-  padding-bottom: 24px;
-  margin-bottom: -24px;
+  /* shadow-lg = 0 8px 40px — need ~50px to not clip hover shadow */
+  padding-bottom: 50px;
+  margin-bottom: -50px;
 }
 .testi-track {
   display: flex; gap: 24px;
