@@ -453,23 +453,24 @@
       if (p3)    p3.textContent    = text.p3;
     }
 
-    // Вызываем при каждой фильтрации
-    var _origFilterCatalog = window.filterCatalog;
-    window.filterCatalog = function() {
-      if (_origFilterCatalog) _origFilterCatalog.apply(this, arguments);
-      updateSeoText();
-    };
-
-    // Вызываем при переключении покупка/аренда
-    var _origSetDealType = window.setDealType;
-    window.setDealType = function(type) {
-      if (_origSetDealType) _origSetDealType.apply(this, arguments);
-      updateSeoText();
-    };
-
-    // Первый рендер после загрузки
+    // Патчим после загрузки всех скриптов — только тогда функции уже определены
     document.addEventListener('DOMContentLoaded', function() {
-      setTimeout(updateSeoText, 250);
+      // Патч filterCatalog (смена страны, статуса, цены и т.д.)
+      var _origFC = window.filterCatalog;
+      window.filterCatalog = function() {
+        if (_origFC) _origFC.apply(this, arguments);
+        updateSeoText();
+      };
+
+      // Патч setDealType (покупка / аренда)
+      var _origSDT = window.setDealType;
+      window.setDealType = function(type) {
+        if (_origSDT) _origSDT.apply(this, arguments);
+        updateSeoText();
+      };
+
+      // Первый рендер
+      setTimeout(updateSeoText, 300);
     });
   })();
   </script>
