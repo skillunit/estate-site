@@ -196,9 +196,30 @@ footer {
 #featuredSection .testi-track-wrap,
 #featuredRentSection .testi-track-wrap {
   overflow: visible;
+  width: 100%;
 }
-.featured-track-outer {
-  overflow: visible;
+/* Трек должен знать свою базовую ширину для calc() в карточках */
+#featuredSection .testi-track,
+#featuredRentSection .testi-track {
+  width: 100%;
+}
+/* Карточки в featured-слайдерах: ширина через CSS, без JS */
+#featuredSection .testi-track .catalog-card,
+#featuredRentSection .testi-track .catalog-card {
+  flex-shrink: 0;
+  width: calc((100% - 48px) / 3);
+}
+@media (max-width: 900px) {
+  #featuredSection .testi-track .catalog-card,
+  #featuredRentSection .testi-track .catalog-card {
+    width: calc((100% - 24px) / 2);
+  }
+}
+@media (max-width: 600px) {
+  #featuredSection .testi-track .catalog-card,
+  #featuredRentSection .testi-track .catalog-card {
+    width: 100%;
+  }
 }
 .testi-track {
   display: flex; gap: 24px;

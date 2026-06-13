@@ -193,18 +193,17 @@ function createFeaturedSlider(trackId, dotsId, navFunc) {
 
   function pages() { return Math.max(1, total - perView() + 1); }
 
-  function getWrapWidth() {
+  function getContainerWidth() {
+    // Find .container ancestor and get its inner width (excluding padding)
     let el = track.parentElement;
     while (el && el !== document.body) {
       if (el.classList.contains('container')) {
-        const style = getComputedStyle(el);
-        const pl = parseFloat(style.paddingLeft) || 0;
-        const pr = parseFloat(style.paddingRight) || 0;
-        return Math.floor(el.getBoundingClientRect().width - pl - pr);
+        const s = getComputedStyle(el);
+        return el.clientWidth - parseFloat(s.paddingLeft) - parseFloat(s.paddingRight);
       }
       el = el.parentElement;
     }
-    return Math.floor(track.parentElement.getBoundingClientRect().width);
+    return track.parentElement.clientWidth;
   }
 
   function buildDots() {
@@ -219,9 +218,8 @@ function createFeaturedSlider(trackId, dotsId, navFunc) {
 
   function goTo(idx) {
     cur = Math.max(0, Math.min(idx, pages() - 1));
-    const wrapW = getWrapWidth();
-    const cardW = Math.floor((wrapW - gap * (perView() - 1)) / perView());
-    cards.forEach(c => { c.style.width = cardW + 'px'; c.style.minWidth = cardW + 'px'; });
+    // card width comes from CSS calc() based on track width we set in init()
+    const cardW = cards[0] ? cards[0].offsetWidth : 0;
     track.style.transform = `translateX(-${cur * (cardW + gap)}px)`;
     dotsWrap.querySelectorAll('.testi-dot').forEach((d, i) => d.classList.toggle('active', i === cur));
   }
@@ -230,12 +228,13 @@ function createFeaturedSlider(trackId, dotsId, navFunc) {
 
   function init() {
     cur = 0;
-    // Reset any previous transforms before measuring
     track.style.transform = 'translateX(0)';
+    // Remove any previously JS-set card widths
     cards.forEach(c => { c.style.width = ''; c.style.minWidth = ''; });
-    const wrapW = getWrapWidth();
-    const cardW = Math.floor((wrapW - gap * (perView() - 1)) / perView());
-    cards.forEach(c => { c.style.width = cardW + 'px'; c.style.minWidth = cardW + 'px'; });
+    // Set track width = container inner width so CSS calc() resolves correctly
+    const w = getContainerWidth();
+    track.style.width = w + 'px';
+    track.parentElement.style.width = w + 'px';
     buildDots();
     goTo(0);
   }
@@ -244,8 +243,8 @@ function createFeaturedSlider(trackId, dotsId, navFunc) {
 }
 
 function initFeaturedSlider(deal) {
-  // rAF ensures the browser has finished layout before we measure widths
-  requestAnimationFrame(() => {
+  // Double rAF: first frame commits DOM changes, second frame measures after layout
+  requestAnimationFrame(() => requestAnimationFrame(() => {
     if (!deal || deal === 'buy') {
       const init = createFeaturedSlider('featuredTrack', 'featuredDots', 'featuredNav');
       if (init) {
@@ -264,5 +263,5 @@ function initFeaturedSlider(deal) {
         window.addEventListener('resize', window._featuredRentResizeHandler);
       }
     }
-  });
+  }));
 }
