@@ -194,6 +194,15 @@ function createFeaturedSlider(trackId, dotsId, navFunc) {
   function pages() { return Math.max(1, total - perView() + 1); }
 
   function getWrapWidth() {
+    // .testi-track-wrap is overflow:visible so its BoundingRect may exceed container.
+    // Walk up to .container for the true available width.
+    let el = track.parentElement;
+    while (el && el !== document.body) {
+      if (el.classList.contains('container')) {
+        return Math.floor(el.getBoundingClientRect().width);
+      }
+      el = el.parentElement;
+    }
     return Math.floor(track.parentElement.getBoundingClientRect().width);
   }
 
