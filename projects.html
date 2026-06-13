@@ -455,7 +455,7 @@
 
     // Патчим после загрузки всех скриптов — только тогда функции уже определены
     document.addEventListener('DOMContentLoaded', function() {
-      // Патч filterCatalog (смена страны, статуса, цены и т.д.)
+      // Патч filterCatalog (смена статуса, цены и т.д.)
       var _origFC = window.filterCatalog;
       window.filterCatalog = function() {
         if (_origFC) _origFC.apply(this, arguments);
@@ -466,6 +466,13 @@
       var _origSDT = window.setDealType;
       window.setDealType = function(type) {
         if (_origSDT) _origSDT.apply(this, arguments);
+        updateSeoText();
+      };
+
+      // Патч onCountryChange (смена страны)
+      var _origOCC = window.onCountryChange;
+      window.onCountryChange = function(select) {
+        if (_origOCC) _origOCC.apply(this, arguments);
         updateSeoText();
       };
 
