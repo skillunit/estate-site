@@ -188,13 +188,17 @@ footer {
 .testimonials-title span { color: var(--red); }
 .testi-track-wrap { overflow: hidden; }
 
-#featuredSection,
-#featuredRentSection {
-  overflow: hidden;
+/* Контейнеры featured-секций режут лишние карточки по горизонтали,
+   но overflow-x:clip не режет тень по вертикали (в отличие от hidden) */
+#featuredSection > .container,
+#featuredRentSection > .container {
+  overflow: visible;
 }
 #featuredSection .testi-track-wrap,
 #featuredRentSection .testi-track-wrap {
-  overflow: visible;
+  /* clip-path с запасом: режет лишние карточки, но оставляет место тени */
+  overflow: hidden;
+  clip-path: inset(-8px -8px -50px -8px);
 }
 #featuredSection .testi-track .catalog-card,
 #featuredRentSection .testi-track .catalog-card {
