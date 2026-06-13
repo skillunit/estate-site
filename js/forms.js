@@ -194,9 +194,6 @@ function createFeaturedSlider(trackId, dotsId, navFunc) {
   function pages() { return Math.max(1, total - perView() + 1); }
 
   function getWrapWidth() {
-    // Measure the outer clip wrapper, not the inner wrap which has negative margins
-    const outer = track.closest('.featured-track-outer');
-    if (outer) return Math.floor(outer.getBoundingClientRect().width);
     return Math.floor(track.parentElement.getBoundingClientRect().width);
   }
 
