@@ -190,8 +190,8 @@ footer {
 #featuredSection .testi-track-wrap,
 #featuredRentSection .testi-track-wrap {
   overflow: visible;
-  /* Clip left/right tightly to hide overflowing cards, allow shadow top/bottom */
-  clip-path: inset(0 0 -30px 0);
+  /* Allow shadow/border-radius on all card edges; negative insets = expand visible area */
+  clip-path: inset(-4px -4px -30px -4px);
   padding-bottom: 30px;
   margin-bottom: -30px;
 }
@@ -380,10 +380,14 @@ footer {
 /* Featured slider dots — light background override */
 #featuredDots .testi-dot { background: var(--gray-300); }
 #featuredDots .testi-dot.active { background: var(--red); }
+#featuredRentDots .testi-dot { background: var(--gray-300); }
+#featuredRentDots .testi-dot.active { background: var(--red); }
 
 /* Featured slider buttons — light background override */
-#featuredSection .testi-btn { border-color: var(--border); color: var(--gray-700); }
-#featuredSection .testi-btn:hover { background: var(--red); border-color: var(--red); color: var(--white); }
+#featuredSection .testi-btn,
+#featuredRentSection .testi-btn { border-color: var(--border); color: var(--gray-700); }
+#featuredSection .testi-btn:hover,
+#featuredRentSection .testi-btn:hover { background: var(--red); border-color: var(--red); color: var(--white); }
 
 /* Related slider dots — light background */
 #relatedDots .testi-dot { background: var(--gray-300); }
