@@ -187,38 +187,42 @@ footer {
 }
 .testimonials-title span { color: var(--red); }
 .testi-track-wrap { overflow: hidden; }
-/* featured слайдеры: карточки режем по горизонтали на уровне секции,
-   тень свободна по вертикали */
+
 #featuredSection,
 #featuredRentSection {
-  overflow-x: clip;
+  overflow: hidden;
 }
 #featuredSection .testi-track-wrap,
 #featuredRentSection .testi-track-wrap {
   overflow: visible;
   width: 100%;
 }
-/* Трек должен знать свою базовую ширину для calc() в карточках */
 #featuredSection .testi-track,
 #featuredRentSection .testi-track {
   width: 100%;
 }
-/* Карточки в featured-слайдерах: ширина через CSS, без JS */
+/* Карточки: ровно 1/3 ширины контейнера с учётом gap */
 #featuredSection .testi-track .catalog-card,
 #featuredRentSection .testi-track .catalog-card {
-  flex-shrink: 0;
+  flex: 0 0 calc((100% - 48px) / 3);
   width: calc((100% - 48px) / 3);
+  min-width: 0;
+  max-width: calc((100% - 48px) / 3);
 }
 @media (max-width: 900px) {
   #featuredSection .testi-track .catalog-card,
   #featuredRentSection .testi-track .catalog-card {
+    flex: 0 0 calc((100% - 24px) / 2);
     width: calc((100% - 24px) / 2);
+    max-width: calc((100% - 24px) / 2);
   }
 }
 @media (max-width: 600px) {
   #featuredSection .testi-track .catalog-card,
   #featuredRentSection .testi-track .catalog-card {
+    flex: 0 0 100%;
     width: 100%;
+    max-width: 100%;
   }
 }
 .testi-track {

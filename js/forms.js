@@ -193,19 +193,6 @@ function createFeaturedSlider(trackId, dotsId, navFunc) {
 
   function pages() { return Math.max(1, total - perView() + 1); }
 
-  function getContainerWidth() {
-    // Find .container ancestor and get its inner width (excluding padding)
-    let el = track.parentElement;
-    while (el && el !== document.body) {
-      if (el.classList.contains('container')) {
-        const s = getComputedStyle(el);
-        return el.clientWidth - parseFloat(s.paddingLeft) - parseFloat(s.paddingRight);
-      }
-      el = el.parentElement;
-    }
-    return track.parentElement.clientWidth;
-  }
-
   function buildDots() {
     dotsWrap.innerHTML = '';
     for (let i = 0; i < pages(); i++) {
@@ -218,7 +205,7 @@ function createFeaturedSlider(trackId, dotsId, navFunc) {
 
   function goTo(idx) {
     cur = Math.max(0, Math.min(idx, pages() - 1));
-    // card width comes from CSS calc() based on track width we set in init()
+    // Card width is set by CSS — just read it
     const cardW = cards[0] ? cards[0].offsetWidth : 0;
     track.style.transform = `translateX(-${cur * (cardW + gap)}px)`;
     dotsWrap.querySelectorAll('.testi-dot').forEach((d, i) => d.classList.toggle('active', i === cur));
@@ -228,13 +215,11 @@ function createFeaturedSlider(trackId, dotsId, navFunc) {
 
   function init() {
     cur = 0;
+    // Clear any previously JS-set sizes — CSS owns sizing
+    track.style.width = '';
     track.style.transform = 'translateX(0)';
-    // Remove any previously JS-set card widths
-    cards.forEach(c => { c.style.width = ''; c.style.minWidth = ''; });
-    // Set track width = container inner width so CSS calc() resolves correctly
-    const w = getContainerWidth();
-    track.style.width = w + 'px';
-    track.parentElement.style.width = w + 'px';
+    cards.forEach(c => { c.style.width = ''; c.style.minWidth = ''; c.style.maxWidth = ''; });
+    track.parentElement.style.width = '';
     buildDots();
     goTo(0);
   }
