@@ -339,17 +339,16 @@ document.querySelectorAll('.team-card[data-agent-id]').forEach(function(card) {
   if (!body) return;
   var btn = document.createElement('a');
   btn.className = 'team-agent-btn';
-  btn.href = 'projects.html';
+  btn.href = 'projects.html?agent=' + agentId;
   btn.textContent = 'Объекты агента →';
   btn.addEventListener('click', function(e) {
     e.preventDefault();
-    // Если мы уже на projects.html — filterByAgent напрямую
+    // Если мы уже на projects.html — filterByAgent напрямую + обновляем URL
     if (typeof filterByAgent === 'function') {
+      history.replaceState(null, '', 'projects.html?agent=' + agentId);
       filterByAgent(agentId);
     } else {
-      // Передаём agentId через sessionStorage и открываем projects.html
-      sessionStorage.setItem('filterAgent', agentId);
-      window.location.href = 'projects.html';
+      window.location.href = 'projects.html?agent=' + agentId;
     }
   });
   body.appendChild(btn);

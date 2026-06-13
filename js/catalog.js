@@ -1365,6 +1365,8 @@ function clearAgentFilter() {
   window._activeAgentId = null;
   const banner = document.getElementById('agentFilterBanner');
   if (banner) banner.style.display = 'none';
+  // Убираем agent из URL
+  if (typeof window.syncFilterToUrl === 'function') window.syncFilterToUrl();
   if (typeof filterCatalog === 'function') filterCatalog();
 }
 

@@ -574,7 +574,7 @@ function cardSlide(e, btn, dir) {
 
 // ── FILTER URL SYNC ──
 (function() {
-  var FILTER_PARAMS = ['deal','country','city','status','type','priceMin','priceMax','areaMin','areaMax','rooms','currency'];
+  var FILTER_PARAMS = ['deal','country','city','status','type','priceMin','priceMax','areaMin','areaMax','rooms','currency','agent'];
 
   function readFilterState() {
     var s = {};
@@ -590,6 +590,7 @@ function cardSlide(e, btn, dir) {
     var aMaxEl    = document.getElementById('areaMax');       s.areaMax  = aMaxEl   ? aMaxEl.value    : '';
     var roomsEl   = document.getElementById('roomsVal');      s.rooms   = roomsEl   ? roomsEl.value   : 'all';
     s.currency = typeof currentCurrency !== 'undefined' ? currentCurrency : 'USD';
+    s.agent    = window._activeAgentId || '';
     return s;
   }
 
@@ -614,6 +615,7 @@ function cardSlide(e, btn, dir) {
       if (s.areaMax)                              p.set('areaMax',  s.areaMax);
       if (s.rooms && s.rooms !== 'all')           p.set('rooms',    s.rooms);
       if (s.currency && s.currency !== 'USD')     p.set('currency', s.currency);
+      if (s.agent)                                p.set('agent',    s.agent);
       // Если всё дефолтное — чистый URL, иначе с параметрами
       var qs = p.toString();
       history.replaceState(null, '', window.location.pathname + (qs ? '?' + qs : ''));
@@ -683,6 +685,12 @@ function cardSlide(e, btn, dir) {
       document.querySelectorAll('.rooms-btn').forEach(function(b) {
         b.classList.toggle('active', b.dataset.val === roomsVal);
       });
+    }
+
+    // agent — устанавливаем _activeAgentId, баннер покажет projects.html после рендера
+    var agentVal = params.get('agent');
+    if (agentVal) {
+      window._activeAgentId = agentVal;
     }
   };
 

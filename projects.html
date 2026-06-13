@@ -996,9 +996,9 @@
 </div>
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-<script src="js/nav.js?v=9"></script>
+<script src="js/nav.js?v=10"></script>
 <script src="js/forms.js?v=6"></script>
-<script src="js/catalog.js?v=6"></script>
+<script src="js/catalog.js?v=7"></script>
 <script>
 /* УМНЫЙ ПОИСК */
 var _sq = '';
@@ -1177,6 +1177,7 @@ window.resetCatalogFilter = function() {
 // На projects.html начальная страница — catalog, не home
 document.addEventListener('DOMContentLoaded', function() {
   // Восстанавливаем значения фильтров из URL ДО первого рендера
+  // (в том числе agent= — устанавливает window._activeAgentId)
   if (typeof window._restoreFilterFromUrl === 'function') window._restoreFilterFromUrl();
 
   // Первый рендер каталога
@@ -1188,23 +1189,23 @@ document.addEventListener('DOMContentLoaded', function() {
   var priceLabel = document.getElementById('priceCurrencyLabel');
   if (priceLabel) priceLabel.textContent = 'Цена, ' + (_symbols[_cur] || '$');
 
-  // Если пришли со страницы команды — применяем фильтр агента
-  var pendingAgent = sessionStorage.getItem('filterAgent');
-  if (pendingAgent) {
-    sessionStorage.removeItem('filterAgent');
-    // Устанавливаем _activeAgentId ДО первого рендера каталога
-    // чтобы renderCatalogGrid/renderMapMarkers уже видели фильтр
-    window._activeAgentId = pendingAgent;
-    // Показываем баннер агента после того как DOM готов
+  // Определяем активного агента — из URL или sessionStorage (legacy)
+  var pendingAgent = sessionStorage.getItem('filterAgent') || null;
+  if (pendingAgent) sessionStorage.removeItem('filterAgent');
+  var activeAgent = window._activeAgentId || pendingAgent || null;
+
+  if (activeAgent) {
+    // _activeAgentId уже установлен (_restoreFilterFromUrl или выше)
+    window._activeAgentId = activeAgent;
     setTimeout(function() {
       if (typeof AGENTS !== 'undefined') {
-        var agent = AGENTS.find(function(a) { return a.id === pendingAgent; });
+        var agent = AGENTS.find(function(a) { return a.id === activeAgent; });
         if (agent) {
           var banner = document.getElementById('agentFilterBanner');
           if (banner) {
-            var nameEl = document.getElementById('agentFilterName');
+            var nameEl  = document.getElementById('agentFilterName');
             var photoEl = document.getElementById('agentFilterPhoto');
-            if (nameEl) nameEl.textContent = agent.name;
+            if (nameEl)  nameEl.textContent = agent.name;
             if (photoEl) photoEl.src = agent.photo;
             banner.style.display = 'flex';
           }
