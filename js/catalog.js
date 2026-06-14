@@ -17,7 +17,7 @@ const MAP_PROPERTIES = [
     specs: '45 м² · 1 спальня · 12 этаж', year: '2022', oldPrice: '$149,000', year: '2022',
   },
   {
-    id: 'batumi-rustaveli', type: 'apartment', agentId: 'janelidze',
+    id: 'batumi-rustaveli', type: 'apartment', top: true, agentId: 'janelidze',
     city: 'batumi', cityLabel: 'Батуми', country: 'all',
     lat: 41.6440, lng: 41.6370,
     name: 'Апартаменты на Руставели, Батуми',
