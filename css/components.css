@@ -836,3 +836,41 @@ footer {
 .catalog-city-row .rev-mini-rating {
   margin: 0;
 }
+
+/* ═══════════════════════════════════
+   NEARBY INFRASTRUCTURE BLOCK
+═══════════════════════════════════ */
+.prop-nearby-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 20px 20px 12px;
+  margin-top: 16px;
+}
+.prop-nearby-title {
+  font-family: var(--font-head);
+  font-size: 0.75rem; font-weight: 700;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--gray-500);
+  display: flex; align-items: center; gap: 6px;
+  margin-bottom: 14px;
+}
+.prop-nearby-list {
+  display: flex; flex-direction: column; gap: 0;
+}
+.nearby-item {
+  display: flex; align-items: center; gap: 10px;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--gray-100);
+  font-size: 0.82rem;
+}
+.nearby-item:last-child { border-bottom: none; }
+.nearby-icon { font-size: 1rem; flex-shrink: 0; width: 22px; text-align: center; }
+.nearby-label { flex: 1; color: var(--gray-700); }
+.nearby-val {
+  font-size: 0.75rem; font-weight: 600;
+  color: var(--red);
+  white-space: nowrap;
+  background: rgba(192,57,43,0.07);
+  padding: 2px 8px; border-radius: 20px;
+}
