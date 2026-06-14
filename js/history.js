@@ -161,7 +161,7 @@ function renderHistoryPage() {
           <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
           Просмотрено ${histFormatDate(p.viewedAt)}
         </div>
-        <div class="catalog-city">${p.cityLabel}</div>
+        <div class="catalog-city-row"><span class="catalog-city">${p.cityLabel}</span>${typeof Reviews !== 'undefined' ? Reviews.getMiniRatingHtml(p.id) : ''}</div>
         <div class="catalog-name">${p.name}</div>
         <div class="catalog-price-block">
           <div class="catalog-price-row">
