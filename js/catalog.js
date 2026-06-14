@@ -790,17 +790,22 @@ function renderCatalogGrid(countryVal, cityVal, statusVal, typeVal, extra) {
   }
   // ── Sort ──
   const sortEl = document.getElementById('catalogSort');
-  const sortVal = sortEl ? sortEl.value : 'top';
+  const sortVal = (sortEl ? sortEl.value : '') || 'top';
+  const priceNum = p => parseFloat((p.price || '0').replace(/[^0-9.]/g, '')) || 0;
   if (sortVal === 'top') {
     filtered.sort((a, b) => (b.top ? 1 : 0) - (a.top ? 1 : 0));
   } else if (sortVal === 'price-asc') {
-    filtered.sort((a, b) => parseFloat(a.price.replace(/[^0-9.]/g,'')) - parseFloat(b.price.replace(/[^0-9.]/g,'')));
+    filtered.sort((a, b) => priceNum(a) - priceNum(b));
   } else if (sortVal === 'price-desc') {
-    filtered.sort((a, b) => parseFloat(b.price.replace(/[^0-9.]/g,'')) - parseFloat(a.price.replace(/[^0-9.]/g,'')));
-  } else if (sortVal === 'area-desc') {
-    filtered.sort((a, b) => parseFloat(b.area) - parseFloat(a.area));
+    filtered.sort((a, b) => priceNum(b) - priceNum(a));
   } else if (sortVal === 'area-asc') {
-    filtered.sort((a, b) => parseFloat(a.area) - parseFloat(b.area));
+    filtered.sort((a, b) => (parseFloat(a.area) || 0) - (parseFloat(b.area) || 0));
+  } else if (sortVal === 'area-desc') {
+    filtered.sort((a, b) => (parseFloat(b.area) || 0) - (parseFloat(a.area) || 0));
+  } else if (sortVal === 'name-asc') {
+    filtered.sort((a, b) => (a.name || '').localeCompare(b.name || '', 'ru'));
+  } else if (sortVal === 'name-desc') {
+    filtered.sort((a, b) => (b.name || '').localeCompare(a.name || '', 'ru'));
   }
 
   if (!filtered.length) return;
