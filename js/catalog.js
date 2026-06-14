@@ -1026,7 +1026,7 @@ function renderNearby(propId) {
 
   list.innerHTML = sorted.map(item => `
     <div class="nearby-item">
-      <span class="nearby-icon">${item.icon}</span>
+      <span class="prop-amenity-dot"></span>
       <span class="nearby-label">${item.label}</span>
       <span class="nearby-val">${item.val} пешком</span>
     </div>`).join('');
