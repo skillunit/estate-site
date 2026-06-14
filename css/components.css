@@ -822,3 +822,17 @@ footer {
 @media (max-width: 600px) {
   .rev-summary { flex-direction: column; gap: 16px; }
 }
+
+/* ── Catalog city row with inline rating ── */
+.catalog-city-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 2px;
+}
+.catalog-city-row .catalog-city {
+  margin-bottom: 0;
+}
+.catalog-city-row .rev-mini-rating {
+  margin: 0;
+}
