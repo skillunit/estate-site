@@ -672,8 +672,7 @@ function renderRecentlyViewed() {
         ${favCardBtn(p.id)}
       </div>
       <div class="catalog-card-body">
-        <div class="catalog-city">${p.cityLabel}</div>
-        ${typeof Reviews !== 'undefined' ? Reviews.getMiniRatingHtml(p.id) : ''}
+        <div class="catalog-city-row"><span class="catalog-city">${p.cityLabel}</span>${typeof Reviews !== 'undefined' ? Reviews.getMiniRatingHtml(p.id) : ''}</div>
         <div class="catalog-name">${p.name}</div>
         <div class="catalog-price-block">
           <div class="catalog-price-row">
@@ -831,8 +830,7 @@ function renderCatalogGrid(countryVal, cityVal, statusVal, typeVal, extra) {
         ${favCardBtn(p.id)}
       </div>
       <div class="catalog-card-body">
-        <div class="catalog-city">${p.cityLabel}</div>
-        ${typeof Reviews !== 'undefined' ? Reviews.getMiniRatingHtml(p.id) : ''}
+        <div class="catalog-city-row"><span class="catalog-city">${p.cityLabel}</span>${typeof Reviews !== 'undefined' ? Reviews.getMiniRatingHtml(p.id) : ''}</div>
         <div class="catalog-name">${p.name}</div>
         <div class="catalog-price-block">
           <div class="catalog-price-row">
@@ -1517,8 +1515,7 @@ function renderRelated(currentId) {
         ${favCardBtn(p.id)}
       </div>
       <div class="catalog-card-body">
-        <div class="catalog-city">${p.cityLabel}</div>
-        ${typeof Reviews !== 'undefined' ? Reviews.getMiniRatingHtml(p.id) : ''}
+        <div class="catalog-city-row"><span class="catalog-city">${p.cityLabel}</span>${typeof Reviews !== 'undefined' ? Reviews.getMiniRatingHtml(p.id) : ''}</div>
         <div class="catalog-name">${p.name}</div>
         <div class="catalog-price">${p.price}</div>
         <div class="catalog-specs"><span>${p.area}</span> м² &nbsp;·&nbsp; <span>${p.rooms}</span> спальн${p.rooms === '1' ? 'я' : 'и'} &nbsp;·&nbsp; <span>${p.floor}</span> этаж</div>
@@ -1617,8 +1614,7 @@ function buildFeaturedCards(props) {
         ${favCardBtn(p.id)}
       </div>
       <div class="catalog-card-body">
-        <div class="catalog-city">${p.cityLabel}</div>
-        ${typeof Reviews !== 'undefined' ? Reviews.getMiniRatingHtml(p.id) : ''}
+        <div class="catalog-city-row"><span class="catalog-city">${p.cityLabel}</span>${typeof Reviews !== 'undefined' ? Reviews.getMiniRatingHtml(p.id) : ''}</div>
         <div class="catalog-name">${p.name}</div>
         <div class="catalog-price-block">
           <div class="catalog-price-row">
