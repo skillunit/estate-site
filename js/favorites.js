@@ -224,7 +224,7 @@ function renderFavoritesPage() {
         ${p.top ? '<span class="top-label" style="z-index:2;">★ ТОП</span>' : ''}
       </div>
       <div class="catalog-card-body">
-        <div class="catalog-city">${p.cityLabel}</div>
+        <div class="catalog-city-row"><span class="catalog-city">${p.cityLabel}</span>${typeof Reviews !== 'undefined' ? Reviews.getMiniRatingHtml(p.id) : ''}</div>
         <div class="catalog-name-row">
           <div class="catalog-name">${p.name}</div>
           <button class="card-fav-inline fav-active" data-fav-id="${p.id}"
