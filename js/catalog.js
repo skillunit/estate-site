@@ -788,6 +788,21 @@ function renderCatalogGrid(countryVal, cityVal, statusVal, typeVal, extra) {
     grid.style.display    = filtered.length ? '' : 'none';
     empty.style.display   = filtered.length ? 'none' : '';
   }
+  // ── Sort ──
+  const sortEl = document.getElementById('catalogSort');
+  const sortVal = sortEl ? sortEl.value : 'top';
+  if (sortVal === 'top') {
+    filtered.sort((a, b) => (b.top ? 1 : 0) - (a.top ? 1 : 0));
+  } else if (sortVal === 'price-asc') {
+    filtered.sort((a, b) => parseFloat(a.price.replace(/[^0-9.]/g,'')) - parseFloat(b.price.replace(/[^0-9.]/g,'')));
+  } else if (sortVal === 'price-desc') {
+    filtered.sort((a, b) => parseFloat(b.price.replace(/[^0-9.]/g,'')) - parseFloat(a.price.replace(/[^0-9.]/g,'')));
+  } else if (sortVal === 'area-desc') {
+    filtered.sort((a, b) => parseFloat(b.area) - parseFloat(a.area));
+  } else if (sortVal === 'area-asc') {
+    filtered.sort((a, b) => parseFloat(a.area) - parseFloat(b.area));
+  }
+
   if (!filtered.length) return;
 
   if (filtered.length === 0) {
