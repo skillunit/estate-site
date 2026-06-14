@@ -486,6 +486,155 @@ const MAP_PROPERTIES = [
   },
 ];
 
+
+// ── NEARBY INFRASTRUCTURE ──
+const NEARBY = {
+  'batumi-grand': [
+    { cat:'transport', icon:'🚌', label:'Маршрутка до центра', val:'3 мин' },
+    { cat:'transport', icon:'🚕', label:'Такси до аэропорта', val:'15 мин' },
+    { cat:'shop',      icon:'🛒', label:'Супермаркет Carrefour', val:'5 мин' },
+    { cat:'food',      icon:'🍽️', label:'Рестораны на набережной', val:'7 мин' },
+    { cat:'beach',     icon:'🏖️', label:'Пляж Батуми', val:'10 мин' },
+    { cat:'school',    icon:'🏫', label:'Международная школа QSI', val:'12 мин' },
+    { cat:'health',    icon:'🏥', label:'Клиника MediClub', val:'8 мин' },
+  ],
+  'batumi-rustaveli': [
+    { cat:'transport', icon:'🚌', label:'Остановка на бульваре', val:'1 мин' },
+    { cat:'shop',      icon:'🛒', label:'Магазин Goodwill', val:'3 мин' },
+    { cat:'food',      icon:'🍽️', label:'Кафе и рестораны', val:'2 мин' },
+    { cat:'beach',     icon:'🏖️', label:'Городской пляж', val:'12 мин' },
+    { cat:'health',    icon:'🏥', label:'Поликлиника', val:'6 мин' },
+    { cat:'school',    icon:'🏫', label:'Школа №5', val:'8 мин' },
+  ],
+  'tbilisi-elite': [
+    { cat:'transport', icon:'🚇', label:'Метро Руставели', val:'5 мин' },
+    { cat:'transport', icon:'🚌', label:'Автобусная остановка', val:'2 мин' },
+    { cat:'shop',      icon:'🛒', label:'Супермаркет Spar', val:'4 мин' },
+    { cat:'food',      icon:'🍽️', label:'Рестораны пр. Руставели', val:'5 мин' },
+    { cat:'school',    icon:'🏫', label:'Школа Европейской гимназии', val:'10 мин' },
+    { cat:'health',    icon:'🏥', label:'Клиника Аверси', val:'7 мин' },
+    { cat:'park',      icon:'🌳', label:'Парк Мтацминда', val:'8 мин' },
+  ],
+  'tbilisi-penthouse': [
+    { cat:'transport', icon:'🚇', label:'Метро Варкетили', val:'7 мин' },
+    { cat:'transport', icon:'🚕', label:'Такси до центра', val:'10 мин' },
+    { cat:'shop',      icon:'🛒', label:'ТЦ Eastpoint Mall', val:'5 мин' },
+    { cat:'food',      icon:'🍽️', label:'Рестораны с видом на город', val:'3 мин' },
+    { cat:'school',    icon:'🏫', label:'Международная школа IST', val:'15 мин' },
+    { cat:'health',    icon:'🏥', label:'Больница GHG', val:'10 мин' },
+    { cat:'park',      icon:'🌳', label:'Ботанический сад', val:'12 мин' },
+  ],
+  'gonio-coast': [
+    { cat:'transport', icon:'🚌', label:'Маршрутка Батуми–Гонио', val:'5 мин' },
+    { cat:'beach',     icon:'🏖️', label:'Пляж Гонио', val:'1 мин' },
+    { cat:'shop',      icon:'🛒', label:'Местный рынок', val:'3 мин' },
+    { cat:'food',      icon:'🍽️', label:'Рестораны у моря', val:'4 мин' },
+    { cat:'health',    icon:'🏥', label:'Медпункт Гонио', val:'6 мин' },
+    { cat:'park',      icon:'🏰', label:'Крепость Гонио-Апсарос', val:'5 мин' },
+  ],
+  'gonio-seaview': [
+    { cat:'beach',     icon:'🏖️', label:'Пляж', val:'3 мин' },
+    { cat:'transport', icon:'🚌', label:'Маршрутка в Батуми', val:'6 мин' },
+    { cat:'food',      icon:'🍽️', label:'Кафе у моря', val:'5 мин' },
+    { cat:'shop',      icon:'🛒', label:'Супермаркет', val:'7 мин' },
+    { cat:'park',      icon:'🏰', label:'Крепость Гонио', val:'8 мин' },
+  ],
+  'bakuriani-hills': [
+    { cat:'transport', icon:'🚡', label:'Канатная дорога', val:'2 мин' },
+    { cat:'transport', icon:'⛷️', label:'Подъёмник Kokhta', val:'3 мин' },
+    { cat:'food',      icon:'🍽️', label:'Рестораны горнолыжного курорта', val:'4 мин' },
+    { cat:'health',    icon:'🏥', label:'Медпункт курорта', val:'5 мин' },
+    { cat:'shop',      icon:'🛒', label:'Магазин снаряжения', val:'3 мин' },
+    { cat:'park',      icon:'🌲', label:'Сосновый лес', val:'1 мин' },
+  ],
+  'bakuriani-chalet': [
+    { cat:'transport', icon:'⛷️', label:'Подъёмник', val:'5 мин' },
+    { cat:'food',      icon:'🍽️', label:'Ресторан шале', val:'2 мин' },
+    { cat:'shop',      icon:'🛒', label:'Магазин', val:'6 мин' },
+    { cat:'park',      icon:'🌲', label:'Лыжные трассы', val:'3 мин' },
+  ],
+  'kakheti-alazani': [
+    { cat:'park',      icon:'🍷', label:'Винный тур по виноградникам', val:'5 мин' },
+    { cat:'food',      icon:'🍽️', label:'Ресторан грузинской кухни', val:'3 мин' },
+    { cat:'transport', icon:'🚌', label:'Маршрутка в Телави', val:'20 мин' },
+    { cat:'health',    icon:'🏥', label:'Больница Телави', val:'25 мин' },
+    { cat:'park',      icon:'🏰', label:'Монастырь Алаверди', val:'15 мин' },
+  ],
+  'tbilisi-commercial': [
+    { cat:'transport', icon:'🚇', label:'Метро Руставели', val:'2 мин' },
+    { cat:'transport', icon:'🚌', label:'Автобусная остановка', val:'1 мин' },
+    { cat:'food',      icon:'🍽️', label:'Рестораны бульвара', val:'1 мин' },
+    { cat:'shop',      icon:'🛒', label:'Торговые центры', val:'5 мин' },
+    { cat:'park',      icon:'🌳', label:'Парк Мтацминда', val:'10 мин' },
+  ],
+  'limassol-apart': [
+    { cat:'transport', icon:'🚌', label:'Автобус до Marina', val:'5 мин' },
+    { cat:'beach',     icon:'🏖️', label:'Пляж Limassol', val:'10 мин' },
+    { cat:'food',      icon:'🍽️', label:'Рестораны делового центра', val:'3 мин' },
+    { cat:'shop',      icon:'🛒', label:'ТЦ My Mall', val:'8 мин' },
+    { cat:'school',    icon:'🏫', label:'Международная школа ГАМК', val:'12 мин' },
+    { cat:'health',    icon:'🏥', label:'Больница YGEIA', val:'10 мин' },
+  ],
+  'limassol-villa': [
+    { cat:'beach',     icon:'🏖️', label:'Частный пляж', val:'2 мин' },
+    { cat:'transport', icon:'🚌', label:'Автобус в центр', val:'8 мин' },
+    { cat:'food',      icon:'🍽️', label:'Рестораны Marina', val:'10 мин' },
+    { cat:'shop',      icon:'🛒', label:'Супермаркет Alpha Mega', val:'7 мин' },
+    { cat:'health',    icon:'🏥', label:'Американский медцентр', val:'12 мин' },
+  ],
+  'dubai-marina': [
+    { cat:'transport', icon:'🚇', label:'Метро Dubai Marina', val:'3 мин' },
+    { cat:'transport', icon:'⛵', label:'Water Bus до JBR', val:'5 мин' },
+    { cat:'beach',     icon:'🏖️', label:'JBR Beach', val:'8 мин' },
+    { cat:'food',      icon:'🍽️', label:'Рестораны Marina Walk', val:'3 мин' },
+    { cat:'shop',      icon:'🛒', label:'Marina Mall', val:'5 мин' },
+    { cat:'health',    icon:'🏥', label:'Клиника Mediclinic', val:'10 мин' },
+  ],
+  'dubai-palm': [
+    { cat:'beach',     icon:'🏖️', label:'Частный пляж Palm', val:'2 мин' },
+    { cat:'transport', icon:'🚝', label:'Palm Monorail', val:'5 мин' },
+    { cat:'food',      icon:'🍽️', label:'Ресторан Nobu', val:'7 мин' },
+    { cat:'shop',      icon:'🛒', label:'Nakheel Mall', val:'10 мин' },
+    { cat:'health',    icon:'🏥', label:'Госпиталь', val:'15 мин' },
+  ],
+  'ny-brooklyn': [
+    { cat:'transport', icon:'🚇', label:'Метро F/G до Манхэттена', val:'5 мин' },
+    { cat:'food',      icon:'🍽️', label:'Рестораны DUMBO', val:'3 мин' },
+    { cat:'shop',      icon:'🛒', label:'Whole Foods Market', val:'7 мин' },
+    { cat:'park',      icon:'🌳', label:'Brooklyn Bridge Park', val:'5 мин' },
+    { cat:'school',    icon:'🏫', label:'PS 58 школа', val:'6 мин' },
+  ],
+  'ny-manhattan': [
+    { cat:'transport', icon:'🚇', label:'Метро N/Q/R до Times Sq', val:'3 мин' },
+    { cat:'park',      icon:'🌳', label:'Central Park', val:'5 мин' },
+    { cat:'food',      icon:'🍽️', label:'Рестораны Midtown', val:'1 мин' },
+    { cat:'shop',      icon:'🛒', label:'Whole Foods / Dean & Deluca', val:'4 мин' },
+    { cat:'health',    icon:'🏥', label:'NYP Hospital', val:'10 мин' },
+    { cat:'school',    icon:'🏫', label:'Dalton School', val:'8 мин' },
+  ],
+  'miami-beach': [
+    { cat:'beach',     icon:'🏖️', label:'Океанский пляж', val:'1 мин' },
+    { cat:'food',      icon:'🍽️', label:'Рестораны Ocean Drive', val:'5 мин' },
+    { cat:'transport', icon:'🚌', label:'Miami Beach Bus', val:'4 мин' },
+    { cat:'shop',      icon:'🛒', label:'Lincoln Road Mall', val:'8 мин' },
+    { cat:'health',    icon:'🏥', label:'Mt Sinai Medical', val:'10 мин' },
+  ],
+  'athens-apart': [
+    { cat:'transport', icon:'🚇', label:'Метро Акрополь', val:'4 мин' },
+    { cat:'park',      icon:'🏛️', label:'Акрополь', val:'6 мин' },
+    { cat:'food',      icon:'🍽️', label:'Таверны Plaka', val:'3 мин' },
+    { cat:'shop',      icon:'🛒', label:'Супермаркет AB', val:'5 мин' },
+    { cat:'health',    icon:'🏥', label:'Клиника Hygeia', val:'15 мин' },
+  ],
+  'mykonos-villa': [
+    { cat:'beach',     icon:'🏖️', label:'Пляж Paradise', val:'5 мин' },
+    { cat:'food',      icon:'🍽️', label:'Рестораны Mykonos Town', val:'10 мин' },
+    { cat:'transport', icon:'⛵', label:'Паром в Афины', val:'20 мин' },
+    { cat:'shop',      icon:'🛒', label:'Супермаркет', val:'8 мин' },
+    { cat:'health',    icon:'🏥', label:'Мед. центр Mykonos', val:'12 мин' },
+  ],
+};
+
 // ── AGENTS ──
 const AGENTS = [
   {
@@ -858,6 +1007,31 @@ function renderCatalogGrid(countryVal, cityVal, statusVal, typeVal, extra) {
   setTimeout(attachCardMapHover, 60);
 }
 
+
+// ── RENDER NEARBY INFRASTRUCTURE ──
+function renderNearby(propId) {
+  const card = document.getElementById('nearbyCard');
+  const list = document.getElementById('nearbyList');
+  if (!card || !list) return;
+
+  const items = NEARBY[propId];
+  if (!items || !items.length) {
+    card.style.display = 'none';
+    return;
+  }
+  card.style.display = '';
+
+  const catOrder = ['transport','beach','shop','food','school','health','park'];
+  const sorted = [...items].sort((a,b) => catOrder.indexOf(a.cat) - catOrder.indexOf(b.cat));
+
+  list.innerHTML = sorted.map(item => `
+    <div class="nearby-item">
+      <span class="nearby-icon">${item.icon}</span>
+      <span class="nearby-label">${item.label}</span>
+      <span class="nearby-val">${item.val} пешком</span>
+    </div>`).join('');
+}
+
 // ── Открыть страницу детали для конкретного объекта ──
 function showDetail(id) {
   const prop = MAP_PROPERTIES.find(p => p.id === id);
@@ -975,6 +1149,7 @@ function showDetail(id) {
 
   // ── Карта объекта ──
   initDetailMap(prop);
+  renderNearby(id);
 
   showPage('detail');
   renderRelated(id);
