@@ -465,7 +465,30 @@ function selectSort(el) {
   const input = document.getElementById('catalogSort');
   if (input) {
     input.value = value;
-    filterCatalog();
+  }
+  // Вызываем renderCatalogGrid напрямую с текущим состоянием фильтров
+  if (typeof renderCatalogGrid === 'function') {
+    const countryEl = document.querySelector('#page-catalog .filter-field--country .filter-select');
+    const cityEl    = document.getElementById('citySelect');
+    const statusEl  = document.getElementById('statusSelect');
+    const typeEl    = document.getElementById('typeSelect');
+    const priceMinEl = document.getElementById('priceMin');
+    const priceMaxEl = document.getElementById('priceMax');
+    const areaMinEl  = document.getElementById('areaMin');
+    const areaMaxEl  = document.getElementById('areaMax');
+    const roomsEl    = document.getElementById('roomsVal');
+    const country = countryEl ? countryEl.value : 'all';
+    const city    = cityEl    ? cityEl.value    : 'all';
+    const status  = statusEl  ? statusEl.value  : 'all';
+    const type    = typeEl    ? typeEl.value    : 'all';
+    const rooms   = roomsEl   ? roomsEl.value   : 'all';
+    const _rate   = (typeof CURRENCY_RATES !== 'undefined' && typeof currentCurrency !== 'undefined') ? (CURRENCY_RATES[currentCurrency] || 1) : 1;
+    const priceMin = priceMinEl && priceMinEl.value ? (parseFloat(priceMinEl.value.replace(/[^0-9.]/g,'')) || 0) / _rate : 0;
+    const priceMax = priceMaxEl && priceMaxEl.value ? (parseFloat(priceMaxEl.value.replace(/[^0-9.]/g,'')) || Infinity) / _rate : Infinity;
+    const areaMin  = areaMinEl  && areaMinEl.value  ? parseFloat(areaMinEl.value)  || 0        : 0;
+    const areaMax  = areaMaxEl  && areaMaxEl.value  ? parseFloat(areaMaxEl.value)  || Infinity : Infinity;
+    renderCatalogGrid(country, city, status, type, { priceMin, priceMax, areaMin, areaMax, rooms });
+    if (typeof renderMapMarkers === 'function') renderMapMarkers(country, city, status, type, { priceMin, priceMax, areaMin, areaMax, rooms });
   }
 
   // Закрыть дропдаун
