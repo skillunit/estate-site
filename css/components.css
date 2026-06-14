@@ -874,3 +874,88 @@ footer {
   background: rgba(192,57,43,0.07);
   padding: 2px 8px; border-radius: 20px;
 }
+
+/* ═══════════════════════════════════
+   LEGAL PAGE — СДЕЛКА, НАЛОГИ, ВНЖ
+═══════════════════════════════════ */
+.legal-body { max-width: 1100px; margin: 0 auto; padding: 48px 32px 0; }
+
+/* Intro */
+.legal-intro { display: flex; gap: 40px; align-items: flex-start; margin-bottom: 48px; flex-wrap: wrap; }
+.legal-intro-text { flex: 1; min-width: 260px; font-size: 1rem; color: var(--gray-700); line-height: 1.8; }
+.legal-highlights { display: flex; gap: 16px; flex-shrink: 0; flex-wrap: wrap; }
+.legal-highlight-item { background: var(--dark); border-radius: var(--radius-sm); padding: 18px 22px; text-align: center; min-width: 100px; }
+.legal-highlight-num { font-family: var(--font-head); font-size: 2rem; font-weight: 800; color: var(--red); line-height: 1; }
+.legal-highlight-label { font-size: 0.68rem; color: rgba(255,255,255,0.6); margin-top: 4px; line-height: 1.4; }
+
+/* Layout */
+.legal-grid { display: grid; grid-template-columns: 1fr 300px; gap: 40px; align-items: start; }
+@media (max-width: 900px) { .legal-grid { grid-template-columns: 1fr; } }
+
+/* Section */
+.legal-section { margin-bottom: 48px; }
+.legal-section-tag { font-size: 0.65rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--red); margin-bottom: 8px; }
+.legal-section-title { font-family: var(--font-head); font-size: 1.35rem; font-weight: 800; color: var(--dark); margin-bottom: 24px; line-height: 1.2; }
+.legal-text { font-size: 0.9rem; color: var(--gray-700); line-height: 1.8; margin-bottom: 20px; }
+
+/* Steps */
+.legal-steps { display: flex; flex-direction: column; gap: 0; }
+.legal-step { display: flex; gap: 16px; padding: 20px 0; border-bottom: 1px solid var(--border); }
+.legal-step:last-child { border-bottom: none; }
+.legal-step-num { width: 32px; height: 32px; border-radius: 50%; background: var(--red); color: var(--white); font-family: var(--font-head); font-size: 0.8rem; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px; }
+.legal-step-title { font-weight: 600; font-size: 0.95rem; color: var(--dark); margin-bottom: 6px; }
+.legal-step-text { font-size: 0.85rem; color: var(--gray-600); line-height: 1.7; }
+
+/* Tax grid */
+.legal-tax-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+@media (max-width: 700px) { .legal-tax-grid { grid-template-columns: 1fr; } }
+.legal-tax-card { background: var(--gray-50); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 18px 20px; }
+.legal-tax-title { font-family: var(--font-head); font-size: 0.75rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--gray-500); margin-bottom: 12px; }
+.legal-tax-row { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; padding: 6px 0; border-bottom: 1px solid var(--border); font-size: 0.82rem; }
+.legal-tax-row:last-of-type { border-bottom: none; }
+.legal-tax-row span { color: var(--gray-600); }
+.legal-tax-row strong { color: var(--dark); font-weight: 600; white-space: nowrap; }
+.legal-tax-note { font-size: 0.75rem; color: var(--red); margin-top: 10px; line-height: 1.5; }
+
+/* VNJ cards */
+.legal-vnj-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 20px; }
+@media (max-width: 800px) { .legal-vnj-cards { grid-template-columns: 1fr; } }
+.legal-vnj-card { border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 24px 20px; position: relative; }
+.legal-vnj-card--featured { border-color: var(--red); background: rgba(192,57,43,0.03); }
+.legal-vnj-badge { display: inline-block; background: var(--red); color: var(--white); font-size: 0.65rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 3px 10px; border-radius: 20px; margin-bottom: 12px; }
+.legal-vnj-title { font-family: var(--font-head); font-size: 1rem; font-weight: 700; color: var(--dark); margin-bottom: 4px; }
+.legal-vnj-price { font-size: 1.2rem; font-weight: 800; color: var(--red); margin-bottom: 10px; }
+.legal-vnj-desc { font-size: 0.82rem; color: var(--gray-600); line-height: 1.6; margin-bottom: 14px; }
+.legal-vnj-list { list-style: none; display: flex; flex-direction: column; gap: 6px; }
+.legal-vnj-list li { font-size: 0.8rem; color: var(--gray-700); padding-left: 14px; position: relative; }
+.legal-vnj-list li::before { content: ''; position: absolute; left: 0; top: 7px; width: 5px; height: 5px; border-radius: 50%; background: var(--red); }
+
+/* FAQ */
+.legal-faq { display: flex; flex-direction: column; gap: 0; }
+.legal-faq-item { border-bottom: 1px solid var(--border); }
+.legal-faq-q { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 16px 0; font-size: 0.9rem; font-weight: 500; color: var(--dark); cursor: pointer; user-select: none; transition: color var(--transition); }
+.legal-faq-q:hover { color: var(--red); }
+.legal-faq-arrow { flex-shrink: 0; transition: transform 0.25s ease; }
+.legal-faq-item.open .legal-faq-arrow { transform: rotate(180deg); }
+.legal-faq-a { font-size: 0.85rem; color: var(--gray-600); line-height: 1.75; max-height: 0; overflow: hidden; transition: max-height 0.35s ease, padding 0.25s ease; padding-bottom: 0; }
+.legal-faq-item.open .legal-faq-a { max-height: 200px; padding-bottom: 16px; }
+
+/* Sidebar */
+.legal-sidebar { display: flex; flex-direction: column; gap: 16px; position: sticky; top: 80px; }
+.legal-cta-card { background: var(--dark); border-radius: var(--radius-sm); padding: 24px; }
+.legal-cta-title { font-family: var(--font-head); font-size: 1rem; font-weight: 700; color: var(--white); margin-bottom: 10px; }
+.legal-cta-text { font-size: 0.82rem; color: rgba(255,255,255,0.6); line-height: 1.6; margin-bottom: 18px; }
+.legal-info-card { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 20px; }
+.legal-info-title { font-family: var(--font-head); font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gray-500); margin-bottom: 14px; }
+.legal-info-row { display: flex; gap: 12px; align-items: center; }
+.legal-lawyer-photo { width: 44px; height: 44px; border-radius: 50%; object-fit: cover; flex-shrink: 0; }
+.legal-lawyer-name { font-weight: 600; font-size: 0.875rem; color: var(--dark); margin-bottom: 2px; }
+.legal-lawyer-spec { font-size: 0.72rem; color: var(--gray-500); line-height: 1.4; }
+.legal-cost-row { display: flex; justify-content: space-between; padding: 7px 0; border-bottom: 1px solid var(--gray-100); font-size: 0.82rem; }
+.legal-cost-row:last-of-type { border-bottom: none; }
+.legal-cost-row span { color: var(--gray-600); }
+.legal-cost-row strong { color: var(--dark); }
+.legal-cost-note { font-size: 0.72rem; color: var(--gray-400); margin-top: 10px; }
+.legal-link-item { display: flex; align-items: center; gap: 8px; padding: 8px 0; font-size: 0.82rem; color: var(--red); text-decoration: none; border-bottom: 1px solid var(--gray-100); transition: opacity var(--transition); }
+.legal-link-item:last-child { border-bottom: none; }
+.legal-link-item:hover { opacity: 0.75; }
