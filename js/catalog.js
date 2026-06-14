@@ -958,6 +958,11 @@ function showDetail(id) {
 
   showPage('detail');
   renderRelated(id);
+  // ── Reviews & Schema.org ──
+  if (typeof Reviews !== 'undefined') {
+    Reviews.renderReviewBlock(id);
+    Reviews.injectSchema(prop);
+  }
 
   // ── Mobile slider ──
   if (typeof mobGalleryInit === 'function') mobGalleryInit(imgs);
