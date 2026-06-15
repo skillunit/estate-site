@@ -973,6 +973,13 @@ footer {
   height: 75vh;
   min-height: 520px;
   max-height: 800px;
+  margin: 0 32px;
+}
+@media (max-width: 1200px) {
+  #catalogSplitWrap.split-active { margin: 0 20px; }
+}
+@media (max-width: 768px) {
+  #catalogSplitWrap.split-active { margin: 0 12px; }
 }
 #catalogSplitWrap.split-active #catalogMainWrap {
   width: 360px;
