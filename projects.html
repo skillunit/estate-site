@@ -315,35 +315,35 @@
       </div>
     </div>
     <div id="catalogSplitWrap">
-    <div id="catalogMainWrap">
-      <div class="catalog-grid" id="catalogGrid">
-    </div>
+      <div id="catalogMainWrap">
+        <div class="catalog-grid" id="catalogGrid"></div>
 
-    <div class="catalog-empty" id="catalogEmpty" style="display:none;">
-      <div class="catalog-empty-icon">
-        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-      </div>
-      <div class="catalog-empty-title">Объектов не найдено</div>
-      <div class="catalog-empty-text">Попробуйте изменить параметры поиска или сбросьте фильтры</div>
-      <button class="btn btn-red" onclick="resetCatalogFilter()">Сбросить фильтры</button>
-    </div>
+        <div class="catalog-empty" id="catalogEmpty" style="display:none;">
+          <div class="catalog-empty-icon">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          </div>
+          <div class="catalog-empty-title">Объектов не найдено</div>
+          <div class="catalog-empty-text">Попробуйте изменить параметры поиска или сбросьте фильтры</div>
+          <button class="btn btn-red" onclick="resetCatalogFilter()">Сбросить фильтры</button>
+        </div>
 
-    <div style="display:flex;align-items:center;justify-content:flex-end;flex-wrap:wrap;gap:16px;margin-top:32px;">
-      <div class="pagination">
-        <button class="page-btn">‹</button>
-        <button class="page-btn active">2</button>
-        <button class="page-btn">3</button>
-        <button class="page-btn">›</button>
-      </div>
-    </div><!-- /catalogMainWrap -->
+        <div style="display:flex;align-items:center;justify-content:flex-end;flex-wrap:wrap;gap:16px;margin-top:32px;">
+          <div class="pagination">
+            <button class="page-btn">‹</button>
+            <button class="page-btn active">2</button>
+            <button class="page-btn">3</button>
+            <button class="page-btn">›</button>
+          </div>
+        </div>
+      </div><!-- /catalogMainWrap -->
 
-    <div class="catalog-map-wrap" id="catalogMapWrap">
-    <div id="catalogMap"></div>
-    <div class="map-toggle-btn" onclick="toggleCatalogMap()" id="mapToggleBtn">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 6l7-3 8 3 7-3v15l-7 3-8-3-7 3V6z"/><line x1="8" y1="3" x2="8" y2="18"/><line x1="16" y1="6" x2="16" y2="21"/></svg>
-      Скрыть карту
-    </div>
-  </div>
+      <div class="catalog-map-wrap" id="catalogMapWrap">
+        <div id="catalogMap"></div>
+        <div class="map-toggle-btn" onclick="toggleCatalogMap()" id="mapToggleBtn">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 6l7-3 8 3 7-3v15l-7 3-8-3-7 3V6z"/><line x1="8" y1="3" x2="8" y2="18"/><line x1="16" y1="6" x2="16" y2="21"/></svg>
+          Скрыть карту
+        </div>
+      </div><!-- /catalogMapWrap -->
     </div><!-- /catalogSplitWrap -->
 
     <!-- Recently viewed -->
