@@ -1046,3 +1046,11 @@ footer {
 #catalogSplitWrap.split-active #catalogMapWrap .map-toggle-btn {
   display: none !important;
 }
+
+/* Pagination centered inside split map left panel */
+#catalogSplitWrap.split-active #catalogMainWrap .pagination {
+  justify-content: center !important;
+}
+#catalogSplitWrap.split-active #catalogMainWrap > div:last-child {
+  justify-content: center !important;
+}
