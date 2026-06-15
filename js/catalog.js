@@ -1154,6 +1154,10 @@ function showDetail(id) {
   renderNearby(id);
 
   showPage('detail');
+
+  // ── Ипотечный калькулятор (сразу после showPage) ──
+  initMortgageCalc(prop);
+
   renderRelated(id);
   // ── Reviews & Schema.org ──
   if (typeof Reviews !== 'undefined') {
@@ -1167,9 +1171,10 @@ function showDetail(id) {
   // ── Переключение блоков: аренда vs покупка ──
   const isRent = prop.deal === 'rent';
 
-  // 1. Инвест-карточка
-  const investTitle = page.querySelector('.invest-title');
-  const investRowsAll = page.querySelectorAll('.invest-row');
+  // 1. Инвест-карточка (querySelector ограничен первой invest-card, не калькулятором)
+  const investCard = page.querySelector('.invest-card');
+  const investTitle = investCard ? investCard.querySelector('.invest-title') : null;
+  const investRowsAll = investCard ? investCard.querySelectorAll('.invest-row') : [];
   if (investTitle) {
     if (isRent) {
       investTitle.textContent = 'Об аренде';
@@ -1300,8 +1305,7 @@ function showDetail(id) {
     }
   }
 
-  // ── Ипотечный калькулятор ──
-  initMortgageCalc(prop);
+  // ── Условия покупки/аренды ──
 }
 
 // ── MORTGAGE CALCULATOR ──
