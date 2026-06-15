@@ -835,7 +835,7 @@
 .detail-actions .btn { width:100%; justify-content:center; }
 
 /* ── Mortgage Calculator ── */
-.calc-card { padding:20px 24px; }
+.calc-card { padding:20px 24px; display:none; }
 .calc-field { margin-bottom:14px; }
 .calc-field-row { display:flex; justify-content:space-between; align-items:center; margin-bottom:6px; }
 .calc-label { font-size:0.75rem; font-weight:600; letter-spacing:0.04em; color:var(--gray-500); text-transform:uppercase; }
