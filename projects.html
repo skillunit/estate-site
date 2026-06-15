@@ -127,7 +127,8 @@
         <div class="filter-field filter-field--country">
           <label>Страна</label>
           <select class="filter-select" onchange="onCountryChange(this)">
-            <option value="all">🇬🇪 Грузия</option>
+            <option value="all">🌍 Все страны</option>
+            <option value="georgia" selected>🇬🇪 Грузия</option>
             <option value="usa">🇺🇸 США</option>
             <option value="uae">🇦🇪 ОАЭ</option>
             <option value="cyprus">🇨🇾 Кипр</option>
@@ -447,7 +448,7 @@
       var countryEl = document.querySelector('#page-catalog .filter-field--country .filter-select');
       var country = countryEl ? countryEl.value : 'all';
       // Грузия = 'all' в данных
-      if (country !== 'usa' && country !== 'uae' && country !== 'cyprus' && country !== 'greece') country = 'all';
+      // country values are now: all, georgia, usa, uae, cyprus, greece
 
       var text = SEO[deal] && SEO[deal][country] ? SEO[deal][country] : SEO.buy.all;
       var title = document.getElementById('seoTitle');
@@ -1137,7 +1138,7 @@
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script src="js/nav.js?v=13"></script>
 <script src="js/forms.js?v=6"></script>
-<script src="js/catalog.js?v=15"></script>
+<script src="js/catalog.js?v=16"></script>
 <script>
 /* УМНЫЙ ПОИСК */
 var _sq = '';
