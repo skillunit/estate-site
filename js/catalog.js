@@ -3,7 +3,7 @@
 const MAP_PROPERTIES = [
   {
     id: 'batumi-grand', type: 'apartment', top: true, agentId: 'chase',
-    city: 'batumi', cityLabel: 'Батуми', country: 'all',
+    city: 'batumi', cityLabel: 'Батуми', country: 'georgia',
     lat: 41.6418, lng: 41.6340,
     name: 'ЖК «Гранд Панорама Батуми»',
     price: '$125,000', area: '45', rooms: '1', floor: '12',
@@ -18,7 +18,7 @@ const MAP_PROPERTIES = [
   },
   {
     id: 'batumi-rustaveli', type: 'apartment', top: true, agentId: 'janelidze',
-    city: 'batumi', cityLabel: 'Батуми', country: 'all',
+    city: 'batumi', cityLabel: 'Батуми', country: 'georgia',
     lat: 41.6440, lng: 41.6370,
     name: 'Апартаменты на Руставели, Батуми',
     price: '$89,000', area: '38', rooms: '1', floor: '7',
@@ -33,7 +33,7 @@ const MAP_PROPERTIES = [
   },
   {
     id: 'tbilisi-elite', type: 'apartment', top: true, agentId: 'janelidze',
-    city: 'tbilisi', cityLabel: 'Тбилиси', country: 'all',
+    city: 'tbilisi', cityLabel: 'Тбилиси', country: 'georgia',
     lat: 41.6938, lng: 44.8015,
     name: 'Элитная квартира в центре Тбилиси',
     price: '$210,000', area: '210', rooms: '2', floor: '6',
@@ -48,7 +48,7 @@ const MAP_PROPERTIES = [
   },
   {
     id: 'tbilisi-penthouse', type: 'apartment', top: true, agentId: 'verin',
-    city: 'tbilisi', cityLabel: 'Тбилиси', country: 'all',
+    city: 'tbilisi', cityLabel: 'Тбилиси', country: 'georgia',
     lat: 41.7000, lng: 44.8130,
     name: 'Пентхаус «Царская Высота», Тбилиси',
     price: '$650,000', area: '310', rooms: '4', floor: '22',
@@ -63,7 +63,7 @@ const MAP_PROPERTIES = [
   },
   {
     id: 'gonio-coast', type: 'apart', top: true, agentId: 'chase',
-    city: 'gonio', cityLabel: 'Гонио', country: 'all',
+    city: 'gonio', cityLabel: 'Гонио', country: 'georgia',
     lat: 41.5300, lng: 41.6000,
     name: 'Апартаменты у моря, Gonio Coast',
     price: '$98,000', area: '52', rooms: '1', floor: '5',
@@ -78,7 +78,7 @@ const MAP_PROPERTIES = [
   },
   {
     id: 'bakuriani-hills', type: 'villa', top: true, agentId: 'chase',
-    city: 'bakuriani', cityLabel: 'Бакуриани', country: 'all',
+    city: 'bakuriani', cityLabel: 'Бакуриани', country: 'georgia',
     lat: 41.7500, lng: 43.5200,
     name: 'Коттеджный комплекс «Бакуриани Хиллс»',
     price: '$195,000', area: '150', rooms: '3', floor: '2',
@@ -93,7 +93,7 @@ const MAP_PROPERTIES = [
   },
   {
     id: 'kakheti-alazani', type: 'apart', agentId: 'janelidze',
-    city: 'kakheti', cityLabel: 'Кахетия', country: 'all',
+    city: 'kakheti', cityLabel: 'Кахетия', country: 'georgia',
     lat: 41.9000, lng: 45.3500,
     name: 'Резиденция в Алазанской Долине',
     price: '$110,000', area: '110', rooms: '2', floor: '1',
@@ -108,7 +108,7 @@ const MAP_PROPERTIES = [
   },
   {
     id: 'tbilisi-commercial', type: 'commercial', agentId: 'verin',
-    city: 'tbilisi', cityLabel: 'Тбилиси', country: 'all',
+    city: 'tbilisi', cityLabel: 'Тбилиси', country: 'georgia',
     lat: 41.6950, lng: 44.8010,
     name: 'Коммерческое помещение, Руставели',
     price: '$320,000', area: '180', rooms: '1', floor: '1',
@@ -124,7 +124,7 @@ const MAP_PROPERTIES = [
   },
   {
     id: 'gonio-seaview', type: 'apart', agentId: 'chase',
-    city: 'gonio', cityLabel: 'Гонио', country: 'all',
+    city: 'gonio', cityLabel: 'Гонио', country: 'georgia',
     lat: 41.5200, lng: 41.6500,
     name: 'Вилла с видом на море, Гонио',
     price: '$185,000', area: '120', rooms: '3', floor: '2',
@@ -139,7 +139,7 @@ const MAP_PROPERTIES = [
   },
   {
     id: 'bakuriani-chalet', type: 'villa', agentId: 'chase',
-    city: 'bakuriani', cityLabel: 'Бакуриани', country: 'all',
+    city: 'bakuriani', cityLabel: 'Бакуриани', country: 'georgia',
     lat: 41.7500, lng: 43.5300,
     name: 'Шале «Альпийский стиль», Бакуриани',
     price: '$145,000', area: '95', rooms: '2', floor: '2',
@@ -290,7 +290,7 @@ const MAP_PROPERTIES = [
   // ── АРЕНДА ──
   {
     id: 'rent-tbilisi-vera', type: 'apartment', top: true, agentId: 'solovieva',
-    city: 'tbilisi', cityLabel: 'Тбилиси', country: 'all',
+    city: 'tbilisi', cityLabel: 'Тбилиси', country: 'georgia',
     lat: 41.6990, lng: 44.7980,
     name: 'Апартаменты в районе Вера, Тбилиси',
     price: '$1,200/мес', area: '65', rooms: '2', floor: '4',
@@ -304,7 +304,7 @@ const MAP_PROPERTIES = [
   },
   {
     id: 'rent-batumi-sea', type: 'apart', top: true, agentId: 'solovieva',
-    city: 'batumi', cityLabel: 'Батуми', country: 'all',
+    city: 'batumi', cityLabel: 'Батуми', country: 'georgia',
     lat: 41.6450, lng: 41.6380,
     name: 'Студия с видом на море, Батуми',
     price: '$800/мес', area: '35', rooms: '1', floor: '9',
@@ -318,7 +318,7 @@ const MAP_PROPERTIES = [
   },
   {
     id: 'rent-tbilisi-saburtalo', type: 'apartment', top: true, agentId: 'solovieva',
-    city: 'tbilisi', cityLabel: 'Тбилиси', country: 'all',
+    city: 'tbilisi', cityLabel: 'Тбилиси', country: 'georgia',
     lat: 41.7200, lng: 44.7650,
     name: 'Квартира в Сабуртало, Тбилиси',
     price: '$950/мес', area: '80', rooms: '3', floor: '6',
@@ -332,7 +332,7 @@ const MAP_PROPERTIES = [
   },
   {
     id: 'rent-bakuriani-chalet', type: 'villa', top: true, agentId: 'chase',
-    city: 'bakuriani', cityLabel: 'Бакуриани', country: 'all',
+    city: 'bakuriani', cityLabel: 'Бакуриани', country: 'georgia',
     lat: 41.7500, lng: 43.5300,
     name: 'Шале в Бакуриани, посуточно',
     price: '$120/сутки', area: '90', rooms: '3', floor: '2',
@@ -416,7 +416,7 @@ const MAP_PROPERTIES = [
   },
   {
     id: 'rent-gonio', type: 'apart', top: true, agentId: 'chase',
-    city: 'gonio', cityLabel: 'Гонио', country: 'all',
+    city: 'gonio', cityLabel: 'Гонио', country: 'georgia',
     lat: 41.5210, lng: 41.6480,
     name: 'Апартаменты у моря, Гонио',
     price: '$700/мес', area: '45', rooms: '1', floor: '3',
@@ -430,7 +430,7 @@ const MAP_PROPERTIES = [
   },
   {
     id: 'rent-kakheti', type: 'villa', agentId: 'janelidze',
-    city: 'kakheti', cityLabel: 'Кахетия', country: 'all',
+    city: 'kakheti', cityLabel: 'Кахетия', country: 'georgia',
     lat: 41.9100, lng: 45.3600,
     name: 'Гостевой дом в Сигнахи',
     price: '$600/мес', area: '80', rooms: '2', floor: '1',
@@ -915,7 +915,7 @@ function renderCatalogGrid(countryVal, cityVal, statusVal, typeVal, extra) {
 
   const filtered = MAP_PROPERTIES.filter(p => {
     const md  = p.deal === dealType;
-    const mc  = countryVal === 'all' || p.country === countryVal;
+    const mc  = countryVal === 'all' || countryVal === '' || p.country === countryVal;
     const mci = cityVal === 'all' || p.city === cityVal;
     const ms  = statusVal === 'all' || p.status === statusVal;
     const mt  = !typeVal || typeVal === 'all' || p.type === typeVal;
