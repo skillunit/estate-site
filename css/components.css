@@ -1024,8 +1024,7 @@ footer {
   }
 }
 
-/* Recently viewed — always below split map */
-#catalogSplitWrap.split-active ~ .recently-viewed,
-#catalogSplitWrap ~ .recently-viewed {
+/* Recently viewed — extra margin only in split map mode */
+#catalogSplitWrap.split-active ~ .recently-viewed {
   margin-top: 48px;
 }
