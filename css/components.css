@@ -1028,3 +1028,21 @@ footer {
 #catalogSplitWrap.split-active ~ .recently-viewed {
   margin-top: 48px;
 }
+
+/* catalogMapWrap hidden by default inside splitWrap, shown only in split mode */
+#catalogSplitWrap #catalogMapWrap {
+  display: none;
+}
+#catalogSplitWrap.split-active #catalogMapWrap {
+  display: block !important;
+  flex: 1;
+  height: 100%;
+  min-width: 0;
+}
+#catalogSplitWrap.split-active #catalogMapWrap #catalogMap {
+  height: 100% !important;
+  min-height: 520px;
+}
+#catalogSplitWrap.split-active #catalogMapWrap .map-toggle-btn {
+  display: none !important;
+}
