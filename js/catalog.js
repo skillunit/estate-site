@@ -1914,16 +1914,43 @@ function setViewMode(mode) {
   const grid    = document.getElementById('catalogGrid');
   const btnGrid = document.getElementById('viewBtnGrid');
   const btnList = document.getElementById('viewBtnList');
+  const btnMap  = document.getElementById('viewBtnMap');
+  const splitWrap = document.getElementById('catalogSplitWrap');
+  const mapWrap   = document.getElementById('catalogMapWrap');
+  const mainWrap  = document.getElementById('catalogMainWrap');
   if (!grid) return;
+
+  // Reset all
+  grid.classList.remove('catalog-list-view');
+  btnGrid && btnGrid.classList.remove('active');
+  btnList && btnList.classList.remove('active');
+  btnMap  && btnMap.classList.remove('active');
 
   if (mode === 'list') {
     grid.classList.add('catalog-list-view');
-    btnGrid && btnGrid.classList.remove('active');
     btnList && btnList.classList.add('active');
+    // Exit split map mode
+    if (splitWrap) splitWrap.classList.remove('split-active');
+    if (mainWrap)  mainWrap.style.display = '';
+    if (mapWrap)   mapWrap.classList.remove('split-map-panel');
+
+  } else if (mode === 'map') {
+    btnMap && btnMap.classList.add('active');
+    // Enter split mode
+    if (splitWrap) splitWrap.classList.add('split-active');
+    if (mainWrap)  mainWrap.style.display = '';
+    if (mapWrap)   mapWrap.classList.add('split-map-panel');
+    // Show map if hidden
+    if (mapWrap) mapWrap.style.display = '';
+    if (!catalogMap) initCatalogMap();
+    setTimeout(() => { if (catalogMap) catalogMap.invalidateSize(); }, 300);
+
   } else {
-    grid.classList.remove('catalog-list-view');
+    // grid
     btnGrid && btnGrid.classList.add('active');
-    btnList && btnList.classList.remove('active');
+    if (splitWrap) splitWrap.classList.remove('split-active');
+    if (mainWrap)  mainWrap.style.display = '';
+    if (mapWrap)   mapWrap.classList.remove('split-map-panel');
   }
 }
 
