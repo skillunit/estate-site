@@ -1312,7 +1312,7 @@ function initMortgageCalc(prop) {
   if (!block) return;
 
   const isRent = prop.deal === 'rent';
-  block.style.display = isRent ? 'none' : '';
+  block.style.display = isRent ? 'none' : 'block';
 
   if (isRent) return;
 
