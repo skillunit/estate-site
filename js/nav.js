@@ -31,11 +31,11 @@ function setSearchTab(el) {
 
 // ── CATALOG FILTER ──
 function goToCountry(country) {
-  var dataCountry = country === 'georgia' ? 'all' : country;
+  var dataCountry = country; // georgia stays georgia, all means all
 
   // Если нет страницы каталога в DOM (index.html) — редирект на projects.html
   if (!document.getElementById('page-catalog')) {
-    var qs = dataCountry !== 'all' ? '?country=' + dataCountry : '';
+    var qs = dataCountry && dataCountry !== 'all' ? '?country=' + dataCountry : '';
     window.location.href = 'projects.html' + qs;
     return;
   }
@@ -131,7 +131,7 @@ function filterCatalog() {
   const areaMin  = areaMinEl  && areaMinEl.value  ? parseFloat(areaMinEl.value)  || 0        : 0;
   const areaMax  = areaMaxEl  && areaMaxEl.value  ? parseFloat(areaMaxEl.value)  || Infinity : Infinity;
 
-  const catalogFilterBar = document.querySelector('#page-catalog .filter-bar .filter-field--country .filter-select');
+  const catalogFilterBar = document.querySelector('#page-catalog .filter-field--country .filter-select');
   const country = catalogFilterBar ? catalogFilterBar.value : 'all';
   const city = cityEl ? cityEl.value : 'all';
   const extra = { priceMin: priceMinUsd, priceMax: priceMaxUsd, areaMin, areaMax, rooms };
