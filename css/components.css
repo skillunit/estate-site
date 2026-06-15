@@ -1023,3 +1023,9 @@ footer {
     min-height: 280px !important;
   }
 }
+
+/* Recently viewed — always below split map */
+#catalogSplitWrap.split-active ~ .recently-viewed,
+#catalogSplitWrap ~ .recently-viewed {
+  margin-top: 48px;
+}
