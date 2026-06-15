@@ -779,6 +779,8 @@ function setCurrency(cur) {
   renderRecentlyViewed();
   // Перерисовать карусель на главной
   if (typeof renderFeatured === 'function') renderFeatured();
+  // Пересчитать калькулятор
+  if (typeof updateMortgageCalc === 'function') updateMortgageCalc();
 }
 
 // ── RECENTLY VIEWED ──
@@ -1297,6 +1299,78 @@ function showDetail(id) {
       });
     }
   }
+
+  // ── Ипотечный калькулятор ──
+  initMortgageCalc(prop);
+}
+
+// ── MORTGAGE CALCULATOR ──
+let _calcPropPrice = 0;
+
+function initMortgageCalc(prop) {
+  const block = document.getElementById('mortgageCalcBlock');
+  if (!block) return;
+
+  const isRent = prop.deal === 'rent';
+  block.style.display = isRent ? 'none' : '';
+
+  if (isRent) return;
+
+  const priceUsd = parseFloat((prop.price || '').replace(/[^0-9.]/g, '')) || 0;
+  _calcPropPrice = priceUsd;
+
+  // Сбрасываем слайдеры к дефолтам
+  const downEl  = document.getElementById('calcDown');
+  const termEl  = document.getElementById('calcTerm');
+  const rateEl  = document.getElementById('calcRate');
+  if (downEl)  downEl.value  = 30;
+  if (termEl)  termEl.value  = 15;
+  if (rateEl)  rateEl.value  = 7;
+
+  updateMortgageCalc();
+}
+
+function updateMortgageCalc() {
+  const downEl  = document.getElementById('calcDown');
+  const termEl  = document.getElementById('calcTerm');
+  const rateEl  = document.getElementById('calcRate');
+  if (!downEl || !termEl || !rateEl) return;
+
+  const downPct  = parseInt(downEl.value);
+  const termYrs  = parseInt(termEl.value);
+  const rateAnn  = parseFloat(rateEl.value);
+
+  // Обновляем бейджи
+  const downBadge = document.getElementById('calcDownPct');
+  const termBadge = document.getElementById('calcTermBadge');
+  const rateBadge = document.getElementById('calcRateBadge');
+  if (downBadge) downBadge.textContent = downPct + '%';
+  if (termBadge) termBadge.textContent = termYrs + ' ' + (termYrs === 1 ? 'год' : termYrs < 5 ? 'года' : 'лет');
+  if (rateBadge) rateBadge.textContent = rateAnn + '%';
+
+  const priceUsd = _calcPropPrice;
+  if (!priceUsd) return;
+
+  const downUsd  = priceUsd * downPct / 100;
+  const loanUsd  = priceUsd - downUsd;
+  const r        = rateAnn / 100 / 12;
+  const n        = termYrs * 12;
+  const payment  = r === 0 ? loanUsd / n : (loanUsd * r) / (1 - Math.pow(1 + r, -n));
+
+  // Конвертируем в текущую валюту
+  const payConverted = Math.round(payment * CURRENCY_RATES[currentCurrency]);
+  const sym          = CURRENCY_SYMBOLS[currentCurrency];
+
+  const payEl  = document.getElementById('calcPayment');
+  const subEl  = document.getElementById('calcSub');
+  const downValEl = document.getElementById('calcDownVal');
+
+  const downConverted = Math.round(downUsd * CURRENCY_RATES[currentCurrency]);
+  const loanConverted = Math.round(loanUsd * CURRENCY_RATES[currentCurrency]);
+
+  if (payEl)  payEl.textContent  = sym + payConverted.toLocaleString('ru-RU') + ' / мес';
+  if (subEl)  subEl.textContent  = 'Взнос ' + sym + downConverted.toLocaleString('ru-RU') + ' · Кредит ' + sym + loanConverted.toLocaleString('ru-RU');
+  if (downValEl) downValEl.textContent = sym + downConverted.toLocaleString('ru-RU');
 }
 
 let catalogMap = null;
