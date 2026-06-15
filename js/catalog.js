@@ -1156,7 +1156,13 @@ function showDetail(id) {
   showPage('detail');
 
   // ── Ипотечный калькулятор (сразу после showPage) ──
-  initMortgageCalc(prop);
+  try {
+    console.log('[showDetail] calling initMortgageCalc, deal:', prop.deal);
+    initMortgageCalc(prop);
+    console.log('[showDetail] initMortgageCalc done');
+  } catch (e) {
+    console.error('[showDetail] initMortgageCalc error:', e);
+  }
 
   renderRelated(id);
   // ── Reviews & Schema.org ──
@@ -1313,25 +1319,29 @@ let _calcPropPrice = 0;
 
 function initMortgageCalc(prop) {
   const block = document.getElementById('mortgageCalcBlock');
+  console.log('[Calc] block found:', !!block, '| deal:', prop.deal);
   if (!block) return;
 
   const isRent = prop.deal === 'rent';
   block.style.display = isRent ? 'none' : 'block';
+  console.log('[Calc] set display to:', block.style.display);
 
   if (isRent) return;
 
   const priceUsd = parseFloat((prop.price || '').replace(/[^0-9.]/g, '')) || 0;
   _calcPropPrice = priceUsd;
+  console.log('[Calc] priceUsd:', priceUsd);
 
-  // Сбрасываем слайдеры к дефолтам
   const downEl  = document.getElementById('calcDown');
   const termEl  = document.getElementById('calcTerm');
   const rateEl  = document.getElementById('calcRate');
+  console.log('[Calc] sliders found:', !!downEl, !!termEl, !!rateEl);
   if (downEl)  downEl.value  = 30;
   if (termEl)  termEl.value  = 15;
   if (rateEl)  rateEl.value  = 7;
 
   updateMortgageCalc();
+  console.log('[Calc] updateMortgageCalc done, block offsetHeight:', block.offsetHeight);
 }
 
 function updateMortgageCalc() {
@@ -1908,7 +1918,7 @@ function renderFeaturedDeal(deal) {
   const props = MAP_PROPERTIES.filter(p =>
     p.top &&
     p.deal === deal &&
-    (country === 'all' ? p.country === 'all' : p.country === country)
+    (country === 'all' || p.country === country)
   ).slice(0, 6);
 
   track.innerHTML = buildFeaturedCards(props);
