@@ -13,7 +13,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
 <link rel="stylesheet" href="css/base.css?v=2">
-<link rel="stylesheet" href="css/pages.css?v=9">
+<link rel="stylesheet" href="css/pages.css?v=10">
 <link rel="stylesheet" href="css/components.css?v=12">
 <link rel="stylesheet" href="css/responsive.css?v=3">
 </head>
@@ -727,8 +727,10 @@
               <label class="calc-label">Первоначальный взнос</label>
               <span class="calc-pct-badge" id="calcDownPct">30%</span>
             </div>
-            <div class="calc-range-wrap">
-              <input type="range" class="calc-range" id="calcDown" min="10" max="80" value="30" step="1" oninput="updateMortgageCalc()">
+            <div class="calc-range-wrap" data-min="10" data-max="80" data-val="30" data-target="calcDown" data-cb="updateMortgageCalc">
+              <div class="calc-track"><div class="calc-track-fill"></div></div>
+              <div class="calc-thumb"></div>
+              <input type="range" class="calc-range" id="calcDown" min="10" max="80" value="30" step="1">
             </div>
             <div class="calc-range-ends">
               <span>10%</span><span id="calcDownVal"></span><span>80%</span>
@@ -740,8 +742,10 @@
               <label class="calc-label">Срок кредита</label>
               <span class="calc-pct-badge" id="calcTermBadge">15 лет</span>
             </div>
-            <div class="calc-range-wrap">
-              <input type="range" class="calc-range" id="calcTerm" min="5" max="30" value="15" step="1" oninput="updateMortgageCalc()">
+            <div class="calc-range-wrap" data-min="5" data-max="30" data-val="15" data-target="calcTerm" data-cb="updateMortgageCalc">
+              <div class="calc-track"><div class="calc-track-fill"></div></div>
+              <div class="calc-thumb"></div>
+              <input type="range" class="calc-range" id="calcTerm" min="5" max="30" value="15" step="1">
             </div>
             <div class="calc-range-ends">
               <span>5 лет</span><span>30 лет</span>
@@ -753,8 +757,10 @@
               <label class="calc-label">Ставка</label>
               <span class="calc-pct-badge" id="calcRateBadge">7%</span>
             </div>
-            <div class="calc-range-wrap">
-              <input type="range" class="calc-range" id="calcRate" min="4" max="15" value="7" step="0.5" oninput="updateMortgageCalc()">
+            <div class="calc-range-wrap" data-min="4" data-max="15" data-val="7" data-target="calcRate" data-cb="updateMortgageCalc">
+              <div class="calc-track"><div class="calc-track-fill"></div></div>
+              <div class="calc-thumb"></div>
+              <input type="range" class="calc-range" id="calcRate" min="4" max="15" value="7" step="0.5">
             </div>
             <div class="calc-range-ends">
               <span>4%</span><span>15%</span>

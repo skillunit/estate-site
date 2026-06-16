@@ -840,32 +840,31 @@
 .calc-field-row { display:flex; justify-content:space-between; align-items:center; margin-bottom:6px; }
 .calc-label { font-size:0.75rem; font-weight:600; letter-spacing:0.04em; color:var(--gray-500); text-transform:uppercase; }
 .calc-pct-badge { font-size:0.78rem; font-weight:700; color:var(--dark); background:var(--gray-100); padding:2px 8px; border-radius:2px; min-width:44px; text-align:center; }
-.calc-range-wrap { padding:12px 0; }
-.calc-range {
-  width:100%; height:20px;
-  -webkit-appearance:none; appearance:none;
-  background:transparent;
-  outline:none; cursor:pointer;
-  display:block;
+.calc-range-wrap {
+  position:relative; height:22px; margin:8px 0;
+  display:flex; align-items:center; cursor:pointer;
+  -webkit-user-select:none; user-select:none;
 }
-.calc-range::-webkit-slider-runnable-track {
-  height:3px;
-  background:var(--gray-200);
-  border-radius:2px;
-  border:none;
+.calc-track {
+  position:absolute; left:0; right:0; height:3px;
+  background:var(--gray-200); border-radius:2px;
 }
-.calc-range::-webkit-slider-thumb {
-  -webkit-appearance:none;
-  width:22px; height:22px;
-  border-radius:50%;
-  background:var(--red);
-  cursor:pointer;
-  border:3px solid #fff;
-  box-shadow:0 2px 6px rgba(0,0,0,.25);
-  margin-top:-10px;
+.calc-track-fill {
+  position:absolute; left:0; height:3px;
+  background:var(--red); border-radius:2px;
+  pointer-events:none;
 }
-.calc-range::-moz-range-track { height:3px; background:var(--gray-200); border-radius:2px; border:none; }
-.calc-range::-moz-range-thumb { width:18px; height:18px; border-radius:50%; background:var(--red); cursor:pointer; border:3px solid #fff; box-shadow:0 1px 6px rgba(0,0,0,.25); }
+.calc-thumb {
+  position:absolute; width:22px; height:22px;
+  background:var(--red); border-radius:50%;
+  border:3px solid #fff; box-shadow:0 2px 6px rgba(0,0,0,.28);
+  transform:translateX(-50%);
+  cursor:grab; touch-action:none;
+  transition:box-shadow .15s;
+}
+.calc-thumb:active { cursor:grabbing; box-shadow:0 3px 10px rgba(0,0,0,.35); }
+/* hide native input but keep it for form value */
+.calc-range { display:none; }
 .calc-range-ends { display:flex; justify-content:space-between; margin-top:2px; font-size:0.68rem; color:var(--gray-400); }
 .calc-result { background:var(--gray-100); border-radius:var(--radius-sm); padding:14px 16px; margin:14px 0 10px; text-align:center; }
 .calc-result-label { font-size:0.68rem; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:var(--gray-500); margin-bottom:4px; }

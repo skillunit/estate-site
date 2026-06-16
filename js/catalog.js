@@ -1323,14 +1323,70 @@ function initMortgageCalc(prop) {
   const priceUsd = parseFloat((prop.price || '').replace(/[^0-9.]/g, '')) || 0;
   _calcPropPrice = priceUsd;
 
-  const downEl  = document.getElementById('calcDown');
-  const termEl  = document.getElementById('calcTerm');
-  const rateEl  = document.getElementById('calcRate');
-  if (downEl)  downEl.value  = 30;
-  if (termEl)  termEl.value  = 15;
-  if (rateEl)  rateEl.value  = 7;
+  // Сброс hidden input значений
+  const downEl = document.getElementById('calcDown');
+  const termEl = document.getElementById('calcTerm');
+  const rateEl = document.getElementById('calcRate');
+  if (downEl) downEl.value = 30;
+  if (termEl) termEl.value = 15;
+  if (rateEl) rateEl.value = 7;
 
+  // Инициализация кастомных слайдеров
+  initCustomSliders(block);
   updateMortgageCalc();
+}
+
+function initCustomSliders(container) {
+  const wraps = container.querySelectorAll('.calc-range-wrap[data-min]');
+  wraps.forEach(wrap => {
+    const min   = parseFloat(wrap.dataset.min);
+    const max   = parseFloat(wrap.dataset.max);
+    const step  = parseFloat(wrap.querySelector('input').step) || 1;
+    const input = wrap.querySelector('input');
+    const thumb = wrap.querySelector('.calc-thumb');
+    const fill  = wrap.querySelector('.calc-track-fill');
+
+    function getPct(val) { return (val - min) / (max - min); }
+
+    function setVal(val) {
+      // snap to step
+      val = Math.round(val / step) * step;
+      val = Math.min(max, Math.max(min, val));
+      input.value = val;
+      const pct = getPct(val) * 100;
+      thumb.style.left = pct + '%';
+      fill.style.width = pct + '%';
+      if (typeof updateMortgageCalc === 'function') updateMortgageCalc();
+    }
+
+    // Init position
+    setVal(parseFloat(input.value) || parseFloat(wrap.dataset.val) || min);
+
+    function onMove(clientX) {
+      const rect = wrap.getBoundingClientRect();
+      const ratio = Math.min(1, Math.max(0, (clientX - rect.left) / rect.width));
+      setVal(min + ratio * (max - min));
+    }
+
+    // Mouse
+    wrap.addEventListener('mousedown', e => {
+      onMove(e.clientX);
+      const onMM = e2 => onMove(e2.clientX);
+      const onMU = () => { document.removeEventListener('mousemove', onMM); document.removeEventListener('mouseup', onMU); };
+      document.addEventListener('mousemove', onMM);
+      document.addEventListener('mouseup', onMU);
+      e.preventDefault();
+    });
+
+    // Touch
+    wrap.addEventListener('touchstart', e => {
+      onMove(e.touches[0].clientX);
+      const onTM = e2 => onMove(e2.touches[0].clientX);
+      const onTE = () => { document.removeEventListener('touchmove', onTM); document.removeEventListener('touchend', onTE); };
+      document.addEventListener('touchmove', onTM, { passive:true });
+      document.addEventListener('touchend', onTE);
+    }, { passive:true });
+  });
 }
 
 function updateMortgageCalc() {
