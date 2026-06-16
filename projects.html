@@ -13,7 +13,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
 <link rel="stylesheet" href="css/base.css?v=2">
-<link rel="stylesheet" href="css/pages.css?v=2">
+<link rel="stylesheet" href="css/pages.css?v=8">
 <link rel="stylesheet" href="css/components.css?v=12">
 <link rel="stylesheet" href="css/responsive.css?v=3">
 </head>
@@ -716,6 +716,57 @@
           <div class="invest-row"><span class="invest-row-label">Ожидаемый рост цены:</span><span class="invest-row-val">15% – 20%</span></div>
           <div class="invest-row"><span class="invest-row-label">Доход от аренды:</span><span class="invest-row-val">8% – 10%</span></div>
           <div class="invest-row"><span class="invest-row-label">Окупаемость:</span><span class="invest-row-val">9 – 11 лет</span></div>
+        </div>
+
+        <!-- Mortgage Calculator -->
+        <div class="invest-card calc-card" id="mortgageCalcBlock" style="display:none">
+          <div class="invest-title">Ипотечный калькулятор</div>
+
+          <div class="calc-field">
+            <div class="calc-field-row">
+              <label class="calc-label">Первоначальный взнос</label>
+              <span class="calc-pct-badge" id="calcDownPct">30%</span>
+            </div>
+            <div class="calc-range-wrap">
+              <input type="range" class="calc-range" id="calcDown" min="10" max="80" value="30" step="1" oninput="updateMortgageCalc()">
+            </div>
+            <div class="calc-range-ends">
+              <span>10%</span><span id="calcDownVal"></span><span>80%</span>
+            </div>
+          </div>
+
+          <div class="calc-field">
+            <div class="calc-field-row">
+              <label class="calc-label">Срок кредита</label>
+              <span class="calc-pct-badge" id="calcTermBadge">15 лет</span>
+            </div>
+            <div class="calc-range-wrap">
+              <input type="range" class="calc-range" id="calcTerm" min="5" max="30" value="15" step="1" oninput="updateMortgageCalc()">
+            </div>
+            <div class="calc-range-ends">
+              <span>5 лет</span><span>30 лет</span>
+            </div>
+          </div>
+
+          <div class="calc-field">
+            <div class="calc-field-row">
+              <label class="calc-label">Ставка</label>
+              <span class="calc-pct-badge" id="calcRateBadge">7%</span>
+            </div>
+            <div class="calc-range-wrap">
+              <input type="range" class="calc-range" id="calcRate" min="4" max="15" value="7" step="0.5" oninput="updateMortgageCalc()">
+            </div>
+            <div class="calc-range-ends">
+              <span>4%</span><span>15%</span>
+            </div>
+          </div>
+
+          <div class="calc-result">
+            <div class="calc-result-label">Ежемесячный платёж</div>
+            <div class="calc-result-value" id="calcPayment">—</div>
+            <div class="calc-result-sub" id="calcSub"></div>
+          </div>
+          <div class="calc-disclaimer">Расчёт ориентировочный. Точные условия — у банка-партнёра.</div>
         </div>
         <div class="detail-actions">
           <div class="detail-price-block">
