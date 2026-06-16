@@ -1038,6 +1038,7 @@ function renderNearby(propId) {
 function showDetail(id) {
   const prop = MAP_PROPERTIES.find(p => p.id === id);
   if (!prop) { showPage('detail'); return; }
+  _currentPdfProp = prop;
 
   const page = document.getElementById('page-detail');
 
@@ -2089,6 +2090,215 @@ function setViewMode(mode) {
 
 function initViewMode() {
   setViewMode(currentViewMode);
+}
+
+// ── PDF BROCHURE GENERATOR ──
+let _currentPdfProp = null;
+
+// Сохраняем текущий объект при открытии детальной страницы
+const _origShowDetail = showDetail;
+
+function downloadPropertyPdf() {
+  const prop = _currentPdfProp;
+  if (!prop) return;
+
+  const btn = document.getElementById('btnDownloadPdf');
+  if (btn) { btn.textContent = 'Генерация...'; btn.disabled = true; }
+
+  try {
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF({ orientation: 'portrait', unit: 'mm', format: 'a4' });
+
+    const W = 210, H = 297;
+    const red = [192, 57, 43];
+    const dark = [26, 26, 26];
+    const gray = [120, 120, 120];
+    const lightgray = [240, 240, 240];
+    const white = [255, 255, 255];
+
+    // ── Шапка (красная полоса) ──
+    doc.setFillColor(...red);
+    doc.rect(0, 0, W, 28, 'F');
+
+    doc.setTextColor(...white);
+    doc.setFontSize(11);
+    doc.setFont('helvetica', 'bold');
+    doc.text('GEORGIA REAL ESTATE', 14, 11);
+
+    doc.setFontSize(8);
+    doc.setFont('helvetica', 'normal');
+    doc.text('Недвижимость в Грузии и за рубежом', 14, 17);
+    doc.text('+995 32 2 123 456  |  georgia-re.com', 14, 22);
+
+    // Бейдж статуса
+    const badgeText = prop.badgeText || '';
+    if (badgeText) {
+      doc.setFillColor(255, 255, 255, 0.2);
+      doc.setFillColor(255, 255, 255);
+      doc.setTextColor(...red);
+      doc.setFontSize(7.5);
+      doc.setFont('helvetica', 'bold');
+      const bw = doc.getTextWidth(badgeText) + 8;
+      doc.roundedRect(W - bw - 14, 10, bw, 9, 2, 2, 'F');
+      doc.text(badgeText.toUpperCase(), W - bw - 10, 16.5);
+    }
+
+    // ── Фото (заглушка с градиентом) ──
+    doc.setFillColor(...lightgray);
+    doc.rect(0, 28, W, 72, 'F');
+
+    // Загружаем фото через Image
+    const imgUrl = prop.img || (prop.imgs && prop.imgs[0]);
+    const loadImg = (url) => new Promise((resolve) => {
+      const img = new Image();
+      img.crossOrigin = 'anonymous';
+      img.onload = () => {
+        const canvas = document.createElement('canvas');
+        canvas.width = img.naturalWidth;
+        canvas.height = img.naturalHeight;
+        canvas.getContext('2d').drawImage(img, 0, 0);
+        resolve(canvas.toDataURL('image/jpeg', 0.85));
+      };
+      img.onerror = () => resolve(null);
+      img.src = url + (url.includes('?') ? '&' : '?') + 'cb=' + Date.now();
+    });
+
+    loadImg(imgUrl).then(dataUrl => {
+      if (dataUrl) {
+        doc.addImage(dataUrl, 'JPEG', 0, 28, W, 72);
+      }
+
+      // Тёмный оверлей снизу фото
+      doc.setFillColor(0, 0, 0);
+      doc.setGState(new doc.GState({ opacity: 0.45 }));
+      doc.rect(0, 76, W, 24, 'F');
+      doc.setGState(new doc.GState({ opacity: 1 }));
+
+      // ── Название объекта поверх фото ──
+      doc.setTextColor(...white);
+      doc.setFontSize(16);
+      doc.setFont('helvetica', 'bold');
+      const name = prop.name || '';
+      const nameLines = doc.splitTextToSize(name, W - 28);
+      doc.text(nameLines, 14, 86);
+
+      // ── Цена ──
+      doc.setTextColor(...white);
+      doc.setFontSize(11);
+      doc.text(prop.price || '', W - 14, 86, { align: 'right' });
+
+      let y = 112;
+
+      // ── Ключевые параметры (плашки) ──
+      const specs = [
+        { label: 'Площадь', val: (prop.area || '—') + ' м²' },
+        { label: 'Спальни', val: prop.rooms || '—' },
+        { label: 'Этаж', val: prop.floor || '—' },
+        { label: 'Год', val: prop.year || '—' },
+        { label: 'Город', val: prop.cityLabel || '—' },
+        { label: 'Тип', val: prop.type === 'villa' ? 'Вилла' : prop.type === 'apart' ? 'Апарт' : 'Квартира' },
+      ];
+      const colW = (W - 28) / 3;
+      specs.forEach((s, i) => {
+        const col = i % 3;
+        const row = Math.floor(i / 3);
+        const x = 14 + col * colW;
+        const yy = y + row * 22;
+        doc.setFillColor(...lightgray);
+        doc.roundedRect(x, yy, colW - 4, 18, 2, 2, 'F');
+        doc.setTextColor(...gray);
+        doc.setFontSize(7);
+        doc.setFont('helvetica', 'normal');
+        doc.text(s.label.toUpperCase(), x + 5, yy + 6);
+        doc.setTextColor(...dark);
+        doc.setFontSize(10);
+        doc.setFont('helvetica', 'bold');
+        doc.text(s.val, x + 5, yy + 13);
+      });
+
+      y += 50;
+
+      // ── Описание ──
+      doc.setDrawColor(...lightgray);
+      doc.setLineWidth(0.3);
+      doc.line(14, y, W - 14, y);
+      y += 7;
+
+      doc.setTextColor(...dark);
+      doc.setFontSize(11);
+      doc.setFont('helvetica', 'bold');
+      doc.text('Об объекте', 14, y);
+      y += 7;
+
+      doc.setTextColor(...gray);
+      doc.setFontSize(9);
+      doc.setFont('helvetica', 'normal');
+      const descLines = doc.splitTextToSize(prop.desc || '', W - 28);
+      doc.text(descLines, 14, y);
+      y += descLines.length * 5 + 8;
+
+      // ── Инвест-потенциал ──
+      if (prop.deal === 'buy' && prop.roi) {
+        doc.line(14, y, W - 14, y);
+        y += 7;
+        doc.setTextColor(...dark);
+        doc.setFontSize(11);
+        doc.setFont('helvetica', 'bold');
+        doc.text('Инвестиционный потенциал', 14, y);
+        y += 8;
+
+        const invest = [
+          { label: 'Доход от аренды', val: prop.roi },
+          { label: 'Ожидаемый рост цены', val: prop.growth },
+          { label: 'Окупаемость', val: prop.payback },
+        ];
+        invest.forEach(item => {
+          doc.setFontSize(9);
+          doc.setFont('helvetica', 'normal');
+          doc.setTextColor(...gray);
+          doc.text(item.label, 14, y);
+          doc.setFont('helvetica', 'bold');
+          doc.setTextColor(...red);
+          doc.text(item.val, W - 14, y, { align: 'right' });
+          doc.setDrawColor(...lightgray);
+          doc.line(14, y + 2, W - 14, y + 2);
+          y += 9;
+        });
+        y += 4;
+      }
+
+      // ── Контакты / CTA ──
+      doc.setFillColor(...red);
+      doc.roundedRect(14, y, W - 28, 28, 3, 3, 'F');
+      doc.setTextColor(...white);
+      doc.setFontSize(12);
+      doc.setFont('helvetica', 'bold');
+      doc.text('Получить консультацию', W / 2, y + 10, { align: 'center' });
+      doc.setFontSize(9);
+      doc.setFont('helvetica', 'normal');
+      doc.text('+995 32 2 123 456  |  WhatsApp  |  Telegram', W / 2, y + 19, { align: 'center' });
+
+      // ── Подвал ──
+      doc.setFillColor(...dark);
+      doc.rect(0, H - 14, W, 14, 'F');
+      doc.setTextColor(...white);
+      doc.setFontSize(7.5);
+      doc.setFont('helvetica', 'normal');
+      doc.text('Georgia Real Estate  ·  Все права защищены  ·  Цены носят ориентировочный характер', W / 2, H - 5, { align: 'center' });
+
+      // Сохраняем
+      const filename = 'GRE_' + (prop.id || 'property').replace(/[^a-z0-9]/gi, '_') + '.pdf';
+      doc.save(filename);
+
+      if (btn) { btn.innerHTML = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> Скачать PDF'; btn.disabled = false; }
+    }).catch(() => {
+      if (btn) { btn.innerHTML = 'Скачать PDF'; btn.disabled = false; }
+    });
+
+  } catch(e) {
+    console.error('PDF error:', e);
+    if (btn) { btn.innerHTML = 'Скачать PDF'; btn.disabled = false; }
+  }
 }
 
 
