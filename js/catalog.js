@@ -917,6 +917,10 @@ function renderRecentlyViewed() {
   track.innerHTML = props.map(p => {
     const imgs = p.imgs || [p.img];
     const dots = imgs.map((_, i) => `<span class="card-slider-dot${i === 0 ? ' active' : ''}"></span>`).join('');
+    const badge = getPropBadge(p);
+    const roiHtml = (p.deal === 'buy' && p.roi)
+      ? `<div class="catalog-roi-pill"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>ROI ${p.roi} / год</div>`
+      : '';
     return `
     <div class="catalog-card" style="flex-shrink:0;" onclick="showDetail('${p.id}')">
       <div class="catalog-card-img-wrap" style="position:relative;overflow:hidden;">
@@ -926,8 +930,8 @@ function renderRecentlyViewed() {
           <button class="card-slider-btn card-slider-next" onclick="cardSlide(event,this,1)" aria-label="Вперёд">&#8250;</button>
           <div class="card-slider-dots">${dots}</div>
         </div>
-        <span class="prop-badge ${getPropBadge(p).cls}" style="position:absolute;top:12px;left:12px;z-index:2;">${getPropBadge(p).text}</span>
-        ${p.top ? '<span class="top-label" style="z-index:2;">★ ТОП</span>' : ''}
+        <span class="prop-badge ${badge.cls}">${badge.text}</span>
+        ${p.top ? '<span class="top-label">★ ТОП</span>' : ''}
         ${shareCardBtn(p.id)}
         ${favCardBtn(p.id)}
       </div>
@@ -941,6 +945,7 @@ function renderRecentlyViewed() {
           </div>
           ${p.oldPrice ? `<div class="catalog-price-old">${formatPrice(p.oldPrice)}</div>` : ''}
         </div>
+        ${roiHtml}
         <div class="catalog-specs">
           <span class="spec-item"><strong>${p.area}</strong> м²</span>
           <span class="spec-sep">·</span>
@@ -949,7 +954,16 @@ function renderRecentlyViewed() {
           <span class="spec-item"><strong>${p.floor}</strong> эт.</span>
           ${p.year ? `<span class="spec-sep">·</span><span class="spec-item"><strong>${p.year}</strong> г.</span>` : ''}
         </div>
-        <a class="catalog-detail-link" onclick="event.stopPropagation();showDetail('${p.id}')">Подробнее →</a>
+      </div>
+      <div class="catalog-card-footer">
+        <button class="catalog-cta-btn" onclick="event.stopPropagation();showDetail('${p.id}')">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+          Подробнее
+        </button>
+        <button class="catalog-contact-btn" onclick="event.stopPropagation();openContactPopup('${p.name}')">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.63A2 2 0 012 .18h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92z"/></svg>
+          Спросить
+        </button>
       </div>
     </div>`;
   }).join('');
@@ -1075,30 +1089,59 @@ function renderCatalogGrid(countryVal, cityVal, statusVal, typeVal, extra) {
     return;
   }
 
-  grid.innerHTML = filtered.map(p => `
+  grid.innerHTML = filtered.map(p => {
+    const badge = getPropBadge(p);
+    const imgs = p.imgs || [p.img];
+    const dots = imgs.map((_,i) => `<span class="card-slider-dot${i===0?' active':''}"></span>`).join('');
+    const priceDisplay = formatPrice(p.price);
+    const sqmDisplay = p.deal === 'buy' && p.area ? formatSqm(p) : '';
+
+    // Savings badge
+    let savingsHtml = '';
+    if (p.oldPrice) {
+      const oldNum = parseFloat(p.oldPrice.replace(/[^0-9.]/g, ''));
+      const curNum = parseFloat(p.price.replace(/[^0-9.]/g, ''));
+      if (oldNum > curNum) {
+        const pct = Math.round((1 - curNum/oldNum)*100);
+        savingsHtml = `<div class="catalog-price-save">−${pct}% от начальной цены</div>`;
+      }
+    }
+
+    // ROI pill — only for buy with roi data
+    const roiHtml = (p.deal === 'buy' && p.roi)
+      ? `<div class="catalog-roi-pill"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>ROI ${p.roi} / год</div>`
+      : '';
+
+    return `
     <div class="catalog-card" data-city="${p.city}" data-status="${p.status}" data-id="${p.id}" onclick="showDetail('${p.id}')">
       <div class="catalog-card-img-wrap" style="position:relative;overflow:hidden;">
-        <div class="card-slider" data-imgs='${JSON.stringify(p.imgs || [p.img])}' data-idx="0">
-          <img class="catalog-img card-slider-img" src="${p.img}" alt="${p.name}">
+        <div class="card-slider" data-imgs='${JSON.stringify(imgs)}' data-idx="0">
+          <img class="catalog-img card-slider-img" src="${p.img}" alt="${p.name}" loading="lazy">
           <button class="card-slider-btn card-slider-prev" onclick="cardSlide(event,this,-1)" aria-label="Назад">&#8249;</button>
           <button class="card-slider-btn card-slider-next" onclick="cardSlide(event,this,1)" aria-label="Вперёд">&#8250;</button>
-          <div class="card-slider-dots">${(p.imgs || [p.img]).map((_,i) => `<span class="card-slider-dot${i===0?' active':''}"></span>`).join('')}</div>
+          <div class="card-slider-dots">${dots}</div>
         </div>
-        <span class="prop-badge ${getPropBadge(p).cls}" style="position:absolute;top:12px;left:12px;z-index:2;">${getPropBadge(p).text}</span>
-        ${p.top ? '<span class="top-label" style="z-index:2;">★ ТОП</span>' : ''}
+        <span class="prop-badge ${badge.cls}">${badge.text}</span>
+        ${p.top ? '<span class="top-label">★ ТОП</span>' : ''}
         ${shareCardBtn(p.id)}
         ${favCardBtn(p.id)}
       </div>
       <div class="catalog-card-body">
-        <div class="catalog-city-row"><span class="catalog-city">${p.cityLabel}</span>${typeof Reviews !== 'undefined' ? Reviews.getMiniRatingHtml(p.id) : ''}</div>
+        <div class="catalog-city-row">
+          <span class="catalog-city">${p.cityLabel}</span>
+          ${typeof Reviews !== 'undefined' ? Reviews.getMiniRatingHtml(p.id) : ''}
+        </div>
         <div class="catalog-name">${p.name}</div>
         <div class="catalog-price-block">
           <div class="catalog-price-row">
-            <span class="catalog-price">${formatPrice(p.price)}</span>
-            ${p.deal === 'buy' && p.area ? `<span class="catalog-price-sqm">${formatSqm(p)}</span>` : ''}
+            <span class="catalog-price">${priceDisplay}</span>
+            ${sqmDisplay ? `<span class="catalog-price-sqm">${sqmDisplay}</span>` : ''}
           </div>
           ${p.oldPrice ? `<div class="catalog-price-old">${formatPrice(p.oldPrice)}</div>` : ''}
+          ${savingsHtml}
         </div>
+        ${roiHtml}
+        ${p.desc ? `<p class="catalog-card-desc">${p.desc}</p>` : ''}
         <div class="catalog-specs">
           <span class="spec-item"><strong>${p.area}</strong> м²</span>
           <span class="spec-sep">·</span>
@@ -1107,10 +1150,18 @@ function renderCatalogGrid(countryVal, cityVal, statusVal, typeVal, extra) {
           <span class="spec-item"><strong>${p.floor}</strong> эт.</span>
           ${p.year ? `<span class="spec-sep">·</span><span class="spec-item"><strong>${p.year}</strong> г.</span>` : ''}
         </div>
-        ${p.desc ? `<p class="catalog-card-desc">${p.desc}</p>` : ''}
-        <a class="catalog-detail-link" onclick="event.stopPropagation();showDetail('${p.id}')">Подробнее →</a>
       </div>
-    </div>`).join('');
+      <div class="catalog-card-footer">
+        <button class="catalog-cta-btn" onclick="event.stopPropagation();showDetail('${p.id}')">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+          Подробнее
+        </button>
+        <button class="catalog-contact-btn" onclick="event.stopPropagation();openContactPopup('${p.name}')">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.63A2 2 0 012 .18h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92z"/></svg>
+          Спросить
+        </button>
+      </div>
+    </div>`}).join('');
 
   // Восстанавливаем сохранённый вид после перерендера грида
   if (typeof initViewMode === 'function') initViewMode();
@@ -1924,23 +1975,50 @@ function renderRelated(currentId) {
   const countryNames = { 'all': 'Грузии', 'usa': 'США', 'uae': 'ОАЭ', 'cyprus': 'Кипре', 'greece': 'Греции' };
   document.getElementById('relatedTitle').textContent = `Другие объекты в ${countryNames[prop.country] || prop.cityLabel}`;
 
-  track.innerHTML = same.map(p => `
+  track.innerHTML = same.map(p => {
+    const badge = getPropBadge(p);
+    const roiHtml = (p.deal === 'buy' && p.roi)
+      ? `<div class="catalog-roi-pill"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>ROI ${p.roi} / год</div>`
+      : '';
+    return `
     <div class="catalog-card" style="flex-shrink:0;" onclick="showDetail('${p.id}')">
       <div style="position:relative;overflow:hidden;">
         <img class="catalog-img" src="${p.img}" alt="${p.name}">
-        <span class="prop-badge ${getPropBadge(p).cls}" style="position:absolute;top:12px;left:12px;">${getPropBadge(p).text}</span>
+        <span class="prop-badge ${badge.cls}">${badge.text}</span>
         ${shareCardBtn(p.id)}
         ${favCardBtn(p.id)}
       </div>
       <div class="catalog-card-body">
         <div class="catalog-city-row"><span class="catalog-city">${p.cityLabel}</span>${typeof Reviews !== 'undefined' ? Reviews.getMiniRatingHtml(p.id) : ''}</div>
         <div class="catalog-name">${p.name}</div>
-        <div class="catalog-price">${p.price}</div>
-        <div class="catalog-specs"><span>${p.area}</span> м² &nbsp;·&nbsp; <span>${p.rooms}</span> спальн${p.rooms === '1' ? 'я' : 'и'} &nbsp;·&nbsp; <span>${p.floor}</span> этаж</div>
-        <a class="catalog-detail-link" onclick="event.stopPropagation();showDetail('${p.id}')">Подробнее →</a>
+        <div class="catalog-price-block">
+          <div class="catalog-price-row">
+            <span class="catalog-price">${formatPrice(p.price)}</span>
+            ${p.deal === 'buy' && p.area ? `<span class="catalog-price-sqm">${formatSqm(p)}</span>` : ''}
+          </div>
+          ${p.oldPrice ? `<div class="catalog-price-old">${formatPrice(p.oldPrice)}</div>` : ''}
+        </div>
+        ${roiHtml}
+        <div class="catalog-specs">
+          <span class="spec-item"><strong>${p.area}</strong> м²</span>
+          <span class="spec-sep">·</span>
+          <span class="spec-item"><strong>${p.rooms}</strong> спал.</span>
+          <span class="spec-sep">·</span>
+          <span class="spec-item"><strong>${p.floor}</strong> эт.</span>
+        </div>
+      </div>
+      <div class="catalog-card-footer">
+        <button class="catalog-cta-btn" onclick="event.stopPropagation();showDetail('${p.id}')">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+          Подробнее
+        </button>
+        <button class="catalog-contact-btn" onclick="event.stopPropagation();openContactPopup('${p.name}')">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.63A2 2 0 012 .18h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92z"/></svg>
+          Спросить
+        </button>
       </div>
     </div>
-  `).join('');
+  `}).join('');
 
   relatedCur = 0;
   setTimeout(initRelatedSlider, 300);
@@ -2017,6 +2095,19 @@ function buildFeaturedCards(props) {
   return props.map(p => {
     const imgs = p.imgs || [p.img];
     const dots = imgs.map((_, i) => `<span class="card-slider-dot${i === 0 ? ' active' : ''}"></span>`).join('');
+    const badge = getPropBadge(p);
+    let savingsHtml = '';
+    if (p.oldPrice) {
+      const oldNum = parseFloat(p.oldPrice.replace(/[^0-9.]/g, ''));
+      const curNum = parseFloat(p.price.replace(/[^0-9.]/g, ''));
+      if (oldNum > curNum) {
+        const pct = Math.round((1 - curNum/oldNum)*100);
+        savingsHtml = `<div class="catalog-price-save">−${pct}% от начальной цены</div>`;
+      }
+    }
+    const roiHtml = (p.deal === 'buy' && p.roi)
+      ? `<div class="catalog-roi-pill"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>ROI ${p.roi} / год</div>`
+      : '';
     return `
     <div class="catalog-card" style="flex-shrink:0;" onclick="showDetail('${p.id}')">
       <div class="catalog-card-img-wrap" style="position:relative;overflow:hidden;">
@@ -2026,8 +2117,8 @@ function buildFeaturedCards(props) {
           <button class="card-slider-btn card-slider-next" onclick="cardSlide(event,this,1)" aria-label="Вперёд">&#8250;</button>
           <div class="card-slider-dots">${dots}</div>
         </div>
-        <span class="prop-badge ${getPropBadge(p).cls}" style="position:absolute;top:12px;left:12px;z-index:2;">${getPropBadge(p).text}</span>
-        <span class="top-label" style="z-index:2;">★ ТОП</span>
+        <span class="prop-badge ${badge.cls}">${badge.text}</span>
+        <span class="top-label">★ ТОП</span>
         ${shareCardBtn(p.id)}
         ${favCardBtn(p.id)}
       </div>
@@ -2040,7 +2131,9 @@ function buildFeaturedCards(props) {
             ${p.area ? `<span class="catalog-price-sqm">${formatSqm(p)}</span>` : ''}
           </div>
           ${p.oldPrice ? `<div class="catalog-price-old">${formatPrice(p.oldPrice)}</div>` : ''}
+          ${savingsHtml}
         </div>
+        ${roiHtml}
         <div class="catalog-specs">
           <span class="spec-item"><strong>${p.area}</strong> м²</span>
           <span class="spec-sep">·</span>
@@ -2049,7 +2142,16 @@ function buildFeaturedCards(props) {
           <span class="spec-item"><strong>${p.floor}</strong> эт.</span>
           ${p.year ? `<span class="spec-sep">·</span><span class="spec-item"><strong>${p.year}</strong> г.</span>` : ''}
         </div>
-        <a class="catalog-detail-link" onclick="event.stopPropagation();showDetail('${p.id}')">Подробнее →</a>
+      </div>
+      <div class="catalog-card-footer">
+        <button class="catalog-cta-btn" onclick="event.stopPropagation();showDetail('${p.id}')">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+          Подробнее
+        </button>
+        <button class="catalog-contact-btn" onclick="event.stopPropagation();openContactPopup('${p.name}')">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.63A2 2 0 012 .18h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92z"/></svg>
+          Спросить
+        </button>
       </div>
     </div>`;
   }).join('');
