@@ -342,53 +342,76 @@
   gap: 24px; margin-bottom: 40px;
 }
 
+
 /* ── List view ── */
 .catalog-grid.catalog-list-view {
   grid-template-columns: 1fr;
   gap: 12px;
 }
+
+/* Карточка — переключаем с column-flex на grid */
 .catalog-grid.catalog-list-view .catalog-card {
-  display: grid;
-  grid-template-columns: 300px 1fr;
+  display: grid !important;
+  grid-template-columns: 280px 1fr;
   grid-template-rows: 1fr auto;
-  min-height: 230px;
-  height: auto;
+  min-height: 240px;
   transform: none !important;
   overflow: hidden;
 }
 .catalog-grid.catalog-list-view .catalog-card:hover {
   box-shadow: 0 12px 40px rgba(0,0,0,0.14);
+  transform: none !important;
 }
+
+/* Фото — левая колонка, оба ряда */
 .catalog-grid.catalog-list-view .catalog-card-img-wrap {
+  grid-column: 1;
   grid-row: 1 / 3;
+  /* min-height = min-height карточки чтобы absolute img мог развернуться */
+  min-height: 240px;
   position: relative;
   overflow: hidden;
-  align-self: stretch;
 }
 .catalog-grid.catalog-list-view .catalog-img {
-  aspect-ratio: unset;
-  position: absolute; inset: 0;
-  width: 100%; height: 100%;
+  position: absolute !important;
+  top: 0; left: 0; right: 0; bottom: 0;
+  width: 100% !important;
+  height: 100% !important;
+  aspect-ratio: unset !important;
   object-fit: cover;
 }
+
+/* Текст — правая колонка, верхний ряд */
 .catalog-grid.catalog-list-view .catalog-card-body {
-  padding: 16px 20px 12px;
+  grid-column: 2;
+  grid-row: 1;
+  padding: 16px 20px 8px;
   min-width: 0; overflow: hidden;
 }
+
+/* Кнопки — правая колонка, нижний ряд */
 .catalog-grid.catalog-list-view .catalog-card-footer {
   grid-column: 2;
+  grid-row: 2;
   padding: 0 20px 16px;
   margin-top: 0; border-top: none;
 }
+
 .catalog-grid.catalog-list-view .catalog-specs {
   flex-wrap: wrap; gap: 0;
   padding-top: 8px; margin-top: 0;
 }
 .catalog-grid.catalog-list-view .catalog-name {
-  font-size: 1.05rem; font-weight: 700; color: var(--dark);
+  font-size: 1rem; font-weight: 700; color: var(--dark);
   -webkit-line-clamp: 2;
 }
 .catalog-grid.catalog-list-view .catalog-price-block { margin-bottom: 6px; }
+.catalog-grid.catalog-list-view .catalog-roi-pill { margin-bottom: 6px; }
+/* card-slider тоже должен занять всю высоту */
+.catalog-grid.catalog-list-view .card-slider {
+  height: 100%;
+  min-height: 240px;
+}
 /* список: описание объекта (только в list-view) */
 .catalog-card-desc {
   font-size: 0.78rem; color: var(--gray-500);
