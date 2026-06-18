@@ -299,4 +299,13 @@ window.GRE_LANG_EN = {
     'team.about_p5_full': 'Our team regularly undergoes professional training and monitors changes in Georgian real estate, taxation and foreign investment legislation — so you always get accurate, up-to-date information.',
     'team.stat_locations_label': 'prime locations',
     'meta.title_team': 'Team — Georgia Real Estate',
+    'team.hero_title': 'Our Team',
+    'team.agent_btn': 'Agent\'s properties',
+    'team.agent_link': 'Agent\'s properties →',
+    'team.fname_1': 'Alexander Verin',
+    'team.fname_2': 'Natalia Solovyova',
+    'team.fname_3': 'Mariam Janelidze',
+    'team.fname_4': 'David Cohen',
+    'team.fname_5': 'Robert Chase',
+    'team.fname_6': 'Yakov Levi',
 };

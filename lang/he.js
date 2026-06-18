@@ -299,4 +299,13 @@ window.GRE_LANG_HE = {
     'team.about_p5_full': 'הצוות שלנו עובר הכשרה מקצועית באופן קבוע ועוקב אחר שינויים בחוקי הנדל"ן, המיסוי וההשקעות הזרות בגאורגיה — כדי שתמיד תקבלו מידע מדויק ועדכני.',
     'team.stat_locations_label': 'מיקומים מובחרים',
     'meta.title_team': 'צוות — Georgia Real Estate',
+    'team.hero_title': 'הצוות שלנו',
+    'team.agent_btn': 'נכסי הסוכן',
+    'team.agent_link': 'נכסי הסוכן ←',
+    'team.fname_1': 'אלכסנדר ורין',
+    'team.fname_2': 'נטליה סולובייובה',
+    'team.fname_3': 'מריאם ג\'אנלידזה',
+    'team.fname_4': 'דייוויד כהן',
+    'team.fname_5': 'רוברט צ\'ייס',
+    'team.fname_6': 'יעקב לוי',
 };

@@ -90,7 +90,7 @@
       <div class="team-card" data-agent-id="verin">
         <img class="team-photo" src="https://randomuser.me/api/portraits/men/32.jpg" alt="Александр Верин">
         <div class="team-body">
-          <div class="team-name">Александр Верин</div>
+          <div class="team-name" data-i18n="team.fname_1">Александр Верин</div>
           <div class="team-role" data-i18n="team.role_1">Генеральный директор</div>
           <div class="team-desc" data-i18n="team.desc_1">Специализируется на стратегическом развитии и международных переговорах.</div>
           <div class="team-socials">
@@ -104,7 +104,7 @@
       <div class="team-card" data-agent-id="solovieva">
         <img class="team-photo" src="https://randomuser.me/api/portraits/women/44.jpg" alt="Наталья Соловьёва">
         <div class="team-body">
-          <div class="team-name">Наталья Соловьёва</div>
+          <div class="team-name" data-i18n="team.fname_2">Наталья Соловьёва</div>
           <div class="team-role" data-i18n="team.role_2">Ведущий агент по продажам</div>
           <div class="team-desc" data-i18n="team.desc_2">Специализируется на жилой недвижимости Тбилиси и Батуми, работает с иностранными инвесторами.</div>
           <div class="team-socials">
@@ -118,7 +118,7 @@
       <div class="team-card" data-agent-id="janelidze">
         <img class="team-photo" src="https://randomuser.me/api/portraits/women/68.jpg" alt="Мариам Джанелидзе">
         <div class="team-body">
-          <div class="team-name">Мариам Джанелидзе</div>
+          <div class="team-name" data-i18n="team.fname_3">Мариам Джанелидзе</div>
           <div class="team-role" data-i18n="team.role_3">Директор грузинского направления</div>
           <div class="team-desc" data-i18n="team.desc_3">Глубокое знание грузинского рынка. Ведёт ключевые сделки в Тбилиси и Кахетии.</div>
           <div class="team-socials">
@@ -132,7 +132,7 @@
       <div class="team-card" data-agent-id="cohen">
         <img class="team-photo" src="https://randomuser.me/api/portraits/men/75.jpg" alt="Дэвид Коэн">
         <div class="team-body">
-          <div class="team-name">Дэвид Коэн</div>
+          <div class="team-name" data-i18n="team.fname_4">Дэвид Коэн</div>
           <div class="team-role" data-i18n="team.role_4">Финансовый директор</div>
           <div class="team-desc" data-i18n="team.desc_4">Структурирование инвестиционных сделок, работа с международным капиталом.</div>
           <div class="team-socials">
@@ -145,7 +145,7 @@
       <div class="team-card" data-agent-id="chase">
         <img class="team-photo" src="https://randomuser.me/api/portraits/men/22.jpg" alt="Роберт Чейз">
         <div class="team-body">
-          <div class="team-name">Роберт Чейз</div>
+          <div class="team-name" data-i18n="team.fname_5">Роберт Чейз</div>
           <div class="team-role" data-i18n="team.role_5">Ведущий агент по продажам</div>
           <div class="team-desc" data-i18n="team.desc_5">Специалист по курортной недвижимости Батуми и Гонио.</div>
           <div class="team-socials">
@@ -158,7 +158,7 @@
       <div class="team-card" data-agent-id="levi">
         <img class="team-photo" src="https://randomuser.me/api/portraits/men/85.jpg" alt="Яков Леви">
         <div class="team-body">
-          <div class="team-name">Яков Леви</div>
+          <div class="team-name" data-i18n="team.fname_6">Яков Леви</div>
           <div class="team-role" data-i18n="team.role_6">Юридический директор</div>
           <div class="team-desc" data-i18n="team.desc_6">Международный юрист. Сопровождение сделок в пяти юрисдикциях.</div>
           <div class="team-socials">
@@ -331,8 +331,15 @@ function toggleAbout() {
 <script src="js/favorites.js?v=3"></script>
 <script src="js/history.js?v=1"></script>
 
+<script src="lang/ru.js?v=10"></script>
+<script src="lang/en.js?v=10"></script>
+<script src="lang/he.js?v=10"></script>
+<script src="lang/translations.js?v=10"></script>
+<script src="js/i18n.js?v=6"></script>
+
 <script>
 // Кнопка "Объекты агента" на карточках команды
+// ВАЖНО: этот скрипт идёт ПОСЛЕ lang/*.js и i18n.js — чтобы GRE_T уже был готов
 document.querySelectorAll('.team-card[data-agent-id]').forEach(function(card) {
   var agentId = card.dataset.agentId;
   var body = card.querySelector('.team-body');
@@ -340,7 +347,8 @@ document.querySelectorAll('.team-card[data-agent-id]').forEach(function(card) {
   var btn = document.createElement('a');
   btn.className = 'team-agent-btn';
   btn.href = 'projects.html?agent=' + agentId;
-  btn.textContent = 'Объекты агента →';
+  btn.setAttribute('data-i18n', 'team.agent_link');
+  btn.textContent = (typeof GRE_T === 'function') ? GRE_T('team.agent_link') : 'Объекты агента →';
   btn.addEventListener('click', function(e) {
     e.preventDefault();
     // Если мы уже на projects.html — filterByAgent напрямую + обновляем URL
@@ -354,12 +362,6 @@ document.querySelectorAll('.team-card[data-agent-id]').forEach(function(card) {
   body.appendChild(btn);
 });
 </script>
-
-<script src="lang/ru.js?v=1"></script>
-<script src="lang/en.js?v=1"></script>
-<script src="lang/he.js?v=1"></script>
-<script src="lang/translations.js?v=2"></script>
-<script src="js/i18n.js?v=4"></script>
 </body>
 </html>
 
