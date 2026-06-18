@@ -1602,14 +1602,23 @@ function updateMortgageCalc() {
   const downPct  = parseInt(downEl.value);
   const termYrs  = parseInt(termEl.value);
   const rateAnn  = parseFloat(rateEl.value);
+  const isZeroRate = rateAnn === 0;
 
-  // Обновляем бейджи
-  const downBadge = document.getElementById('calcDownPct');
-  const termBadge = document.getElementById('calcTermBadge');
-  const rateBadge = document.getElementById('calcRateBadge');
+  // Бейджи
+  const downBadge  = document.getElementById('calcDownPct');
+  const termBadge  = document.getElementById('calcTermBadge');
+  const rateBadge  = document.getElementById('calcRateBadge');
+  const rateLabel  = document.getElementById('calcRateLabel');
+
   if (downBadge) downBadge.textContent = downPct + '%';
-  if (termBadge) termBadge.textContent = termYrs + ' ' + (termYrs === 1 ? 'год' : termYrs < 5 ? 'года' : 'лет');
-  if (rateBadge) rateBadge.textContent = rateAnn + '%';
+
+  // Склонение лет
+  const termWord = termYrs === 1 ? 'год' : termYrs >= 2 && termYrs <= 4 ? 'года' : 'лет';
+  if (termBadge) termBadge.textContent = termYrs + ' ' + termWord;
+
+  // Ставка: 0% = рассрочка
+  if (rateBadge) rateBadge.textContent = isZeroRate ? '0% — рассрочка' : rateAnn + '%';
+  if (rateLabel) rateLabel.textContent = isZeroRate ? 'Рассрочка от застройщика' : 'Ставка по ипотеке';
 
   const priceUsd = _calcPropPrice;
   if (!priceUsd) return;
@@ -1618,21 +1627,26 @@ function updateMortgageCalc() {
   const loanUsd  = priceUsd - downUsd;
   const r        = rateAnn / 100 / 12;
   const n        = termYrs * 12;
+  // При r=0 — равные платежи без процентов
   const payment  = r === 0 ? loanUsd / n : (loanUsd * r) / (1 - Math.pow(1 + r, -n));
 
   // Конвертируем в текущую валюту
-  const payConverted = Math.round(payment * CURRENCY_RATES[currentCurrency]);
-  const sym          = CURRENCY_SYMBOLS[currentCurrency];
-
-  const payEl  = document.getElementById('calcPayment');
-  const subEl  = document.getElementById('calcSub');
-  const downValEl = document.getElementById('calcDownVal');
-
+  const payConverted  = Math.round(payment * CURRENCY_RATES[currentCurrency]);
+  const sym           = CURRENCY_SYMBOLS[currentCurrency];
   const downConverted = Math.round(downUsd * CURRENCY_RATES[currentCurrency]);
   const loanConverted = Math.round(loanUsd * CURRENCY_RATES[currentCurrency]);
 
-  if (payEl)  payEl.textContent  = sym + payConverted.toLocaleString('ru-RU') + ' / мес';
-  if (subEl)  subEl.textContent  = 'Взнос ' + sym + downConverted.toLocaleString('ru-RU') + ' · Кредит ' + sym + loanConverted.toLocaleString('ru-RU');
+  const payEl     = document.getElementById('calcPayment');
+  const subEl     = document.getElementById('calcSub');
+  const downValEl = document.getElementById('calcDownVal');
+
+  if (payEl) payEl.textContent = sym + payConverted.toLocaleString('ru-RU') + ' / мес';
+
+  // Подпись под платежом
+  const subText = isZeroRate
+    ? `Взнос ${sym}${downConverted.toLocaleString('ru-RU')} · Рассрочка без % на ${termYrs} ${termWord}`
+    : `Взнос ${sym}${downConverted.toLocaleString('ru-RU')} · Кредит ${sym}${loanConverted.toLocaleString('ru-RU')}`;
+  if (subEl)  subEl.textContent  = subText;
   if (downValEl) downValEl.textContent = sym + downConverted.toLocaleString('ru-RU');
 }
 

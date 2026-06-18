@@ -808,28 +808,28 @@
               <label class="calc-label">Срок кредита</label>
               <span class="calc-pct-badge" id="calcTermBadge">15 лет</span>
             </div>
-            <div class="calc-range-wrap" data-min="5" data-max="30" data-val="15" data-target="calcTerm" data-cb="updateMortgageCalc">
+            <div class="calc-range-wrap" data-min="1" data-max="30" data-val="15" data-target="calcTerm" data-cb="updateMortgageCalc">
               <div class="calc-track"><div class="calc-track-fill"></div></div>
               <div class="calc-thumb"></div>
-              <input type="range" class="calc-range" id="calcTerm" min="5" max="30" value="15" step="1">
+              <input type="range" class="calc-range" id="calcTerm" min="1" max="30" value="15" step="1">
             </div>
             <div class="calc-range-ends">
-              <span>5 лет</span><span>30 лет</span>
+              <span>1 год</span><span>30 лет</span>
             </div>
           </div>
 
           <div class="calc-field">
             <div class="calc-field-row">
-              <label class="calc-label">Ставка</label>
+              <label class="calc-label" id="calcRateLabel">Ставка</label>
               <span class="calc-pct-badge" id="calcRateBadge">7%</span>
             </div>
-            <div class="calc-range-wrap" data-min="4" data-max="15" data-val="7" data-target="calcRate" data-cb="updateMortgageCalc">
+            <div class="calc-range-wrap" data-min="0" data-max="15" data-val="7" data-target="calcRate" data-cb="updateMortgageCalc">
               <div class="calc-track"><div class="calc-track-fill"></div></div>
               <div class="calc-thumb"></div>
-              <input type="range" class="calc-range" id="calcRate" min="4" max="15" value="7" step="0.5">
+              <input type="range" class="calc-range" id="calcRate" min="0" max="15" value="7" step="0.5">
             </div>
             <div class="calc-range-ends">
-              <span>4%</span><span>15%</span>
+              <span>0% — рассрочка</span><span>15%</span>
             </div>
           </div>
 
@@ -1265,7 +1265,7 @@
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script src="js/nav.js?v=17"></script>
 <script src="js/forms.js?v=6"></script>
-<script src="js/catalog.js?v=61"></script>
+<script src="js/catalog.js?v=62"></script>
 <script>
 /* УМНЫЙ ПОИСК */
 var _sq = '';
