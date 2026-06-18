@@ -987,9 +987,9 @@ function renderRecentlyViewed() {
             <span class="catalog-price">${formatPrice(p.price)}</span>
             ${p.deal === 'buy' && p.area ? `<span class="catalog-price-sqm">${formatSqm(p)}</span>` : ''}
           </div>
-          ${`<div class="catalog-price-old">${p.oldPrice ? formatPrice(p.oldPrice) : ''}</div>`}
+          ${p.deal !== "rent" ? `<div class="catalog-price-old">${p.oldPrice ? formatPrice(p.oldPrice) : ''}</div>` : (p.oldPrice ? `<div class="catalog-price-old">${formatPrice(p.oldPrice)}</div>` : "")}
         </div>
-        ${`<div class="catalog-pills-row">${roiHtml}</div>`}
+        ${roiHtml ? `<div class="catalog-pills-row">${roiHtml}</div>` : (p.deal !== "rent" ? `<div class="catalog-pills-row"></div>` : "")}
         <div class="catalog-specs">
           <span class="spec-item"><strong>${p.area}</strong> м²</span>
           <span class="spec-sep">·</span>
@@ -1181,9 +1181,9 @@ function renderCatalogGrid(countryVal, cityVal, statusVal, typeVal, extra) {
             <span class="catalog-price">${priceDisplay}</span>
             ${sqmDisplay ? `<span class="catalog-price-sqm">${sqmDisplay}</span>` : ''}
           </div>
-          ${`<div class="catalog-price-old">${p.oldPrice ? formatPrice(p.oldPrice) : ''}</div>`}
+          ${p.deal !== "rent" ? `<div class="catalog-price-old">${p.oldPrice ? formatPrice(p.oldPrice) : ''}</div>` : (p.oldPrice ? `<div class="catalog-price-old">${formatPrice(p.oldPrice)}</div>` : "")}
         </div>
-        ${`<div class="catalog-pills-row">${savingsHtml}${roiHtml}</div>`}
+        ${(savingsHtml || roiHtml) ? `<div class="catalog-pills-row">${savingsHtml}${roiHtml}</div>` : (p.deal !== "rent" ? `<div class="catalog-pills-row"></div>` : "")}
         ${p.desc ? `<p class="catalog-card-desc">${p.desc}</p>` : ''}
         <div class="catalog-specs">
           <span class="spec-item"><strong>${p.area}</strong> м²</span>
@@ -2040,9 +2040,9 @@ function renderRelated(currentId) {
             <span class="catalog-price">${formatPrice(p.price)}</span>
             ${p.deal === 'buy' && p.area ? `<span class="catalog-price-sqm">${formatSqm(p)}</span>` : ''}
           </div>
-          ${`<div class="catalog-price-old">${p.oldPrice ? formatPrice(p.oldPrice) : ''}</div>`}
+          ${p.deal !== "rent" ? `<div class="catalog-price-old">${p.oldPrice ? formatPrice(p.oldPrice) : ''}</div>` : (p.oldPrice ? `<div class="catalog-price-old">${formatPrice(p.oldPrice)}</div>` : "")}
         </div>
-        ${`<div class="catalog-pills-row">${roiHtml}</div>`}
+        ${roiHtml ? `<div class="catalog-pills-row">${roiHtml}</div>` : (p.deal !== "rent" ? `<div class="catalog-pills-row"></div>` : "")}
         <div class="catalog-specs">
           <span class="spec-item"><strong>${p.area}</strong> м²</span>
           <span class="spec-sep">·</span>
@@ -2174,9 +2174,9 @@ function buildFeaturedCards(props) {
             <span class="catalog-price">${formatPrice(p.price)}</span>
             ${p.area ? `<span class="catalog-price-sqm">${formatSqm(p)}</span>` : ''}
           </div>
-          ${`<div class="catalog-price-old">${p.oldPrice ? formatPrice(p.oldPrice) : ''}</div>`}
+          ${p.deal !== "rent" ? `<div class="catalog-price-old">${p.oldPrice ? formatPrice(p.oldPrice) : ''}</div>` : (p.oldPrice ? `<div class="catalog-price-old">${formatPrice(p.oldPrice)}</div>` : "")}
         </div>
-        ${`<div class="catalog-pills-row">${savingsHtml}${roiHtml}</div>`}
+        ${(savingsHtml || roiHtml) ? `<div class="catalog-pills-row">${savingsHtml}${roiHtml}</div>` : (p.deal !== "rent" ? `<div class="catalog-pills-row"></div>` : "")}
         <div class="catalog-specs">
           <span class="spec-item"><strong>${p.area}</strong> м²</span>
           <span class="spec-sep">·</span>
