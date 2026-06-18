@@ -161,18 +161,18 @@
           </select>
         </div>
         <div class="filter-field filter-field--type">
-          <label>Тип недвижимости</label>
+          <label data-i18n="filter.type">Тип недвижимости</label>
           <select class="filter-select" id="homeType">
-            <option value="all">Любой</option>
-            <option value="apartment">Квартира</option>
-            <option value="apart">Апартаменты</option>
-            <option value="villa">Вилла</option>
-            <option value="commercial">Коммерческая</option>
+            <option value="all" data-i18n="filter.type_all">Любой</option>
+            <option value="apartment" data-i18n="filter.type_apartment">Квартира</option>
+            <option value="apart" data-i18n="filter.type_apart">Апартаменты</option>
+            <option value="villa" data-i18n="filter.type_villa">Вилла</option>
+            <option value="commercial" data-i18n="filter.type_commercial">Коммерческая</option>
           </select>
         </div>
         <!-- Поиск по названию -->
         <div class="filter-field filter-field--search">
-          <label>Поиск по названию</label>
+          <label data-i18n="filter.name_label">Поиск по названию</label>
           <div class="search-field-wrap">
             <svg class="search-field-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
             <input class="search-field-input" id="homeNameSearch" type="text" placeholder="Название, район, тип…" autocomplete="off"
@@ -188,17 +188,17 @@
       <!-- Строка 2: статус, цена, площадь, спальни, кнопки -->
       <div class="filter-row-2 filter-row-2--projects">
         <div class="filter-field">
-          <label>Статус</label>
+          <label data-i18n="filter.status">Статус</label>
           <select class="filter-select" id="homeStatus" style="min-width:150px;">
-            <option value="all">Любой статус</option>
-            <option value="ready">Сдан в эксплуатацию</option>
-            <option value="build">На стадии строительства</option>
-            <option value="invest">Инвестиции</option>
+            <option value="all" data-i18n="filter.status_all">Любой статус</option>
+            <option value="ready" data-i18n="filter.status_ready">Сдан в эксплуатацию</option>
+            <option value="build" data-i18n="filter.status_build">На стадии строительства</option>
+            <option value="invest" data-i18n="filter.status_invest">Инвестиции</option>
           </select>
         </div>
         <div class="filter-sep-v"></div>
         <div class="filter-field filter-field--price">
-          <label>Цена, $</label>
+          <label data-i18n="filter.price">Цена, $</label>
           <div class="filter-range-inputs">
             <input class="filter-range-input" type="text" id="homePriceMin" placeholder="От">
             <span class="filter-range-sep">—</span>
@@ -207,7 +207,7 @@
         </div>
         <div class="filter-sep-v"></div>
         <div class="filter-field filter-field--area">
-          <label>Площадь, м²</label>
+          <label data-i18n="filter.area">Площадь, м²</label>
           <div class="filter-range-inputs">
             <input class="filter-range-input" type="text" id="homeAreaMin" placeholder="От">
             <span class="filter-range-sep">—</span>
@@ -216,9 +216,9 @@
         </div>
         <div class="filter-sep-v"></div>
         <div class="filter-field filter-field--rooms">
-          <label>Спальни</label>
+          <label data-i18n="filter.rooms">Спальни</label>
           <div class="filter-rooms-btns">
-            <button class="rooms-btn active" data-val="all" onclick="setHomeRooms(this)">Любое</button>
+            <button class="rooms-btn active" data-val="all" onclick="setHomeRooms(this)" data-i18n="filter.rooms_any">Любое</button>
             <button class="rooms-btn" data-val="1"  onclick="setHomeRooms(this)">1</button>
             <button class="rooms-btn" data-val="2"  onclick="setHomeRooms(this)">2</button>
             <button class="rooms-btn" data-val="3"  onclick="setHomeRooms(this)">3</button>
@@ -227,7 +227,7 @@
           <input type="hidden" id="homeRoomsVal" value="all">
         </div>
         <div class="filter-row-2-actions">
-          <span class="filter-reset-link" onclick="resetHomeFilter()">Сброс</span>
+          <span class="filter-reset-link" onclick="resetHomeFilter()" data-i18n="filter.reset">Сброс</span>
           <button class="btn btn-red filter-btn" onclick="goSearch()">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
             Найти
@@ -245,9 +245,9 @@
     <div class="container">
       <div class="section-header">
         <div>
-          <h2 class="section-title">Популярные направления</h2>
+          <h2 class="section-title" data-i18n="directions.title">Популярные направления</h2>
         </div>
-        <span class="see-all" onclick="window.location.href='projects.html'">Смотреть все</span>
+        <span class="see-all" onclick="window.location.href='projects.html'" data-i18n="catalog.see_all">Смотреть все</span>
       </div>
       <div class="directions-grid">
         <div class="direction-card" onclick="goToCountry('georgia')">
@@ -258,7 +258,7 @@
           <div class="direction-info">
             <span class="direction-flag">🇬🇪</span>
             <div class="direction-name">Грузия</div>
-            <div class="direction-desc">Тбилиси, Батуми, Бакуриани</div>
+            <div class="direction-desc" data-i18n="directions.georgia_cities">Тбилиси, Батуми, Бакуриани</div>
           </div>
         </div>
         <div class="direction-card" onclick="goToCountry('usa')">
@@ -269,7 +269,7 @@
           <div class="direction-info">
             <span class="direction-flag">🇺🇸</span>
             <div class="direction-name">США</div>
-            <div class="direction-desc">Нью-Йорк, Майами</div>
+            <div class="direction-desc" data-i18n="directions.usa_cities">Нью-Йорк, Майами</div>
           </div>
         </div>
         <div class="direction-card" onclick="goToCountry('uae')">
@@ -280,7 +280,7 @@
           <div class="direction-info">
             <span class="direction-flag">🇦🇪</span>
             <div class="direction-name">ОАЭ</div>
-            <div class="direction-desc">Дубай</div>
+            <div class="direction-desc" data-i18n="directions.uae_cities">Дубай</div>
           </div>
         </div>
         <div class="direction-card" onclick="goToCountry('cyprus')">
@@ -291,7 +291,7 @@
           <div class="direction-info">
             <span class="direction-flag">🇨🇾</span>
             <div class="direction-name">Кипр</div>
-            <div class="direction-desc">Лимасол, Пафос</div>
+            <div class="direction-desc" data-i18n="directions.cyprus_cities">Лимасол, Пафос</div>
           </div>
         </div>
         <div class="direction-card" onclick="goToCountry('greece')">
@@ -302,7 +302,7 @@
           <div class="direction-info">
             <span class="direction-flag">🇬🇷</span>
             <div class="direction-name">Греция</div>
-            <div class="direction-desc">Афины, Миконос</div>
+            <div class="direction-desc" data-i18n="directions.greece_cities">Афины, Миконос</div>
           </div>
         </div>
       </div>
@@ -313,9 +313,9 @@
   <div class="about-strip">
     <div class="about-strip-inner">
       <div class="about-text">
-        <h2>О компании</h2>
-        <p>Мы — команда профессионалов с многолетним опытом на рынке недвижимости Грузии. Наша миссия — помочь вам найти идеальный объект для жизни, отдыха или инвестиций.</p>
-        <button class="btn btn-outline" onclick="showPage('team')">Подробнее о нас</button>
+        <h2 data-i18n="about.title">О компании</h2>
+        <p data-i18n="about.desc">Мы — команда профессионалов с многолетним опытом на рынке недвижимости Грузии. Наша миссия — помочь вам найти идеальный объект для жизни, отдыха или инвестиций.</p>
+        <button class="btn btn-outline" onclick="showPage('team')" data-i18n="about.btn">Подробнее о нас</button>
       </div>
       <div class="stats-row">
 
@@ -335,7 +335,7 @@
             </svg>
           </div>
           <div class="stat-num">10+</div>
-          <div class="stat-label">лет на рынке недвижимости</div>
+          <div class="stat-label" data-i18n="about.stat_years">лет на рынке недвижимости</div>
         </div>
 
         <div class="stat-item">
@@ -352,7 +352,7 @@
             </svg>
           </div>
           <div class="stat-num">1000+</div>
-          <div class="stat-label">довольных клиентов</div>
+          <div class="stat-label" data-i18n="about.stat_clients">довольных клиентов</div>
         </div>
 
         <div class="stat-item">
@@ -372,7 +372,7 @@
             </svg>
           </div>
           <div class="stat-num" id="statObjectsCount">—</div>
-          <div class="stat-label">Общее количество предложений</div>
+          <div class="stat-label" data-i18n="about.stat_objects">Общее количество предложений</div>
         </div>
 
         <div class="stat-item">
@@ -389,7 +389,7 @@
             </svg>
           </div>
           <div class="stat-num">20+</div>
-          <div class="stat-label">лучших локаций по всей Грузии</div>
+          <div class="stat-label" data-i18n="about.stat_locations">лучших локаций по всей Грузии</div>
         </div>
 
       </div>
@@ -401,9 +401,9 @@
     <div class="container">
       <div class="section-header">
         <div>
-          <h2 class="section-title" id="featuredTitle">Топовые предложения покупки в Грузии</h2>
+          <h2 class="section-title" id="featuredTitle" data-i18n="catalog.buy_title">Топовые предложения покупки в Грузии</h2>
         </div>
-        <span class="see-all" onclick="window.location.href='projects.html'">Смотреть все</span>
+        <span class="see-all" onclick="window.location.href='projects.html'" data-i18n="catalog.see_all">Смотреть все</span>
       </div>
       <div class="featured-country-tabs" id="featuredCountryTabs">
         <button class="featured-tab active" data-country="all" onclick="setFeaturedCountry(this, 'buy')">🇬🇪 Грузия</button>
@@ -430,7 +430,7 @@
     <div class="container">
       <div class="section-header">
         <div>
-          <h2 class="section-title" id="featuredRentTitle">Топовые предложения аренды в Грузии</h2>
+          <h2 class="section-title" id="featuredRentTitle" data-i18n="catalog.rent_title">Топовые предложения аренды в Грузии</h2>
         </div>
         <span class="see-all" onclick="window.location.href='projects.html?deal=rent'">Смотреть все</span>
       </div>
@@ -458,63 +458,63 @@
   <section class="testimonials" id="testimonials">
     <div class="container">
       <div class="testimonials-header">
-        <div class="testimonials-eyebrow">Отзывы</div>
-        <div class="testimonials-title">Нам доверяют<br><span>партнёры и инвесторы</span></div>
+        <div class="testimonials-eyebrow" data-i18n="testi.eyebrow">Отзывы</div>
+        <div class="testimonials-title" data-i18n-html="testi.title">Нам доверяют<br><span>партнёры и инвесторы</span></div>
       </div>
       <div class="testi-track-wrap">
         <div class="testi-track" id="testiTrack">
           <div class="testi-card">
             <div class="testi-stars">★★★★★</div>
-            <p class="testi-quote">Команда Georgia Real Estate провела нас через весь процесс покупки квартиры в Батуми — от первого звонка до получения ключей. Профессионализм и прозрачность на каждом шагу.</p>
+            <p class="testi-quote" data-i18n="testi.q1">Команда Georgia Real Estate провела нас через весь процесс покупки квартиры в Батуми — от первого звонка до получения ключей. Профессионализм и прозрачность на каждом шагу.</p>
             <div class="testi-author">
               <div class="testi-avatar-placeholder">АМ</div>
-              <div><div class="testi-name">Алексей Морозов</div><div class="testi-role">Частный инвестор, Москва</div></div>
-              <div class="testi-tag">Инвестор</div>
+              <div><div class="testi-name" data-i18n="testi.q1_name">Алексей Морозов</div><div class="testi-role" data-i18n="testi.q1_role">Частный инвестор, Москва</div></div>
+              <div class="testi-tag" data-i18n="testi.tag_investor">Инвестор</div>
             </div>
           </div>
           <div class="testi-card">
             <div class="testi-stars">★★★★★</div>
-            <p class="testi-quote">Сотрудничаем с компанией уже третий год. Надёжный партнёр для масштабных инвестиций в грузинскую недвижимость. Особо ценим юридическую чистоту сделок и постпродажное сопровождение.</p>
+            <p class="testi-quote" data-i18n="testi.q2">Сотрудничаем с компанией уже третий год. Надёжный партнёр для масштабных инвестиций в грузинскую недвижимость. Особо ценим юридическую чистоту сделок и постпродажное сопровождение.</p>
             <div class="testi-author">
               <div class="testi-avatar-placeholder">DK</div>
-              <div><div class="testi-name">David Kvaratskhelia</div><div class="testi-role">CEO, KvGroup Invest</div></div>
-              <div class="testi-tag">Партнёр</div>
+              <div><div class="testi-name">David Kvaratskhelia</div><div class="testi-role" data-i18n="testi.q2_role">CEO, KvGroup Invest</div></div>
+              <div class="testi-tag" data-i18n="testi.tag_partner">Партнёр</div>
             </div>
           </div>
           <div class="testi-card">
             <div class="testi-stars">★★★★★</div>
-            <p class="testi-quote">Искала апартаменты у моря для семейного отдыха и сдачи в аренду. Менеджер подобрал идеальный вариант в Гонио — уже получаю 12% годовых. Рекомендую всем, кто думает об инвестициях.</p>
+            <p class="testi-quote" data-i18n="testi.q3">Искала апартаменты у моря для семейного отдыха и сдачи в аренду. Менеджер подобрал идеальный вариант в Гонио — уже получаю 12% годовых. Рекомендую всем, кто думает об инвестициях.</p>
             <div class="testi-author">
               <div class="testi-avatar-placeholder">ОС</div>
-              <div><div class="testi-name">Ольга Степанова</div><div class="testi-role">Предприниматель, Киев</div></div>
+              <div><div class="testi-name" data-i18n="testi.q3_name">Ольга Степанова</div><div class="testi-role" data-i18n="testi.q3_role">Предприниматель, Киев</div></div>
               <div class="testi-tag">Клиент</div>
             </div>
           </div>
           <div class="testi-card">
             <div class="testi-stars">★★★★★</div>
-            <p class="testi-quote">Приобрели коммерческое помещение в Тбилиси для открытия ресторана. Georgia Real Estate сопроводили не только сделку, но и помогли с регистрацией бизнеса. Это настоящий партнёрский подход.</p>
+            <p class="testi-quote" data-i18n="testi.q4">Приобрели коммерческое помещение в Тбилиси для открытия ресторана. Georgia Real Estate сопроводили не только сделку, но и помогли с регистрацией бизнеса. Это настоящий партнёрский подход.</p>
             <div class="testi-author">
               <div class="testi-avatar-placeholder">МТ</div>
-              <div><div class="testi-name">Михаил Тетрадзе</div><div class="testi-role">Ресторатор, Тбилиси</div></div>
+              <div><div class="testi-name" data-i18n="testi.q4_name">Михаил Тетрадзе</div><div class="testi-role" data-i18n="testi.q4_role">Ресторатор, Тбилиси</div></div>
               <div class="testi-tag">Клиент</div>
             </div>
           </div>
           <div class="testi-card">
             <div class="testi-stars">★★★★★</div>
-            <p class="testi-quote">Направляю всех своих клиентов именно сюда. Лучшая база объектов по грузинскому рынку, честные комиссии и молниеносная реакция команды. Для нашего агентства это стратегический партнёр.</p>
+            <p class="testi-quote" data-i18n="testi.q5">Направляю всех своих клиентов именно сюда. Лучшая база объектов по грузинскому рынку, честные комиссии и молниеносная реакция команды. Для нашего агентства это стратегический партнёр.</p>
             <div class="testi-author">
               <div class="testi-avatar-placeholder">NB</div>
-              <div><div class="testi-name">Nino Bakradze</div><div class="testi-role">Директор, Prime Realty GE</div></div>
-              <div class="testi-tag">Партнёр</div>
+              <div><div class="testi-name">Nino Bakradze</div><div class="testi-role" data-i18n="testi.q5_role">Директор, Prime Realty GE</div></div>
+              <div class="testi-tag" data-i18n="testi.tag_partner">Партнёр</div>
             </div>
           </div>
           <div class="testi-card">
             <div class="testi-stars">★★★★★</div>
-            <p class="testi-quote">Диверсифицируем портфель зарубежной недвижимостью. Грузия оказалась лучшим выбором — стабильный рост, доступный вход. Команда дала исчерпывающие аналитические материалы ещё на этапе переговоров.</p>
+            <p class="testi-quote" data-i18n="testi.q6">Диверсифицируем портфель зарубежной недвижимостью. Грузия оказалась лучшим выбором — стабильный рост, доступный вход. Команда дала исчерпывающие аналитические материалы ещё на этапе переговоров.</p>
             <div class="testi-author">
               <div class="testi-avatar-placeholder">РШ</div>
-              <div><div class="testi-name">Роман Шевченко</div><div class="testi-role">Управляющий активами, Дубай</div></div>
-              <div class="testi-tag">Инвестор</div>
+              <div><div class="testi-name" data-i18n="testi.q6_name">Роман Шевченко</div><div class="testi-role" data-i18n="testi.q6_role">Управляющий активами, Дубай</div></div>
+              <div class="testi-tag" data-i18n="testi.tag_investor">Инвестор</div>
             </div>
           </div>
         </div>
@@ -536,7 +536,7 @@
             <svg width="22" height="22" viewBox="0 0 36 36" fill="none"><rect width="36" height="36" fill="transparent"/><rect x="15.5" y="2" width="5" height="32" fill="#C0392B"/><rect x="2" y="15.5" width="32" height="5" fill="#C0392B"/><rect x="4" y="4" width="2.5" height="8" fill="#C0392B"/><rect x="1.5" y="6" width="7.5" height="2.5" fill="#C0392B"/><rect x="29.5" y="4" width="2.5" height="8" fill="#C0392B"/><rect x="27" y="6" width="7.5" height="2.5" fill="#C0392B"/><rect x="4" y="24" width="2.5" height="8" fill="#C0392B"/><rect x="1.5" y="27.5" width="7.5" height="2.5" fill="#C0392B"/><rect x="29.5" y="24" width="2.5" height="8" fill="#C0392B"/><rect x="27" y="27.5" width="7.5" height="2.5" fill="#C0392B"/></svg>
             Georgia Real Estate
           </div>
-          <div class="footer-brand-desc">Ваш надёжный партнёр на рынке недвижимости в Грузии.</div>
+          <div class="footer-brand-desc" data-i18n="footer.brand_desc">Ваш надёжный партнёр на рынке недвижимости в Грузии.</div>
           <div class="footer-socials">
             <div class="footer-social">f</div>
             <div class="footer-social">in</div>
@@ -545,10 +545,10 @@
           </div>
         </div>
         <div>
-          <div class="footer-col-title">Меню</div>
+          <div class="footer-col-title" data-i18n="footer.menu_title">Меню</div>
           <ul class="footer-links">
-            <li onclick="showPage('home')">О компании</li>
-            <li onclick="window.location.href='projects.html'">Недвижимость</li>
+            <li onclick="showPage('home')" data-i18n="footer.menu_about">О компании</li>
+            <li onclick="window.location.href='projects.html'" data-i18n="footer.menu_catalog">Недвижимость</li>
             <li>Услуги</li>
             <li>Блог</li>
             <li onclick="showPage('contact')">Контакты</li>
@@ -556,16 +556,16 @@
           </ul>
         </div>
         <div>
-          <div class="footer-col-title">Услуги</div>
+          <div class="footer-col-title" data-i18n="footer.services_title">Услуги</div>
           <ul class="footer-links">
-            <li>Подбор недвижимости</li>
-            <li>Юридическое сопровождение</li>
-            <li>Управление недвижимостью</li>
-            <li>Инвестиционные консультации</li>
+            <li data-i18n="footer.services_1">Подбор недвижимости</li>
+            <li data-i18n="footer.services_2">Юридическое сопровождение</li>
+            <li data-i18n="footer.services_3">Управление недвижимостью</li>
+            <li data-i18n="footer.services_4">Инвестиционные консультации</li>
           </ul>
         </div>
         <div>
-          <div class="footer-col-title">Контакты</div>
+          <div class="footer-col-title" data-i18n="footer.contacts_title">Контакты</div>
           <div class="footer-contact">
             <span>+995 32 2 123 456</span>
             <span>info@georgia-re.com</span>
@@ -574,8 +574,8 @@
         </div>
       </div>
       <div class="footer-bottom">
-        <span class="footer-copy">© 2026 Georgia Real Estate</span>
-        <span class="footer-policy" onclick="showPage('privacy')">Политика конфиденциальности</span>
+        <span class="footer-copy" data-i18n="footer.copyright">© 2026 Georgia Real Estate</span>
+        <span class="footer-policy" onclick="showPage('privacy')" data-i18n="footer.privacy">Политика конфиденциальности</span>
       </div>
     </div>
   </footer>
@@ -588,7 +588,7 @@
   <div class="team-hero">
     <div class="team-hero-bg"></div>
     <div class="team-hero-overlay"></div>
-    <div class="team-hero-content"><h1>Наша команда</h1></div>
+    <div class="team-hero-content"><h1 data-i18n="team.hero_title">Наша команда</h1></div>
   </div>
 
   <div class="team-section-inner">
@@ -657,7 +657,7 @@
       <div class="about-strip-inner">
 
         <div class="about-text">
-          <h2>О компании</h2>
+          <h2 data-i18n="about.title">О компании</h2>
           <p>Мы — команда профессионалов с многолетним опытом на рынке недвижимости Грузии. С 2014 года помогаем клиентам из более чем 30 стран найти идеальный объект для жизни или инвестиций.</p>
           <p>Наш офис расположен в Тбилиси, но мы работаем по всей Грузии — от Батуми до Бакуриани. Каждый проект проходит юридическую проверку и личный осмотр нашими экспертами.</p>
 
@@ -689,7 +689,7 @@
               </svg>
             </div>
             <div class="stat-num">10+</div>
-            <div class="stat-label">лет на рынке недвижимости</div>
+            <div class="stat-label" data-i18n="about.stat_years">лет на рынке недвижимости</div>
           </div>
           <div class="stat-item">
             <div class="stat-icon">
@@ -702,7 +702,7 @@
               </svg>
             </div>
             <div class="stat-num">1000+</div>
-            <div class="stat-label">довольных клиентов</div>
+            <div class="stat-label" data-i18n="about.stat_clients">довольных клиентов</div>
           </div>
           <div class="stat-item">
             <div class="stat-icon">
@@ -720,7 +720,7 @@
               </svg>
             </div>
             <div class="stat-num" id="statObjectsCount2">—</div>
-            <div class="stat-label">Общее количество предложений</div>
+            <div class="stat-label" data-i18n="about.stat_objects">Общее количество предложений</div>
           </div>
           <div class="stat-item">
             <div class="stat-icon">
@@ -902,7 +902,7 @@
         <p class="detail-desc">Этот уникальный жилой комплекс расположен в историческом центре Тбилиси, предлагая роскошную жизнь и панорамные виды на город и горы. Современная архитектура, высококачественные материалы и отличная инфраструктура делают его идеальным выбором для тех, кто ценит комфорт и стиль. В шаговой доступности парки, театры и лучшие рестораны города.</p>
 
         <div class="video-section">
-          <div class="video-label">Видео презентация проекта</div>
+          <div class="video-label" data-i18n="detail.video_label">Видео презентация проекта</div>
           <div class="video-thumb" onclick="openVideo('dQw4w9WgXcQ')">
             <img src="https://picsum.photos/seed/video-thumb/800/450" alt="">
             <div class="play-btn"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></div>
@@ -918,18 +918,18 @@
             <div class="invest-badge" id="detailBadge" style="margin-bottom:0;">📈 Investment</div>
             <div class="invest-badge" id="detailTopLabel" style="display:none;margin-bottom:0;background:#F5C518;color:#1A1A1A;box-shadow:0 2px 8px rgba(245,197,24,0.4);">★ ТОП</div>
           </div>
-          <div class="invest-title">Потенциал для инвестиций</div>
-          <div class="invest-row"><span class="invest-row-label">Ожидаемый рост цены:</span><span class="invest-row-val">15% – 20%</span></div>
-          <div class="invest-row"><span class="invest-row-label">Доход от аренды:</span><span class="invest-row-val">8% – 10%</span></div>
-          <div class="invest-row"><span class="invest-row-label">Окупаемость:</span><span class="invest-row-val">9 – 11 лет</span></div>
+          <div class="invest-title" data-i18n="detail.invest_title">Потенциал для инвестиций</div>
+          <div class="invest-row"><span class="invest-row-label" data-i18n="detail.invest_growth">Ожидаемый рост цены:</span><span class="invest-row-val">15% – 20%</span></div>
+          <div class="invest-row"><span class="invest-row-label" data-i18n="detail.invest_roi">Доход от аренды:</span><span class="invest-row-val">8% – 10%</span></div>
+          <div class="invest-row"><span class="invest-row-label" data-i18n="detail.invest_payback">Окупаемость:</span><span class="invest-row-val">9 – 11 лет</span></div>
         </div>
         <!-- Mortgage Calculator -->
         <div class="invest-card calc-card" id="mortgageCalcBlock">
-          <div class="invest-title">Ипотечный калькулятор</div>
+          <div class="invest-title" data-i18n="calc.title">Ипотечный калькулятор</div>
 
           <div class="calc-field">
             <div class="calc-field-row">
-              <label class="calc-label">Первоначальный взнос</label>
+              <label class="calc-label" data-i18n="calc.down">Первоначальный взнос</label>
               <span class="calc-pct-badge" id="calcDownPct">30%</span>
             </div>
             <div class="calc-range-wrap" data-min="10" data-max="80" data-val="30" data-target="calcDown" data-cb="updateMortgageCalc">
@@ -944,7 +944,7 @@
 
           <div class="calc-field">
             <div class="calc-field-row">
-              <label class="calc-label">Срок кредита</label>
+              <label class="calc-label" data-i18n="calc.term">Срок кредита</label>
               <span class="calc-pct-badge" id="calcTermBadge">15 лет</span>
             </div>
             <div class="calc-range-wrap" data-min="1" data-max="30" data-val="15" data-target="calcTerm" data-cb="updateMortgageCalc">
@@ -953,7 +953,7 @@
               <input type="range" class="calc-range" id="calcTerm" min="1" max="30" value="15" step="1">
             </div>
             <div class="calc-range-ends">
-              <span>1 год</span><span>30 лет</span>
+              <span data-i18n="calc.term_from">1 год</span><span data-i18n="calc.term_to">30 лет</span>
             </div>
           </div>
 
@@ -973,11 +973,11 @@
           </div>
 
           <div class="calc-result">
-            <div class="calc-result-label">Ежемесячный платёж</div>
+            <div class="calc-result-label" data-i18n="calc.payment_label">Ежемесячный платёж</div>
             <div class="calc-result-value" id="calcPayment">—</div>
             <div class="calc-result-sub" id="calcSub"></div>
           </div>
-          <div class="calc-disclaimer">Расчёт ориентировочный. Точные условия — у банка-партнёра.</div>
+          <div class="calc-disclaimer" data-i18n="calc.disclaimer">Расчёт ориентировочный. Точные условия — у банка-партнёра.</div>
         </div>
 
         <div class="detail-actions">
@@ -1113,7 +1113,7 @@
     <div class="container">
       <div class="section-header">
         <h2 class="section-title" id="relatedTitle">Другие объекты в этом регионе</h2>
-        <span class="see-all" onclick="window.location.href='projects.html'">Смотреть все</span>
+        <span class="see-all" onclick="window.location.href='projects.html'" data-i18n="catalog.see_all">Смотреть все</span>
       </div>
       <div class="testi-track-wrap">
         <div class="testi-track" id="relatedTrack" style="gap:24px;"></div>
@@ -1992,7 +1992,7 @@
   } catch(e) {}
 })();
 </script>
-<script src="js/catalog.js?v=64"></script>
+<script src="js/catalog.js?v=65"></script>
 <script src="js/animations.js"></script>
 <script src="js/auth.js?v=4"></script>
 <script src="js/favorites.js?v=4"></script>
@@ -2283,7 +2283,8 @@ function resetHomeFilter() {
   }, { passive: true });
 })();
 </script>
-<script src="js/i18n.js?v=1"></script>
+<script src="lang/translations.js?v=1"></script>
+<script src="js/i18n.js?v=2"></script>
 </body>
 </html>
 

@@ -112,7 +112,7 @@
     <div class="catalog-hero-bg"></div>
     <div class="catalog-hero-overlay"></div>
     <div class="catalog-hero-content">
-      <h1>Наши проекты</h1>
+      <h1 data-i18n="meta.title_catalog_h1">Наши проекты</h1>
     </div>
   </div>
 
@@ -150,16 +150,16 @@
         <div class="filter-field filter-field--type">
           <label data-i18n="filter.type">Тип недвижимости</label>
           <select class="filter-select" id="typeSelect">
-            <option value="all">Любой</option>
-            <option value="apartment">Квартира</option>
-            <option value="apart">Апартаменты</option>
-            <option value="villa">Вилла</option>
-            <option value="commercial">Коммерческая</option>
+            <option value="all" data-i18n="filter.type_all">Любой</option>
+            <option value="apartment" data-i18n="filter.type_apartment">Квартира</option>
+            <option value="apart" data-i18n="filter.type_apart">Апартаменты</option>
+            <option value="villa" data-i18n="filter.type_villa">Вилла</option>
+            <option value="commercial" data-i18n="filter.type_commercial">Коммерческая</option>
           </select>
         </div>
         <!-- Умный поиск по названию -->
         <div class="filter-field filter-field--search">
-          <label>Поиск по названию</label>
+          <label data-i18n="filter.name_label">Поиск по названию</label>
           <div class="search-field-wrap" id="searchFieldWrap">
             <svg class="search-field-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
             <input
@@ -185,7 +185,7 @@
         <div class="filter-field">
           <label data-i18n="filter.status">Статус</label>
           <select class="filter-select" id="statusSelect" style="min-width:150px;">
-            <option value="all">Любой статус</option>
+            <option value="all" data-i18n="filter.status_all">Любой статус</option>
           </select>
         </div>
         <div class="filter-sep-v"></div>
@@ -526,8 +526,8 @@
         </div>
       </div>
       <div class="footer-bottom">
-        <span class="footer-copy">© 2024 Georgia Real Estate</span>
-        <span class="footer-policy" onclick="window.location.href='index.html#privacy'">Политика конфиденциальности</span>
+        <span class="footer-copy" data-i18n="footer.copyright">© 2024 Georgia Real Estate</span>
+        <span class="footer-policy" data-i18n="footer.privacy" onclick="window.location.href='index.html#privacy'">Политика конфиденциальности</span>
       </div>
     </div>
   </footer>
@@ -687,7 +687,7 @@
         <p class="detail-desc">Этот уникальный жилой комплекс расположен в историческом центре Тбилиси, предлагая роскошную жизнь и панорамные виды на город и горы. Современная архитектура, высококачественные материалы и отличная инфраструктура делают его идеальным выбором для тех, кто ценит комфорт и стиль. В шаговой доступности парки, театры и лучшие рестораны города.</p>
 
         <div class="video-section">
-          <div class="video-label">Видео презентация проекта</div>
+          <div class="video-label" data-i18n="detail.video_label">Видео презентация проекта</div>
           <div class="video-thumb" onclick="openVideo('dQw4w9WgXcQ')">
             <img src="https://picsum.photos/seed/video-thumb/800/450" alt="">
             <div class="play-btn"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></div>
@@ -703,19 +703,19 @@
             <div class="invest-badge" id="detailBadge" style="margin-bottom:0;">📈 Investment</div>
             <div class="invest-badge" id="detailTopLabel" style="display:none;margin-bottom:0;background:#F5C518;color:#1A1A1A;box-shadow:0 2px 8px rgba(245,197,24,0.4);">★ ТОП</div>
           </div>
-          <div class="invest-title">Потенциал для инвестиций</div>
-          <div class="invest-row"><span class="invest-row-label">Ожидаемый рост цены:</span><span class="invest-row-val">15% – 20%</span></div>
-          <div class="invest-row"><span class="invest-row-label">Доход от аренды:</span><span class="invest-row-val">8% – 10%</span></div>
-          <div class="invest-row"><span class="invest-row-label">Окупаемость:</span><span class="invest-row-val">9 – 11 лет</span></div>
+          <div class="invest-title" data-i18n="detail.invest_title">Потенциал для инвестиций</div>
+          <div class="invest-row"><span class="invest-row-label" data-i18n="detail.invest_growth">Ожидаемый рост цены:</span><span class="invest-row-val">15% – 20%</span></div>
+          <div class="invest-row"><span class="invest-row-label" data-i18n="detail.invest_roi">Доход от аренды:</span><span class="invest-row-val">8% – 10%</span></div>
+          <div class="invest-row"><span class="invest-row-label" data-i18n="detail.invest_payback">Окупаемость:</span><span class="invest-row-val">9 – 11 лет</span></div>
         </div>
 
         <!-- Mortgage Calculator -->
         <div class="invest-card calc-card" id="mortgageCalcBlock" style="display:none">
-          <div class="invest-title">Ипотечный калькулятор</div>
+          <div class="invest-title" data-i18n="calc.title">Ипотечный калькулятор</div>
 
           <div class="calc-field">
             <div class="calc-field-row">
-              <label class="calc-label">Первоначальный взнос</label>
+              <label class="calc-label" data-i18n="calc.down">Первоначальный взнос</label>
               <span class="calc-pct-badge" id="calcDownPct">30%</span>
             </div>
             <div class="calc-range-wrap" data-min="10" data-max="80" data-val="30" data-target="calcDown" data-cb="updateMortgageCalc">
@@ -730,7 +730,7 @@
 
           <div class="calc-field">
             <div class="calc-field-row">
-              <label class="calc-label">Срок кредита</label>
+              <label class="calc-label" data-i18n="calc.term">Срок кредита</label>
               <span class="calc-pct-badge" id="calcTermBadge">15 лет</span>
             </div>
             <div class="calc-range-wrap" data-min="1" data-max="30" data-val="15" data-target="calcTerm" data-cb="updateMortgageCalc">
@@ -739,7 +739,7 @@
               <input type="range" class="calc-range" id="calcTerm" min="1" max="30" value="15" step="1">
             </div>
             <div class="calc-range-ends">
-              <span>1 год</span><span>30 лет</span>
+              <span data-i18n="calc.term_from">1 год</span><span data-i18n="calc.term_to">30 лет</span>
             </div>
           </div>
 
@@ -759,11 +759,11 @@
           </div>
 
           <div class="calc-result">
-            <div class="calc-result-label">Ежемесячный платёж</div>
+            <div class="calc-result-label" data-i18n="calc.payment_label">Ежемесячный платёж</div>
             <div class="calc-result-value" id="calcPayment">—</div>
             <div class="calc-result-sub" id="calcSub"></div>
           </div>
-          <div class="calc-disclaimer">Расчёт ориентировочный. Точные условия — у банка-партнёра.</div>
+          <div class="calc-disclaimer" data-i18n="calc.disclaimer">Расчёт ориентировочный. Точные условия — у банка-партнёра.</div>
         </div>
         <div class="detail-actions">
           <div class="detail-price-block">
@@ -959,8 +959,8 @@
         </div>
       </div>
       <div class="footer-bottom">
-        <span class="footer-copy">© 2024 Georgia Real Estate</span>
-        <span class="footer-policy" onclick="window.location.href='index.html#privacy'">Политика конфиденциальности</span>
+        <span class="footer-copy" data-i18n="footer.copyright">© 2024 Georgia Real Estate</span>
+        <span class="footer-policy" data-i18n="footer.privacy" onclick="window.location.href='index.html#privacy'">Политика конфиденциальности</span>
       </div>
     </div>
   </footer>
@@ -1193,7 +1193,7 @@
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script src="js/nav.js?v=18"></script>
 <script src="js/forms.js?v=6"></script>
-<script src="js/catalog.js?v=64"></script>
+<script src="js/catalog.js?v=65"></script>
 <script>
 /* УМНЫЙ ПОИСК */
 var _sq = '';
@@ -1756,7 +1756,8 @@ function toggleFaq(el) {
   }, { passive: true });
 })();
 </script>
-<script src="js/i18n.js?v=1"></script>
+<script src="lang/translations.js?v=1"></script>
+<script src="js/i18n.js?v=2"></script>
 </body>
 </html>
 

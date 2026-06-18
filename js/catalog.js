@@ -1617,8 +1617,10 @@ function updateMortgageCalc() {
   if (termBadge) termBadge.textContent = termYrs + ' ' + termWord;
 
   // Ставка: 0% = рассрочка
+  const T = (typeof GRE_T === 'function') ? GRE_T : (k) => k;
+
   if (rateBadge) rateBadge.textContent = isZeroRate ? '0%' : rateAnn + '%';
-  if (rateLabel) rateLabel.textContent = isZeroRate ? 'Рассрочка' : 'Ставка по ипотеке';
+  if (rateLabel) rateLabel.textContent = isZeroRate ? T('calc.installment') : T('calc.rate');
 
   const priceUsd = _calcPropPrice;
   if (!priceUsd) return;
@@ -1644,8 +1646,8 @@ function updateMortgageCalc() {
 
   // Подпись под платежом
   const subText = isZeroRate
-    ? `Взнос ${sym}${downConverted.toLocaleString('ru-RU')} · Рассрочка без % на ${termYrs} ${termWord}`
-    : `Взнос ${sym}${downConverted.toLocaleString('ru-RU')} · Кредит ${sym}${loanConverted.toLocaleString('ru-RU')}`;
+    ? T('calc.installment_sub', { term: termYrs, word: termWord })
+    : T('calc.mortgage_sub', { down: sym + downConverted.toLocaleString('ru-RU'), loan: sym + loanConverted.toLocaleString('ru-RU') });
   if (subEl)  subEl.textContent  = subText;
   if (downValEl) downValEl.textContent = sym + downConverted.toLocaleString('ru-RU');
 }
