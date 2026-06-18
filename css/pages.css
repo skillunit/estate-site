@@ -467,8 +467,16 @@
 
 /* ── Card body ── */
 .catalog-card-body {
-  padding: 16px 18px 18px;
+  padding: 16px 18px 0;
   display: flex; flex-direction: column; flex: 1;
+}
+/* Название — 2 строки макс */
+.catalog-name {
+  font-family: var(--font-head);
+  font-size: 0.95rem; font-weight: 700;
+  color: var(--dark); line-height: 1.35;
+  margin-bottom: 10px;
+  display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
 }
 
 /* 1. Location row */
@@ -489,17 +497,8 @@
   background-repeat: no-repeat; background-size: contain;
 }
 
-/* 2. Name */
-.catalog-name {
-  font-family: var(--font-head);
-  font-size: 0.95rem; font-weight: 700;
-  color: var(--dark); line-height: 1.35;
-  margin-bottom: 10px;
-  display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
-}
-
-/* 3. Price block */
-.catalog-price-block { margin-bottom: 10px; }
+/* 3. Price block — прибит к низу, name растягивается */
+.catalog-price-block { margin-bottom: 6px; margin-top: auto; }
 .catalog-price-row { display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap; }
 .catalog-price {
   font-family: var(--font-head);
@@ -544,10 +543,10 @@
 .catalog-specs {
   display: flex; align-items: center; flex-wrap: wrap;
   gap: 0;
-  padding-top: 10px;
+  padding-top: 10px; padding-bottom: 14px;
   border-top: 1px solid var(--gray-100);
   font-size: 0.72rem; color: var(--gray-500);
-  line-height: 1.6; margin-top: auto;
+  line-height: 1.6;
 }
 .catalog-specs .spec-item {
   display: flex; align-items: center; gap: 4px;
