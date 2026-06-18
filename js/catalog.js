@@ -1617,8 +1617,8 @@ function updateMortgageCalc() {
   if (termBadge) termBadge.textContent = termYrs + ' ' + termWord;
 
   // Ставка: 0% = рассрочка
-  if (rateBadge) rateBadge.textContent = isZeroRate ? '0% — рассрочка' : rateAnn + '%';
-  if (rateLabel) rateLabel.textContent = isZeroRate ? 'Рассрочка от застройщика' : 'Ставка по ипотеке';
+  if (rateBadge) rateBadge.textContent = isZeroRate ? '0%' : rateAnn + '%';
+  if (rateLabel) rateLabel.textContent = isZeroRate ? 'Рассрочка' : 'Ставка по ипотеке';
 
   const priceUsd = _calcPropPrice;
   if (!priceUsd) return;

@@ -963,9 +963,9 @@
 /* ── Mortgage Calculator ── */
 .calc-card { padding:20px 24px; display:none; }
 .calc-field { margin-bottom:14px; }
-.calc-field-row { display:flex; justify-content:space-between; align-items:center; margin-bottom:6px; }
-.calc-label { font-size:0.75rem; font-weight:600; letter-spacing:0.04em; color:var(--gray-500); text-transform:uppercase; }
-.calc-pct-badge { font-size:0.78rem; font-weight:700; color:var(--dark); background:var(--gray-100); padding:2px 8px; border-radius:2px; min-width:44px; text-align:center; }
+.calc-field-row { display:flex; justify-content:space-between; align-items:center; margin-bottom:6px; min-height:22px; }
+.calc-label { font-size:0.75rem; font-weight:600; letter-spacing:0.04em; color:var(--gray-500); text-transform:uppercase; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; max-width:65%; }
+.calc-pct-badge { font-size:0.78rem; font-weight:700; color:var(--dark); background:var(--gray-100); padding:2px 8px; border-radius:2px; min-width:44px; text-align:center; white-space:nowrap; flex-shrink:0; }
 .calc-range-wrap {
   position:relative; height:22px; margin:8px 0;
   display:flex; align-items:center; cursor:pointer;
