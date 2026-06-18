@@ -514,10 +514,12 @@
   color: #bbb; text-decoration: line-through; margin-top: 1px;
 }
 
-/* Savings tag + ROI — в одну строку */
+/* Savings tag + ROI — в одну строку, фиксированная высота зоны */
 .catalog-pills-row {
   display: flex; align-items: center; gap: 6px;
-  flex-wrap: wrap; margin-top: 5px; margin-bottom: 10px;
+  flex-wrap: wrap;
+  min-height: 28px; /* резервируем место даже если пилюль нет */
+  margin-bottom: 8px;
 }
 .catalog-price-save {
   display: inline-flex; align-items: center;

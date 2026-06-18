@@ -989,7 +989,7 @@ function renderRecentlyViewed() {
           </div>
           ${p.oldPrice ? `<div class="catalog-price-old">${formatPrice(p.oldPrice)}</div>` : ''}
         </div>
-        ${roiHtml ? `<div class="catalog-pills-row">${roiHtml}</div>` : ""}
+        ${`<div class="catalog-pills-row">${roiHtml}</div>`}
         <div class="catalog-specs">
           <span class="spec-item"><strong>${p.area}</strong> м²</span>
           <span class="spec-sep">·</span>
@@ -1183,7 +1183,7 @@ function renderCatalogGrid(countryVal, cityVal, statusVal, typeVal, extra) {
           </div>
           ${p.oldPrice ? `<div class="catalog-price-old">${formatPrice(p.oldPrice)}</div>` : ''}
         </div>
-        ${(savingsHtml || roiHtml) ? `<div class="catalog-pills-row">${savingsHtml}${roiHtml}</div>` : ''}
+        ${`<div class="catalog-pills-row">${savingsHtml}${roiHtml}</div>`}
         ${p.desc ? `<p class="catalog-card-desc">${p.desc}</p>` : ''}
         <div class="catalog-specs">
           <span class="spec-item"><strong>${p.area}</strong> м²</span>
@@ -2042,7 +2042,7 @@ function renderRelated(currentId) {
           </div>
           ${p.oldPrice ? `<div class="catalog-price-old">${formatPrice(p.oldPrice)}</div>` : ''}
         </div>
-        ${roiHtml ? `<div class="catalog-pills-row">${roiHtml}</div>` : ""}
+        ${`<div class="catalog-pills-row">${roiHtml}</div>`}
         <div class="catalog-specs">
           <span class="spec-item"><strong>${p.area}</strong> м²</span>
           <span class="spec-sep">·</span>
@@ -2176,7 +2176,7 @@ function buildFeaturedCards(props) {
           </div>
           ${p.oldPrice ? `<div class="catalog-price-old">${formatPrice(p.oldPrice)}</div>` : ''}
         </div>
-        ${(savingsHtml || roiHtml) ? `<div class="catalog-pills-row">${savingsHtml}${roiHtml}</div>` : ''}
+        ${`<div class="catalog-pills-row">${savingsHtml}${roiHtml}</div>`}
         <div class="catalog-specs">
           <span class="spec-item"><strong>${p.area}</strong> м²</span>
           <span class="spec-sep">·</span>
