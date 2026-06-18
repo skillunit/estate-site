@@ -5,8 +5,7 @@
  * Конвертация: wp i18n make-pot → заполнить .po файл
  */
 
-window.GRE_LANG_EN = {{
-{
+window.GRE_LANG_EN = {
     // ── Meta ───────────────────────────────────────────────
     'meta.lang': 'en',
     'meta.dir': 'ltr',
@@ -276,5 +275,4 @@ window.GRE_LANG_EN = {{
     // ── Recently viewed ────────────────────────────────────
     'recent.title': 'Recently viewed',
     'recent.clear': 'Clear',
-  }
-}};
+  };
