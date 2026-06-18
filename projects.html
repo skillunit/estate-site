@@ -17,7 +17,6 @@
 <link rel="stylesheet" href="css/components.css?v=50">
 <link rel="stylesheet" href="css/responsive.css?v=3">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-<script src="js/i18n.js?v=1"></script>
 </head>
 <body data-page="projects">
 
@@ -522,8 +521,9 @@
       if (p3)    p3.textContent    = text.p3;
     }
 
-    // Патчим после загрузки всех скриптов — только тогда функции уже определены
-    document.addEventListener('DOMContentLoaded', function() {
+    // Патчим после загрузки всех скриптов
+    // Используем window.onload (все скрипты уже выполнены) вместо DOMContentLoaded
+    window.addEventListener('load', function() {
       // Патч filterCatalog (смена статуса, цены и т.д.)
       var _origFC = window.filterCatalog;
       window.filterCatalog = function() {
@@ -551,8 +551,8 @@
         cityEl.addEventListener('change', updateSeoText);
       }
 
-      // Первый рендер
-      setTimeout(updateSeoText, 300);
+      // Первый рендер — после того как catalog.js отрендерил каталог
+      updateSeoText();
     });
   })();
   </script>
@@ -1266,7 +1266,7 @@
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script src="js/nav.js?v=18"></script>
 <script src="js/forms.js?v=6"></script>
-<script src="js/catalog.js?v=63"></script>
+<script src="js/catalog.js?v=64"></script>
 <script>
 /* УМНЫЙ ПОИСК */
 var _sq = '';
@@ -1829,6 +1829,7 @@ function toggleFaq(el) {
   }, { passive: true });
 })();
 </script>
+<script src="js/i18n.js?v=1"></script>
 </body>
 </html>
 

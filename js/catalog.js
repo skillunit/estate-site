@@ -963,7 +963,7 @@ function renderRecentlyViewed() {
     const dots = imgs.map((_, i) => `<span class="card-slider-dot${i === 0 ? ' active' : ''}"></span>`).join('');
     const badge = getPropBadge(p);
     const roiHtml = (p.deal === 'buy' && p.roi)
-      ? `<div class="catalog-roi-pill"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>ROI ${p.roi} / год</div>`
+      ? `<div class="catalog-roi-pill"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>${typeof I18n!=="undefined"?I18n.t("card.roi_label"):"ROI"} ${p.roi} ${typeof I18n!=="undefined"?I18n.t("card.roi_year"):"/год"}</div>`
       : '';
     return `
     <div class="catalog-card" style="flex-shrink:0;" onclick="showDetail('${p.id}')" spellcheck="false">
@@ -975,7 +975,7 @@ function renderRecentlyViewed() {
           <div class="card-slider-dots">${dots}</div>
         </div>
         <span class="prop-badge ${badge.cls}">${badge.text}</span>
-        ${p.top ? '<span class="top-label">★ ТОП</span>' : ''}
+        ${p.top ? `<span class="top-label">${typeof I18n!=="undefined"?I18n.t("card.top"):"★ ТОП"}</span>` : ''}
         ${shareCardBtn(p.id)}
         ${favCardBtn(p.id)}
       </div>
@@ -1002,11 +1002,11 @@ function renderRecentlyViewed() {
       <div class="catalog-card-footer">
         <button class="catalog-cta-btn" onclick="event.stopPropagation();showDetail('${p.id}')">
           <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
-          Подробнее
+          ${typeof I18n!=="undefined"?I18n.t("card.details"):"Подробнее"}
         </button>
         <button class="catalog-contact-btn" onclick="event.stopPropagation();openContactPopup('${p.name}')">
           <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.63A2 2 0 012 .18h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92z"/></svg>
-          Спросить
+          ${typeof I18n!=="undefined"?I18n.t("card.ask"):"Спросить"}
         </button>
       </div>
     </div>`;
@@ -1147,13 +1147,13 @@ function renderCatalogGrid(countryVal, cityVal, statusVal, typeVal, extra) {
       const curNum = parseFloat(p.price.replace(/[^0-9.]/g, ''));
       if (oldNum > curNum) {
         const pct = Math.round((1 - curNum/oldNum)*100);
-        savingsHtml = `<div class="catalog-price-save">−${pct}% от начальной цены</div>`;
+        savingsHtml = `<div class="catalog-price-save">−${pct}% ${typeof I18n!=="undefined"?I18n.t("card.savings_from"):"от начальной цены"}</div>`;
       }
     }
 
     // ROI pill — only for buy with roi data
     const roiHtml = (p.deal === 'buy' && p.roi)
-      ? `<div class="catalog-roi-pill"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>ROI ${p.roi} / год</div>`
+      ? `<div class="catalog-roi-pill"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>${typeof I18n!=="undefined"?I18n.t("card.roi_label"):"ROI"} ${p.roi} ${typeof I18n!=="undefined"?I18n.t("card.roi_year"):"/год"}</div>`
       : '';
 
     return `
@@ -1166,7 +1166,7 @@ function renderCatalogGrid(countryVal, cityVal, statusVal, typeVal, extra) {
           <div class="card-slider-dots">${dots}</div>
         </div>
         <span class="prop-badge ${badge.cls}">${badge.text}</span>
-        ${p.top ? '<span class="top-label">★ ТОП</span>' : ''}
+        ${p.top ? `<span class="top-label">${typeof I18n!=="undefined"?I18n.t("card.top"):"★ ТОП"}</span>` : ''}
         ${shareCardBtn(p.id)}
         ${favCardBtn(p.id)}
       </div>
@@ -1197,11 +1197,11 @@ function renderCatalogGrid(countryVal, cityVal, statusVal, typeVal, extra) {
       <div class="catalog-card-footer">
         <button class="catalog-cta-btn" onclick="event.stopPropagation();showDetail('${p.id}')">
           <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
-          Подробнее
+          ${typeof I18n!=="undefined"?I18n.t("card.details"):"Подробнее"}
         </button>
         <button class="catalog-contact-btn" onclick="event.stopPropagation();openContactPopup('${p.name}')">
           <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.63A2 2 0 012 .18h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92z"/></svg>
-          Спросить
+          ${typeof I18n!=="undefined"?I18n.t("card.ask"):"Спросить"}
         </button>
       </div>
     </div>`}).join('');
@@ -2035,14 +2035,14 @@ function renderRelated(currentId) {
   track.innerHTML = same.map(p => {
     const badge = getPropBadge(p);
     const roiHtml = (p.deal === 'buy' && p.roi)
-      ? `<div class="catalog-roi-pill"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>ROI ${p.roi} / год</div>`
+      ? `<div class="catalog-roi-pill"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>${typeof I18n!=="undefined"?I18n.t("card.roi_label"):"ROI"} ${p.roi} ${typeof I18n!=="undefined"?I18n.t("card.roi_year"):"/год"}</div>`
       : '';
     return `
     <div class="catalog-card" style="flex-shrink:0;" onclick="showDetail('${p.id}')" spellcheck="false">
       <div style="position:relative;overflow:hidden;">
         <img class="catalog-img" src="${p.img}" alt="${p.name}">
         <span class="prop-badge ${badge.cls}">${badge.text}</span>
-        ${p.top ? '<span class="top-label">★ ТОП</span>' : ''}
+        ${p.top ? `<span class="top-label">${typeof I18n!=="undefined"?I18n.t("card.top"):"★ ТОП"}</span>` : ''}
         ${shareCardBtn(p.id)}
         ${favCardBtn(p.id)}
       </div>
@@ -2068,11 +2068,11 @@ function renderRelated(currentId) {
       <div class="catalog-card-footer">
         <button class="catalog-cta-btn" onclick="event.stopPropagation();showDetail('${p.id}')">
           <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
-          Подробнее
+          ${typeof I18n!=="undefined"?I18n.t("card.details"):"Подробнее"}
         </button>
         <button class="catalog-contact-btn" onclick="event.stopPropagation();openContactPopup('${p.name}')">
           <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.63A2 2 0 012 .18h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92z"/></svg>
-          Спросить
+          ${typeof I18n!=="undefined"?I18n.t("card.ask"):"Спросить"}
         </button>
       </div>
     </div>
@@ -2160,11 +2160,11 @@ function buildFeaturedCards(props) {
       const curNum = parseFloat(p.price.replace(/[^0-9.]/g, ''));
       if (oldNum > curNum) {
         const pct = Math.round((1 - curNum/oldNum)*100);
-        savingsHtml = `<div class="catalog-price-save">−${pct}% от начальной цены</div>`;
+        savingsHtml = `<div class="catalog-price-save">−${pct}% ${typeof I18n!=="undefined"?I18n.t("card.savings_from"):"от начальной цены"}</div>`;
       }
     }
     const roiHtml = (p.deal === 'buy' && p.roi)
-      ? `<div class="catalog-roi-pill"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>ROI ${p.roi} / год</div>`
+      ? `<div class="catalog-roi-pill"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>${typeof I18n!=="undefined"?I18n.t("card.roi_label"):"ROI"} ${p.roi} ${typeof I18n!=="undefined"?I18n.t("card.roi_year"):"/год"}</div>`
       : '';
     return `
     <div class="catalog-card" style="flex-shrink:0;" onclick="showDetail('${p.id}')" spellcheck="false">
@@ -2176,7 +2176,7 @@ function buildFeaturedCards(props) {
           <div class="card-slider-dots">${dots}</div>
         </div>
         <span class="prop-badge ${badge.cls}">${badge.text}</span>
-        <span class="top-label">★ ТОП</span>
+        <span class="top-label">${typeof I18n!=="undefined"?I18n.t("card.top"):"★ ТОП"}</span>
         ${shareCardBtn(p.id)}
         ${favCardBtn(p.id)}
       </div>
@@ -2203,11 +2203,11 @@ function buildFeaturedCards(props) {
       <div class="catalog-card-footer">
         <button class="catalog-cta-btn" onclick="event.stopPropagation();showDetail('${p.id}')">
           <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
-          Подробнее
+          ${typeof I18n!=="undefined"?I18n.t("card.details"):"Подробнее"}
         </button>
         <button class="catalog-contact-btn" onclick="event.stopPropagation();openContactPopup('${p.name}')">
           <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.63A2 2 0 012 .18h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92z"/></svg>
-          Спросить
+          ${typeof I18n!=="undefined"?I18n.t("card.ask"):"Спросить"}
         </button>
       </div>
     </div>`;
