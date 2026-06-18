@@ -1985,6 +1985,7 @@ function renderRelated(currentId) {
       <div style="position:relative;overflow:hidden;">
         <img class="catalog-img" src="${p.img}" alt="${p.name}">
         <span class="prop-badge ${badge.cls}">${badge.text}</span>
+        ${p.top ? '<span class="top-label">★ ТОП</span>' : ''}
         ${shareCardBtn(p.id)}
         ${favCardBtn(p.id)}
       </div>
