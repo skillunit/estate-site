@@ -522,10 +522,11 @@
 }
 .catalog-price-save {
   display: inline-flex; align-items: center;
-  font-size: 0.62rem; font-weight: 700; letter-spacing: 0.04em;
+  font-size: 0.68rem; font-weight: 700; letter-spacing: 0.04em;
   text-transform: uppercase;
   background: #EAF3DE; color: #3B6D11;
-  padding: 3px 7px; border-radius: 3px;
+  border: 1px solid #C0DD97;
+  padding: 3px 9px; border-radius: 3px;
 }
 
 /* 4. ROI pill */
