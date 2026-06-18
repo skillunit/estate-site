@@ -515,25 +515,27 @@
   color: #bbb; text-decoration: line-through; margin-top: 1px;
 }
 
-/* Savings tag — показывается если есть oldPrice */
+/* Savings tag + ROI — в одну строку */
+.catalog-pills-row {
+  display: flex; align-items: center; gap: 6px;
+  flex-wrap: wrap; margin-top: 5px; margin-bottom: 10px;
+}
 .catalog-price-save {
-  display: inline-block;
+  display: inline-flex; align-items: center;
   font-size: 0.62rem; font-weight: 700; letter-spacing: 0.04em;
   text-transform: uppercase;
   background: #EAF3DE; color: #3B6D11;
-  padding: 2px 7px; border-radius: 3px;
-  margin-top: 3px;
+  padding: 3px 7px; border-radius: 3px;
 }
 
-/* 4. ROI pill (только для объектов с roi) */
+/* 4. ROI pill */
 .catalog-roi-pill {
   display: inline-flex; align-items: center; gap: 4px;
   font-size: 0.68rem; font-weight: 700;
   color: #3B6D11; background: #EAF3DE;
   border: 1px solid #C0DD97;
   padding: 3px 9px; border-radius: 3px;
-  margin-bottom: 10px; width: fit-content;
-  letter-spacing: 0.02em;
+  width: fit-content; letter-spacing: 0.02em;
 }
 .catalog-roi-pill svg { flex-shrink: 0; }
 
