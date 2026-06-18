@@ -6,15 +6,41 @@
   box-shadow: var(--shadow-md);
 }
 
-/* Homepage search bar — reveal from below hero */
-.home-search-bar {
-  animation: searchBarReveal 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
-  position: relative; z-index: 10;
+.filter-bar {
+  background: var(--white);
+  border-top: 3px solid var(--red);
+  box-shadow: var(--shadow-md);
 }
-@keyframes searchBarReveal {
-  from { opacity: 0; transform: translateY(-16px); }
+
+/* ── Homepage search bar ── */
+/* В потоке страницы (до скролла) — скрыт, место занимает */
+.home-search-bar {
+  position: relative;
+  z-index: 10;
+}
+
+/* Когда залипает сверху — fixed полоса */
+.home-search-bar.is-sticky {
+  position: fixed;
+  top: 64px; /* высота header */
+  left: 0; right: 0;
+  z-index: 900;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.13);
+  animation: stickyBarIn 0.3s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+@keyframes stickyBarIn {
+  from { opacity: 0; transform: translateY(-20px); }
   to   { opacity: 1; transform: translateY(0); }
 }
+
+/* Плейсхолдер — держит место в потоке пока бар залипает */
+.home-search-bar-placeholder {
+  display: none;
+}
+.home-search-bar-placeholder.active {
+  display: block;
+}
+
 /* Filter form on homepage — single row */
 .home-filter-form {
   display: flex !important;

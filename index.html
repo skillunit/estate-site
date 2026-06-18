@@ -13,7 +13,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
 <link rel="stylesheet" href="css/base.css?v=2">
-<link rel="stylesheet" href="css/pages.css?v=52">
+<link rel="stylesheet" href="css/pages.css?v=53">
 <link rel="stylesheet" href="css/components.css?v=50">
 <link rel="stylesheet" href="css/responsive.css?v=3">
 
@@ -185,6 +185,8 @@
       </div>
     </div>
   </div>
+  <!-- placeholder держит место в потоке пока бар залипает -->
+  <div class="home-search-bar-placeholder" id="homeSearchBarPlaceholder"></div>
 
   <!-- DIRECTIONS -->
   <section class="section">
@@ -2129,23 +2131,16 @@ function setHomeTab(btn) {
 
 function goSearch() {
   var p = new URLSearchParams();
-  // deal
   if (_homeSearchDeal && _homeSearchDeal !== 'buy') p.set('deal', _homeSearchDeal);
-  // country
   var country = document.getElementById('homeCountry');
   if (country && country.value && country.value !== 'all') p.set('country', country.value);
-  // city
   var city = document.getElementById('homeCity');
   if (city && city.value && city.value !== 'all') p.set('city', city.value);
-  // type
   var type = document.getElementById('homeType');
   if (type && type.value && type.value !== 'all') p.set('type', type.value);
-  // priceMax
   var priceMax = document.getElementById('homePriceMax');
   if (priceMax && priceMax.value) p.set('priceMax', priceMax.value);
-  // status (для «Инвестировать»)
   if (_homeSearchStatus) p.set('status', _homeSearchStatus);
-
   var qs = p.toString();
   window.location.href = 'projects.html' + (qs ? '?' + qs : '');
 }
@@ -2155,13 +2150,46 @@ function resetHomeFilter() {
     var el = document.getElementById(id);
     if (el) el.selectedIndex = 0;
   });
-  // сброс активного таба
   document.querySelectorAll('#homeSearchBar .filter-tab').forEach(function(b, i) {
     b.classList.toggle('active', i === 0);
   });
   _homeSearchDeal   = 'buy';
   _homeSearchStatus = '';
 }
+
+// ── Sticky scroll reveal ──
+(function() {
+  var bar         = document.getElementById('homeSearchBar');
+  var placeholder = document.getElementById('homeSearchBarPlaceholder');
+  if (!bar || !placeholder) return;
+
+  var isSticky = false;
+
+  function updateSticky() {
+    // Триггер: прокрутили дальше hero (100vh - высота header)
+    var heroBottom = window.innerHeight - 64;
+    var shouldStick = window.scrollY > heroBottom;
+
+    if (shouldStick === isSticky) return;
+    isSticky = shouldStick;
+
+    if (shouldStick) {
+      // Запоминаем высоту до залипания
+      var h = bar.offsetHeight;
+      placeholder.style.height = h + 'px';
+      placeholder.classList.add('active');
+      bar.classList.add('is-sticky');
+    } else {
+      placeholder.classList.remove('active');
+      placeholder.style.height = '';
+      bar.classList.remove('is-sticky');
+    }
+  }
+
+  window.addEventListener('scroll', updateSticky, { passive: true });
+  window.addEventListener('resize', updateSticky, { passive: true });
+  updateSticky();
+})();
 </script>
 <div class="floating-panel">
   <button class="btn-scroll-top" id="btnScrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Наверх">
