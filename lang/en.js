@@ -292,5 +292,11 @@ window.GRE_LANG_EN = {
     'team.about_p3': 'Georgia Real Estate is an accredited partner of Georgia\'s leading developers. We work directly with TBC Bank, Bank of Georgia and international mortgage programmes.',
     'team.about_p4': 'Over 10 years we have closed more than 2,000 transactions, launched our own property management division and opened offices in Batumi and Tbilisi.',
     'team.read_more': 'Read more',
-    'team.read_less': 'Show less'
+    'team.read_less': 'Show less',
+    'team.subtitle': 'Real estate professionals in Georgia',
+    'team.about_p3_full': 'Over 10 years we have closed more than 2,000 transactions, launched our own property management division and opened offices in Batumi and Tbilisi. Every year we help over 200 families find their dream home or a profitable investment property.',
+    'team.about_p4_full': 'We work transparently: fixed commission, full legal support from property verification to title registration. Our clients include citizens of Russia, Israel, the USA, Germany, the UAE and 25 other countries.',
+    'team.about_p5_full': 'Our team regularly undergoes professional training and monitors changes in Georgian real estate, taxation and foreign investment legislation — so you always get accurate, up-to-date information.',
+    'team.stat_locations_label': 'prime locations',
+    'meta.title_team': 'Team — Georgia Real Estate',
 };
