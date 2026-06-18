@@ -452,23 +452,30 @@
     window.addEventListener('load', function() {
       updateSeoText();
 
+      // filterCatalog вызывается при любом изменении фильтра (страна, город, тип, deal)
       var _origFC = window.filterCatalog;
       window.filterCatalog = function() {
         if (_origFC) _origFC.apply(this, arguments);
         updateSeoText();
       };
-      var _origSDT = window.setDealType;
-      window.setDealType = function(type) {
-        if (_origSDT) _origSDT.apply(this, arguments);
-        updateSeoText();
-      };
+
+      // Патч onCountryChange — вызывается при смене страны
       var _origOCC = window.onCountryChange;
       window.onCountryChange = function(select) {
         if (_origOCC) _origOCC.apply(this, arguments);
-        updateSeoText();
+        // После смены страны citySelect обновился — даём время DOM обновиться
+        setTimeout(updateSeoText, 50);
       };
+
+      // citySelect — смена города
       var cityEl = document.getElementById('citySelect');
       if (cityEl) cityEl.addEventListener('change', updateSeoText);
+
+      // deal buttons — прямая привязка на случай если патч window.setDealType не сработает
+      var btnBuy  = document.getElementById('dealBtnBuy');
+      var btnRent = document.getElementById('dealBtnRent');
+      if (btnBuy)  btnBuy.addEventListener('click',  function() { setTimeout(updateSeoText, 0); });
+      if (btnRent) btnRent.addEventListener('click', function() { setTimeout(updateSeoText, 0); });
     });
   })();
   </script>
