@@ -208,13 +208,6 @@ window.GRE_LANG_EN = {
     'footer.privacy': 'Privacy Policy',
 
     // ── Team page ──────────────────────────────────────────
-    'team.hero_title': 'Our team',
-    'team.role_ceo': 'CEO',
-    'team.role_sales': 'Head of Sales',
-    'team.role_lawyer': 'Legal Counsel',
-    'team.role_agent': 'Real Estate Agent',
-    'team.role_marketing': 'Marketing Director',
-    'team.agent_ask': 'Ask a question',
 
     // ── Blog page ──────────────────────────────────────────
     'blog.hero_title': 'Blog',
@@ -275,4 +268,29 @@ window.GRE_LANG_EN = {
     // ── Recently viewed ────────────────────────────────────
     'recent.title': 'Recently viewed',
     'recent.clear': 'Clear',
-  };
+    // ── Team — cards ──────────────────────────────────────
+    'team.name_1': 'Alexander Verin',
+    'team.role_1': 'CEO',
+    'team.desc_1': 'Specialises in strategic development and international negotiations.',
+    'team.name_2': 'Natalia Solovyova',
+    'team.role_2': 'Senior Sales Agent',
+    'team.desc_2': 'Specialises in residential property in Tbilisi and Batumi, works with foreign investors.',
+    'team.name_3': 'Mariam Janelidze',
+    'team.role_3': 'Georgian Market Director',
+    'team.desc_3': 'Deep knowledge of the Georgian market. Leads key transactions in Tbilisi and Kakheti.',
+    'team.name_4': 'David Cohen',
+    'team.role_4': 'CFO',
+    'team.desc_4': 'Structuring investment deals, working with international capital.',
+    'team.name_5': 'Robert Chase',
+    'team.role_5': 'Senior Sales Agent',
+    'team.desc_5': 'Specialist in resort properties in Batumi and Gonio.',
+    'team.name_6': 'Yakov Levi',
+    'team.role_6': 'Legal Director',
+    'team.desc_6': 'International lawyer. Transaction support in five jurisdictions.',
+    'team.about_p1': 'We are a team of professionals with years of experience in Georgian real estate. Since 2014 we have helped clients from over 30 countries find the perfect property to live in or invest.',
+    'team.about_p2': 'Our office is in Tbilisi, but we operate across all of Georgia — from Batumi to Bakuriani. Every project undergoes legal verification and a personal inspection by our experts.',
+    'team.about_p3': 'Georgia Real Estate is an accredited partner of Georgia\'s leading developers. We work directly with TBC Bank, Bank of Georgia and international mortgage programmes.',
+    'team.about_p4': 'Over 10 years we have closed more than 2,000 transactions, launched our own property management division and opened offices in Batumi and Tbilisi.',
+    'team.read_more': 'Read more',
+    'team.read_less': 'Show less'
+};
