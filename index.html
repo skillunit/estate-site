@@ -1971,7 +1971,7 @@
 
 <!-- Сначала библиотека карт, которая нужна твоему коду -->
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-<script src="js/nav.js?v=10"></script>
+<script src="js/nav.js?v=11"></script>
 <script src="js/forms.js"></script>
 <script src="js/reviews.js?v=1"></script>
 <script>
@@ -2174,9 +2174,11 @@ var _homeDeal = 'buy';
 function updateHomeCityOptions(country) {
   var cityEl = document.getElementById('homeCity');
   if (!cityEl) return;
-  var cities = (typeof COUNTRY_CITIES !== 'undefined' && COUNTRY_CITIES[country])
-    ? COUNTRY_CITIES[country]
-    : [['all','Любой город'],['tbilisi','Тбилиси'],['batumi','Батуми'],['gonio','Гонио'],['kakheti','Кахетия'],['bakuriani','Бакуриани']];
+  var cities = (typeof getCitiesForCountry === 'function')
+    ? getCitiesForCountry(country)
+    : (typeof COUNTRY_CITIES !== 'undefined' && COUNTRY_CITIES[country])
+      ? COUNTRY_CITIES[country]
+      : [['all','Любой город']];
   cityEl.innerHTML = cities.map(function(c) {
     return '<option value="' + c[0] + '">' + c[1] + '</option>';
   }).join('');

@@ -60,18 +60,38 @@ function goToCountry(country) {
 
 const COUNTRY_LABELS = { 'all': 'Грузии', 'usa': 'США', 'uae': 'ОАЭ', 'cyprus': 'Кипре', 'greece': 'Греции' };
 
+// Статический fallback — используется до инициализации MAP_PROPERTIES
 const COUNTRY_CITIES = {
   'all':    [['all','Любой город'],['tbilisi','Тбилиси'],['batumi','Батуми'],['gonio','Гонио'],['kakheti','Кахетия'],['bakuriani','Бакуриани']],
   'usa':    [['all','Любой город'],['new-york','Нью-Йорк'],['miami','Майами']],
   'uae':    [['all','Любой город'],['dubai','Дубай']],
-  'cyprus': [['all','Любой город'],['limassol','Лимасол'],['paphos','Пафос']],
+  'cyprus': [['all','Любой город'],['limassol','Лимасол']],
   'greece': [['all','Любой город'],['athens','Афины'],['mykonos','Миконос']],
 };
+
+// Возвращает города реально присутствующие в данных для данной страны
+function getCitiesForCountry(country) {
+  if (typeof MAP_PROPERTIES === 'undefined') {
+    return COUNTRY_CITIES[country] || COUNTRY_CITIES['all'];
+  }
+  var props = country === 'all'
+    ? MAP_PROPERTIES
+    : MAP_PROPERTIES.filter(function(p) { return p.country === country; });
+  var seen = {};
+  var cities = [['all', 'Любой город']];
+  props.forEach(function(p) {
+    if (p.city && p.cityLabel && !seen[p.city]) {
+      seen[p.city] = true;
+      cities.push([p.city, p.cityLabel]);
+    }
+  });
+  return cities;
+}
 
 function updateCityOptions(country) {
   const citySelect = document.getElementById('citySelect');
   if (!citySelect) return;
-  const cities = COUNTRY_CITIES[country] || COUNTRY_CITIES['all'];
+  const cities = getCitiesForCountry(country);
   citySelect.innerHTML = cities.map(([v, l]) => `<option value="${v}">${l}</option>`).join('');
 }
 
