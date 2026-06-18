@@ -8,6 +8,8 @@ function showPage(id) {
   window.scrollTo({top:0, behavior:'instant'});
   document.getElementById('mainNav').classList.remove('open');
   document.getElementById('hamburger').classList.remove('open');
+  // Применяем переводы к только что показанной странице
+  if (typeof I18n !== 'undefined') I18n.applyAll();
 }
 
 function toggleMenu() {
