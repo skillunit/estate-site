@@ -13,7 +13,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
 <link rel="stylesheet" href="css/base.css?v=2">
-<link rel="stylesheet" href="css/pages.css?v=54">
+<link rel="stylesheet" href="css/pages.css?v=55">
 <link rel="stylesheet" href="css/components.css?v=50">
 <link rel="stylesheet" href="css/responsive.css?v=3">
 
@@ -140,7 +140,7 @@
         </div>
         <div class="filter-field filter-field--country">
           <label>Страна</label>
-          <select class="filter-select" id="homeCountry">
+          <select class="filter-select" id="homeCountry" onchange="updateHomeCityOptions(this.value)">
             <option value="all">🌍 Все страны</option>
             <option value="georgia" selected>🇬🇪 Грузия</option>
             <option value="usa">🇺🇸 США</option>
@@ -2170,6 +2170,17 @@ function toggleFaq(el) {
 <!-- ══ HOME SEARCH BAR LOGIC ══ -->
 <script>
 var _homeDeal = 'buy';
+
+function updateHomeCityOptions(country) {
+  var cityEl = document.getElementById('homeCity');
+  if (!cityEl) return;
+  var cities = (typeof COUNTRY_CITIES !== 'undefined' && COUNTRY_CITIES[country])
+    ? COUNTRY_CITIES[country]
+    : [['all','Любой город'],['tbilisi','Тбилиси'],['batumi','Батуми'],['gonio','Гонио'],['kakheti','Кахетия'],['bakuriani','Бакуриани']];
+  cityEl.innerHTML = cities.map(function(c) {
+    return '<option value="' + c[0] + '">' + c[1] + '</option>';
+  }).join('');
+}
 
 function setHomeDeal(btn) {
   document.querySelectorAll('#homeSearchBar .deal-btn').forEach(function(b) { b.classList.remove('active'); });
