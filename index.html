@@ -13,7 +13,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
 <link rel="stylesheet" href="css/base.css?v=2">
-<link rel="stylesheet" href="css/pages.css?v=55">
+<link rel="stylesheet" href="css/pages.css?v=56">
 <link rel="stylesheet" href="css/components.css?v=50">
 <link rel="stylesheet" href="css/responsive.css?v=3">
 
@@ -2251,31 +2251,7 @@ function resetHomeFilter() {
   var rv = document.getElementById('homeRoomsVal'); if (rv) rv.value = 'all';
 }
 
-// ── Sticky scroll reveal ──
-(function() {
-  var bar         = document.getElementById('homeSearchBar');
-  var placeholder = document.getElementById('homeSearchBarPlaceholder');
-  if (!bar || !placeholder) return;
-  var isSticky = false;
-  function updateSticky() {
-    var heroBottom = window.innerHeight - 64;
-    var shouldStick = window.scrollY > heroBottom;
-    if (shouldStick === isSticky) return;
-    isSticky = shouldStick;
-    if (shouldStick) {
-      placeholder.style.height = bar.offsetHeight + 'px';
-      placeholder.classList.add('active');
-      bar.classList.add('is-sticky');
-    } else {
-      placeholder.classList.remove('active');
-      placeholder.style.height = '';
-      bar.classList.remove('is-sticky');
-    }
-  }
-  window.addEventListener('scroll', updateSticky, { passive: true });
-  window.addEventListener('resize', updateSticky,  { passive: true });
-  updateSticky();
-})();
+// ── Sticky scroll — отключён ──
 </script>
 <div class="floating-panel">
   <button class="btn-scroll-top" id="btnScrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Наверх">
