@@ -515,7 +515,9 @@
 }
 .catalog-price-old {
   font-size: 0.75rem; font-weight: 500;
-  color: #bbb; text-decoration: line-through; margin-top: 1px;
+  color: #bbb; text-decoration: line-through;
+  min-height: 1.2em; /* резервируем место даже если нет старой цены */
+  display: block;
 }
 
 /* Savings tag + ROI — в одну строку, фиксированная высота зоны */

@@ -987,7 +987,7 @@ function renderRecentlyViewed() {
             <span class="catalog-price">${formatPrice(p.price)}</span>
             ${p.deal === 'buy' && p.area ? `<span class="catalog-price-sqm">${formatSqm(p)}</span>` : ''}
           </div>
-          ${p.oldPrice ? `<div class="catalog-price-old">${formatPrice(p.oldPrice)}</div>` : ''}
+          ${`<div class="catalog-price-old">${p.oldPrice ? formatPrice(p.oldPrice) : ''}</div>`}
         </div>
         ${`<div class="catalog-pills-row">${roiHtml}</div>`}
         <div class="catalog-specs">
@@ -1181,7 +1181,7 @@ function renderCatalogGrid(countryVal, cityVal, statusVal, typeVal, extra) {
             <span class="catalog-price">${priceDisplay}</span>
             ${sqmDisplay ? `<span class="catalog-price-sqm">${sqmDisplay}</span>` : ''}
           </div>
-          ${p.oldPrice ? `<div class="catalog-price-old">${formatPrice(p.oldPrice)}</div>` : ''}
+          ${`<div class="catalog-price-old">${p.oldPrice ? formatPrice(p.oldPrice) : ''}</div>`}
         </div>
         ${`<div class="catalog-pills-row">${savingsHtml}${roiHtml}</div>`}
         ${p.desc ? `<p class="catalog-card-desc">${p.desc}</p>` : ''}
@@ -2040,7 +2040,7 @@ function renderRelated(currentId) {
             <span class="catalog-price">${formatPrice(p.price)}</span>
             ${p.deal === 'buy' && p.area ? `<span class="catalog-price-sqm">${formatSqm(p)}</span>` : ''}
           </div>
-          ${p.oldPrice ? `<div class="catalog-price-old">${formatPrice(p.oldPrice)}</div>` : ''}
+          ${`<div class="catalog-price-old">${p.oldPrice ? formatPrice(p.oldPrice) : ''}</div>`}
         </div>
         ${`<div class="catalog-pills-row">${roiHtml}</div>`}
         <div class="catalog-specs">
@@ -2174,7 +2174,7 @@ function buildFeaturedCards(props) {
             <span class="catalog-price">${formatPrice(p.price)}</span>
             ${p.area ? `<span class="catalog-price-sqm">${formatSqm(p)}</span>` : ''}
           </div>
-          ${p.oldPrice ? `<div class="catalog-price-old">${formatPrice(p.oldPrice)}</div>` : ''}
+          ${`<div class="catalog-price-old">${p.oldPrice ? formatPrice(p.oldPrice) : ''}</div>`}
         </div>
         ${`<div class="catalog-pills-row">${savingsHtml}${roiHtml}</div>`}
         <div class="catalog-specs">
