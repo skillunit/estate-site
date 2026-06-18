@@ -1,15 +1,19 @@
 // ── NAVIGATION ──
 function showPage(id) {
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-  document.getElementById('page-' + id).classList.add('active');
+  const page = document.getElementById('page-' + id);
+  if (page) page.classList.add('active');
   document.querySelectorAll('.header-nav a').forEach(a => {
     a.classList.toggle('active', a.dataset.page === id);
   });
   window.scrollTo({top:0, behavior:'instant'});
   document.getElementById('mainNav').classList.remove('open');
   document.getElementById('hamburger').classList.remove('open');
-  // Применяем переводы к только что показанной странице
-  if (typeof I18n !== 'undefined') I18n.applyAll();
+  // Применяем переводы к странице — и к header (он общий)
+  if (typeof I18n !== 'undefined') {
+    I18n.applyAll(page);
+    I18n.applyAll(document.getElementById('header'));
+  }
 }
 
 function toggleMenu() {

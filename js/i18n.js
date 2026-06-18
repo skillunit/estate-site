@@ -99,9 +99,14 @@ const I18n = (() => {
   return { init, t, setLang, applyAll, getLang: () => _lang };
 })();
 
-// Автоинициализация
+// Автоинициализация — синхронно если DOM готов, иначе ждём
 if (document.readyState === 'loading') {
   document.addEventListener('DOMContentLoaded', () => I18n.init());
 } else {
   I18n.init();
 }
+
+// Повторно применяем при каждом показе страницы (SPA навигация)
+document.addEventListener('i18n:applied', function() {
+  // Уже применено через applyAll — ничего делать не нужно
+});
