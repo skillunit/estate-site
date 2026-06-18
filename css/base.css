@@ -301,3 +301,16 @@ header.header-anim {
   .header-anim { transition: none; }
   .reveal-init { opacity: 1; transform: none; transition: none; }
 }
+
+/* ── RTL support (Hebrew) ── */
+body.rtl { direction: rtl; text-align: right; }
+body.rtl .header-inner { flex-direction: row-reverse; }
+body.rtl .header-nav { flex-direction: row-reverse; }
+body.rtl .logo { flex-direction: row-reverse; }
+body.rtl .filter-form { flex-direction: row-reverse; }
+body.rtl .catalog-city-row { flex-direction: row-reverse; }
+body.rtl .catalog-specs { flex-direction: row-reverse; }
+body.rtl .catalog-card-footer { flex-direction: row-reverse; }
+body.rtl .catalog-pills-row { flex-direction: row-reverse; }
+body.rtl .prop-badge { left: auto; right: 12px; }
+body.rtl .top-label { right: auto; left: 12px; }

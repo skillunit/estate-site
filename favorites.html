@@ -50,8 +50,9 @@
   .fav-confirm-sub { font-size: 0.84rem; color: var(--gray-500); margin-bottom: 24px; }
   .fav-confirm-btns { display: flex; gap: 10px; justify-content: center; }
 </style>
+<script src="js/i18n.js?v=1"></script>
 </head>
-<body>
+<body data-page="favorites">
 
 <!-- HEADER -->
 <header id="header">
@@ -89,13 +90,13 @@
     </nav>
 
     <div class="header-right">
-      <div class="header-phone">+995 32 2 123 456</div>
+      <div class="header-phone" data-i18n="nav.phone">+995 32 2 123 456</div>
       <div class="lang-switch">
-        <button class="lang-btn active">RU</button>
+        <button class="lang-btn active" data-lang="ru">RU</button>
         <span class="lang-sep-char">|</span>
-        <button class="lang-btn">EN</button>
+        <button class="lang-btn" data-lang="en">EN</button>
         <span class="lang-sep-char">|</span>
-        <button class="lang-btn">HE</button>
+        <button class="lang-btn" data-lang="he">HE</button>
       </div>
       <div id="authBtnWrap"></div>
       <button class="hamburger" id="hamburger" onclick="toggleMenu()">

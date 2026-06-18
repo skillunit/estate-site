@@ -16,12 +16,7 @@ function toggleMenu() {
 }
 
 // ── LANG ──
-document.querySelectorAll('.lang-btn').forEach(b => {
-  b.addEventListener('click', function(){
-    document.querySelectorAll('.lang-btn').forEach(x => x.classList.remove('active'));
-    this.classList.add('active');
-  });
-});
+// ── LANG BUTTONS — handled by js/i18n.js ──
 
 // ── SEARCH TABS ──
 function setSearchTab(el) {
