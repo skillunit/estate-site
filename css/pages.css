@@ -374,7 +374,7 @@
 /* Карточка — переключаем с column-flex на grid */
 .catalog-grid.catalog-list-view .catalog-card {
   display: grid !important;
-  grid-template-columns: 280px 1fr;
+  grid-template-columns: 380px 1fr;
   grid-template-rows: 1fr auto;
   min-height: 240px;
   transform: none !important;
