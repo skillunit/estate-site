@@ -966,7 +966,7 @@ function renderRecentlyViewed() {
       ? `<div class="catalog-roi-pill"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>ROI ${p.roi} / год</div>`
       : '';
     return `
-    <div class="catalog-card" style="flex-shrink:0;" onclick="showDetail('${p.id}')">
+    <div class="catalog-card" style="flex-shrink:0;" onclick="showDetail('${p.id}')" spellcheck="false">
       <div class="catalog-card-img-wrap" style="position:relative;overflow:hidden;">
         <div class="card-slider" data-imgs='${JSON.stringify(imgs)}' data-idx="0">
           <img class="catalog-img card-slider-img" src="${imgs[0]}" alt="${p.name}">
@@ -1157,7 +1157,7 @@ function renderCatalogGrid(countryVal, cityVal, statusVal, typeVal, extra) {
       : '';
 
     return `
-    <div class="catalog-card" data-city="${p.city}" data-status="${p.status}" data-id="${p.id}" onclick="showDetail('${p.id}')">
+    <div class="catalog-card" data-city="${p.city}" data-status="${p.status}" data-id="${p.id}" onclick="showDetail('${p.id}')" spellcheck="false">
       <div class="catalog-card-img-wrap" style="position:relative;overflow:hidden;">
         <div class="card-slider" data-imgs='${JSON.stringify(imgs)}' data-idx="0">
           <img class="catalog-img card-slider-img" src="${p.img}" alt="${p.name}" loading="lazy">
@@ -2024,7 +2024,7 @@ function renderRelated(currentId) {
       ? `<div class="catalog-roi-pill"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>ROI ${p.roi} / год</div>`
       : '';
     return `
-    <div class="catalog-card" style="flex-shrink:0;" onclick="showDetail('${p.id}')">
+    <div class="catalog-card" style="flex-shrink:0;" onclick="showDetail('${p.id}')" spellcheck="false">
       <div style="position:relative;overflow:hidden;">
         <img class="catalog-img" src="${p.img}" alt="${p.name}">
         <span class="prop-badge ${badge.cls}">${badge.text}</span>
@@ -2153,7 +2153,7 @@ function buildFeaturedCards(props) {
       ? `<div class="catalog-roi-pill"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>ROI ${p.roi} / год</div>`
       : '';
     return `
-    <div class="catalog-card" style="flex-shrink:0;" onclick="showDetail('${p.id}')">
+    <div class="catalog-card" style="flex-shrink:0;" onclick="showDetail('${p.id}')" spellcheck="false">
       <div class="catalog-card-img-wrap" style="position:relative;overflow:hidden;">
         <div class="card-slider" data-imgs='${JSON.stringify(imgs)}' data-idx="0">
           <img class="catalog-img card-slider-img" src="${imgs[0]}" alt="${p.name}">
