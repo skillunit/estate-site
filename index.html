@@ -13,7 +13,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
 <link rel="stylesheet" href="css/base.css?v=2">
-<link rel="stylesheet" href="css/pages.css?v=53">
+<link rel="stylesheet" href="css/pages.css?v=54">
 <link rel="stylesheet" href="css/components.css?v=50">
 <link rel="stylesheet" href="css/responsive.css?v=3">
 
@@ -130,59 +130,111 @@
 
   <!-- SEARCH BAR -->
   <div class="filter-bar home-search-bar" id="homeSearchBar">
-    <div class="filter-tabs">
-      <button class="filter-tab active" data-deal="buy"  onclick="setHomeTab(this)">Купить</button>
-      <button class="filter-tab"        data-deal="rent" onclick="setHomeTab(this)">Арендовать</button>
-      <button class="filter-tab"        data-deal="buy"  data-status="invest" onclick="setHomeTab(this)">Инвестировать</button>
-    </div>
-    <div class="filter-form home-filter-form">
-      <div class="filter-field filter-field--country">
-        <label>Страна</label>
-        <select class="filter-select" id="homeCountry">
-          <option value="georgia">🇬🇪 Грузия</option>
-          <option value="usa">🇺🇸 США</option>
-          <option value="uae">🇦🇪 ОАЭ</option>
-          <option value="cyprus">🇨🇾 Кипр</option>
-          <option value="greece">🇬🇷 Греция</option>
-        </select>
+    <div class="filter-form">
+
+      <!-- Строка 1: deal toggle + основные фильтры -->
+      <div class="filter-row-1">
+        <div class="filter-deal-toggle">
+          <button class="deal-btn active" id="homeDealBuy"  data-deal="buy"  onclick="setHomeDeal(this)">Покупка</button>
+          <button class="deal-btn"        id="homeDealRent" data-deal="rent" onclick="setHomeDeal(this)">Аренда</button>
+        </div>
+        <div class="filter-field filter-field--country">
+          <label>Страна</label>
+          <select class="filter-select" id="homeCountry">
+            <option value="all">🌍 Все страны</option>
+            <option value="georgia" selected>🇬🇪 Грузия</option>
+            <option value="usa">🇺🇸 США</option>
+            <option value="uae">🇦🇪 ОАЭ</option>
+            <option value="cyprus">🇨🇾 Кипр</option>
+            <option value="greece">🇬🇷 Греция</option>
+          </select>
+        </div>
+        <div class="filter-field filter-field--city">
+          <label>Город</label>
+          <select class="filter-select" id="homeCity">
+            <option value="all">Любой город</option>
+            <option value="tbilisi">Тбилиси</option>
+            <option value="batumi">Батуми</option>
+            <option value="gonio">Гонио</option>
+            <option value="kakheti">Кахетия</option>
+            <option value="bakuriani">Бакуриани</option>
+          </select>
+        </div>
+        <div class="filter-field filter-field--type">
+          <label>Тип недвижимости</label>
+          <select class="filter-select" id="homeType">
+            <option value="all">Любой</option>
+            <option value="apartment">Квартира</option>
+            <option value="apart">Апартаменты</option>
+            <option value="villa">Вилла</option>
+            <option value="commercial">Коммерческая</option>
+          </select>
+        </div>
+        <!-- Поиск по названию -->
+        <div class="filter-field filter-field--search">
+          <label>Поиск по названию</label>
+          <div class="search-field-wrap">
+            <svg class="search-field-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            <input class="search-field-input" id="homeNameSearch" type="text" placeholder="Название, район, тип…" autocomplete="off"
+              oninput="document.getElementById('homeNameSearchClear').style.display=this.value?'flex':'none'">
+            <button class="search-field-clear" id="homeNameSearchClear" style="display:none;"
+              onclick="document.getElementById('homeNameSearch').value='';this.style.display='none'">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+            </button>
+          </div>
+        </div>
       </div>
-      <div class="filter-field">
-        <label>Город</label>
-        <select class="filter-select" id="homeCity">
-          <option value="all">Любой город</option>
-          <option value="tbilisi">Тбилиси</option>
-          <option value="batumi">Батуми</option>
-          <option value="gonio">Гонио</option>
-          <option value="bakuriani">Бакуриани</option>
-        </select>
+
+      <!-- Строка 2: статус, цена, площадь, спальни, кнопки -->
+      <div class="filter-row-2 filter-row-2--projects">
+        <div class="filter-field">
+          <label>Статус</label>
+          <select class="filter-select" id="homeStatus" style="min-width:150px;">
+            <option value="all">Любой статус</option>
+            <option value="ready">Сдан в эксплуатацию</option>
+            <option value="build">На стадии строительства</option>
+            <option value="invest">Инвестиции</option>
+          </select>
+        </div>
+        <div class="filter-sep-v"></div>
+        <div class="filter-field filter-field--price">
+          <label>Цена, $</label>
+          <div class="filter-range-inputs">
+            <input class="filter-range-input" type="text" id="homePriceMin" placeholder="От">
+            <span class="filter-range-sep">—</span>
+            <input class="filter-range-input" type="text" id="homePriceMax" placeholder="До">
+          </div>
+        </div>
+        <div class="filter-sep-v"></div>
+        <div class="filter-field filter-field--area">
+          <label>Площадь, м²</label>
+          <div class="filter-range-inputs">
+            <input class="filter-range-input" type="text" id="homeAreaMin" placeholder="От">
+            <span class="filter-range-sep">—</span>
+            <input class="filter-range-input" type="text" id="homeAreaMax" placeholder="До">
+          </div>
+        </div>
+        <div class="filter-sep-v"></div>
+        <div class="filter-field filter-field--rooms">
+          <label>Спальни</label>
+          <div class="filter-rooms-btns">
+            <button class="rooms-btn active" data-val="all" onclick="setHomeRooms(this)">Любое</button>
+            <button class="rooms-btn" data-val="1"  onclick="setHomeRooms(this)">1</button>
+            <button class="rooms-btn" data-val="2"  onclick="setHomeRooms(this)">2</button>
+            <button class="rooms-btn" data-val="3"  onclick="setHomeRooms(this)">3</button>
+            <button class="rooms-btn" data-val="4+" onclick="setHomeRooms(this)">4+</button>
+          </div>
+          <input type="hidden" id="homeRoomsVal" value="all">
+        </div>
+        <div class="filter-row-2-actions">
+          <span class="filter-reset-link" onclick="resetHomeFilter()">Сброс</span>
+          <button class="btn btn-red filter-btn" onclick="goSearch()">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            Найти
+          </button>
+        </div>
       </div>
-      <div class="filter-field">
-        <label>Тип недвижимости</label>
-        <select class="filter-select" id="homeType">
-          <option value="all">Любой</option>
-          <option value="apartment">Квартира</option>
-          <option value="apart">Апартаменты</option>
-          <option value="villa">Вилла</option>
-          <option value="commercial">Коммерческая</option>
-        </select>
-      </div>
-      <div class="filter-field">
-        <label>Цена до</label>
-        <select class="filter-select" id="homePriceMax">
-          <option value="">Любая</option>
-          <option value="100000">$100 000</option>
-          <option value="200000">$200 000</option>
-          <option value="500000">$500 000</option>
-          <option value="1000000">$1 000 000+</option>
-        </select>
-      </div>
-      <div class="filter-field filter-field--btn">
-        <span class="filter-reset-link" onclick="resetHomeFilter()">Сброс</span>
-        <button class="btn btn-red filter-btn" onclick="goSearch()">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-          Найти
-        </button>
-      </div>
+
     </div>
   </div>
   <!-- placeholder держит место в потоке пока бар залипает -->
@@ -1919,7 +1971,7 @@
 
 <!-- Сначала библиотека карт, которая нужна твоему коду -->
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-<script src="js/nav.js?v=9"></script>
+<script src="js/nav.js?v=10"></script>
 <script src="js/forms.js"></script>
 <script src="js/reviews.js?v=1"></script>
 <script>
@@ -1940,7 +1992,7 @@
   } catch(e) {}
 })();
 </script>
-<script src="js/catalog.js?v=55"></script>
+<script src="js/catalog.js?v=56"></script>
 <script src="js/animations.js"></script>
 <script src="js/auth.js?v=4"></script>
 <script src="js/favorites.js?v=4"></script>
@@ -2117,44 +2169,75 @@ function toggleFaq(el) {
 
 <!-- ══ HOME SEARCH BAR LOGIC ══ -->
 <script>
-var _homeSearchDeal   = 'buy';
-var _homeSearchStatus = '';
+var _homeDeal = 'buy';
 
-function setHomeTab(btn) {
-  document.querySelectorAll('#homeSearchBar .filter-tab').forEach(function(b) {
-    b.classList.remove('active');
-  });
+function setHomeDeal(btn) {
+  document.querySelectorAll('#homeSearchBar .deal-btn').forEach(function(b) { b.classList.remove('active'); });
   btn.classList.add('active');
-  _homeSearchDeal   = btn.dataset.deal   || 'buy';
-  _homeSearchStatus = btn.dataset.status || '';
+  _homeDeal = btn.dataset.deal || 'buy';
+}
+
+function setHomeRooms(btn) {
+  document.querySelectorAll('#homeSearchBar .rooms-btn').forEach(function(b) { b.classList.remove('active'); });
+  btn.classList.add('active');
+  var rv = document.getElementById('homeRoomsVal');
+  if (rv) rv.value = btn.dataset.val;
 }
 
 function goSearch() {
   var p = new URLSearchParams();
-  if (_homeSearchDeal && _homeSearchDeal !== 'buy') p.set('deal', _homeSearchDeal);
+
+  if (_homeDeal === 'rent') p.set('deal', 'rent');
+
   var country = document.getElementById('homeCountry');
   if (country && country.value && country.value !== 'all') p.set('country', country.value);
+
   var city = document.getElementById('homeCity');
   if (city && city.value && city.value !== 'all') p.set('city', city.value);
+
   var type = document.getElementById('homeType');
   if (type && type.value && type.value !== 'all') p.set('type', type.value);
+
+  var name = document.getElementById('homeNameSearch');
+  if (name && name.value.trim()) p.set('name', name.value.trim());
+
+  var status = document.getElementById('homeStatus');
+  if (status && status.value && status.value !== 'all') p.set('status', status.value);
+
+  var priceMin = document.getElementById('homePriceMin');
+  if (priceMin && priceMin.value.trim()) p.set('priceMin', priceMin.value.replace(/\s/g,''));
+
   var priceMax = document.getElementById('homePriceMax');
-  if (priceMax && priceMax.value) p.set('priceMax', priceMax.value);
-  if (_homeSearchStatus) p.set('status', _homeSearchStatus);
+  if (priceMax && priceMax.value.trim()) p.set('priceMax', priceMax.value.replace(/\s/g,''));
+
+  var areaMin = document.getElementById('homeAreaMin');
+  if (areaMin && areaMin.value.trim()) p.set('areaMin', areaMin.value);
+
+  var areaMax = document.getElementById('homeAreaMax');
+  if (areaMax && areaMax.value.trim()) p.set('areaMax', areaMax.value);
+
+  var rooms = document.getElementById('homeRoomsVal');
+  if (rooms && rooms.value && rooms.value !== 'all') p.set('rooms', rooms.value);
+
   var qs = p.toString();
   window.location.href = 'projects.html' + (qs ? '?' + qs : '');
 }
 
 function resetHomeFilter() {
-  ['homeCountry','homeCity','homeType','homePriceMax'].forEach(function(id) {
-    var el = document.getElementById(id);
-    if (el) el.selectedIndex = 0;
+  _homeDeal = 'buy';
+  document.querySelectorAll('#homeSearchBar .deal-btn').forEach(function(b, i) { b.classList.toggle('active', i === 0); });
+  ['homeCountry','homeCity','homeType','homeStatus'].forEach(function(id) {
+    var el = document.getElementById(id); if (el) el.selectedIndex = id === 'homeCountry' ? 1 : 0;
   });
-  document.querySelectorAll('#homeSearchBar .filter-tab').forEach(function(b, i) {
-    b.classList.toggle('active', i === 0);
+  ['homePriceMin','homePriceMax','homeAreaMin','homeAreaMax'].forEach(function(id) {
+    var el = document.getElementById(id); if (el) el.value = '';
   });
-  _homeSearchDeal   = 'buy';
-  _homeSearchStatus = '';
+  var ns = document.getElementById('homeNameSearch');
+  if (ns) { ns.value = ''; }
+  var nc = document.getElementById('homeNameSearchClear');
+  if (nc) nc.style.display = 'none';
+  document.querySelectorAll('#homeSearchBar .rooms-btn').forEach(function(b) { b.classList.toggle('active', b.dataset.val === 'all'); });
+  var rv = document.getElementById('homeRoomsVal'); if (rv) rv.value = 'all';
 }
 
 // ── Sticky scroll reveal ──
@@ -2162,21 +2245,14 @@ function resetHomeFilter() {
   var bar         = document.getElementById('homeSearchBar');
   var placeholder = document.getElementById('homeSearchBarPlaceholder');
   if (!bar || !placeholder) return;
-
   var isSticky = false;
-
   function updateSticky() {
-    // Триггер: прокрутили дальше hero (100vh - высота header)
     var heroBottom = window.innerHeight - 64;
     var shouldStick = window.scrollY > heroBottom;
-
     if (shouldStick === isSticky) return;
     isSticky = shouldStick;
-
     if (shouldStick) {
-      // Запоминаем высоту до залипания
-      var h = bar.offsetHeight;
-      placeholder.style.height = h + 'px';
+      placeholder.style.height = bar.offsetHeight + 'px';
       placeholder.classList.add('active');
       bar.classList.add('is-sticky');
     } else {
@@ -2185,9 +2261,8 @@ function resetHomeFilter() {
       bar.classList.remove('is-sticky');
     }
   }
-
   window.addEventListener('scroll', updateSticky, { passive: true });
-  window.addEventListener('resize', updateSticky, { passive: true });
+  window.addEventListener('resize', updateSticky,  { passive: true });
   updateSticky();
 })();
 </script>

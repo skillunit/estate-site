@@ -686,6 +686,17 @@ function cardSlide(e, btn, dir) {
       });
     }
 
+    // name search
+    var nameVal = params.get('name');
+    if (nameVal) {
+      var nameEl = document.getElementById('nameSearch');
+      if (nameEl) {
+        nameEl.value = nameVal;
+        var clearBtn = document.getElementById('nameSearchClear');
+        if (clearBtn) clearBtn.style.display = 'flex';
+      }
+    }
+
     // agent — устанавливаем _activeAgentId, баннер покажет projects.html после рендера
     var agentVal = params.get('agent');
     if (agentVal) {

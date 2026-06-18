@@ -41,16 +41,7 @@
   display: block;
 }
 
-/* Filter form on homepage — single row */
-.home-filter-form {
-  display: flex !important;
-  flex-direction: row !important;
-  align-items: flex-end;
-  gap: 10px;
-  flex-wrap: wrap;
-}
-.home-filter-form .filter-field { flex: 1; min-width: 130px; }
-.home-filter-form .filter-field--btn { flex: 0 0 auto; }
+/* Filter form on homepage uses same .filter-row-1 / .filter-row-2 as projects.html */
 .home-filter-form .filter-btn {
   display: inline-flex; align-items: center; gap: 6px;
   white-space: nowrap;
