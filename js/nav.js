@@ -315,7 +315,8 @@ function toggleAbout() {
   const text  = document.getElementById('teamAboutBtnText');
   const open  = block.classList.toggle('open');
   btn.classList.toggle('open', open);
-  text.textContent = open ? 'Свернуть' : 'Читать далее';
+  const T = (typeof GRE_T === 'function') ? GRE_T : (k, fb) => fb;
+  text.textContent = open ? T('team.read_less', 'Свернуть') : T('team.read_more', 'Читать далее');
 }
 
 // Blog filter buttons
