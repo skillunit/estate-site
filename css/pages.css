@@ -358,6 +358,10 @@
 .catalog-grid {
   display: grid; grid-template-columns: repeat(3, 1fr);
   gap: 24px; margin-bottom: 40px;
+  align-items: stretch;
+}
+.catalog-grid .catalog-card {
+  height: 100%;
 }
 
 
@@ -497,8 +501,8 @@
   background-repeat: no-repeat; background-size: contain;
 }
 
-/* 3. Price block — прибит к низу, name растягивается */
-.catalog-price-block { margin-bottom: 6px; margin-top: auto; }
+/* 3. Price block */
+.catalog-price-block { margin-bottom: 6px; }
 .catalog-price-row { display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap; }
 .catalog-price {
   font-family: var(--font-head);
@@ -561,12 +565,12 @@
   margin: 0 6px; color: var(--gray-200);
 }
 
-/* 6. CTA footer */
+/* 6. CTA footer — всегда внизу карточки */
 .catalog-card-footer {
   display: flex; align-items: center; justify-content: space-between;
   padding: 10px 18px 14px;
   border-top: 1px solid var(--gray-100);
-  margin-top: 12px;
+  margin-top: auto;
 }
 .catalog-cta-btn {
   display: inline-flex; align-items: center; gap: 6px;
