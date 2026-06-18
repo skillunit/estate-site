@@ -1,0 +1,281 @@
+/**
+ * HE translations — Georgia Real Estate
+ *
+ * WordPress (WPML): каждый ключ → <?php _e('key', 'gre') ?>
+ * Конвертация: wp i18n make-pot → заполнить .po файл
+ */
+
+window.GRE_LANG_HE = {{
+{
+    // ── מטא ───────────────────────────────────────────────
+    'meta.lang': 'he',
+    'meta.dir': 'rtl',
+    'meta.title_home': 'Georgia Real Estate — נדל"ן בגאורגיה',
+    'meta.title_catalog_h1': 'הפרויקטים שלנו',
+    'meta.title_catalog': 'Georgia Real Estate — הפרויקטים שלנו',
+    'meta.desc': 'קנה או שכור נדל"ן בגאורגיה. דירות בטביליסי, באטומי, גוניו. השקעה עם תשואה של 8–14%.',
+
+    // ── ניווט ──────────────────────────────────────────────
+    'nav.home': 'ראשי',
+    'nav.team': 'צוות',
+    'nav.projects': 'פרויקטים',
+    'nav.blog': 'בלוג',
+    'nav.contact': 'צור קשר',
+    'nav.phone': '+995 32 2 123 456',
+
+    // ── Hero ───────────────────────────────────────────────
+    'hero.eyebrow': 'יזם בינלאומי',
+    'hero.title': 'נדל"ן<br>בגאורגיה',
+    'hero.sub': 'למגורים ולהשקעה',
+    'hero.cta_catalog': 'לצפייה בנכסים',
+    'hero.cta_contact': 'צור קשר',
+
+    // ── פילטר ─────────────────────────────────────────────
+    'filter.buy': 'קנייה',
+    'filter.rent': 'שכירות',
+    'filter.country': 'מדינה',
+    'filter.city': 'עיר',
+    'filter.type': 'סוג נכס',
+    'filter.type_all': 'הכל',
+    'filter.type_apartment': 'דירה',
+    'filter.type_apart': 'אפרטמנט',
+    'filter.type_villa': 'וילה',
+    'filter.type_commercial': 'מסחרי',
+    'filter.name_label': 'חיפוש לפי שם',
+    'filter.name_placeholder': 'שם, שכונה, סוג…',
+    'filter.status': 'סטטוס',
+    'filter.status_all': 'כל הסטטוסים',
+    'filter.status_ready': 'מוכן למגורים',
+    'filter.status_build': 'בשלבי בנייה',
+    'filter.status_invest': 'השקעה',
+    'filter.price': 'מחיר, $',
+    'filter.area': 'שטח, מ"ר',
+    'filter.rooms': 'חדרי שינה',
+    'filter.rooms_any': 'הכל',
+    'filter.from': 'מ-',
+    'filter.to': 'עד',
+    'filter.reset': 'אפס',
+    'filter.find': 'חפש',
+
+    // ── יעדים ─────────────────────────────────────────────
+    'directions.title': 'יעדים פופולריים',
+    'directions.see_all': 'ראה הכל',
+    'directions.georgia_cities': 'טביליסי, באטומי, בקוריאני',
+    'directions.usa_cities': 'ניו יורק, מיאמי',
+    'directions.uae_cities': 'דובאי',
+    'directions.cyprus_cities': 'לימסול, פאפוס',
+    'directions.greece_cities': 'אתונה, מיקונוס',
+
+    // ── אודות ─────────────────────────────────────────────
+    'about.title': 'אודותינו',
+    'about.desc': 'אנחנו צוות של אנשי מקצוע עם ניסיון רב שנים בשוק הנדל"ן הגאורגי. המשימה שלנו — לעזור לך למצוא את הנכס המושלם למגורים, לנופש או להשקעה.',
+    'about.btn': 'עוד עלינו',
+    'about.stat_years': 'שנות ניסיון',
+    'about.stat_clients': 'לקוחות מרוצים',
+    'about.stat_objects': 'סך הנכסים המוצעים',
+    'about.stat_locations': 'מיקומים מובחרים בגאורגיה',
+
+    // ── קטלוג ─────────────────────────────────────────────
+    'catalog.buy_title': 'נכסים מובילים למכירה בגאורגיה',
+    'catalog.rent_title': 'נכסים מובילים להשכרה בגאורגיה',
+    'catalog.see_all': 'ראה הכל',
+    'catalog.found': 'נכסים נמצאו:',
+    'catalog.empty_title': 'לא נמצאו נכסים',
+    'catalog.empty_sub': 'נסה לשנות את פרמטרי החיפוש או אפס את הפילטרים',
+    'catalog.sort_top': 'הנמכרים ביותר',
+    'catalog.sort_price_asc': 'מחיר: מנמוך לגבוה',
+    'catalog.sort_price_desc': 'מחיר: מגבוה לנמוך',
+    'catalog.sort_name_az': 'שם: א-ת',
+    'catalog.sort_name_za': 'שם: ת-א',
+
+    // ── כרטיס ─────────────────────────────────────────────
+    'card.details': 'פרטים נוספים',
+    'card.ask': 'שאל',
+    'card.top': '★ TOP',
+    'card.roi_year': '/ שנה',
+    'card.savings_from': 'הנחה ממחיר מקורי',
+    'card.sqm_abbr': 'מ"ר',
+    'card.rooms_abbr': "חד'",
+    'card.floor_abbr': 'קומה',
+
+    // ── תגיות ─────────────────────────────────────────────
+    'badge.sale': 'למכירה',
+    'badge.rent': 'להשכרה',
+    'badge.invest': 'השקעה',
+    'badge.ready': 'מוכן למגורים',
+    'badge.build': 'בשלבי בנייה',
+    'badge.exclusive': 'בלעדי',
+    'badge.rent_long': 'שכירות ארוכת טווח',
+    'badge.rent_short': 'שכירות קצרת טווח',
+
+    // ── דף נכס ────────────────────────────────────────────
+    'detail.invest_title': 'פוטנציאל השקעה',
+    'detail.invest_growth': 'צמיחת מחיר צפויה:',
+    'detail.invest_roi': 'הכנסה משכירות:',
+    'detail.invest_payback': 'תקופת החזר:',
+    'detail.spec_location': 'מיקום',
+    'detail.spec_area': 'שטח',
+    'detail.spec_rooms': 'חדרי שינה',
+    'detail.spec_floor': 'קומה',
+    'detail.spec_type': 'סוג',
+    'detail.spec_year': 'שנת בנייה',
+    'detail.video_label': 'סרטון הצגת הפרויקט',
+    'detail.nearby_title': 'בסביבה',
+    'detail.all_photos': 'כל התמונות',
+    'detail.related_title': 'עוד נכסים ב{city}',
+    'detail.related_see_all': 'ראה הכל',
+    'detail.back': '← חזרה לקטלוג',
+    'detail.rent_title': 'על ההשכרה',
+    'detail.rent_deposit': 'פיקדון:',
+    'detail.rent_term': 'שהייה מינימלית:',
+    'detail.rent_utilities': 'חשבונות:',
+    'detail.rent_utilities_val': 'כלול',
+
+    // ── מחשבון ────────────────────────────────────────────
+    'calc.title': 'מחשבון משכנתא',
+    'calc.down': 'מקדמה',
+    'calc.term': 'תקופת הלוואה',
+    'calc.rate': 'ריבית',
+    'calc.installment': 'תשלומים',
+    'calc.term_from': 'שנה 1',
+    'calc.term_to': '30 שנים',
+    'calc.payment_label': 'תשלום חודשי',
+    'calc.disclaimer': 'אומדן בלבד. תנאים מדויקים — אצל הבנק השותף.',
+    'calc.installment_sub': 'תשלומים ללא ריבית ל-{term} שנים',
+    'calc.mortgage_sub': 'מקדמה {down} · הלוואה {loan}',
+
+    // ── פופאפ ─────────────────────────────────────────────
+    'popup.eyebrow': 'השאר פנייה',
+    'popup.title': 'קבל ייעוץ',
+    'popup.sub': 'המומחה שלנו יצור איתך קשר בזמן נוח',
+    'popup.name_label': 'שמך',
+    'popup.name_placeholder': 'ישראל ישראלי',
+    'popup.phone_label': 'טלפון / WhatsApp',
+    'popup.phone_placeholder': '+972 50 000 0000',
+    'popup.time_label': 'זמן מועדף',
+    'popup.time_morning': 'בוקר (9–12)',
+    'popup.time_day': 'צהריים (12–17)',
+    'popup.time_evening': 'ערב (17–21)',
+    'popup.whatsapp': 'WhatsApp',
+    'popup.telegram': 'Telegram',
+    'popup.call': 'שיחה',
+    'popup.submit': 'שלח פנייה',
+    'popup.success_title': 'הפנייה התקבלה!',
+    'popup.success_sub': 'המנהל שלנו ייצור איתך קשר בזמן שסוכם.',
+    'popup.close': 'סגור',
+
+    // ── המלצות ────────────────────────────────────────────
+    'testi.eyebrow': 'המלצות',
+    'testi.title': 'סומכים עלינו<br><span>שותפים ומשקיעים</span>',
+    'testi.tag_investor': 'משקיע',
+    'testi.tag_partner': 'שותף',
+    'testi.tag_client': 'לקוח',
+    'testi.q1': 'צוות Georgia Real Estate ליווה אותנו לאורך כל תהליך רכישת הדירה בבאטומי — מהשיחה הראשונה ועד קבלת המפתחות. מקצועיות ושקיפות בכל שלב.',
+    'testi.q1_name': 'אלכסיי מורוזוב',
+    'testi.q1_role': 'משקיע פרטי, מוסקבה',
+    'testi.q2': 'אנחנו עובדים עם החברה כבר שלוש שנים. שותף אמין להשקעות גדולות בנדל"ן הגאורגי. אנחנו מעריכים במיוחד את הניקיון המשפטי של העסקאות.',
+    'testi.q2_name': 'David Kvaratskhelia',
+    'testi.q2_role': 'CEO, KvGroup Invest',
+    'testi.q3': 'חיפשתי דירות עם נוף לים לנופש משפחתי והשכרה. המנהל מצא את הנכס המושלם בגוניו — כבר מקבלת 12% לשנה.',
+    'testi.q3_name': 'אולגה סטפנובה',
+    'testi.q3_role': 'יזמת, קייב',
+    'testi.q4': 'רכשנו שטח מסחרי בטביליסי לפתיחת מסעדה. Georgia Real Estate ליוו לא רק את העסקה אלא גם עזרו ברישום העסק.',
+    'testi.q4_name': 'מיכאיל טטראדזה',
+    'testi.q4_role': 'מסעדן, טביליסי',
+    'testi.q5': 'אני מפנה את כל הלקוחות שלי לכאן. מסד הנתונים הטוב ביותר של נכסים בשוק הגאורגי, עמלות הוגנות ותגובה מהירה של הצוות.',
+    'testi.q5_name': 'Nino Bakradze',
+    'testi.q5_role': 'מנהלת, Prime Realty GE',
+    'testi.q6': 'אנחנו מגוונים את תיק ההשקעות עם נדל"ן בינלאומי. גאורגיה הוכחה כבחירה הטובה ביותר — צמיחה יציבה, כניסה נגישה.',
+    'testi.q6_name': 'רומן שבצ\'נקו',
+    'testi.q6_role': 'מנהל נכסים, דובאי',
+
+    // ── פוטר ──────────────────────────────────────────────
+    'footer.brand_desc': 'השותף האמין שלך בנדל"ן הגאורגי.',
+    'footer.menu_title': 'תפריט',
+    'footer.menu_about': 'אודות',
+    'footer.menu_catalog': 'נכסים',
+    'footer.menu_services': 'שירותים',
+    'footer.menu_blog': 'בלוג',
+    'footer.menu_contact': 'צור קשר',
+    'footer.menu_legal': 'עסקה, מיסים ורישיון שהייה',
+    'footer.services_title': 'שירותים',
+    'footer.services_1': 'בחירת נכס',
+    'footer.services_2': 'ליווי משפטי',
+    'footer.services_3': 'ניהול נכס',
+    'footer.services_4': 'ייעוץ השקעות',
+    'footer.contacts_title': 'יצירת קשר',
+    'footer.address': 'טביליסי,<br>רחוב צ\'אוקאידזה 37',
+    'footer.copyright': '© 2026 Georgia Real Estate',
+    'footer.privacy': 'מדיניות פרטיות',
+
+    // ── דף צוות ───────────────────────────────────────────
+    'team.hero_title': 'הצוות שלנו',
+    'team.role_ceo': 'מנכ"ל',
+    'team.role_sales': 'ראש מחלקת מכירות',
+    'team.role_lawyer': 'יועץ משפטי',
+    'team.role_agent': 'סוכן נדל"ן',
+    'team.role_marketing': 'מנהל שיווק',
+    'team.agent_ask': 'שאל שאלה',
+
+    // ── דף בלוג ───────────────────────────────────────────
+    'blog.hero_title': 'בלוג',
+    'blog.hero_sub': 'מאמרים על נדל"ן, השקעות וחיים בגאורגיה',
+    'blog.read_more': 'קרא עוד',
+    'blog.tag_all': 'הכל',
+    'blog.tag_invest': 'השקעות',
+    'blog.tag_market': 'שוק',
+    'blog.tag_life': 'חיים בגאורגיה',
+    'blog.tag_legal': 'משפטי',
+
+    // ── דף צור קשר ────────────────────────────────────────
+    'contact.hero_title': 'צור קשר',
+    'contact.hero_sub': 'אנחנו מוכנים לענות על כל שאלה',
+    'contact.form_name': 'שמך',
+    'contact.form_email': 'אימייל',
+    'contact.form_phone': 'טלפון',
+    'contact.form_message': 'הודעה',
+    'contact.form_submit': 'שלח',
+    'contact.office_title': 'המשרד שלנו',
+    'contact.work_hours': 'ב-ו: 9:00–19:00',
+
+    // ── מועדפים ───────────────────────────────────────────
+    'favorites.title': 'נכסים שמורים',
+    'favorites.empty': 'עדיין לא שמרת נכסים',
+    'favorites.empty_sub': 'לחץ על ♡ בכרטיס נכס כלשהו כדי לשמור אותו כאן',
+
+    // ── היסטוריה ──────────────────────────────────────────
+    'history.title': 'היסטוריית צפייה',
+    'history.empty': 'עדיין לא צפית בנכסים',
+    'history.clear': 'נקה היסטוריה',
+
+    // ── כפתורים צפים ──────────────────────────────────────
+    'floating.consult': 'ייעוץ מקוון',
+    'floating.top': 'חזרה למעלה',
+
+    // ── מדינות וערים ──────────────────────────────────────
+    'country.all': '🌍 כל המדינות',
+    'country.georgia': '🇬🇪 גאורגיה',
+    'country.usa': '🇺🇸 ארה"ב',
+    'country.uae': '🇦🇪 איחוד האמירויות',
+    'country.cyprus': '🇨🇾 קפריסין',
+    'country.greece': '🇬🇷 יוון',
+    'city.all': 'כל עיר',
+    'city.tbilisi': 'טביליסי',
+    'city.batumi': 'באטומי',
+    'city.gonio': 'גוניו',
+    'city.kakheti': 'קאחתי',
+    'city.bakuriani': 'בקוריאני',
+    'city.new-york': 'ניו יורק',
+    'city.miami': 'מיאמי',
+    'city.dubai': 'דובאי',
+    'city.limassol': 'לימסול',
+    'city.paphos': 'פאפוס',
+    'city.athens': 'אתונה',
+    'city.mykonos': 'מיקונוס',
+
+    // ── נצפו לאחרונה ──────────────────────────────────────
+    'recent.title': 'נצפו לאחרונה',
+    'recent.clear': 'נקה',
+  }
+};
+}};
