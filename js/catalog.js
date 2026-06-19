@@ -894,13 +894,15 @@ function formatPrice(usdPriceStr) {
   const isRent = usdPriceStr.includes('/мес');
   const num = parseFloat(usdPriceStr.replace(/[^0-9.]/g, ''));
   if (isNaN(num)) return usdPriceStr;
-  return CURRENCY_SYMBOLS[currentCurrency] + convertUsd(num).toLocaleString('en-US') + (isRent ? '/мес' : '');
+  const T = (typeof GRE_T === 'function') ? GRE_T : (k, fb) => fb;
+  return CURRENCY_SYMBOLS[currentCurrency] + convertUsd(num).toLocaleString('en-US') + (isRent ? T('card.per_month', '/мес') : '');
 }
 
 // Цена за м² в текущей валюте
 function formatSqm(p) {
   const usd = parseFloat(p.price.replace(/[^0-9.]/g, '')) / parseFloat(p.area);
-  return convertUsd(usd).toLocaleString('ru-RU') + ' ' + CURRENCY_SYMBOLS[currentCurrency] + '/м²';
+  const T = (typeof GRE_T === 'function') ? GRE_T : (k, fb) => fb;
+  return convertUsd(usd).toLocaleString('ru-RU') + ' ' + CURRENCY_SYMBOLS[currentCurrency] + '/' + T('card.sqm_abbr', 'м²');
 }
 
 function setCurrency(cur) {
@@ -973,8 +975,8 @@ function renderRecentlyViewed() {
       <div class="catalog-card-img-wrap" style="position:relative;overflow:hidden;">
         <div class="card-slider" data-imgs='${JSON.stringify(imgs)}' data-idx="0">
           <img class="catalog-img card-slider-img" src="${imgs[0]}" alt="${p.name}">
-          <button class="card-slider-btn card-slider-prev" onclick="cardSlide(event,this,-1)" aria-label="Назад">&#8249;</button>
-          <button class="card-slider-btn card-slider-next" onclick="cardSlide(event,this,1)" aria-label="Вперёд">&#8250;</button>
+          <button class="card-slider-btn card-slider-prev" onclick="cardSlide(event,this,-1)" aria-label="${typeof GRE_T==='function'?GRE_T('card.slider_prev','Назад'):'Назад'}">&#8249;</button>
+          <button class="card-slider-btn card-slider-next" onclick="cardSlide(event,this,1)" aria-label="${typeof GRE_T==='function'?GRE_T('card.slider_next','Вперёд'):'Вперёд'}">&#8250;</button>
           <div class="card-slider-dots">${dots}</div>
         </div>
         <span class="prop-badge ${badge.cls}">${badge.text}</span>
@@ -999,7 +1001,7 @@ function renderRecentlyViewed() {
           <span class="spec-item"><strong>${p.rooms}</strong> ${typeof GRE_T==="function"?GRE_T("card.rooms_abbr"):"спал."}</span>
           <span class="spec-sep">·</span>
           <span class="spec-item"><strong>${p.floor}</strong> ${typeof GRE_T==="function"?GRE_T("card.floor_abbr"):"эт."}</span>
-          ${p.year ? `<span class="spec-sep">·</span><span class="spec-item"><strong>${p.year}</strong> г.</span>` : ''}
+          ${p.year ? `<span class="spec-sep">·</span><span class="spec-item"><strong>${p.year}</strong> ${typeof GRE_T==="function"?GRE_T("card.year_abbr","г."):"г."}</span>` : ''}
         </div>
       </div>
       <div class="catalog-card-footer">
@@ -1164,8 +1166,8 @@ function renderCatalogGrid(countryVal, cityVal, statusVal, typeVal, extra) {
       <div class="catalog-card-img-wrap" style="position:relative;overflow:hidden;">
         <div class="card-slider" data-imgs='${JSON.stringify(imgs)}' data-idx="0">
           <img class="catalog-img card-slider-img" src="${p.img}" alt="${p.name}" loading="lazy">
-          <button class="card-slider-btn card-slider-prev" onclick="cardSlide(event,this,-1)" aria-label="Назад">&#8249;</button>
-          <button class="card-slider-btn card-slider-next" onclick="cardSlide(event,this,1)" aria-label="Вперёд">&#8250;</button>
+          <button class="card-slider-btn card-slider-prev" onclick="cardSlide(event,this,-1)" aria-label="${typeof GRE_T==='function'?GRE_T('card.slider_prev','Назад'):'Назад'}">&#8249;</button>
+          <button class="card-slider-btn card-slider-next" onclick="cardSlide(event,this,1)" aria-label="${typeof GRE_T==='function'?GRE_T('card.slider_next','Вперёд'):'Вперёд'}">&#8250;</button>
           <div class="card-slider-dots">${dots}</div>
         </div>
         <span class="prop-badge ${badge.cls}">${badge.text}</span>
@@ -1194,7 +1196,7 @@ function renderCatalogGrid(countryVal, cityVal, statusVal, typeVal, extra) {
           <span class="spec-item"><strong>${p.rooms}</strong> ${typeof GRE_T==="function"?GRE_T("card.rooms_abbr"):"спал."}</span>
           <span class="spec-sep">·</span>
           <span class="spec-item"><strong>${p.floor}</strong> ${typeof GRE_T==="function"?GRE_T("card.floor_abbr"):"эт."}</span>
-          ${p.year ? `<span class="spec-sep">·</span><span class="spec-item"><strong>${p.year}</strong> г.</span>` : ''}
+          ${p.year ? `<span class="spec-sep">·</span><span class="spec-item"><strong>${p.year}</strong> ${typeof GRE_T==="function"?GRE_T("card.year_abbr","г."):"г."}</span>` : ''}
         </div>
       </div>
       <div class="catalog-card-footer">
@@ -2187,8 +2189,8 @@ function buildFeaturedCards(props) {
       <div class="catalog-card-img-wrap" style="position:relative;overflow:hidden;">
         <div class="card-slider" data-imgs='${JSON.stringify(imgs)}' data-idx="0">
           <img class="catalog-img card-slider-img" src="${imgs[0]}" alt="${p.name}">
-          <button class="card-slider-btn card-slider-prev" onclick="cardSlide(event,this,-1)" aria-label="Назад">&#8249;</button>
-          <button class="card-slider-btn card-slider-next" onclick="cardSlide(event,this,1)" aria-label="Вперёд">&#8250;</button>
+          <button class="card-slider-btn card-slider-prev" onclick="cardSlide(event,this,-1)" aria-label="${typeof GRE_T==='function'?GRE_T('card.slider_prev','Назад'):'Назад'}">&#8249;</button>
+          <button class="card-slider-btn card-slider-next" onclick="cardSlide(event,this,1)" aria-label="${typeof GRE_T==='function'?GRE_T('card.slider_next','Вперёд'):'Вперёд'}">&#8250;</button>
           <div class="card-slider-dots">${dots}</div>
         </div>
         <span class="prop-badge ${badge.cls}">${badge.text}</span>
@@ -2213,7 +2215,7 @@ function buildFeaturedCards(props) {
           <span class="spec-item"><strong>${p.rooms}</strong> ${typeof GRE_T==="function"?GRE_T("card.rooms_abbr"):"спал."}</span>
           <span class="spec-sep">·</span>
           <span class="spec-item"><strong>${p.floor}</strong> ${typeof GRE_T==="function"?GRE_T("card.floor_abbr"):"эт."}</span>
-          ${p.year ? `<span class="spec-sep">·</span><span class="spec-item"><strong>${p.year}</strong> г.</span>` : ''}
+          ${p.year ? `<span class="spec-sep">·</span><span class="spec-item"><strong>${p.year}</strong> ${typeof GRE_T==="function"?GRE_T("card.year_abbr","г."):"г."}</span>` : ''}
         </div>
       </div>
       <div class="catalog-card-footer">

@@ -97,6 +97,11 @@ window.GRE_LANG_EN = {
     'card.sqm_abbr': 'm²',
     'card.rooms_abbr': 'bd.',
     'card.floor_abbr': 'fl.',
+    'card.per_month': '/mo',
+    'card.year_abbr': '',
+    'card.not_found': 'No properties found for the selected filters',
+    'card.slider_prev': 'Previous',
+    'card.slider_next': 'Next',
 
     // ── Badges ─────────────────────────────────────────────
     'badge.sale': 'For Sale',

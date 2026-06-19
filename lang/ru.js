@@ -97,6 +97,11 @@ window.GRE_LANG_RU = {
     'card.sqm_abbr': 'м²',
     'card.rooms_abbr': 'спал.',
     'card.floor_abbr': 'эт.',
+    'card.per_month': '/мес',
+    'card.year_abbr': 'г.',
+    'card.not_found': 'По выбранным фильтрам объектов не найдено',
+    'card.slider_prev': 'Назад',
+    'card.slider_next': 'Вперёд',
 
     // ── Бейджи статуса ─────────────────────────────────────
     'badge.sale': 'Продажа',

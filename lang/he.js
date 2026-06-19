@@ -97,6 +97,11 @@ window.GRE_LANG_HE = {
     'card.sqm_abbr': 'מ"ר',
     'card.rooms_abbr': "חד'",
     'card.floor_abbr': 'קומה',
+    'card.per_month': '/חודש',
+    'card.year_abbr': '',
+    'card.not_found': 'לא נמצאו נכסים לפי הסינון שנבחר',
+    'card.slider_prev': 'הקודם',
+    'card.slider_next': 'הבא',
 
     // ── תגיות ─────────────────────────────────────────────
     'badge.sale': 'למכירה',
