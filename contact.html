@@ -7,7 +7,7 @@
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
 <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Контакты — Georgia Real Estate</title>
+<title data-i18n="contact.hero_title">Контакты — Georgia Real Estate</title>
 <meta name="description" content="Свяжитесь с нами. Офис в Тбилиси, ул. Шота Руставели 15. Телефон: +995 32 2 123 456">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -49,15 +49,15 @@
     </div>
 
     <nav class="header-nav" id="mainNav">
-      <a href="index.html">Главная</a>
+      <a href="index.html" data-i18n="nav.home">Главная</a>
       <span class="nav-sep">|</span>
-      <a href="team.html">Команда</a>
+      <a href="team.html" data-i18n="nav.team">Команда</a>
       <span class="nav-sep">|</span>
-      <a href="projects.html">Проекты</a>
+      <a href="projects.html" data-i18n="nav.projects">Проекты</a>
       <span class="nav-sep">|</span>
-      <a href="blog.html">Блог</a>
+      <a href="blog.html" data-i18n="nav.blog">Блог</a>
       <span class="nav-sep">|</span>
-      <a href="contact.html" class="nav-contact-link active">Связаться с нами</a>
+      <a href="contact.html" class="nav-contact-link active" data-i18n="nav.contact">Связаться с нами</a>
     </nav>
 
     <div class="header-right">
@@ -84,7 +84,7 @@
   <div class="contacts-hero">
     <div class="contacts-hero-bg"></div>
     <div class="contacts-hero-overlay"></div>
-    <div class="contacts-hero-content"><h1>Контакты</h1><p class="page-hero-subtitle">Свяжитесь с нами любым удобным способом</p></div>
+    <div class="contacts-hero-content"><h1 data-i18n="contact.hero_title">Контакты</h1><p class="page-hero-subtitle" data-i18n="contact.hero_sub">Свяжитесь с нами любым удобным способом</p></div>
   </div>
 
   <!-- Body -->
@@ -94,22 +94,22 @@
       <!-- Left: office info -->
       <div class="contacts-left">
         <div class="office-card office-card--stretch">
-          <div class="office-title">Офис в Тбилиси</div>
+          <div class="office-title" data-i18n="contact.office_title">Офис в Тбилиси</div>
           <div class="office-row">
-            <span class="office-row-label">Адрес:</span>
-            <span class="office-row-val">ул. Шота Руставели 15,<br>Тбилиси, Грузия</span>
+            <span class="office-row-label" data-i18n="contact.label_address">Адрес:</span>
+            <span class="office-row-val" data-i18n-html="contact.val_address">ул. Шота Руставели 15,<br>Тбилиси, Грузия</span>
           </div>
           <div class="office-row">
-            <span class="office-row-label">Телефон:</span>
+            <span class="office-row-label" data-i18n="contact.label_phone">Телефон:</span>
             <span class="office-row-val"><a href="tel:+995322123456">+995 32 2 123 456</a></span>
           </div>
           <div class="office-row">
-            <span class="office-row-label">Email:</span>
+            <span class="office-row-label" data-i18n="contact.label_email">Email:</span>
             <span class="office-row-val"><a href="mailto:info@georgia-re.com">info@georgia-re.com</a></span>
           </div>
           <div class="office-row">
-            <span class="office-row-label">Часы работы:</span>
-            <span class="office-row-val">Пн–Пт 9:00 – 18:00</span>
+            <span class="office-row-label" data-i18n="contact.label_hours">Часы работы:</span>
+            <span class="office-row-val" data-i18n="contact.val_hours">Пн–Пт 9:00 – 18:00</span>
           </div>
           <div class="office-socials">
             <a class="office-social-btn" href="https://t.me/" target="_blank">
@@ -130,7 +130,7 @@
             </a>
           </div>
           <div class="office-action">
-            <a href="https://maps.google.com/?q=Shota+Rustaveli+15+Tbilisi+Georgia" target="_blank" class="btn btn-red">📍 Открыть на карте</a>
+            <a href="https://maps.google.com/?q=Shota+Rustaveli+15+Tbilisi+Georgia" target="_blank" class="btn btn-red" data-i18n="contact.map_btn">📍 Открыть на карте</a>
           </div>
         </div>
       </div>
@@ -138,27 +138,27 @@
       <!-- Right: contact form -->
       <div style="display:flex;flex-direction:column;">
         <div class="form-card" style="flex:1;display:flex;flex-direction:column;">
-          <div class="form-card-title">Форма обратной связи</div>
+          <div class="form-card-title" data-i18n="contact.form_title">Форма обратной связи</div>
           <div class="form-row">
             <div class="form-group" style="margin-bottom:0;">
-              <label>Ваше имя</label>
-              <input class="form-input" type="text" id="contactName" placeholder="Ваше Имя">
+              <label data-i18n="contact.label_name">Ваше имя</label>
+              <input class="form-input" type="text" id="contactName" placeholder="Ваше Имя" data-i18n-attr="placeholder:contact.ph_name">
             </div>
             <div class="form-group" style="margin-bottom:0;">
-              <label>Email</label>
-              <input class="form-input" type="email" id="contactEmail" placeholder="Ваш Email">
+              <label data-i18n="contact.label_email_field">Email</label>
+              <input class="form-input" type="email" id="contactEmail" placeholder="Ваш Email" data-i18n-attr="placeholder:contact.ph_email">
             </div>
           </div>
           <div class="form-group" style="margin-top:14px;margin-bottom:0;">
-            <label>Телефон</label>
-            <input class="form-input" type="tel" id="contactPhone" placeholder="Ваш Телефон">
+            <label data-i18n="contact.label_phone_field">Телефон</label>
+            <input class="form-input" type="tel" id="contactPhone" placeholder="Ваш Телефон" data-i18n-attr="placeholder:contact.ph_phone">
           </div>
           <div class="form-group" style="margin-top:14px;">
-            <label>Сообщение</label>
-            <textarea class="form-textarea" id="contactMessage" placeholder="Ваше сообщение..."></textarea>
+            <label data-i18n="contact.label_message">Сообщение</label>
+            <textarea class="form-textarea" id="contactMessage" placeholder="Ваше сообщение..." data-i18n-attr="placeholder:contact.ph_message"></textarea>
           </div>
-          <button class="btn btn-red form-submit" onclick="submitContactForm()">Отправить сообщение</button>
-          <div class="form-success" id="formSuccess" style="display:none;">✓ Сообщение отправлено! Мы свяжемся с вами в течение 24 часов.</div>
+          <button class="btn btn-red form-submit" onclick="submitContactForm()" data-i18n="contact.submit">Отправить сообщение</button>
+          <div class="form-success" id="formSuccess" style="display:none;" data-i18n="contact.success">✓ Сообщение отправлено! Мы свяжемся с вами в течение 24 часов.</div>
         </div>
       </div>
 
@@ -186,7 +186,7 @@
             </svg>
             Georgia Real Estate
           </div>
-          <div class="footer-brand-desc">Ваш надёжный партнёр на рынке недвижимости в Грузии.</div>
+          <div class="footer-brand-desc" data-i18n="footer.brand_desc">Ваш надёжный партнёр на рынке недвижимости в Грузии.</div>
           <div class="footer-socials">
             <a class="footer-social" href="https://facebook.com/" target="_blank">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
@@ -203,36 +203,36 @@
           </div>
         </div>
         <div>
-          <div class="footer-col-title">Меню</div>
+          <div class="footer-col-title" data-i18n="footer.menu_title">Меню</div>
           <ul class="footer-links">
-            <li><a href="index.html">О компании</a></li>
-            <li><a href="projects.html">Недвижимость</a></li>
-            <li>Услуги</li>
-            <li><a href="index.html#blog">Блог</a></li>
-            <li><a href="contact.html">Контакты</a></li>
+            <li><a href="index.html" data-i18n="footer.menu_about">О компании</a></li>
+            <li><a href="projects.html" data-i18n="footer.menu_catalog">Недвижимость</a></li>
+            <li data-i18n="footer.menu_services">Услуги</li>
+            <li><a href="index.html#blog" data-i18n="footer.menu_blog">Блог</a></li>
+            <li><a href="contact.html" data-i18n="footer.menu_contact">Контакты</a></li>
           </ul>
         </div>
         <div>
-          <div class="footer-col-title">Услуги</div>
+          <div class="footer-col-title" data-i18n="footer.services_title">Услуги</div>
           <ul class="footer-links">
-            <li>Подбор недвижимости</li>
-            <li>Юридическое сопровождение</li>
-            <li>Управление недвижимостью</li>
-            <li>Инвестиционные консультации</li>
+            <li data-i18n="footer.services_1">Подбор недвижимости</li>
+            <li data-i18n="footer.services_2">Юридическое сопровождение</li>
+            <li data-i18n="footer.services_3">Управление недвижимостью</li>
+            <li data-i18n="footer.services_4">Инвестиционные консультации</li>
           </ul>
         </div>
         <div>
-          <div class="footer-col-title">Контакты</div>
+          <div class="footer-col-title" data-i18n="footer.contacts_title">Контакты</div>
           <div class="footer-contact">
             <span><a href="tel:+995322123456">+995 32 2 123 456</a></span>
             <span><a href="mailto:info@georgia-re.com">info@georgia-re.com</a></span>
-            <span>г. Тбилиси, ул. Руставели 15</span>
+            <span data-i18n="contact.footer_address">г. Тбилиси, ул. Руставели 15</span>
           </div>
         </div>
       </div>
       <div class="footer-bottom">
-        <span class="footer-copy">© 2026 Georgia Real Estate</span>
-        <a class="footer-policy" href="index.html#privacy">Политика конфиденциальности</a>
+        <span class="footer-copy" data-i18n="footer.copyright">© 2026 Georgia Real Estate</span>
+        <a class="footer-policy" href="index.html#privacy" data-i18n="footer.privacy">Политика конфиденциальности</a>
       </div>
     </div>
   </footer>
@@ -272,10 +272,10 @@ function submitContactForm() {
 <script src="js/auth.js?v=4"></script>
 <script src="js/favorites.js?v=3"></script>
 <script src="js/history.js?v=1"></script>
-<script src="lang/ru.js?v=10"></script>
-<script src="lang/en.js?v=10"></script>
-<script src="lang/he.js?v=10"></script>
-<script src="lang/translations.js?v=10"></script>
-<script src="js/i18n.js?v=6"></script>
+<script src="lang/ru.js?v=12"></script>
+<script src="lang/en.js?v=12"></script>
+<script src="lang/he.js?v=12"></script>
+<script src="lang/translations.js?v=12"></script>
+<script src="js/i18n.js?v=8"></script>
 </body>
 </html>
