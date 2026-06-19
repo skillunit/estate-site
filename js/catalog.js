@@ -2031,8 +2031,15 @@ function renderRelated(currentId) {
   }
 
   section.style.display = 'block';
-  const countryNames = { 'all': 'Грузии', 'usa': 'США', 'uae': 'ОАЭ', 'cyprus': 'Кипре', 'greece': 'Греции' };
-  document.getElementById('relatedTitle').textContent = `Другие объекты в ${countryNames[prop.country] || prop.cityLabel}`;
+  const T = (typeof GRE_T === 'function') ? GRE_T : (k, fb) => fb;
+  const countryNames = {
+    'all': T('catalog.in_georgia', 'в Грузии'),
+    'usa': T('catalog.in_usa', 'в США'),
+    'uae': T('catalog.in_uae', 'в ОАЭ'),
+    'cyprus': T('catalog.in_cyprus', 'на Кипре'),
+    'greece': T('catalog.in_greece', 'в Греции'),
+  };
+  document.getElementById('relatedTitle').textContent = T('detail.related_other_country', 'Другие объекты') + ' ' + (countryNames[prop.country] || prop.cityLabel);
 
   track.innerHTML = same.map(p => {
     const badge = getPropBadge(p);
@@ -2060,11 +2067,11 @@ function renderRelated(currentId) {
         </div>
         ${roiHtml ? `<div class="catalog-pills-row">${roiHtml}</div>` : (p.deal !== "rent" ? `<div class="catalog-pills-row"></div>` : "")}
         <div class="catalog-specs">
-          <span class="spec-item"><strong>${p.area}</strong> м²</span>
+          <span class="spec-item"><strong>${p.area}</strong> ${T('card.sqm_abbr','м²')}</span>
           <span class="spec-sep">·</span>
-          <span class="spec-item"><strong>${p.rooms}</strong> спал.</span>
+          <span class="spec-item"><strong>${p.rooms}</strong> ${T('card.rooms_abbr','спал.')}</span>
           <span class="spec-sep">·</span>
-          <span class="spec-item"><strong>${p.floor}</strong> эт.</span>
+          <span class="spec-item"><strong>${p.floor}</strong> ${T('card.floor_abbr','эт.')}</span>
         </div>
       </div>
       <div class="catalog-card-footer">
