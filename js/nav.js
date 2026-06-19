@@ -99,10 +99,18 @@ function updateCityOptions(country) {
 function updateCatalogHeadline(country) {
   const el = document.getElementById('catalogHeadline');
   if (!el) return;
+  const T = (typeof GRE_T === 'function') ? GRE_T : (k, fb) => fb;
   const deal = typeof currentDealType !== 'undefined' ? currentDealType : 'buy';
-  const dealLabel = deal === 'rent' ? 'Аренда' : 'Покупка';
-  const countryLabel = COUNTRY_LABELS[country] || 'Грузии';
-  el.textContent = `${dealLabel} в ${countryLabel}`;
+  const dealLabel = deal === 'rent' ? T('filter.rent', 'Аренда') : T('filter.buy', 'Покупка');
+  const countryMap = {
+    all: T('catalog.in_georgia', 'в Грузии'),
+    usa: T('catalog.in_usa', 'в США'),
+    uae: T('catalog.in_uae', 'в ОАЭ'),
+    cyprus: T('catalog.in_cyprus', 'на Кипре'),
+    greece: T('catalog.in_greece', 'в Греции'),
+  };
+  const countryLabel = countryMap[country] || countryMap.all;
+  el.textContent = `${dealLabel} ${countryLabel}`;
 }
 
 let _prevCountry = 'all';
