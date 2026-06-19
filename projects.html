@@ -190,7 +190,7 @@
         </div>
         <div class="filter-sep-v"></div>
         <div class="filter-field filter-field--price">
-          <label id="priceCurrencyLabel" data-i18n="filter.price">Цена, $</label>
+          <label id="priceCurrencyLabel">Цена, $</label>
           <div class="filter-range-inputs">
             <input class="filter-range-input" type="text" id="priceMin" placeholder="От" oninput="formatPriceInput(this)">
             <span class="filter-range-sep">—</span>
@@ -432,11 +432,35 @@
       if (country === 'georgia') country = 'all';
 
       var cityKey = country + '_' + city;
-      var text = (SEO[deal] && SEO[deal][cityKey])
-        ? SEO[deal][cityKey]
-        : (SEO[deal] && SEO[deal][country])
-          ? SEO[deal][country]
-          : SEO.buy.all;
+
+      // 1) Пробуем взять перевод через GRE_T (поддержка EN/HE + RU из lang-файлов)
+      var T = (typeof GRE_T === 'function') ? GRE_T : null;
+      var text = null;
+      if (T) {
+        var tryKeys = [cityKey, country];
+        for (var i = 0; i < tryKeys.length; i++) {
+          var base = 'seo.' + deal + '.' + tryKeys[i];
+          var t = T(base + '.title');
+          if (t !== base + '.title') {
+            text = {
+              title: t,
+              p1: T(base + '.p1'),
+              p2: T(base + '.p2'),
+              p3: T(base + '.p3'),
+            };
+            break;
+          }
+        }
+      }
+
+      // 2) Fallback на встроенный русский объект SEO (для записей без перевода ещё)
+      if (!text) {
+        text = (SEO[deal] && SEO[deal][cityKey])
+          ? SEO[deal][cityKey]
+          : (SEO[deal] && SEO[deal][country])
+            ? SEO[deal][country]
+            : SEO.buy.all;
+      }
 
       var title = document.getElementById('seoTitle');
       var p1    = document.getElementById('seoP1');
@@ -470,6 +494,9 @@
       // citySelect — смена города
       var cityEl = document.getElementById('citySelect');
       if (cityEl) cityEl.addEventListener('change', updateSeoText);
+
+      // Перерисовываем SEO-текст при смене языка
+      document.addEventListener('langchange', updateSeoText);
 
       // deal buttons — прямая привязка на случай если патч window.setDealType не сработает
       var btnBuy  = document.getElementById('dealBtnBuy');
@@ -1191,14 +1218,14 @@
 </div>
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-<script src="lang/ru.js?v=24"></script>
-<script src="lang/en.js?v=24"></script>
-<script src="lang/he.js?v=24"></script>
-<script src="lang/translations.js?v=24"></script>
-<script src="js/i18n.js?v=24"></script>
-<script src="js/nav.js?v=25"></script>
+<script src="lang/ru.js?v=25"></script>
+<script src="lang/en.js?v=25"></script>
+<script src="lang/he.js?v=25"></script>
+<script src="lang/translations.js?v=25"></script>
+<script src="js/i18n.js?v=25"></script>
+<script src="js/nav.js?v=26"></script>
 <script src="js/forms.js?v=6"></script>
-<script src="js/catalog.js?v=68"></script>
+<script src="js/catalog.js?v=69"></script>
 <script>
 /* УМНЫЙ ПОИСК */
 var _sq = '';
@@ -1387,7 +1414,10 @@ document.addEventListener('DOMContentLoaded', function() {
   var _symbols = { USD: '$', GEL: '₾', EUR: '€' };
   var _cur = localStorage.getItem('grre_currency') || 'USD';
   var priceLabel = document.getElementById('priceCurrencyLabel');
-  if (priceLabel) priceLabel.textContent = 'Цена, ' + (_symbols[_cur] || '$');
+  if (priceLabel) {
+    var _priceT = (typeof GRE_T === 'function') ? GRE_T('filter.price_currency') : 'Цена,';
+    priceLabel.textContent = _priceT + ' ' + (_symbols[_cur] || '$');
+  }
 
   // Определяем активного агента — из URL или sessionStorage (legacy)
   var pendingAgent = sessionStorage.getItem('filterAgent') || null;

@@ -423,26 +423,29 @@ function openArticle(imgUrl) {
 // ── DEAL TYPE TOGGLE ──
 let currentDealType = 'buy';
 
-const STATUS_OPTIONS = {
-  buy:  [
-    ['all',          'Любой статус'],
-    ['ready',        'Сдан в эксплуатацию'],
-    ['construction', 'На стадии строительства'],
-    ['investment',   'Инвестиция'],
-    ['sale',         'Эксклюзив'],
-  ],
-  rent: [
-    ['all',       'Любой статус'],
-    ['longterm',  'Долгосрочная аренда'],
-    ['shortterm', 'Краткосрочная аренда'],
-    ['daily',     'Посуточно'],
-  ],
-};
+function getStatusOptions(type) {
+  const T = (typeof GRE_T === 'function') ? GRE_T : (k, fb) => fb;
+  if (type === 'rent') {
+    return [
+      ['all',       T('filter.status_all', 'Любой статус')],
+      ['longterm',  T('badge.rent_long', 'Долгосрочная аренда')],
+      ['shortterm', T('badge.rent_short', 'Краткосрочная аренда')],
+      ['daily',     T('filter.status_daily', 'Посуточно')],
+    ];
+  }
+  return [
+    ['all',          T('filter.status_all', 'Любой статус')],
+    ['ready',        T('badge.ready', 'Сдан в эксплуатацию')],
+    ['construction', T('badge.build', 'На стадии строительства')],
+    ['investment',   T('badge.invest', 'Инвестиция')],
+    ['sale',         T('badge.exclusive', 'Эксклюзив')],
+  ];
+}
 
 function updateStatusOptions(type) {
   const statusSelect = document.getElementById('statusSelect');
   if (!statusSelect) return;
-  statusSelect.innerHTML = STATUS_OPTIONS[type]
+  statusSelect.innerHTML = getStatusOptions(type)
     .map(([v, l]) => `<option value="${v}">${l}</option>`)
     .join('');
 }

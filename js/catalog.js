@@ -915,7 +915,10 @@ function setCurrency(cur) {
 
   // Обновляем подпись фильтра цены
   const priceLabel = document.getElementById('priceCurrencyLabel');
-  if (priceLabel) priceLabel.textContent = 'Цена, ' + CURRENCY_SYMBOLS[cur];
+  if (priceLabel) {
+    const T = (typeof GRE_T === 'function') ? GRE_T : (k, fb) => fb;
+    priceLabel.textContent = T('filter.price_currency', 'Цена,') + ' ' + CURRENCY_SYMBOLS[cur];
+  }
 
   // Пересчитываем значения в полях прайс-фильтра
   ['priceMin','priceMax'].forEach(function(id) {
@@ -991,11 +994,11 @@ function renderRecentlyViewed() {
         </div>
         ${roiHtml ? `<div class="catalog-pills-row">${roiHtml}</div>` : (p.deal !== "rent" ? `<div class="catalog-pills-row"></div>` : "")}
         <div class="catalog-specs">
-          <span class="spec-item"><strong>${p.area}</strong> м²</span>
+          <span class="spec-item"><strong>${p.area}</strong> ${typeof GRE_T==="function"?GRE_T("card.sqm_abbr"):"м²"}</span>
           <span class="spec-sep">·</span>
-          <span class="spec-item"><strong>${p.rooms}</strong> спал.</span>
+          <span class="spec-item"><strong>${p.rooms}</strong> ${typeof GRE_T==="function"?GRE_T("card.rooms_abbr"):"спал."}</span>
           <span class="spec-sep">·</span>
-          <span class="spec-item"><strong>${p.floor}</strong> эт.</span>
+          <span class="spec-item"><strong>${p.floor}</strong> ${typeof GRE_T==="function"?GRE_T("card.floor_abbr"):"эт."}</span>
           ${p.year ? `<span class="spec-sep">·</span><span class="spec-item"><strong>${p.year}</strong> г.</span>` : ''}
         </div>
       </div>
@@ -1186,11 +1189,11 @@ function renderCatalogGrid(countryVal, cityVal, statusVal, typeVal, extra) {
         ${(savingsHtml || roiHtml) ? `<div class="catalog-pills-row">${savingsHtml}${roiHtml}</div>` : (p.deal !== "rent" ? `<div class="catalog-pills-row"></div>` : "")}
         ${p.desc ? `<p class="catalog-card-desc">${p.desc}</p>` : ''}
         <div class="catalog-specs">
-          <span class="spec-item"><strong>${p.area}</strong> м²</span>
+          <span class="spec-item"><strong>${p.area}</strong> ${typeof GRE_T==="function"?GRE_T("card.sqm_abbr"):"м²"}</span>
           <span class="spec-sep">·</span>
-          <span class="spec-item"><strong>${p.rooms}</strong> спал.</span>
+          <span class="spec-item"><strong>${p.rooms}</strong> ${typeof GRE_T==="function"?GRE_T("card.rooms_abbr"):"спал."}</span>
           <span class="spec-sep">·</span>
-          <span class="spec-item"><strong>${p.floor}</strong> эт.</span>
+          <span class="spec-item"><strong>${p.floor}</strong> ${typeof GRE_T==="function"?GRE_T("card.floor_abbr"):"эт."}</span>
           ${p.year ? `<span class="spec-sep">·</span><span class="spec-item"><strong>${p.year}</strong> г.</span>` : ''}
         </div>
       </div>
@@ -2205,11 +2208,11 @@ function buildFeaturedCards(props) {
         </div>
         ${(savingsHtml || roiHtml) ? `<div class="catalog-pills-row">${savingsHtml}${roiHtml}</div>` : (p.deal !== "rent" ? `<div class="catalog-pills-row"></div>` : "")}
         <div class="catalog-specs">
-          <span class="spec-item"><strong>${p.area}</strong> м²</span>
+          <span class="spec-item"><strong>${p.area}</strong> ${typeof GRE_T==="function"?GRE_T("card.sqm_abbr"):"м²"}</span>
           <span class="spec-sep">·</span>
-          <span class="spec-item"><strong>${p.rooms}</strong> спал.</span>
+          <span class="spec-item"><strong>${p.rooms}</strong> ${typeof GRE_T==="function"?GRE_T("card.rooms_abbr"):"спал."}</span>
           <span class="spec-sep">·</span>
-          <span class="spec-item"><strong>${p.floor}</strong> эт.</span>
+          <span class="spec-item"><strong>${p.floor}</strong> ${typeof GRE_T==="function"?GRE_T("card.floor_abbr"):"эт."}</span>
           ${p.year ? `<span class="spec-sep">·</span><span class="spec-item"><strong>${p.year}</strong> г.</span>` : ''}
         </div>
       </div>
