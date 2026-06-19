@@ -400,4 +400,6 @@ window.GRE_LANG_HE = {
     'article.sidebar_cta_title': 'צריכים ייעוץ?',
     'article.sidebar_cta_text': 'המומחים שלנו יעזרו לכם למצוא נכס שמתאים למטרות ולתקציב שלכם.',
     'article.sidebar_cta_btn': 'צור קשר',
+    'article.back': 'חזרה',
+    'article.back_to_blog': 'חזרה לבלוג',
 };

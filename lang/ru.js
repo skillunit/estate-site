@@ -400,4 +400,6 @@ window.GRE_LANG_RU = {
     'article.sidebar_cta_title': 'Нужна консультация?',
     'article.sidebar_cta_text': 'Наши эксперты помогут подобрать объект под ваши цели и бюджет.',
     'article.sidebar_cta_btn': 'Связаться с нами',
+    'article.back': 'Назад',
+    'article.back_to_blog': 'Назад в блог',
 };

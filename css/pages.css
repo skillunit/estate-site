@@ -1641,7 +1641,12 @@
   border: 1px solid rgba(255,255,255,0.25);
   border-radius: 20px;
   font-size: 0.82rem; font-weight: 600; color: var(--white);
+  text-decoration: none;
   cursor: pointer; transition: background 0.2s;
+}
+/* В hero статьи — ниже, чтобы не перекрываться с фиксированным header */
+.blog-article-hero .gallery-back-btn {
+  top: 80px;
 }
 .gallery-back-btn:hover { background: rgba(0,0,0,0.7); }
 

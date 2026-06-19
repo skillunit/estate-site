@@ -400,4 +400,6 @@ window.GRE_LANG_EN = {
     'article.sidebar_cta_title': 'Need a consultation?',
     'article.sidebar_cta_text': 'Our experts will help you find a property that matches your goals and budget.',
     'article.sidebar_cta_btn': 'Contact us',
+    'article.back': 'Back',
+    'article.back_to_blog': 'Back to blog',
 };
