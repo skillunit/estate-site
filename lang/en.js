@@ -53,6 +53,7 @@ window.GRE_LANG_EN = {
     'filter.rooms_any': 'Any',
     'filter.from': 'From',
     'filter.to': 'To',
+    'filter.search_placeholder': 'Name, area, type…',
     'filter.reset': 'Reset',
     'filter.find': 'Search',
 

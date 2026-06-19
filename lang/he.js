@@ -53,6 +53,7 @@ window.GRE_LANG_HE = {
     'filter.rooms_any': 'הכל',
     'filter.from': 'מ-',
     'filter.to': 'עד',
+    'filter.search_placeholder': 'שם, אזור, סוג…',
     'filter.reset': 'אפס',
     'filter.find': 'חפש',
 

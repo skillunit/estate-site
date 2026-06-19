@@ -53,6 +53,7 @@ window.GRE_LANG_RU = {
     'filter.rooms_any': 'Любое',
     'filter.from': 'От',
     'filter.to': 'До',
+    'filter.search_placeholder': 'Название, район, тип…',
     'filter.reset': 'Сброс',
     'filter.find': 'Найти',
 

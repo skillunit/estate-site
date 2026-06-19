@@ -167,6 +167,7 @@
               id="nameSearch"
               type="text"
               placeholder="Название, район, тип…"
+              data-i18n-attr="placeholder:filter.search_placeholder"
               autocomplete="off"
               oninput="onNameSearchInput(this.value)"
               onkeydown="onNameSearchKey(event)"
@@ -192,18 +193,18 @@
         <div class="filter-field filter-field--price">
           <label id="priceCurrencyLabel">Цена, $</label>
           <div class="filter-range-inputs">
-            <input class="filter-range-input" type="text" id="priceMin" placeholder="От" oninput="formatPriceInput(this)">
+            <input class="filter-range-input" type="text" id="priceMin" placeholder="От" data-i18n-attr="placeholder:filter.from" oninput="formatPriceInput(this)">
             <span class="filter-range-sep">—</span>
-            <input class="filter-range-input" type="text" id="priceMax" placeholder="До" oninput="formatPriceInput(this)">
+            <input class="filter-range-input" type="text" id="priceMax" placeholder="До" data-i18n-attr="placeholder:filter.to" oninput="formatPriceInput(this)">
           </div>
         </div>
         <div class="filter-sep-v"></div>
         <div class="filter-field filter-field--area">
           <label data-i18n="filter.area">Площадь, м²</label>
           <div class="filter-range-inputs">
-            <input class="filter-range-input" type="text" id="areaMin" placeholder="От">
+            <input class="filter-range-input" type="text" id="areaMin" placeholder="От" data-i18n-attr="placeholder:filter.from">
             <span class="filter-range-sep">—</span>
-            <input class="filter-range-input" type="text" id="areaMax" placeholder="До">
+            <input class="filter-range-input" type="text" id="areaMax" placeholder="До" data-i18n-attr="placeholder:filter.to">
           </div>
         </div>
         <div class="filter-sep-v"></div>
