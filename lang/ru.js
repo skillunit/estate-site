@@ -313,4 +313,12 @@ window.GRE_LANG_RU = {
     'country.uae_name': 'ОАЭ',
     'country.cyprus_name': 'Кипр',
     'country.greece_name': 'Греция',
+    'card.roi_label': 'ROI',
+    'catalog.buy_title_prefix': 'Топовые предложения покупки',
+    'catalog.rent_title_prefix': 'Топовые предложения аренды',
+    'catalog.in_georgia': 'в Грузии',
+    'catalog.in_usa': 'в США',
+    'catalog.in_uae': 'в ОАЭ',
+    'catalog.in_cyprus': 'на Кипре',
+    'catalog.in_greece': 'в Греции',
 };

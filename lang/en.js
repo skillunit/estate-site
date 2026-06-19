@@ -313,4 +313,12 @@ window.GRE_LANG_EN = {
     'country.uae_name': 'UAE',
     'country.cyprus_name': 'Cyprus',
     'country.greece_name': 'Greece',
+    'card.roi_label': 'ROI',
+    'catalog.buy_title_prefix': 'Top properties for sale',
+    'catalog.rent_title_prefix': 'Top rental properties',
+    'catalog.in_georgia': 'in Georgia',
+    'catalog.in_usa': 'in the USA',
+    'catalog.in_uae': 'in the UAE',
+    'catalog.in_cyprus': 'in Cyprus',
+    'catalog.in_greece': 'in Greece',
 };

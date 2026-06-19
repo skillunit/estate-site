@@ -2124,13 +2124,17 @@ function initRelatedSlider() {
 
 
 // ── RENDER FEATURED TRACK (главная страница) ──
-const FEATURED_COUNTRY_LABELS = {
-  all:    'в Грузии',
-  usa:    'в США',
-  uae:    'в ОАЭ',
-  cyprus: 'на Кипре',
-  greece: 'в Греции',
-};
+function getFeaturedCountryLabel(country) {
+  const T = (typeof GRE_T === 'function') ? GRE_T : (k, fb) => fb;
+  const map = {
+    all:    T('catalog.in_georgia', 'в Грузии'),
+    usa:    T('catalog.in_usa', 'в США'),
+    uae:    T('catalog.in_uae', 'в ОАЭ'),
+    cyprus: T('catalog.in_cyprus', 'на Кипре'),
+    greece: T('catalog.in_greece', 'в Греции'),
+  };
+  return map[country] || '';
+}
 
 let featuredCountry = 'all';
 let featuredRentCountry = 'all';
@@ -2221,14 +2225,15 @@ function renderFeaturedDeal(deal) {
   const country = isBuy ? featuredCountry : featuredRentCountry;
   const trackId = isBuy ? 'featuredTrack' : 'featuredRentTrack';
   const titleId = isBuy ? 'featuredTitle' : 'featuredRentTitle';
-  const titlePrefix = isBuy ? 'Топовые предложения покупки' : 'Топовые предложения аренды';
 
   const track = document.getElementById(trackId);
   const titleEl = document.getElementById(titleId);
   if (!track) return;
 
   if (titleEl) {
-    titleEl.textContent = titlePrefix + ' ' + (FEATURED_COUNTRY_LABELS[country] || '');
+    const T = (typeof GRE_T === 'function') ? GRE_T : (k, fb) => fb;
+    const titlePrefix = isBuy ? T('catalog.buy_title_prefix', 'Топовые предложения покупки') : T('catalog.rent_title_prefix', 'Топовые предложения аренды');
+    titleEl.textContent = titlePrefix + ' ' + getFeaturedCountryLabel(country);
   }
 
   const props = MAP_PROPERTIES.filter(p =>

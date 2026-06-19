@@ -39,3 +39,26 @@ window.GRE_T = function(key, params) {
 
   return String(val);
 };
+
+/**
+ * GRE_PLURAL_OBJECTS — склонение "N объект/объекта/объектов" по языку
+ * RU: 1 объект, 2-4 объекта, 5+ объектов
+ * EN/HE: N properties / 1 property
+ */
+window.GRE_PLURAL_OBJECTS = function(n) {
+  var lang = localStorage.getItem('gre_lang') || 'ru';
+
+  if (lang === 'ru') {
+    var mod10 = n % 10, mod100 = n % 100;
+    var word;
+    if (mod10 === 1 && mod100 !== 11) word = 'объект';
+    else if ([2,3,4].includes(mod10) && ![12,13,14].includes(mod100)) word = 'объекта';
+    else word = 'объектов';
+    return n + ' ' + word;
+  }
+  if (lang === 'he') {
+    return n + ' ' + (n === 1 ? 'נכס' : 'נכסים');
+  }
+  // en
+  return n + ' ' + (n === 1 ? 'property' : 'properties');
+};

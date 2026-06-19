@@ -50,6 +50,14 @@ const I18n = (() => {
       });
     });
 
+    // Счётчик объектов на карточках направлений (РУ-склонение / EN-HE простое число)
+    root.querySelectorAll('.direction-count[data-count]').forEach(el => {
+      const n = parseInt(el.dataset.count, 10);
+      el.textContent = (typeof window.GRE_PLURAL_OBJECTS === 'function')
+        ? window.GRE_PLURAL_OBJECTS(n)
+        : n + ' properties';
+    });
+
     // RTL / LTR
     const dir = t('meta.dir') || 'ltr';
     document.documentElement.setAttribute('lang', _lang);

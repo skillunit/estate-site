@@ -313,4 +313,12 @@ window.GRE_LANG_HE = {
     'country.uae_name': 'איחוד האמירויות',
     'country.cyprus_name': 'קפריסין',
     'country.greece_name': 'יוון',
+    'card.roi_label': 'ROI',
+    'catalog.buy_title_prefix': 'נכסים מובילים למכירה',
+    'catalog.rent_title_prefix': 'נכסים מובילים להשכרה',
+    'catalog.in_georgia': 'בגאורגיה',
+    'catalog.in_usa': 'בארה"ב',
+    'catalog.in_uae': 'באיחוד האמירויות',
+    'catalog.in_cyprus': 'בקפריסין',
+    'catalog.in_greece': 'ביוון',
 };

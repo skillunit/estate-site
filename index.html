@@ -141,23 +141,23 @@
         <div class="filter-field filter-field--country">
           <label data-i18n="filter.country">Страна</label>
           <select class="filter-select" id="homeCountry" onchange="updateHomeCityOptions(this.value)">
-            <option value="all"     data-i18n="countries.all">🌍 Все страны</option>
-            <option value="georgia" data-i18n="countries.georgia" selected>🇬🇪 Грузия</option>
-            <option value="usa"     data-i18n="countries.usa">🇺🇸 США</option>
-            <option value="uae"     data-i18n="countries.uae">🇦🇪 ОАЭ</option>
-            <option value="cyprus"  data-i18n="countries.cyprus">🇨🇾 Кипр</option>
-            <option value="greece"  data-i18n="countries.greece">🇬🇷 Греция</option>
+            <option value="all"     data-i18n="country.all">🌍 Все страны</option>
+            <option value="georgia" data-i18n="country.georgia" selected>🇬🇪 Грузия</option>
+            <option value="usa"     data-i18n="country.usa">🇺🇸 США</option>
+            <option value="uae"     data-i18n="country.uae">🇦🇪 ОАЭ</option>
+            <option value="cyprus"  data-i18n="country.cyprus">🇨🇾 Кипр</option>
+            <option value="greece"  data-i18n="country.greece">🇬🇷 Греция</option>
           </select>
         </div>
         <div class="filter-field filter-field--city">
           <label data-i18n="filter.city">Город</label>
           <select class="filter-select" id="homeCity">
-            <option value="all"       data-i18n="cities.all">Любой город</option>
-            <option value="tbilisi"   data-i18n="cities.tbilisi">Тбилиси</option>
-            <option value="batumi"    data-i18n="cities.batumi">Батуми</option>
-            <option value="gonio"     data-i18n="cities.gonio">Гонио</option>
-            <option value="kakheti"   data-i18n="cities.kakheti">Кахетия</option>
-            <option value="bakuriani" data-i18n="cities.bakuriani">Бакуриани</option>
+            <option value="all"       data-i18n="city.all">Любой город</option>
+            <option value="tbilisi"   data-i18n="city.tbilisi">Тбилиси</option>
+            <option value="batumi"    data-i18n="city.batumi">Батуми</option>
+            <option value="gonio"     data-i18n="city.gonio">Гонио</option>
+            <option value="kakheti"   data-i18n="city.kakheti">Кахетия</option>
+            <option value="bakuriani" data-i18n="city.bakuriani">Бакуриани</option>
           </select>
         </div>
         <div class="filter-field filter-field--type">
@@ -252,7 +252,7 @@
       <div class="directions-grid">
         <div class="direction-card" onclick="goToCountry('georgia')">
           <div class="direction-accent"></div>
-          <div class="direction-count">6 объектов</div>
+          <div class="direction-count" data-count="6">6 объектов</div>
           <img class="direction-img" src="https://images.unsplash.com/photo-1565008576549-57569a49371d?w=400&h=530&fit=crop" alt="Грузия">
           <div class="direction-overlay"></div>
           <div class="direction-info">
@@ -263,7 +263,7 @@
         </div>
         <div class="direction-card" onclick="goToCountry('usa')">
           <div class="direction-accent"></div>
-          <div class="direction-count">4 объекта</div>
+          <div class="direction-count" data-count="4">4 объекта</div>
           <img class="direction-img" src="https://images.unsplash.com/photo-1485871981521-5b1fd3805eee?w=400&h=530&fit=crop" alt="США">
           <div class="direction-overlay"></div>
           <div class="direction-info">
@@ -274,7 +274,7 @@
         </div>
         <div class="direction-card" onclick="goToCountry('uae')">
           <div class="direction-accent"></div>
-          <div class="direction-count">3 объекта</div>
+          <div class="direction-count" data-count="3">3 объекта</div>
           <img class="direction-img" src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=400&h=530&fit=crop" alt="ОАЭ">
           <div class="direction-overlay"></div>
           <div class="direction-info">
@@ -285,7 +285,7 @@
         </div>
         <div class="direction-card" onclick="goToCountry('cyprus')">
           <div class="direction-accent"></div>
-          <div class="direction-count">5 объектов</div>
+          <div class="direction-count" data-count="5">5 объектов</div>
           <img class="direction-img" src="https://images.unsplash.com/photo-1601581875309-fafbf2d3ed3a?w=400&h=530&fit=crop" alt="Кипр">
           <div class="direction-overlay"></div>
           <div class="direction-info">
@@ -296,7 +296,7 @@
         </div>
         <div class="direction-card" onclick="goToCountry('greece')">
           <div class="direction-accent"></div>
-          <div class="direction-count">7 объектов</div>
+          <div class="direction-count" data-count="7">7 объектов</div>
           <img class="direction-img" src="https://images.unsplash.com/photo-1533105079780-92b9be482077?w=400&h=530&fit=crop" alt="Греция">
           <div class="direction-overlay"></div>
           <div class="direction-info">
@@ -1971,10 +1971,10 @@
 
 <!-- Сначала библиотека карт, которая нужна твоему коду -->
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-<script src="lang/ru.js?v=11"></script>
-<script src="lang/en.js?v=11"></script>
-<script src="lang/he.js?v=11"></script>
-<script src="lang/translations.js?v=11"></script>
+<script src="lang/ru.js?v=12"></script>
+<script src="lang/en.js?v=12"></script>
+<script src="lang/he.js?v=12"></script>
+<script src="lang/translations.js?v=12"></script>
 <script src="js/i18n.js?v=3"></script>
 <script src="js/nav.js?v=14"></script>
 <script src="js/forms.js"></script>
@@ -1997,7 +1997,7 @@
   } catch(e) {}
 })();
 </script>
-<script src="js/catalog.js?v=65"></script>
+<script src="js/catalog.js?v=66"></script>
 <script src="js/animations.js"></script>
 <script src="js/auth.js?v=4"></script>
 <script src="js/favorites.js?v=4"></script>
