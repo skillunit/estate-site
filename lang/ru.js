@@ -308,4 +308,9 @@ window.GRE_LANG_RU = {
     'team.fname_4': 'Дэвид Коэн',
     'team.fname_5': 'Роберт Чейз',
     'team.fname_6': 'Яков Леви',
+    'country.georgia_name': 'Грузия',
+    'country.usa_name': 'США',
+    'country.uae_name': 'ОАЭ',
+    'country.cyprus_name': 'Кипр',
+    'country.greece_name': 'Греция',
 };

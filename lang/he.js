@@ -308,4 +308,9 @@ window.GRE_LANG_HE = {
     'team.fname_4': 'דייוויד כהן',
     'team.fname_5': 'רוברט צ\'ייס',
     'team.fname_6': 'יעקב לוי',
+    'country.georgia_name': 'גאורגיה',
+    'country.usa_name': 'ארה"ב',
+    'country.uae_name': 'איחוד האמירויות',
+    'country.cyprus_name': 'קפריסין',
+    'country.greece_name': 'יוון',
 };

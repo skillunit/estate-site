@@ -308,4 +308,9 @@ window.GRE_LANG_EN = {
     'team.fname_4': 'David Cohen',
     'team.fname_5': 'Robert Chase',
     'team.fname_6': 'Yakov Levi',
+    'country.georgia_name': 'Georgia',
+    'country.usa_name': 'USA',
+    'country.uae_name': 'UAE',
+    'country.cyprus_name': 'Cyprus',
+    'country.greece_name': 'Greece',
 };

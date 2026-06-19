@@ -257,7 +257,7 @@
           <div class="direction-overlay"></div>
           <div class="direction-info">
             <span class="direction-flag">🇬🇪</span>
-            <div class="direction-name">Грузия</div>
+            <div class="direction-name" data-i18n="country.georgia_name">Грузия</div>
             <div class="direction-desc" data-i18n="directions.georgia_cities">Тбилиси, Батуми, Бакуриани</div>
           </div>
         </div>
@@ -268,7 +268,7 @@
           <div class="direction-overlay"></div>
           <div class="direction-info">
             <span class="direction-flag">🇺🇸</span>
-            <div class="direction-name">США</div>
+            <div class="direction-name" data-i18n="country.usa_name">США</div>
             <div class="direction-desc" data-i18n="directions.usa_cities">Нью-Йорк, Майами</div>
           </div>
         </div>
@@ -279,7 +279,7 @@
           <div class="direction-overlay"></div>
           <div class="direction-info">
             <span class="direction-flag">🇦🇪</span>
-            <div class="direction-name">ОАЭ</div>
+            <div class="direction-name" data-i18n="country.uae_name">ОАЭ</div>
             <div class="direction-desc" data-i18n="directions.uae_cities">Дубай</div>
           </div>
         </div>
@@ -290,7 +290,7 @@
           <div class="direction-overlay"></div>
           <div class="direction-info">
             <span class="direction-flag">🇨🇾</span>
-            <div class="direction-name">Кипр</div>
+            <div class="direction-name" data-i18n="country.cyprus_name">Кипр</div>
             <div class="direction-desc" data-i18n="directions.cyprus_cities">Лимасол, Пафос</div>
           </div>
         </div>
@@ -301,7 +301,7 @@
           <div class="direction-overlay"></div>
           <div class="direction-info">
             <span class="direction-flag">🇬🇷</span>
-            <div class="direction-name">Греция</div>
+            <div class="direction-name" data-i18n="country.greece_name">Греция</div>
             <div class="direction-desc" data-i18n="directions.greece_cities">Афины, Миконос</div>
           </div>
         </div>
@@ -406,11 +406,11 @@
         <span class="see-all" onclick="window.location.href='projects.html'" data-i18n="catalog.see_all">Смотреть все</span>
       </div>
       <div class="featured-country-tabs" id="featuredCountryTabs">
-        <button class="featured-tab active" data-country="all" onclick="setFeaturedCountry(this, 'buy')">🇬🇪 Грузия</button>
-        <button class="featured-tab" data-country="usa" onclick="setFeaturedCountry(this, 'buy')">🇺🇸 США</button>
-        <button class="featured-tab" data-country="uae" onclick="setFeaturedCountry(this, 'buy')">🇦🇪 ОАЭ</button>
-        <button class="featured-tab" data-country="cyprus" onclick="setFeaturedCountry(this, 'buy')">🇨🇾 Кипр</button>
-        <button class="featured-tab" data-country="greece" onclick="setFeaturedCountry(this, 'buy')">🇬🇷 Греция</button>
+        <button class="featured-tab active" data-country="all" onclick="setFeaturedCountry(this, 'buy')" data-i18n="country.georgia">🇬🇪 Грузия</button>
+        <button class="featured-tab" data-country="usa" onclick="setFeaturedCountry(this, 'buy')" data-i18n="country.usa">🇺🇸 США</button>
+        <button class="featured-tab" data-country="uae" onclick="setFeaturedCountry(this, 'buy')" data-i18n="country.uae">🇦🇪 ОАЭ</button>
+        <button class="featured-tab" data-country="cyprus" onclick="setFeaturedCountry(this, 'buy')" data-i18n="country.cyprus">🇨🇾 Кипр</button>
+        <button class="featured-tab" data-country="greece" onclick="setFeaturedCountry(this, 'buy')" data-i18n="country.greece">🇬🇷 Греция</button>
       </div>
       <div class="testi-track-wrap">
         <div class="testi-track" id="featuredTrack" style="gap:24px;">
@@ -435,11 +435,11 @@
         <span class="see-all" onclick="window.location.href='projects.html?deal=rent'">Смотреть все</span>
       </div>
       <div class="featured-country-tabs" id="featuredRentCountryTabs">
-        <button class="featured-tab active" data-country="all" onclick="setFeaturedCountry(this, 'rent')">🇬🇪 Грузия</button>
-        <button class="featured-tab" data-country="usa" onclick="setFeaturedCountry(this, 'rent')">🇺🇸 США</button>
-        <button class="featured-tab" data-country="uae" onclick="setFeaturedCountry(this, 'rent')">🇦🇪 ОАЭ</button>
-        <button class="featured-tab" data-country="cyprus" onclick="setFeaturedCountry(this, 'rent')">🇨🇾 Кипр</button>
-        <button class="featured-tab" data-country="greece" onclick="setFeaturedCountry(this, 'rent')">🇬🇷 Греция</button>
+        <button class="featured-tab active" data-country="all" onclick="setFeaturedCountry(this, 'rent')" data-i18n="country.georgia">🇬🇪 Грузия</button>
+        <button class="featured-tab" data-country="usa" onclick="setFeaturedCountry(this, 'rent')" data-i18n="country.usa">🇺🇸 США</button>
+        <button class="featured-tab" data-country="uae" onclick="setFeaturedCountry(this, 'rent')" data-i18n="country.uae">🇦🇪 ОАЭ</button>
+        <button class="featured-tab" data-country="cyprus" onclick="setFeaturedCountry(this, 'rent')" data-i18n="country.cyprus">🇨🇾 Кипр</button>
+        <button class="featured-tab" data-country="greece" onclick="setFeaturedCountry(this, 'rent')" data-i18n="country.greece">🇬🇷 Греция</button>
       </div>
       <div class="testi-track-wrap">
         <div class="testi-track" id="featuredRentTrack" style="gap:24px;">
@@ -1971,10 +1971,10 @@
 
 <!-- Сначала библиотека карт, которая нужна твоему коду -->
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-<script src="lang/ru.js?v=10"></script>
-<script src="lang/en.js?v=10"></script>
-<script src="lang/he.js?v=10"></script>
-<script src="lang/translations.js?v=10"></script>
+<script src="lang/ru.js?v=11"></script>
+<script src="lang/en.js?v=11"></script>
+<script src="lang/he.js?v=11"></script>
+<script src="lang/translations.js?v=11"></script>
 <script src="js/i18n.js?v=3"></script>
 <script src="js/nav.js?v=14"></script>
 <script src="js/forms.js"></script>
