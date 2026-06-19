@@ -93,8 +93,21 @@ function updateCityOptions(country) {
   const citySelect = document.getElementById('citySelect');
   if (!citySelect) return;
   const cities = getCitiesForCountry(country);
-  citySelect.innerHTML = cities.map(([v, l]) => `<option value="${v}">${l}</option>`).join('');
+  const T = (typeof GRE_T === 'function') ? GRE_T : (k, fb) => fb;
+  citySelect.innerHTML = cities.map(([v, l]) => `<option value="${v}">${T('city.' + v, l)}</option>`).join('');
 }
+
+// При смене языка перерисовываем подписи в списке городов,
+// сохраняя текущий выбор (фильтрацию не трогаем — value не меняются)
+document.addEventListener('i18n:applied', function() {
+  const citySelect = document.getElementById('citySelect');
+  if (!citySelect) return;
+  const countrySelect = document.querySelector('#page-catalog .filter-field--country .filter-select');
+  const country = countrySelect ? countrySelect.value : (typeof _prevCountry !== 'undefined' ? _prevCountry : 'all');
+  const keepValue = citySelect.value;
+  updateCityOptions(country);
+  if (keepValue) citySelect.value = keepValue;
+});
 
 function updateCatalogHeadline(country) {
   const el = document.getElementById('catalogHeadline');
