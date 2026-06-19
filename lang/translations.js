@@ -28,7 +28,12 @@ window.GRE_T = function(key, params) {
   }
 
   // Если ключа нет вообще → возвращаем сам ключ
-  if (val === undefined) return key;
+  if (val === undefined) {
+    if (window.console && console.warn) {
+      console.warn('[GRE_T] Missing translation key:', key, '| RU dict loaded:', !!window.GRE_LANG_RU, '| keys count:', window.GRE_LANG_RU ? Object.keys(window.GRE_LANG_RU).length : 0);
+    }
+    return key;
+  }
 
   // Подстановка {placeholder}
   if (params) {
