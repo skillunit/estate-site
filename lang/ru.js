@@ -112,6 +112,8 @@ window.GRE_LANG_RU = {
     'badge.exclusive': 'Эксклюзив',
     'badge.rent_long': 'Долгосрочная аренда',
     'badge.rent_short': 'Краткосрочная аренда',
+    'badge.daily': 'Посуточно',
+    'badge.available': 'Доступно',
 
     // ── Детальная страница объекта ─────────────────────────
     'detail.invest_title': 'Потенциал для инвестиций',

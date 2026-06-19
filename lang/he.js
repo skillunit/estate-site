@@ -112,6 +112,8 @@ window.GRE_LANG_HE = {
     'badge.exclusive': 'בלעדי',
     'badge.rent_long': 'שכירות ארוכת טווח',
     'badge.rent_short': 'שכירות קצרת טווח',
+    'badge.daily': 'יומי',
+    'badge.available': 'זמין',
 
     // ── דף נכס ────────────────────────────────────────────
     'detail.invest_title': 'פוטנציאל השקעה',

@@ -112,6 +112,8 @@ window.GRE_LANG_EN = {
     'badge.exclusive': 'Exclusive',
     'badge.rent_long': 'Long-term rental',
     'badge.rent_short': 'Short-term rental',
+    'badge.daily': 'Daily rate',
+    'badge.available': 'Available',
 
     // ── Detail page ────────────────────────────────────────
     'detail.invest_title': 'Investment potential',

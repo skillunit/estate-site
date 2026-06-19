@@ -858,10 +858,19 @@ const CURRENCY_SYMBOLS = { USD: '$', GEL: '₾', EUR: '€' };
 let currentCurrency = localStorage.getItem('grre_currency') || 'USD';
 
 // ── BADGE HELPER ──
-const RENT_BADGE = {
-  longterm:  { cls: 'badge-ready',  text: 'Долгосрочная аренда' },
-  shortterm: { cls: 'badge-invest', text: 'Краткосрочная аренда' },
-  daily:     { cls: 'badge-build',  text: 'Посуточно' },
+const RENT_BADGE_KEYS = {
+  longterm:  { cls: 'badge-ready',  key: 'badge.rent_long',  fallback: 'Долгосрочная аренда' },
+  shortterm: { cls: 'badge-invest', key: 'badge.rent_short', fallback: 'Краткосрочная аренда' },
+  daily:     { cls: 'badge-build',  key: 'badge.daily',      fallback: 'Посуточно' },
+};
+// Сопоставление сырого RU-текста badgeText (из MAP_PROPERTIES) с ключом перевода.
+// Используется только для отображения — сами данные в MAP_PROPERTIES не меняются.
+const BADGE_TEXT_KEYS = {
+  'Сдан в эксплуатацию':       'badge.ready',
+  'На стадии строительства':   'badge.build',
+  'Эксклюзив':                 'badge.exclusive',
+  'Инвестиция':                'badge.invest',
+  'Доступно':                  'badge.available',
 };
 /* ── Fav button helper — inline in card body ── */
 function favCardBtn(id) {
@@ -878,10 +887,32 @@ function shareCardBtn(id) {
 }
 
 function getPropBadge(p) {
-  if (p.deal === 'rent' && RENT_BADGE[p.status]) {
-    return RENT_BADGE[p.status];
+  const T = (typeof GRE_T === 'function') ? GRE_T : (k, fb) => fb;
+  if (p.deal === 'rent' && RENT_BADGE_KEYS[p.status]) {
+    const rb = RENT_BADGE_KEYS[p.status];
+    return { cls: rb.cls, text: T(rb.key, rb.fallback) };
   }
-  return { cls: p.badge, text: p.badgeText };
+  const key = BADGE_TEXT_KEYS[p.badgeText];
+  return { cls: p.badge, text: key ? T(key, p.badgeText) : p.badgeText };
+}
+
+// ── Переводы названий/описаний объектов (lang/properties.js) ──
+// p.name / p.desc остаются на русском в данных (используются для
+// сортировки и поиска) — эти хелперы только подменяют отображаемый текст.
+function _currentLang() {
+  return localStorage.getItem('gre_lang') || 'ru';
+}
+function getPropName(p) {
+  const lang = _currentLang();
+  const dict = lang === 'en' ? window.GRE_PROP_EN : lang === 'he' ? window.GRE_PROP_HE : null;
+  const override = dict && p.id && dict[p.id];
+  return (override && override.name) || p.name;
+}
+function getPropDesc(p) {
+  const lang = _currentLang();
+  const dict = lang === 'en' ? window.GRE_PROP_EN : lang === 'he' ? window.GRE_PROP_HE : null;
+  const override = dict && p.id && dict[p.id];
+  return (override && override.desc) || p.desc;
 }
 
 function convertUsd(num) {
@@ -967,6 +998,7 @@ function renderRecentlyViewed() {
     const imgs = p.imgs || [p.img];
     const dots = imgs.map((_, i) => `<span class="card-slider-dot${i === 0 ? ' active' : ''}"></span>`).join('');
     const badge = getPropBadge(p);
+    const pName = getPropName(p);
     const roiHtml = (p.deal === 'buy' && p.roi)
       ? `<div class="catalog-roi-pill"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>${typeof I18n!=="undefined"?I18n.t("card.roi_label"):"ROI"} ${p.roi} ${typeof I18n!=="undefined"?I18n.t("card.roi_year"):"/год"}</div>`
       : '';
@@ -974,7 +1006,7 @@ function renderRecentlyViewed() {
     <div class="catalog-card" style="flex-shrink:0;" onclick="showDetail('${p.id}')" spellcheck="false">
       <div class="catalog-card-img-wrap" style="position:relative;overflow:hidden;">
         <div class="card-slider" data-imgs='${JSON.stringify(imgs)}' data-idx="0">
-          <img class="catalog-img card-slider-img" src="${imgs[0]}" alt="${p.name}">
+          <img class="catalog-img card-slider-img" src="${imgs[0]}" alt="${pName}">
           <button class="card-slider-btn card-slider-prev" onclick="cardSlide(event,this,-1)" aria-label="${typeof GRE_T==='function'?GRE_T('card.slider_prev','Назад'):'Назад'}">&#8249;</button>
           <button class="card-slider-btn card-slider-next" onclick="cardSlide(event,this,1)" aria-label="${typeof GRE_T==='function'?GRE_T('card.slider_next','Вперёд'):'Вперёд'}">&#8250;</button>
           <div class="card-slider-dots">${dots}</div>
@@ -986,7 +1018,7 @@ function renderRecentlyViewed() {
       </div>
       <div class="catalog-card-body">
         <div class="catalog-city-row"><span class="catalog-city">${p.cityLabel}</span>${typeof Reviews !== 'undefined' ? Reviews.getMiniRatingHtml(p.id) : ''}</div>
-        <div class="catalog-name">${p.name}</div>
+        <div class="catalog-name">${pName}</div>
         <div class="catalog-price-block">
           <div class="catalog-price-row">
             <span class="catalog-price">${formatPrice(p.price)}</span>
@@ -1009,7 +1041,7 @@ function renderRecentlyViewed() {
           <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
           ${typeof I18n!=="undefined"?I18n.t("card.details"):"Подробнее"}
         </button>
-        <button class="catalog-contact-btn" onclick="event.stopPropagation();openContactPopup('${p.name}')">
+        <button class="catalog-contact-btn" onclick="event.stopPropagation();openContactPopup('${pName.replace(/'/g, "\\'")}')">
           <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.63A2 2 0 012 .18h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92z"/></svg>
           ${typeof I18n!=="undefined"?I18n.t("card.ask"):"Спросить"}
         </button>
@@ -1144,6 +1176,8 @@ function renderCatalogGrid(countryVal, cityVal, statusVal, typeVal, extra) {
     const dots = imgs.map((_,i) => `<span class="card-slider-dot${i===0?' active':''}"></span>`).join('');
     const priceDisplay = formatPrice(p.price);
     const sqmDisplay = p.deal === 'buy' && p.area ? formatSqm(p) : '';
+    const pName = getPropName(p);
+    const pDesc = getPropDesc(p);
 
     // Savings badge
     let savingsHtml = '';
@@ -1165,7 +1199,7 @@ function renderCatalogGrid(countryVal, cityVal, statusVal, typeVal, extra) {
     <div class="catalog-card" data-city="${p.city}" data-status="${p.status}" data-id="${p.id}" onclick="showDetail('${p.id}')" spellcheck="false">
       <div class="catalog-card-img-wrap" style="position:relative;overflow:hidden;">
         <div class="card-slider" data-imgs='${JSON.stringify(imgs)}' data-idx="0">
-          <img class="catalog-img card-slider-img" src="${p.img}" alt="${p.name}" loading="lazy">
+          <img class="catalog-img card-slider-img" src="${p.img}" alt="${pName}" loading="lazy">
           <button class="card-slider-btn card-slider-prev" onclick="cardSlide(event,this,-1)" aria-label="${typeof GRE_T==='function'?GRE_T('card.slider_prev','Назад'):'Назад'}">&#8249;</button>
           <button class="card-slider-btn card-slider-next" onclick="cardSlide(event,this,1)" aria-label="${typeof GRE_T==='function'?GRE_T('card.slider_next','Вперёд'):'Вперёд'}">&#8250;</button>
           <div class="card-slider-dots">${dots}</div>
@@ -1180,7 +1214,7 @@ function renderCatalogGrid(countryVal, cityVal, statusVal, typeVal, extra) {
           <span class="catalog-city">${p.cityLabel}</span>
           ${typeof Reviews !== 'undefined' ? Reviews.getMiniRatingHtml(p.id) : ''}
         </div>
-        <div class="catalog-name">${p.name}</div>
+        <div class="catalog-name">${pName}</div>
         <div class="catalog-price-block">
           <div class="catalog-price-row">
             <span class="catalog-price">${priceDisplay}</span>
@@ -1189,7 +1223,7 @@ function renderCatalogGrid(countryVal, cityVal, statusVal, typeVal, extra) {
           ${p.deal !== "rent" ? `<div class="catalog-price-old">${p.oldPrice ? formatPrice(p.oldPrice) : ''}</div>` : (p.oldPrice ? `<div class="catalog-price-old">${formatPrice(p.oldPrice)}</div>` : "")}
         </div>
         ${(savingsHtml || roiHtml) ? `<div class="catalog-pills-row">${savingsHtml}${roiHtml}</div>` : (p.deal !== "rent" ? `<div class="catalog-pills-row"></div>` : "")}
-        ${p.desc ? `<p class="catalog-card-desc">${p.desc}</p>` : ''}
+        ${pDesc ? `<p class="catalog-card-desc">${pDesc}</p>` : ''}
         <div class="catalog-specs">
           <span class="spec-item"><strong>${p.area}</strong> ${typeof GRE_T==="function"?GRE_T("card.sqm_abbr"):"м²"}</span>
           <span class="spec-sep">·</span>
@@ -1204,7 +1238,7 @@ function renderCatalogGrid(countryVal, cityVal, statusVal, typeVal, extra) {
           <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
           ${typeof I18n!=="undefined"?I18n.t("card.details"):"Подробнее"}
         </button>
-        <button class="catalog-contact-btn" onclick="event.stopPropagation();openContactPopup('${p.name}')">
+        <button class="catalog-contact-btn" onclick="event.stopPropagation();openContactPopup('${pName.replace(/'/g, "\\'")}')">
           <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.63A2 2 0 012 .18h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92z"/></svg>
           ${typeof I18n!=="undefined"?I18n.t("card.ask"):"Спросить"}
         </button>
@@ -1275,7 +1309,7 @@ function showDetail(id) {
 
   // ── Text fields ──
   const titleEl = page.querySelector('.detail-title');
-  if (titleEl) titleEl.textContent = prop.name;
+  if (titleEl) titleEl.textContent = getPropName(prop);
 
   const specVals = page.querySelectorAll('.detail-spec-val');
   if (specVals[0]) specVals[0].textContent = prop.cityLabel;
@@ -1285,7 +1319,7 @@ function showDetail(id) {
   if (specVals[5]) specVals[5].textContent = prop.year || '—';
 
   const descEl = page.querySelector('.detail-desc');
-  if (descEl) descEl.textContent = prop.desc;
+  if (descEl) descEl.textContent = getPropDesc(prop);
 
   const investRows = page.querySelectorAll('.invest-row-val');
   if (investRows[0]) investRows[0].textContent = prop.growth;
@@ -1295,8 +1329,9 @@ function showDetail(id) {
   // Update status badge
   const detailBadge = document.getElementById('detailBadge');
   if (detailBadge && prop.badge && prop.badgeText) {
-    detailBadge.className = 'invest-badge ' + prop.badge;
-    detailBadge.textContent = prop.badgeText;
+    const _b = getPropBadge(prop);
+    detailBadge.className = 'invest-badge ' + _b.cls;
+    detailBadge.textContent = _b.text;
   }
   // Update top label
   const detailTopLabel = document.getElementById('detailTopLabel');
@@ -1749,7 +1784,7 @@ function renderMapMarkers(countryVal, cityVal, statusVal, typeVal, extra) {
           <img src="${item.img.replace('/600/375','/120/90')}" style="width:48px;height:36px;object-fit:cover;border-radius:2px;flex-shrink:0;">
           <div>
             <div style="font-size:0.7rem;color:#C0392B;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;">${item.cityLabel}</div>
-            <div style="font-size:0.75rem;font-weight:600;color:#1A1A1A;line-height:1.3;">${item.name}</div>
+            <div style="font-size:0.75rem;font-weight:600;color:#1A1A1A;line-height:1.3;">${getPropName(item)}</div>
             <div style="font-size:0.82rem;font-weight:800;color:#C0392B;">${item.price}</div>
           </div>
         </div>`
@@ -1764,9 +1799,9 @@ function renderMapMarkers(countryVal, cityVal, statusVal, typeVal, extra) {
         <img class="map-popup-img" src="${mainProp.img.replace('/600/375','/480/240')}" alt="">
         <div class="map-popup-body">
           <div class="map-popup-city">${mainProp.cityLabel}</div>
-          <div class="map-popup-name">${mainProp.name}</div>
+          <div class="map-popup-name">${getPropName(mainProp)}</div>
           <div class="map-popup-price">${mainProp.price}</div>
-          <span class="map-popup-link map-popup-go" data-id="${mainProp.id}">Подробнее →</span>
+          <span class="map-popup-link map-popup-go" data-id="${mainProp.id}">${typeof I18n!=="undefined"?I18n.t("card.details"):"Подробнее"} →</span>
         </div>`;
     }
 
@@ -2048,13 +2083,14 @@ function renderRelated(currentId) {
 
   track.innerHTML = same.map(p => {
     const badge = getPropBadge(p);
+    const pName = getPropName(p);
     const roiHtml = (p.deal === 'buy' && p.roi)
       ? `<div class="catalog-roi-pill"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>${typeof I18n!=="undefined"?I18n.t("card.roi_label"):"ROI"} ${p.roi} ${typeof I18n!=="undefined"?I18n.t("card.roi_year"):"/год"}</div>`
       : '';
     return `
     <div class="catalog-card" style="flex-shrink:0;" onclick="showDetail('${p.id}')" spellcheck="false">
       <div style="position:relative;overflow:hidden;">
-        <img class="catalog-img" src="${p.img}" alt="${p.name}">
+        <img class="catalog-img" src="${p.img}" alt="${pName}">
         <span class="prop-badge ${badge.cls}">${badge.text}</span>
         ${p.top ? `<span class="top-label">${typeof I18n!=="undefined"?I18n.t("card.top"):"★ ТОП"}</span>` : ''}
         ${shareCardBtn(p.id)}
@@ -2062,7 +2098,7 @@ function renderRelated(currentId) {
       </div>
       <div class="catalog-card-body">
         <div class="catalog-city-row"><span class="catalog-city">${p.cityLabel}</span>${typeof Reviews !== 'undefined' ? Reviews.getMiniRatingHtml(p.id) : ''}</div>
-        <div class="catalog-name">${p.name}</div>
+        <div class="catalog-name">${pName}</div>
         <div class="catalog-price-block">
           <div class="catalog-price-row">
             <span class="catalog-price">${formatPrice(p.price)}</span>
@@ -2084,7 +2120,7 @@ function renderRelated(currentId) {
           <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
           ${typeof I18n!=="undefined"?I18n.t("card.details"):"Подробнее"}
         </button>
-        <button class="catalog-contact-btn" onclick="event.stopPropagation();openContactPopup('${p.name}')">
+        <button class="catalog-contact-btn" onclick="event.stopPropagation();openContactPopup('${pName.replace(/'/g, "\\'")}')">
           <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.63A2 2 0 012 .18h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92z"/></svg>
           ${typeof I18n!=="undefined"?I18n.t("card.ask"):"Спросить"}
         </button>
@@ -2172,6 +2208,7 @@ function buildFeaturedCards(props) {
     const imgs = p.imgs || [p.img];
     const dots = imgs.map((_, i) => `<span class="card-slider-dot${i === 0 ? ' active' : ''}"></span>`).join('');
     const badge = getPropBadge(p);
+    const pName = getPropName(p);
     let savingsHtml = '';
     if (p.oldPrice) {
       const oldNum = parseFloat(p.oldPrice.replace(/[^0-9.]/g, ''));
@@ -2188,7 +2225,7 @@ function buildFeaturedCards(props) {
     <div class="catalog-card" style="flex-shrink:0;" onclick="showDetail('${p.id}')" spellcheck="false">
       <div class="catalog-card-img-wrap" style="position:relative;overflow:hidden;">
         <div class="card-slider" data-imgs='${JSON.stringify(imgs)}' data-idx="0">
-          <img class="catalog-img card-slider-img" src="${imgs[0]}" alt="${p.name}">
+          <img class="catalog-img card-slider-img" src="${imgs[0]}" alt="${pName}">
           <button class="card-slider-btn card-slider-prev" onclick="cardSlide(event,this,-1)" aria-label="${typeof GRE_T==='function'?GRE_T('card.slider_prev','Назад'):'Назад'}">&#8249;</button>
           <button class="card-slider-btn card-slider-next" onclick="cardSlide(event,this,1)" aria-label="${typeof GRE_T==='function'?GRE_T('card.slider_next','Вперёд'):'Вперёд'}">&#8250;</button>
           <div class="card-slider-dots">${dots}</div>
@@ -2200,7 +2237,7 @@ function buildFeaturedCards(props) {
       </div>
       <div class="catalog-card-body">
         <div class="catalog-city-row"><span class="catalog-city">${p.cityLabel}</span>${typeof Reviews !== 'undefined' ? Reviews.getMiniRatingHtml(p.id) : ''}</div>
-        <div class="catalog-name">${p.name}</div>
+        <div class="catalog-name">${pName}</div>
         <div class="catalog-price-block">
           <div class="catalog-price-row">
             <span class="catalog-price">${formatPrice(p.price)}</span>
@@ -2223,7 +2260,7 @@ function buildFeaturedCards(props) {
           <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
           ${typeof I18n!=="undefined"?I18n.t("card.details"):"Подробнее"}
         </button>
-        <button class="catalog-contact-btn" onclick="event.stopPropagation();openContactPopup('${p.name}')">
+        <button class="catalog-contact-btn" onclick="event.stopPropagation();openContactPopup('${pName.replace(/'/g, "\\'")}')">
           <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.63A2 2 0 012 .18h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92z"/></svg>
           ${typeof I18n!=="undefined"?I18n.t("card.ask"):"Спросить"}
         </button>
@@ -2313,7 +2350,7 @@ function initDetailMap(prop) {
 
     detailMarker = L.marker([lat, lng], { icon })
       .addTo(detailMap)
-      .bindPopup(`<div style="font-size:13px;font-weight:600;color:#1A1A1A;">${prop.name}</div><div style="font-size:12px;color:#C0392B;font-weight:700;margin-top:4px;">${prop.price}</div>`, {
+      .bindPopup(`<div style="font-size:13px;font-weight:600;color:#1A1A1A;">${getPropName(prop)}</div><div style="font-size:12px;color:#C0392B;font-weight:700;margin-top:4px;">${prop.price}</div>`, {
         maxWidth: 240,
         className: 'detail-map-popup',
       })
@@ -2465,7 +2502,7 @@ function downloadPropertyPdf() {
       doc.setTextColor(...white);
       doc.setFontSize(16);
       doc.setFont('helvetica', 'bold');
-      const name = prop.name || '';
+      const name = getPropName(prop) || '';
       const nameLines = doc.splitTextToSize(name, W - 28);
       doc.text(nameLines, 14, 86);
 
@@ -2520,7 +2557,7 @@ function downloadPropertyPdf() {
       doc.setTextColor(...gray);
       doc.setFontSize(9);
       doc.setFont('helvetica', 'normal');
-      const descLines = doc.splitTextToSize(prop.desc || '', W - 28);
+      const descLines = doc.splitTextToSize(getPropDesc(prop) || '', W - 28);
       doc.text(descLines, 14, y);
       y += descLines.length * 5 + 8;
 
