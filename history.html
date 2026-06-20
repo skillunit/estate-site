@@ -28,6 +28,12 @@
   /* ── Card extras ── */
   .hist-viewed-at { display: flex; align-items: center; gap: 5px; font-size: 0.7rem; color: #5DADE2; font-weight: 500; margin-bottom: 5px; }
   .hist-card-actions { display: flex; align-items: center; justify-content: space-between; margin-top: 12px; }
+  .fav-delete-btn {
+    display: flex; align-items: center; gap: 5px;
+    background: none; border: 1px solid var(--border); border-radius: 6px; padding: 6px 10px;
+    font-size: 0.72rem; color: var(--gray-500); cursor: pointer; transition: var(--transition); font-family: var(--font-body);
+  }
+  .fav-delete-btn:hover { border-color: var(--red); color: var(--red); }
 
   /* ── Empty state ── */
   #histEmpty { grid-column: 1 / -1; text-align: center; padding: 80px 20px; }
