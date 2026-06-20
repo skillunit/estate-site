@@ -914,6 +914,13 @@ function getPropDesc(p) {
   const override = dict && p.id && dict[p.id];
   return (override && override.desc) || p.desc;
 }
+function getCityLabel(p) {
+  if (!p.city) return p.cityLabel;
+  const lang = _currentLang();
+  const dict = window['GRE_LANG_' + lang.toUpperCase()] || window.GRE_LANG_RU || {};
+  const key = 'city.' + p.city;
+  return dict[key] !== undefined ? dict[key] : p.cityLabel;
+}
 
 function convertUsd(num) {
   return Math.round(num * CURRENCY_RATES[currentCurrency]);
@@ -1017,7 +1024,7 @@ function renderRecentlyViewed() {
         ${favCardBtn(p.id)}
       </div>
       <div class="catalog-card-body">
-        <div class="catalog-city-row"><span class="catalog-city">${p.cityLabel}</span>${typeof Reviews !== 'undefined' ? Reviews.getMiniRatingHtml(p.id) : ''}</div>
+        <div class="catalog-city-row"><span class="catalog-city">${getCityLabel(p)}</span>${typeof Reviews !== 'undefined' ? Reviews.getMiniRatingHtml(p.id) : ''}</div>
         <div class="catalog-name">${pName}</div>
         <div class="catalog-price-block">
           <div class="catalog-price-row">
@@ -1211,7 +1218,7 @@ function renderCatalogGrid(countryVal, cityVal, statusVal, typeVal, extra) {
       </div>
       <div class="catalog-card-body">
         <div class="catalog-city-row">
-          <span class="catalog-city">${p.cityLabel}</span>
+          <span class="catalog-city">${getCityLabel(p)}</span>
           ${typeof Reviews !== 'undefined' ? Reviews.getMiniRatingHtml(p.id) : ''}
         </div>
         <div class="catalog-name">${pName}</div>
@@ -1312,7 +1319,7 @@ function showDetail(id) {
   if (titleEl) titleEl.textContent = getPropName(prop);
 
   const specVals = page.querySelectorAll('.detail-spec-val');
-  if (specVals[0]) specVals[0].textContent = prop.cityLabel;
+  if (specVals[0]) specVals[0].textContent = getCityLabel(prop);
   if (specVals[1]) specVals[1].textContent = prop.area + ' м²';
   if (specVals[2]) specVals[2].textContent = prop.rooms;
   if (specVals[3]) specVals[3].textContent = prop.floor;
@@ -1783,7 +1790,7 @@ function renderMapMarkers(countryVal, cityVal, statusVal, typeVal, extra) {
         `<div class="map-popup-row" data-id="${item.id}" style="display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid #f0f0f0;cursor:pointer;">
           <img src="${item.img.replace('/600/375','/120/90')}" style="width:48px;height:36px;object-fit:cover;border-radius:2px;flex-shrink:0;">
           <div>
-            <div style="font-size:0.7rem;color:#C0392B;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;">${item.cityLabel}</div>
+            <div style="font-size:0.7rem;color:#C0392B;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;">${getCityLabel(item)}</div>
             <div style="font-size:0.75rem;font-weight:600;color:#1A1A1A;line-height:1.3;">${getPropName(item)}</div>
             <div style="font-size:0.82rem;font-weight:800;color:#C0392B;">${item.price}</div>
           </div>
@@ -1791,14 +1798,14 @@ function renderMapMarkers(countryVal, cityVal, statusVal, typeVal, extra) {
       ).join('');
       popupHtml = `
         <div style="padding:14px 16px 6px;max-height:280px;overflow-y:auto;">
-          <div style="font-size:0.65rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:#7A7A7A;margin-bottom:10px;">${count} объекта · ${mainProp.cityLabel}</div>
+          <div style="font-size:0.65rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:#7A7A7A;margin-bottom:10px;">${count} объекта · ${getCityLabel(mainProp)}</div>
           ${listItems}
         </div>`;
     } else {
       popupHtml = `
         <img class="map-popup-img" src="${mainProp.img.replace('/600/375','/480/240')}" alt="">
         <div class="map-popup-body">
-          <div class="map-popup-city">${mainProp.cityLabel}</div>
+          <div class="map-popup-city">${getCityLabel(mainProp)}</div>
           <div class="map-popup-name">${getPropName(mainProp)}</div>
           <div class="map-popup-price">${mainProp.price}</div>
           <span class="map-popup-link map-popup-go" data-id="${mainProp.id}">${typeof I18n!=="undefined"?I18n.t("card.details"):"Подробнее"} →</span>
@@ -2079,7 +2086,7 @@ function renderRelated(currentId) {
     'cyprus': T('catalog.in_cyprus', 'на Кипре'),
     'greece': T('catalog.in_greece', 'в Греции'),
   };
-  document.getElementById('relatedTitle').textContent = T('detail.related_other_country', 'Другие объекты') + ' ' + (countryNames[prop.country] || prop.cityLabel);
+  document.getElementById('relatedTitle').textContent = T('detail.related_other_country', 'Другие объекты') + ' ' + (countryNames[prop.country] || getCityLabel(prop));
 
   track.innerHTML = same.map(p => {
     const badge = getPropBadge(p);
@@ -2097,7 +2104,7 @@ function renderRelated(currentId) {
         ${favCardBtn(p.id)}
       </div>
       <div class="catalog-card-body">
-        <div class="catalog-city-row"><span class="catalog-city">${p.cityLabel}</span>${typeof Reviews !== 'undefined' ? Reviews.getMiniRatingHtml(p.id) : ''}</div>
+        <div class="catalog-city-row"><span class="catalog-city">${getCityLabel(p)}</span>${typeof Reviews !== 'undefined' ? Reviews.getMiniRatingHtml(p.id) : ''}</div>
         <div class="catalog-name">${pName}</div>
         <div class="catalog-price-block">
           <div class="catalog-price-row">
@@ -2236,7 +2243,7 @@ function buildFeaturedCards(props) {
         ${favCardBtn(p.id)}
       </div>
       <div class="catalog-card-body">
-        <div class="catalog-city-row"><span class="catalog-city">${p.cityLabel}</span>${typeof Reviews !== 'undefined' ? Reviews.getMiniRatingHtml(p.id) : ''}</div>
+        <div class="catalog-city-row"><span class="catalog-city">${getCityLabel(p)}</span>${typeof Reviews !== 'undefined' ? Reviews.getMiniRatingHtml(p.id) : ''}</div>
         <div class="catalog-name">${pName}</div>
         <div class="catalog-price-block">
           <div class="catalog-price-row">

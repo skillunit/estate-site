@@ -1998,7 +1998,7 @@
   } catch(e) {}
 })();
 </script>
-<script src="js/catalog.js?v=70"></script>
+<script src="js/catalog.js?v=71"></script>
 <script src="js/animations.js"></script>
 <script src="js/auth.js?v=5"></script>
 <script src="js/favorites.js?v=4"></script>
@@ -2262,14 +2262,14 @@ function resetHomeFilter() {
 // ── Sticky scroll — отключён ──
 </script>
 <div class="floating-panel">
-  <button class="btn-scroll-top" id="btnScrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Наверх">
+  <button class="btn-scroll-top" id="btnScrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Наверх" data-i18n-attr="aria-label:floating.top">
     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
       <polyline points="18 15 12 9 6 15"/>
     </svg>
   </button>
 
-  <button class="btn-consult" onclick="openContactPopup()" aria-label="Онлайн консультация">
-    <span class="btn-consult-tooltip">Онлайн консультация</span>
+  <button class="btn-consult" onclick="openContactPopup()" aria-label="Онлайн консультация" data-i18n-attr="aria-label:floating.consult">
+    <span class="btn-consult-tooltip" data-i18n="floating.consult">Онлайн консультация</span>
     <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
       <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
     </svg>

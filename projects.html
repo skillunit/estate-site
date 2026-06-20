@@ -1227,7 +1227,7 @@
 <script src="js/i18n.js?v=25"></script>
 <script src="js/nav.js?v=26"></script>
 <script src="js/forms.js?v=6"></script>
-<script src="js/catalog.js?v=70"></script>
+<script src="js/catalog.js?v=71"></script>
 <script>
 /* УМНЫЙ ПОИСК */
 var _sq = '';
@@ -1314,7 +1314,8 @@ function _renderSug(query) {
     html += '<img class="search-suggestion-img" src="' + p.img + '" alt="">';
     html += '<div class="search-suggestion-info">';
     html += '<div class="search-suggestion-name">' + _hilite(pName, query) + '</div>';
-    html += '<div class="search-suggestion-meta">' + p.cityLabel + ' &middot; ' + p.area + ' м²</div>';
+    var pCity = (typeof getCityLabel === 'function') ? getCityLabel(p) : p.cityLabel;
+    html += '<div class="search-suggestion-meta">' + pCity + ' &middot; ' + p.area + ' м²</div>';
     html += '</div>';
     html += '<span class="search-suggestion-price">' + p.price + '</span>';
     html += '</div>';
@@ -1772,13 +1773,13 @@ function toggleFaq(el) {
 </script>
 
 <div class="floating-panel">
-  <button class="btn-scroll-top" id="btnScrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Наверх">
+  <button class="btn-scroll-top" id="btnScrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Наверх" data-i18n-attr="aria-label:floating.top">
     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
       <polyline points="18 15 12 9 6 15"/>
     </svg>
   </button>
-  <button class="btn-consult" onclick="openContactPopup()" aria-label="Онлайн консультация">
-    <span class="btn-consult-tooltip">Онлайн консультация</span>
+  <button class="btn-consult" onclick="openContactPopup()" aria-label="Онлайн консультация" data-i18n-attr="aria-label:floating.consult">
+    <span class="btn-consult-tooltip" data-i18n="floating.consult">Онлайн консультация</span>
     <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
       <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
     </svg>
