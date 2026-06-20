@@ -260,7 +260,10 @@ function renderFavoritesPage() {
           ${p.year ? `<span class="spec-sep">·</span><span class="spec-item"><strong>${p.year}</strong> ${_favT('card.year_abbr', 'г.')}</span>` : ''}
         </div>
         <div class="fav-card-actions">
-          <a class="catalog-detail-link" href="index.html?prop=${p.id}" onclick="event.stopPropagation()">${_favT('card.details', 'Подробнее')} →</a>
+          <button class="catalog-cta-btn" onclick="event.stopPropagation();window.location.href='index.html?prop=${p.id}'">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+            ${_favT('card.details', 'Подробнее')}
+          </button>
           <button class="fav-delete-btn" onclick="removeFavFromPage(event,'${p.id}')">
             <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/><path d="M9 6V4h6v2"/></svg>
             ${_favT('fav.remove_btn', 'Удалить')}
