@@ -307,10 +307,55 @@ body.rtl { direction: rtl; text-align: right; }
 body.rtl .header-inner { flex-direction: row-reverse; }
 body.rtl .header-nav { flex-direction: row-reverse; }
 body.rtl .logo { flex-direction: row-reverse; }
-body.rtl .filter-form { flex-direction: row-reverse; }
+body.rtl .filter-form { flex-direction: column; }
 body.rtl .catalog-city-row { flex-direction: row-reverse; }
 body.rtl .catalog-specs { flex-direction: row-reverse; }
 body.rtl .catalog-card-footer { flex-direction: row-reverse; }
 body.rtl .catalog-pills-row { flex-direction: row-reverse; }
 body.rtl .prop-badge { left: auto; right: 12px; }
 body.rtl .top-label { right: auto; left: 12px; }
+
+/* ── RTL: filter bar (projects.html + homepage search) ── */
+body.rtl .filter-row-1,
+body.rtl .filter-row-2 {
+  flex-direction: row-reverse;
+}
+body.rtl .filter-deal-toggle {
+  flex-direction: row-reverse;
+}
+body.rtl .filter-field {
+  text-align: right;
+}
+/* Field separator dot — was anchored to the left edge of each field */
+body.rtl .filter-field + .filter-field::before {
+  left: auto; right: -7px;
+}
+/* Select dropdown arrow + padding mirror */
+body.rtl .filter-select {
+  padding: 0 12px 0 36px;
+  background-position: left 12px center;
+}
+/* "Сброс / Найти" block was pinned to the right via margin-left:auto */
+body.rtl .filter-row-2-actions {
+  margin-left: 0;
+  margin-right: auto;
+  align-items: flex-end;
+}
+/* projects.html row 2 indent matched the toggle width on the left */
+body.rtl .filter-row-2--projects {
+  padding-left: 0;
+  padding-right: calc(var(--projects-toggle-w, 170px) + 10px);
+}
+/* Search field icon/clear button are absolutely positioned (not flex
+   items), so row-reverse on the wrapper has no effect on them —
+   mirror left/right directly instead */
+body.rtl .search-field-icon {
+  left: auto; right: 11px;
+}
+body.rtl .search-field-input {
+  padding: 0 34px 0 32px;
+  text-align: right;
+}
+body.rtl .search-field-clear {
+  right: auto; left: 10px;
+}
