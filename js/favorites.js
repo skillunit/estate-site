@@ -233,16 +233,15 @@ function renderFavoritesPage() {
         </div>
         <span class="prop-badge ${badge.cls}" style="position:absolute;top:12px;left:12px;z-index:2;">${badge.text}</span>
         ${p.top ? `<span class="top-label" style="z-index:2;">${_favT('card.top', '★ ТОП')}</span>` : ''}
+        <!-- Fav button on photo -->
+        <button class="card-fav-inline fav-active" data-fav-id="${p.id}"
+          onclick="removeFavFromPage(event,'${p.id}')" aria-label="${_favT('fav.remove', 'Убрать из избранного')}">
+          ${heartSVG(true)}
+        </button>
       </div>
       <div class="catalog-card-body">
         <div class="catalog-city-row"><span class="catalog-city">${pCity}</span>${typeof Reviews !== 'undefined' ? Reviews.getMiniRatingHtml(p.id) : ''}</div>
-        <div class="catalog-name-row">
-          <div class="catalog-name">${pName}</div>
-          <button class="card-fav-inline fav-active" data-fav-id="${p.id}"
-            onclick="removeFavFromPage(event,'${p.id}')" aria-label="${_favT('fav.remove', 'Убрать из избранного')}">
-            ${heartSVG(true)}
-          </button>
-        </div>
+        <div class="catalog-name">${pName}</div>
         <div class="fav-card-added">${_favT('fav.added_on', 'Добавлено {date}', { date: formatFavDate(userFavs[p.id]) })}</div>
         <div class="catalog-price-block">
           <div class="catalog-price-row">
