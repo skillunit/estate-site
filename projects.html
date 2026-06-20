@@ -1463,11 +1463,24 @@ document.addEventListener('DOMContentLoaded', function() {
     var toggle = document.querySelector('.filter-deal-toggle');
     var row2 = document.querySelector('.filter-row-2--projects');
     if (!toggle || !row2) return;
-    if (window.innerWidth <= 768) { row2.style.paddingLeft = ''; return; }
-    row2.style.paddingLeft = (toggle.offsetWidth + 10) + 'px';
+    var isRtl = document.body.classList.contains('rtl');
+    if (window.innerWidth <= 768) {
+      row2.style.paddingLeft = '';
+      row2.style.paddingRight = '';
+      return;
+    }
+    var indent = (toggle.offsetWidth + 10) + 'px';
+    if (isRtl) {
+      row2.style.paddingLeft = '';
+      row2.style.paddingRight = indent;
+    } else {
+      row2.style.paddingRight = '';
+      row2.style.paddingLeft = indent;
+    }
   }
   document.addEventListener('DOMContentLoaded', alignFilterRow2);
   window.addEventListener('resize', alignFilterRow2);
+  document.addEventListener('i18n:applied', alignFilterRow2);
 })();
 </script>
 <script src="js/auth.js?v=5"></script>
