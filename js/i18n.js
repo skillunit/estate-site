@@ -89,8 +89,14 @@ const I18n = (() => {
     localStorage.setItem(STORAGE_KEY, lang);
     applyAll();
     updateLangButtons();
-    // Перерендер каталога если он инициализирован
-    if (typeof renderCatalogGrid === 'function') renderCatalogGrid();
+    // Перерендер каталога если он инициализирован.
+    // Важно: используем filterCatalog(), а не renderCatalogGrid() напрямую —
+    // renderCatalogGrid(countryVal, cityVal, ...) ожидает аргументы; вызов без них
+    // даёт всем p.country === undefined и т.д., из-за чего фильтр совпадает 0 раз
+    // и каталог показывает "0 объектов" до ручного нажатия "Найти" или перезагрузки.
+    // filterCatalog() сама читает текущие значения фильтров из DOM и передаёт их дальше.
+    if (typeof filterCatalog === 'function') filterCatalog();
+    else if (typeof renderCatalogGrid === 'function') renderCatalogGrid();
     if (typeof renderFeatured    === 'function') renderFeatured();
     document.dispatchEvent(new CustomEvent('langchange', { detail: { lang } }));
   }
