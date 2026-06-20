@@ -2,6 +2,11 @@
    FAVORITES — Georgia Real Estate
 ═══════════════════════════════════ */
 
+/* ── i18n helper (defensive — translations.js may load after this file) ── */
+function _favT(key, fallback, params) {
+  return (typeof window.GRE_T === 'function') ? window.GRE_T(key, params) : fallback;
+}
+
 /* ── Storage ── */
 const FAVS_KEY = 'gre_favorites';
 
@@ -85,7 +90,7 @@ function refreshAllFavBtns() {
   const detailBtn = document.getElementById('detailFavBtn');
   if (detailBtn && detailBtn.dataset.favId) {
     const filled = isFavById(detailBtn.dataset.favId);
-    detailBtn.innerHTML = heartSVG(filled) + `<span>${filled ? 'В избранном' : 'В избранное'}</span>`;
+    detailBtn.innerHTML = heartSVG(filled) + `<span>${filled ? _favT('fav.in_favorites', 'В избранном') : _favT('fav.add_to_favorites', 'В избранное')}</span>`;
     detailBtn.classList.toggle('fav-active', filled);
   }
   updateFavBadge();
@@ -98,9 +103,11 @@ function showFavToast(added) {
   const t = document.createElement('div');
   t.className = 'fav-toast';
   if (added) {
-    t.innerHTML = `${heartSVG(true)} <span>Добавлено в избранное · <a href="favorites.html" style="color:#fff;text-decoration:underline;pointer-events:all;">Открыть</a></span>`;
+    const openText = _favT('fav.toast_added_link', 'Открыть');
+    const linkHtml = `<a href="favorites.html" style="color:#fff;text-decoration:underline;pointer-events:all;">${openText}</a>`;
+    t.innerHTML = `${heartSVG(true)} <span>${_favT('fav.toast_added', 'Добавлено в избранное · {link}', { link: linkHtml })}</span>`;
   } else {
-    t.innerHTML = `${heartSVG(false)} <span>Удалено из избранного</span>`;
+    t.innerHTML = `${heartSVG(false)} <span>${_favT('fav.toast_removed', 'Удалено из избранного')}</span>`;
   }
   document.body.appendChild(t);
   setTimeout(() => t.classList.add('show'), 10);
@@ -161,11 +168,11 @@ function renderFavoritesPage() {
       emptyEl.style.display = '';
       emptyEl.innerHTML = `
         <div class="fav-empty-icon">${heartSVG(false)}</div>
-        <div class="fav-empty-title">Войдите, чтобы видеть избранное</div>
-        <div class="fav-empty-sub">Сохраняйте понравившиеся объекты и возвращайтесь к ним в любое время</div>
-        <button class="btn btn-primary" onclick="Auth.openAuthModal()" style="margin-top:20px;">Войти / Зарегистрироваться</button>`;
+        <div class="fav-empty-title">${_favT('fav.login_required_title', 'Войдите, чтобы видеть избранное')}</div>
+        <div class="fav-empty-sub">${_favT('fav.login_required_sub', 'Сохраняйте понравившиеся объекты и возвращайтесь к ним в любое время')}</div>
+        <button class="btn btn-primary" onclick="Auth.openAuthModal()" style="margin-top:20px;">${_favT('fav.login_or_register', 'Войти / Зарегистрироваться')}</button>`;
     }
-    if (countEl) countEl.textContent = '0 объектов';
+    if (countEl) countEl.textContent = _favT('fav.count_zero', '0 объектов');
     if (toolbar) toolbar.style.display = 'none';
     const favBody = document.getElementById('favBody');
     if (favBody) favBody.classList.remove('toolbar-active');
@@ -190,7 +197,7 @@ function renderFavoritesPage() {
     .filter(Boolean);
 
   const n = props.length;
-  if (countEl) countEl.textContent = `${n} ${plural(n, 'объект', 'объекта', 'объектов')}`;
+  if (countEl) countEl.textContent = (typeof GRE_PLURAL_OBJECTS === 'function') ? GRE_PLURAL_OBJECTS(n) : `${n} ${plural(n, 'объект', 'объекта', 'объектов')}`;
 
   if (!n) {
     grid.innerHTML = '';
@@ -198,9 +205,9 @@ function renderFavoritesPage() {
       emptyEl.style.display = '';
       emptyEl.innerHTML = `
         <div class="fav-empty-icon">${heartSVG(false)}</div>
-        <div class="fav-empty-title">В избранном пока пусто</div>
-        <div class="fav-empty-sub">Нажимайте ❤ на карточках объектов — они сохранятся здесь</div>
-        <a href="index.html" class="btn btn-primary" style="margin-top:20px;">Перейти к объектам</a>`;
+        <div class="fav-empty-title">${_favT('fav.empty_title', 'В избранном пока пусто')}</div>
+        <div class="fav-empty-sub">${_favT('fav.empty_sub', 'Нажимайте ❤ на карточках объектов — они сохранятся здесь')}</div>
+        <a href="index.html" class="btn btn-primary" style="margin-top:20px;">${_favT('fav.browse_properties', 'Перейти к объектам')}</a>`;
     }
     return;
   }
@@ -210,49 +217,53 @@ function renderFavoritesPage() {
   grid.innerHTML = props.map(p => {
     const imgs = p.imgs || [p.img];
     const badge = getPropBadgeLocal(p);
+    const pName = (typeof getPropName === 'function') ? getPropName(p) : p.name;
+    const pCity = (typeof getCityLabel === 'function') ? getCityLabel(p) : p.cityLabel;
+    const priceDisplay = (typeof formatPrice === 'function') ? formatPrice(p.price) : p.price;
+    const oldPriceDisplay = p.oldPrice ? ((typeof formatPrice === 'function') ? formatPrice(p.oldPrice) : p.oldPrice) : '';
     return `
     <div class="catalog-card fav-page-card" data-id="${p.id}" onclick="window.location.href='index.html?prop=${p.id}'" style="cursor:pointer;">
       <div class="catalog-card-img-wrap" style="position:relative;overflow:hidden;">
         <div class="card-slider" data-imgs='${JSON.stringify(imgs)}' data-idx="0">
-          <img class="catalog-img card-slider-img" src="${imgs[0]}" alt="${p.name}" loading="lazy">
+          <img class="catalog-img card-slider-img" src="${imgs[0]}" alt="${pName}" loading="lazy">
           ${imgs.length > 1 ? `
-          <button class="card-slider-btn card-slider-prev" onclick="favCardSlide(event,this,-1)" aria-label="Назад">&#8249;</button>
-          <button class="card-slider-btn card-slider-next" onclick="favCardSlide(event,this,1)" aria-label="Вперёд">&#8250;</button>
+          <button class="card-slider-btn card-slider-prev" onclick="favCardSlide(event,this,-1)" aria-label="${_favT('card.slider_prev','Назад')}">&#8249;</button>
+          <button class="card-slider-btn card-slider-next" onclick="favCardSlide(event,this,1)" aria-label="${_favT('card.slider_next','Вперёд')}">&#8250;</button>
           <div class="card-slider-dots">${imgs.map((_,i)=>`<span class="card-slider-dot${i===0?' active':''}"></span>`).join('')}</div>` : ''}
         </div>
         <span class="prop-badge ${badge.cls}" style="position:absolute;top:12px;left:12px;z-index:2;">${badge.text}</span>
-        ${p.top ? '<span class="top-label" style="z-index:2;">★ ТОП</span>' : ''}
+        ${p.top ? `<span class="top-label" style="z-index:2;">${_favT('card.top', '★ ТОП')}</span>` : ''}
       </div>
       <div class="catalog-card-body">
-        <div class="catalog-city-row"><span class="catalog-city">${p.cityLabel}</span>${typeof Reviews !== 'undefined' ? Reviews.getMiniRatingHtml(p.id) : ''}</div>
+        <div class="catalog-city-row"><span class="catalog-city">${pCity}</span>${typeof Reviews !== 'undefined' ? Reviews.getMiniRatingHtml(p.id) : ''}</div>
         <div class="catalog-name-row">
-          <div class="catalog-name">${p.name}</div>
+          <div class="catalog-name">${pName}</div>
           <button class="card-fav-inline fav-active" data-fav-id="${p.id}"
-            onclick="removeFavFromPage(event,'${p.id}')" aria-label="Убрать из избранного">
+            onclick="removeFavFromPage(event,'${p.id}')" aria-label="${_favT('fav.remove', 'Убрать из избранного')}">
             ${heartSVG(true)}
           </button>
         </div>
-        <div class="fav-card-added">Добавлено ${formatFavDate(userFavs[p.id])}</div>
+        <div class="fav-card-added">${_favT('fav.added_on', 'Добавлено {date}', { date: formatFavDate(userFavs[p.id]) })}</div>
         <div class="catalog-price-block">
           <div class="catalog-price-row">
-            <span class="catalog-price">${p.price}</span>
+            <span class="catalog-price">${priceDisplay}</span>
             ${p.area ? `<span class="catalog-price-sqm" style="font-size:0.72rem;color:var(--gray-500);">${formatSqmLocal(p)}</span>` : ''}
           </div>
-          ${p.oldPrice ? `<div class="catalog-price-old">${p.oldPrice}</div>` : ''}
+          ${oldPriceDisplay ? `<div class="catalog-price-old">${oldPriceDisplay}</div>` : ''}
         </div>
         <div class="catalog-specs">
-          <span class="spec-item"><strong>${p.area}</strong> м²</span>
+          <span class="spec-item"><strong>${p.area}</strong> ${_favT('card.sqm_abbr', 'м²')}</span>
           <span class="spec-sep">·</span>
-          <span class="spec-item"><strong>${p.rooms}</strong> спал.</span>
+          <span class="spec-item"><strong>${p.rooms}</strong> ${_favT('card.rooms_abbr', 'спал.')}</span>
           <span class="spec-sep">·</span>
-          <span class="spec-item"><strong>${p.floor}</strong> эт.</span>
-          ${p.year ? `<span class="spec-sep">·</span><span class="spec-item"><strong>${p.year}</strong> г.</span>` : ''}
+          <span class="spec-item"><strong>${p.floor}</strong> ${_favT('card.floor_abbr', 'эт.')}</span>
+          ${p.year ? `<span class="spec-sep">·</span><span class="spec-item"><strong>${p.year}</strong> ${_favT('card.year_abbr', 'г.')}</span>` : ''}
         </div>
         <div class="fav-card-actions">
-          <a class="catalog-detail-link" href="index.html?prop=${p.id}" onclick="event.stopPropagation()">Подробнее →</a>
+          <a class="catalog-detail-link" href="index.html?prop=${p.id}" onclick="event.stopPropagation()">${_favT('card.details', 'Подробнее')} →</a>
           <button class="fav-delete-btn" onclick="removeFavFromPage(event,'${p.id}')">
             <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/><path d="M9 6V4h6v2"/></svg>
-            Удалить
+            ${_favT('fav.remove_btn', 'Удалить')}
           </button>
         </div>
       </div>
@@ -322,7 +333,9 @@ function plural(n, one, few, many) {
 }
 function formatFavDate(ts) {
   if (!ts) return '';
-  return new Date(ts).toLocaleDateString('ru-RU', { day: 'numeric', month: 'long' });
+  const lang = localStorage.getItem('gre_lang') || 'ru';
+  const locale = lang === 'he' ? 'he-IL' : lang === 'en' ? 'en-US' : 'ru-RU';
+  return new Date(ts).toLocaleDateString(locale, { day: 'numeric', month: 'long' });
 }
 function getPropBadgeLocal(p) {
   if (typeof getPropBadge === 'function') return getPropBadge(p);
