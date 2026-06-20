@@ -341,7 +341,7 @@ window.GRE_LANG_EN = {
     'contact.label_email': 'Email:',
     'contact.label_hours': 'Hours:',
     'contact.val_hours': 'Mon–Fri 9:00 AM – 6:00 PM',
-    'contact.map_btn': '📍 Open in Maps',
+    'contact.map_btn': 'Open in Maps',
     'contact.form_title': 'Contact form',
     'contact.label_name': 'Your name',
     'contact.ph_name': 'Your name',

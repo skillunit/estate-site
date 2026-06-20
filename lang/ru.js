@@ -341,7 +341,7 @@ window.GRE_LANG_RU = {
     'contact.label_email': 'Email:',
     'contact.label_hours': 'Часы работы:',
     'contact.val_hours': 'Пн–Пт 9:00 – 18:00',
-    'contact.map_btn': '📍 Открыть на карте',
+    'contact.map_btn': 'Открыть на карте',
     'contact.form_title': 'Форма обратной связи',
     'contact.label_name': 'Ваше имя',
     'contact.ph_name': 'Ваше Имя',

@@ -341,7 +341,7 @@ window.GRE_LANG_HE = {
     'contact.label_email': 'אימייל:',
     'contact.label_hours': 'שעות פעילות:',
     'contact.val_hours': 'א-ה 9:00 – 18:00',
-    'contact.map_btn': '📍 פתח במפה',
+    'contact.map_btn': 'פתח במפה',
     'contact.form_title': 'טופס יצירת קשר',
     'contact.label_name': 'שמך',
     'contact.ph_name': 'שמך',
