@@ -166,12 +166,38 @@ footer {
   padding: 80px 0;
   overflow: hidden;
   position: relative;
+  isolation: isolate;
 }
 .testimonials::before {
   content: '';
   position: absolute; top: 0; left: 0; right: 0;
   height: 3px;
   background: linear-gradient(90deg, var(--red) 0%, transparent 100%);
+  z-index: 2;
+}
+/* Parallax bg photo — pure CSS (background-attachment: fixed).
+   Correct approach for a section in the middle of the page: the JS
+   scroll-driven parallax used for page heroes assumes the section
+   starts at scrollY≈0, which doesn't hold here. */
+.testimonials-bg {
+  position: absolute; inset: 0;
+  z-index: -2;
+  background-image: url('https://images.unsplash.com/photo-1657383543451-e47d1589195d?w=1920&h=1000&fit=crop');
+  background-position: center 45%;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+@media (max-width: 900px) {
+  /* background-attachment:fixed is unreliable on mobile Safari and
+     hurts scroll perf on touch devices — fall back to a static bg */
+  .testimonials-bg { background-attachment: scroll; }
+}
+/* Dark tint over the photo — same tone as the section's old solid --dark background */
+.testimonials-overlay {
+  position: absolute; inset: 0;
+  z-index: -1;
+  background: rgba(26,26,26,0.86);
 }
 .testimonials-header { text-align: center; margin-bottom: 56px; }
 .testimonials-eyebrow {
