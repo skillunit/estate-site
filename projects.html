@@ -12,8 +12,8 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
-<link rel="stylesheet" href="css/base.css?v=6">
-<link rel="stylesheet" href="css/pages.css?v=69">
+<link rel="stylesheet" href="css/base.css?v=7">
+<link rel="stylesheet" href="css/pages.css?v=70">
 <link rel="stylesheet" href="css/components.css?v=51">
 <link rel="stylesheet" href="css/responsive.css?v=3">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
@@ -1463,19 +1463,23 @@ document.addEventListener('DOMContentLoaded', function() {
     var toggle = document.querySelector('.filter-deal-toggle');
     var row2 = document.querySelector('.filter-row-2--projects');
     if (!toggle || !row2) return;
+    var firstField = row2.querySelector('.filter-field');
     var isRtl = document.body.classList.contains('rtl');
-    if (window.innerWidth <= 768) {
-      row2.style.paddingLeft = '';
-      row2.style.paddingRight = '';
-      return;
+    // Чистим возможные остатки от предыдущего расчёта/направления
+    row2.style.paddingLeft = '';
+    row2.style.paddingRight = '';
+    if (firstField) {
+      firstField.style.marginLeft = '';
+      firstField.style.marginRight = '';
     }
+    if (window.innerWidth <= 768) return;
     var indent = (toggle.offsetWidth + 10) + 'px';
-    if (isRtl) {
-      row2.style.paddingLeft = '';
-      row2.style.paddingRight = indent;
-    } else {
-      row2.style.paddingRight = '';
-      row2.style.paddingLeft = indent;
+    // Отступ ставим на первое поле строки (margin), а не padding всего
+    // ряда — иначе он сжимает доступную ширину и для filter-row-2-actions
+    // на другом конце, мешая margin-left/right:auto доехать до края.
+    if (firstField) {
+      if (isRtl) firstField.style.marginRight = indent;
+      else firstField.style.marginLeft = indent;
     }
   }
   document.addEventListener('DOMContentLoaded', alignFilterRow2);

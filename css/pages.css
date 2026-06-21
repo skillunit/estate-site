@@ -2123,13 +2123,18 @@
 }
 
 
-/* ── projects.html: строка 2 фильтра начинается под "Страна" (не под toggle) ── */
-.filter-row-2--projects {
-  padding-left: calc(var(--projects-toggle-w, 170px) + 10px);
+/* ── projects.html: строка 2 фильтра начинается под "Страна" (не под toggle) ──
+   Применяем отступ как margin к первому полю ряда (Статус), а не как
+   padding всего ряда — иначе он сжимает доступную ширину и для
+   .filter-row-2-actions на другом конце строки. Это CSS-фолбэк на
+   случай если JS (см. <script> на projects.html) ещё не успел
+   посчитать точную ширину toggle-блока; JS его сразу переопределяет. */
+.filter-row-2--projects > .filter-field:first-child {
+  margin-left: calc(var(--projects-toggle-w, 170px) + 10px);
 }
 
 @media (max-width: 768px) {
-  .filter-row-2--projects { padding-left: 0; }
+  .filter-row-2--projects > .filter-field:first-child { margin-left: 0; }
 }
 
 

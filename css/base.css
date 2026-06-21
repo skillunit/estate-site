@@ -343,10 +343,17 @@ body.rtl .filter-row-2-actions {
   margin-left: auto;
   align-items: flex-end;
 }
-/* projects.html row 2 indent matched the toggle width on the left */
+/* projects.html row 2 indent matched the toggle width on the left —
+   same fix as the LTR fallback in pages.css: margin on the first
+   field, not padding on the whole row (which would squeeze
+   .filter-row-2-actions' available width on the other end) */
 body.rtl .filter-row-2--projects {
   padding-left: 0;
-  padding-right: calc(var(--projects-toggle-w, 170px) + 10px);
+  padding-right: 0;
+}
+body.rtl .filter-row-2--projects > .filter-field:first-child {
+  margin-left: 0;
+  margin-right: calc(var(--projects-toggle-w, 170px) + 10px);
 }
 /* Search field icon/clear button are absolutely positioned (not flex
    items), so row-reverse on the wrapper has no effect on them —
@@ -369,5 +376,8 @@ body.rtl .search-field-clear {
      needing row-reverse; just clear the desktop margin-left:auto */
   body.rtl .filter-row-2-actions {
     margin-left: 0;
+  }
+  body.rtl .filter-row-2--projects > .filter-field:first-child {
+    margin-right: 0;
   }
 }
