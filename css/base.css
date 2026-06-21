@@ -315,14 +315,13 @@ body.rtl .catalog-pills-row { flex-direction: row-reverse; }
 body.rtl .prop-badge { left: auto; right: 12px; }
 body.rtl .top-label { right: auto; left: 12px; }
 
-/* ── RTL: filter bar (projects.html + homepage search) ── */
-body.rtl .filter-row-1,
-body.rtl .filter-row-2 {
-  flex-direction: row-reverse;
-}
-body.rtl .filter-deal-toggle {
-  flex-direction: row-reverse;
-}
+/* ── RTL: filter bar (projects.html + homepage search) ──
+   body.rtl already sets direction:rtl, which makes plain
+   flex-direction:row containers lay out right-to-left on their own
+   (the flex "row" axis follows the inline/text direction). Adding
+   row-reverse on top double-flips them back to an LTR-looking
+   order — so these containers are intentionally left at their
+   default row, not reversed. */
 body.rtl .filter-field {
   text-align: right;
 }
@@ -335,10 +334,13 @@ body.rtl .filter-select {
   padding: 0 12px 0 36px;
   background-position: left 12px center;
 }
-/* "Сброс / Найти" block was pinned to the right via margin-left:auto */
+/* "Сброс / Найти" is the last DOM child of filter-row-2 — with plain
+   row + direction:rtl it's already the leftmost item; margin-left:auto
+   (not margin-right, since there's no row-reverse) pushes it flush
+   against the row's left edge */
 body.rtl .filter-row-2-actions {
-  margin-left: 0;
-  margin-right: auto;
+  margin-right: 0;
+  margin-left: auto;
   align-items: flex-end;
 }
 /* projects.html row 2 indent matched the toggle width on the left */
@@ -362,9 +364,10 @@ body.rtl .search-field-clear {
 
 @media (max-width: 768px) {
   /* .filter-row-2-actions on mobile switches to flex-direction:row,
-     width:100%, margin-left:0 (see responsive.css) — re-mirror it */
+     width:100%, justify-content:space-between (see responsive.css) —
+     that already lays out correctly under direction:rtl without
+     needing row-reverse; just clear the desktop margin-left:auto */
   body.rtl .filter-row-2-actions {
-    flex-direction: row-reverse;
-    margin-right: 0;
+    margin-left: 0;
   }
 }
