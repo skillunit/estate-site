@@ -359,3 +359,12 @@ body.rtl .search-field-input {
 body.rtl .search-field-clear {
   right: auto; left: 10px;
 }
+
+@media (max-width: 768px) {
+  /* .filter-row-2-actions on mobile switches to flex-direction:row,
+     width:100%, margin-left:0 (see responsive.css) — re-mirror it */
+  body.rtl .filter-row-2-actions {
+    flex-direction: row-reverse;
+    margin-right: 0;
+  }
+}
