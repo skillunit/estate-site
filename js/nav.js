@@ -107,6 +107,24 @@ document.addEventListener('i18n:applied', function() {
   const keepValue = citySelect.value;
   updateCityOptions(country);
   if (keepValue) citySelect.value = keepValue;
+
+  // То же самое для списка статусов — он тоже собирается через JS (getStatusOptions)
+  // и не подхватывает смену языка автоматически без явной перерисовки.
+  const statusSelect = document.getElementById('statusSelect');
+  if (statusSelect && typeof updateStatusOptions === 'function') {
+    const keepStatus = statusSelect.value;
+    const deal = typeof currentDealType !== 'undefined' ? currentDealType : 'buy';
+    updateStatusOptions(deal);
+    if (keepStatus) statusSelect.value = keepStatus;
+  }
+
+  // Подпись "Цена, $" тоже составляется в JS (слово + текущий символ валюты)
+  // и иначе остаётся на языке, на котором её в последний раз обновил setCurrency()
+  const priceLabel = document.getElementById('priceCurrencyLabel');
+  if (priceLabel && typeof CURRENCY_SYMBOLS !== 'undefined' && typeof currentCurrency !== 'undefined') {
+    const T = (typeof GRE_T === 'function') ? GRE_T : (k, fb) => fb;
+    priceLabel.textContent = T('filter.price_currency', 'Цена,') + ' ' + CURRENCY_SYMBOLS[currentCurrency];
+  }
 });
 
 function updateCatalogHeadline(country) {
