@@ -1,0 +1,8 @@
+{
+  "name": "georgia-real-estate-site",
+  "private": true,
+  "description": "Georgia Real Estate — static site. See README.md for the header/footer build workflow.",
+  "scripts": {
+    "build": "node build.js"
+  }
+}

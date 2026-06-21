@@ -63,6 +63,7 @@ header {
 .logo {
   display: flex; align-items: center; gap: 10px;
   cursor: pointer; flex-shrink: 0;
+  text-decoration: none;
 }
 .logo-icon {
   width: 36px; height: 36px; flex-shrink:0;
