@@ -363,6 +363,18 @@ footer {
   position: absolute; inset: 0;
   background: var(--dark);
 }
+/* Фото-фон для конкретных страниц — тот же тёмный тон поверх фото,
+   что был у сплошного фона, через rgba(26,26,26,0.86) ≈ var(--dark) */
+.privacy-hero-bg--legal {
+  background:
+    linear-gradient(rgba(26,26,26,0.86), rgba(26,26,26,0.86)),
+    url('https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=1920&h=500&fit=crop') center 35% / cover no-repeat;
+}
+.privacy-hero-bg--privacy {
+  background:
+    linear-gradient(rgba(26,26,26,0.86), rgba(26,26,26,0.86)),
+    url('https://images.unsplash.com/photo-1633265486064-086b219458ec?w=1920&h=500&fit=crop') center / cover no-repeat;
+}
 .privacy-hero-bar {
   position: absolute; top: 0; left: 0; right: 0;
   height: 3px; background: linear-gradient(90deg, var(--red) 0%, transparent 100%);
