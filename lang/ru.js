@@ -307,6 +307,8 @@ window.GRE_LANG_RU = {
     'team.about_p5_full': 'Наша команда регулярно проходит профессиональную переподготовку и следит за изменениями грузинского законодательства в сфере недвижимости, налогообложения и иностранных инвестиций — чтобы вы всегда получали актуальную и точную информацию.',
     'team.stat_locations_label': 'лучших локаций',
     'meta.title_team': 'Команда — Georgia Real Estate',
+    'meta.title_legal': 'Сделка, налоги и ВНЖ — Georgia Real Estate',
+    'meta.title_privacy': 'Политика конфиденциальности — Georgia Real Estate',
     'meta.title_favorites': 'Избранное — Georgia Real Estate',
     'meta.title_history': 'История просмотров — Georgia Real Estate',
     'team.hero_title': 'Наша команда',

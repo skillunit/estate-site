@@ -46,6 +46,8 @@ const PAGES = [
   'contact.html',
   'favorites.html',
   'history.html',
+  'legal.html',
+  'privacy.html',
 ];
 
 const HEADER_PARTIAL = fs.readFileSync(path.join(ROOT, 'partials/header.html'), 'utf-8').trim();

@@ -307,6 +307,8 @@ window.GRE_LANG_HE = {
     'team.about_p5_full': 'הצוות שלנו עובר הכשרה מקצועית באופן קבוע ועוקב אחר שינויים בחוקי הנדל"ן, המיסוי וההשקעות הזרות בגאורגיה — כדי שתמיד תקבלו מידע מדויק ועדכני.',
     'team.stat_locations_label': 'מיקומים מובחרים',
     'meta.title_team': 'צוות — Georgia Real Estate',
+    'meta.title_legal': 'עסקה, מיסים ותושבות — Georgia Real Estate',
+    'meta.title_privacy': 'מדיניות פרטיות — Georgia Real Estate',
     'meta.title_favorites': 'מועדפים — Georgia Real Estate',
     'meta.title_history': 'היסטוריית צפייה — Georgia Real Estate',
     'team.hero_title': 'הצוות שלנו',

@@ -307,6 +307,8 @@ window.GRE_LANG_EN = {
     'team.about_p5_full': 'Our team regularly undergoes professional training and monitors changes in Georgian real estate, taxation and foreign investment legislation — so you always get accurate, up-to-date information.',
     'team.stat_locations_label': 'prime locations',
     'meta.title_team': 'Team — Georgia Real Estate',
+    'meta.title_legal': 'Deal, Taxes & Residency — Georgia Real Estate',
+    'meta.title_privacy': 'Privacy Policy — Georgia Real Estate',
     'meta.title_favorites': 'Favorites — Georgia Real Estate',
     'meta.title_history': 'Viewing History — Georgia Real Estate',
     'team.hero_title': 'Our Team',
