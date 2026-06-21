@@ -770,6 +770,30 @@ function cardSlide(e, btn, dir) {
 
 })();
 
+// ── HASH ROUTING ──
+// Открытие SPA-секции (.page-body) по якорю в URL, например
+// index.html#privacy или projects.html#legal. Без этого ссылки вида
+// href="index.html#privacy" из футера вели в никуда: якорь не
+// совпадает ни с одним id напрямую (секция называется
+// id="page-privacy", не id="privacy"), да и сама секция скрыта
+// классом .page без .active, так что браузер не показал бы её, даже
+// если бы прокрутил к месту с совпадающим id.
+(function () {
+  function openSectionFromHash() {
+    var hash = (window.location.hash || '').replace('#', '');
+    if (!hash) return;
+    if (document.getElementById('page-' + hash) && typeof showPage === 'function') {
+      showPage(hash);
+    }
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', openSectionFromHash);
+  } else {
+    openSectionFromHash();
+  }
+  window.addEventListener('hashchange', openSectionFromHash);
+})();
+
 
 
 
