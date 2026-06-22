@@ -1485,3 +1485,8 @@ thead .compare-col-dragover {
   color: #1a7a42;
   border: 1px solid rgba(39,174,96,0.20);
 }
+
+/* Compare button in detail gallery — left of fav button */
+#detailCompareBtn.detail-gallery-fav {
+  right: 64px;
+}
