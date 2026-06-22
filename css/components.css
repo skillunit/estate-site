@@ -1410,3 +1410,7 @@ thead .compare-col-dragover {
 
 /* hide text selection during drag */
 .compare-table { user-select: none; }
+
+@media (min-width: 768px) {
+  .compare-table th[data-prop-id] .compare-remove-btn { cursor: pointer; }
+}
