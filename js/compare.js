@@ -117,7 +117,7 @@ function showCompareLimitPopup() {
         ${_cmpT('compare.limit_text', 'Вы уже добавили 4 объекта для сравнения. Удалите один из списка, чтобы добавить новый.')}
       </p>
       <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
-        <a href="compare.html" class="btn btn-primary" style="min-width:140px;">
+        <a href="compare.html" class="btn btn-red" style="min-width:140px;">
           ${_cmpT('compare.go_compare', 'Перейти к сравнению')}
         </a>
         <button class="btn btn-outline" onclick="document.getElementById('compareLimitPopup').style.display='none'" style="min-width:120px;">
@@ -166,7 +166,7 @@ function renderComparePage() {
         <div style="font-size:3rem;margin-bottom:16px;">⚖️</div>
         <div class="fav-empty-title">${_cmpT('compare.login_title', 'Войдите, чтобы сравнивать объекты')}</div>
         <div class="fav-empty-sub">${_cmpT('compare.login_sub', 'Добавляйте объекты через иконку ⚖ на карточке')}</div>
-        <button class="btn btn-primary" onclick="Auth.openAuthModal()" style="margin-top:20px;">${_cmpT('fav.login_or_register', 'Войти / Зарегистрироваться')}</button>`;
+        <button class="btn btn-red" onclick="Auth.openAuthModal()" style="margin-top:20px;">${_cmpT('fav.login_or_register', 'Войти / Зарегистрироваться')}</button>`;
     }
     return;
   }
@@ -182,7 +182,7 @@ function renderComparePage() {
         <div style="font-size:3rem;margin-bottom:16px;">⚖️</div>
         <div class="fav-empty-title">${_cmpT('compare.empty_title', 'Список сравнения пуст')}</div>
         <div class="fav-empty-sub">${_cmpT('compare.empty_sub', 'Нажмите ⚖ на карточке объекта, чтобы добавить его в сравнение')}</div>
-        <a href="index.html" class="btn btn-primary" style="margin-top:20px;">${_cmpT('fav.browse_properties', 'Перейти к объектам')}</a>`;
+        <a href="index.html" class="btn btn-red" style="margin-top:20px;">${_cmpT('fav.browse_properties', 'Перейти к объектам')}</a>`;
     }
     return;
   }
@@ -240,7 +240,7 @@ function renderComparePage() {
             <td class="compare-label"></td>
             ${props.map(p => `
               <td class="compare-cell">
-                <a href="index.html?prop=${p.id}" class="btn btn-primary" style="width:100%;justify-content:center;">
+                <a href="index.html?prop=${p.id}" class="btn btn-red" style="width:100%;justify-content:center;">
                   ${_cmpT('card.details','Подробнее')}
                 </a>
               </td>`).join('')}
