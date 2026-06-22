@@ -1224,3 +1224,85 @@ footer {
   .btn-consult { width: 48px; height: 48px; }
   .btn-consult-tooltip { display: none; }
 }
+
+/* ── Compare card button ── */
+.card-compare-inline {
+  position: absolute;
+  bottom: 10px; right: 94px;
+  z-index: 4;
+  width: 34px; height: 34px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.93);
+  backdrop-filter: blur(4px);
+  border: none;
+  color: var(--gray-400);
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.14);
+  transition: color 0.18s ease, background 0.18s ease, transform 0.18s ease;
+}
+.card-compare-inline:hover { color: var(--red); transform: scale(1.12); }
+.card-compare-inline.compare-active { color: var(--red); background: rgba(255,255,255,0.97); }
+
+/* ── Compare table page ── */
+.compare-table-wrap {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  margin-top: 24px;
+}
+.compare-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 500px;
+}
+.compare-table th,
+.compare-table td {
+  padding: 14px 16px;
+  text-align: left;
+  vertical-align: top;
+  border-bottom: 1px solid var(--border);
+  font-size: 0.875rem;
+}
+.compare-label-col { width: 140px; min-width: 120px; }
+.compare-prop-col { min-width: 200px; }
+.compare-label {
+  color: var(--gray-500);
+  font-size: 0.78rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  white-space: nowrap;
+  vertical-align: middle;
+}
+.compare-table thead th {
+  background: var(--gray-50, #f8f8f6);
+  border-bottom: 2px solid var(--border);
+  vertical-align: top;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+.compare-prop-name {
+  font-family: var(--font-head);
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--dark);
+  margin-bottom: 4px;
+  line-height: 1.3;
+}
+.compare-prop-city {
+  font-size: 0.78rem;
+  color: var(--gray-500);
+  margin-bottom: 12px;
+}
+.compare-remove-btn {
+  display: inline-flex; align-items: center; gap: 5px;
+  font-size: 0.75rem; color: var(--gray-400);
+  background: none; border: 1px solid var(--border);
+  border-radius: 6px; padding: 4px 10px;
+  cursor: pointer; transition: var(--transition);
+}
+.compare-remove-btn:hover { color: var(--red); border-color: var(--red); }
+.compare-row:nth-child(even) td { background: var(--gray-50, #f8f8f6); }
+.compare-row:nth-child(even) .compare-label { background: var(--gray-50, #f8f8f6); }
+.compare-cell { color: var(--dark); font-weight: 500; }
+.compare-cta-row td { padding-top: 20px; padding-bottom: 20px; border-bottom: none; }
