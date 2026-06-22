@@ -18,6 +18,49 @@
 <link rel="stylesheet" href="css/responsive.css?v=3">
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<style>
+/* ── Phone picker ── */
+.phone-wrap { position: relative; display: flex; align-items: stretch; }
+.phone-flag-btn {
+  display: flex; align-items: center; gap: 5px;
+  padding: 0 10px 0 12px;
+  background: var(--gray-50, #f8f8f8);
+  border: 1.5px solid var(--border); border-right: none;
+  border-radius: var(--radius-sm) 0 0 var(--radius-sm);
+  cursor: pointer; font-size: 0.8rem; color: var(--dark);
+  white-space: nowrap; height: 46px; min-width: 92px;
+  transition: background 0.15s; flex-shrink: 0;
+}
+.phone-flag-btn:hover { background: var(--gray-100, #f0f0f0); }
+.phone-flag-btn .ph-flag { font-size: 1.1rem; line-height: 1; }
+.phone-flag-btn .ph-code { font-weight: 600; font-size: 0.78rem; }
+.phone-flag-btn .ph-arrow { font-size: 0.6rem; color: var(--gray-400, #aaa); margin-left: 2px; }
+.phone-wrap .cpopup-input,
+.phone-wrap .form-input {
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0 !important;
+  border-left: none !important;
+  padding-left: 12px !important;
+  flex: 1; min-width: 0;
+}
+.phone-dropdown {
+  position: absolute; top: calc(100% + 4px); left: 0;
+  background: var(--white); border: 1.5px solid var(--border);
+  border-radius: var(--radius-sm); box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+  z-index: 9999; min-width: 220px; max-height: 280px; overflow-y: auto;
+  display: none;
+}
+.phone-dropdown.open { display: block; }
+.phone-dropdown-item {
+  display: flex; align-items: center; gap: 10px;
+  padding: 9px 14px; cursor: pointer; font-size: 0.82rem;
+  transition: background 0.12s;
+}
+.phone-dropdown-item:hover { background: var(--gray-50, #f8f8f8); }
+.phone-dropdown-item .ph-flag { font-size: 1.05rem; }
+.phone-dropdown-item .ph-name { flex: 1; color: var(--dark); }
+.phone-dropdown-item .ph-code { color: var(--gray-400, #aaa); font-size: 0.75rem; }
+.form-group .phone-flag-btn { height: 44px; }
+</style>
 </head>
 <body data-page="home">
 
@@ -1406,7 +1449,7 @@
           </div>
           <div class="cpopup-field">
             <label data-i18n="popup.phone">Телефон</label>
-            <input class="cpopup-input" type="tel" placeholder="+995 5XX XXX XXX" id="cpPhone" maxlength="17">
+            <div class="phone-wrap"><input class="cpopup-input" type="tel" id="cpPhone"></div>
           </div>
         </div>
         <div class="cpopup-field" style="margin-bottom:14px;">
@@ -1648,7 +1691,7 @@
           </div>
           <div class="cpopup-field">
             <label data-i18n="popup.phone">Телефон</label>
-            <input class="cpopup-input" type="tel" placeholder="+995 5XX XXX XXX" id="ppPhone" maxlength="17">
+            <div class="phone-wrap"><input class="cpopup-input" type="tel" id="ppPhone"></div>
           </div>
         </div>
         <div class="cpopup-field" style="margin-bottom:14px;">
@@ -1709,7 +1752,7 @@
           </div>
           <div class="cpopup-field">
             <label data-i18n="popup.phone">Телефон</label>
-            <input class="cpopup-input" type="tel" placeholder="+995 5XX XXX XXX" id="mpPhone" maxlength="17">
+            <div class="phone-wrap"><input class="cpopup-input" type="tel" id="mpPhone"></div>
           </div>
         </div>
         <div class="cpopup-field" style="margin-bottom:14px;">
@@ -1933,6 +1976,7 @@ function resetHomeFilter() {
 </script>
 
 <script src="js/nav-active.js?v=1"></script>
+<script src="js/phone-picker.js?v=1"></script>
 </body>
 </html>
 
