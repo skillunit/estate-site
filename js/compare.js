@@ -182,7 +182,7 @@ function renderComparePage() {
         <div style="font-size:3rem;margin-bottom:16px;">⚖️</div>
         <div class="fav-empty-title">${_cmpT('compare.empty_title', 'Список сравнения пуст')}</div>
         <div class="fav-empty-sub">${_cmpT('compare.empty_sub', 'Нажмите ⚖ на карточке объекта, чтобы добавить его в сравнение')}</div>
-        <a href="index.html" class="btn btn-red" style="margin-top:20px;">${_cmpT('fav.browse_properties', 'Перейти к объектам')}</a>`;
+        <a href="projects.html" class="btn btn-red" style="margin-top:20px;">${_cmpT('fav.browse_properties', 'Перейти к объектам')}</a>`;
     }
     return;
   }
