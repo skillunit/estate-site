@@ -1254,58 +1254,104 @@ footer {
   width: 100%;
   border-collapse: collapse;
   min-width: 500px;
+  font-family: var(--font-body);
 }
+
+/* Base cells */
 .compare-table th,
 .compare-table td {
-  padding: 14px 16px;
+  padding: 14px 20px;
   text-align: left;
-  vertical-align: top;
+  vertical-align: middle;
   border-bottom: 1px solid var(--border);
   font-size: 0.875rem;
+  line-height: 1.5;
 }
-.compare-label-col { width: 140px; min-width: 120px; }
-.compare-prop-col { min-width: 200px; }
+
+/* Label column (left) */
+.compare-label-col { width: 130px; min-width: 110px; }
 .compare-label {
-  color: var(--gray-500);
-  font-size: 0.78rem;
+  font-family: var(--font-body);
+  font-size: 0.72rem;
   font-weight: 600;
+  color: var(--gray-400);
   text-transform: uppercase;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.07em;
   white-space: nowrap;
   vertical-align: middle;
 }
+
+/* Property column header */
+.compare-prop-col { min-width: 220px; vertical-align: top; }
 .compare-table thead th {
-  background: var(--gray-50, #f8f8f6);
   border-bottom: 2px solid var(--border);
   vertical-align: top;
-  padding-top: 20px;
-  padding-bottom: 20px;
+  padding-top: 16px;
+  padding-bottom: 16px;
 }
+
+/* Object name & city in header */
 .compare-prop-name {
   font-family: var(--font-head);
-  font-size: 0.95rem;
+  font-size: 1rem;
   font-weight: 700;
   color: var(--dark);
-  margin-bottom: 4px;
+  margin-bottom: 2px;
   line-height: 1.3;
 }
 .compare-prop-city {
+  font-family: var(--font-body);
   font-size: 0.78rem;
+  font-weight: 400;
   color: var(--gray-500);
-  margin-bottom: 12px;
+  margin-bottom: 14px;
 }
+
+/* Remove button */
 .compare-remove-btn {
   display: inline-flex; align-items: center; gap: 5px;
-  font-size: 0.75rem; color: var(--gray-400);
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  font-weight: 500;
+  color: var(--gray-400);
   background: none; border: 1px solid var(--border);
   border-radius: 6px; padding: 4px 10px;
   cursor: pointer; transition: var(--transition);
 }
 .compare-remove-btn:hover { color: var(--red); border-color: var(--red); }
-.compare-row:nth-child(even) td { background: var(--gray-50, #f8f8f6); }
-.compare-row:nth-child(even) .compare-label { background: var(--gray-50, #f8f8f6); }
-.compare-cell { color: var(--dark); font-weight: 500; }
-.compare-cta-row td { padding-top: 20px; padding-bottom: 20px; border-bottom: none; }
+
+/* Data cells */
+.compare-cell {
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  font-weight: 400;
+  color: var(--dark);
+  vertical-align: middle;
+}
+.compare-cell strong {
+  font-family: var(--font-head);
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--dark);
+}
+
+/* Zebra rows */
+.compare-row:nth-child(even) .compare-cell { background: var(--gray-50, #f8f8f8); }
+.compare-row:nth-child(even) .compare-label { background: var(--gray-50, #f8f8f8); }
+
+/* CTA row */
+.compare-cta-row .compare-cell {
+  padding-top: 20px;
+  padding-bottom: 20px;
+  border-bottom: none;
+  background: var(--white) !important;
+}
+
+/* Photo row — full height */
+.compare-table .compare-cell img {
+  border-radius: var(--radius-sm);
+  display: block;
+}
 
 /* ── Compare columns: shadow separator + drag & drop ── */
 
