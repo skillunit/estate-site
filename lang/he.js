@@ -629,6 +629,7 @@ window.GRE_LANG_HE = {
     'hist.time_days_ago': 'לפני {n} ימים',
 
   // ── Compare page ──
+  'compare.row_deal': 'סוג עסקה',
   'compare.hero_title': 'השוואת נכסים',
   'compare.hero_sub': 'עד 4 נכסים בו-זמנית',
   'compare.added': 'נוסף להשוואה:',
