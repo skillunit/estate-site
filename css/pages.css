@@ -2230,6 +2230,8 @@
   margin-top: -32px;
   padding-top: 44px;
   box-shadow: 0 -8px 32px rgba(0,0,0,0.10);
+  /* prevent shadow/border-radius bleeding beyond viewport */
+  overflow-x: clip;
 }
 
 /* catalog: filter bar is the first thing after hero — it starts the slide-over */
