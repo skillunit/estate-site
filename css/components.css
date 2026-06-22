@@ -1491,13 +1491,11 @@ thead .compare-col-dragover {
   right: 64px;
 }
 
-/* ── Compare photo slider — кнопки всегда видны (нет hover-карточки) ── */
-.compare-photo-slider .card-slider-btn {
+/* ── Compare photo slider — hover как в каталоге ── */
+.compare-photo-slider:hover .card-slider-btn {
   opacity: 1;
   pointer-events: auto;
-  width: 32px; height: 32px;
-  font-size: 1.3rem;
 }
-.compare-photo-slider .card-slider-dots {
+.compare-photo-slider:hover .card-slider-dots {
   opacity: 1;
 }
