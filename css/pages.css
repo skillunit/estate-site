@@ -2234,14 +2234,7 @@
   z-index: 3;
 }
 
-/* When filter-bar directly follows a hero, give it the rounded top treatment */
-.catalog-hero + .filter-bar {
-  border-radius: 18px 18px 0 0;
-  margin-top: -32px;
-  box-shadow: 0 -8px 32px rgba(0,0,0,0.10);
-  overflow: hidden;
-  border-top: none;
-}
+
 
 /* Компенсируем сдвиг — padding-top чтобы лейблы не попадали в зону перекрытия с hero */
 .catalog-hero + .filter-bar .filter-form {
