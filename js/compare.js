@@ -198,6 +198,12 @@ function renderComparePage() {
   // Rows to compare
   const rows = [
     { key: 'photo',    label: _cmpT('compare.row_photo',    'Фото'),               fn: p => `<img src="${(p.imgs||[p.img])[0]}" style="width:100%;height:160px;object-fit:cover;border-radius:8px;cursor:pointer;" onclick="window.location.href='index.html?prop=${p.id}'" loading="lazy">` },
+    { key: 'deal',    label: _cmpT('compare.row_deal', 'Сделка'),
+      fn: p => {
+        if (p.deal === 'rent') return '<span style="display:inline-flex;align-items:center;gap:5px;color:#1a6b3a;font-weight:600;">🔑 ' + _cmpT('filter.rent','Аренда') + '</span>';
+        return '<span style="display:inline-flex;align-items:center;gap:5px;color:#8B4513;font-weight:600;">🏷 ' + _cmpT('filter.buy','Продажа') + '</span>';
+      }
+    },
     { key: 'price',    label: _cmpT('compare.row_price',    'Цена'),               fn: p => `<strong>${typeof formatPrice==='function'?formatPrice(p.price):p.price}</strong>` },
     { key: 'area',     label: _cmpT('compare.row_area',     'Площадь'),            fn: p => `${p.area} м²` },
     { key: 'rooms',    label: _cmpT('compare.row_rooms',    'Спальни'),            fn: p => p.rooms },
