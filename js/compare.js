@@ -226,9 +226,10 @@ function renderComparePage() {
           <tr>
             <th class="compare-label-col"></th>
             ${props.map(p => `
-              <th class="compare-prop-col" draggable="true" data-prop-id="${p.id}">
-                <div class="compare-col-drag-handle" title="Перетащить для сортировки">
-                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="8" y1="6" x2="16" y2="6"/><line x1="8" y1="12" x2="16" y2="12"/><line x1="8" y1="18" x2="16" y2="18"/></svg>
+              <th class="compare-prop-col" data-prop-id="${p.id}">
+                <div class="compare-col-drag-handle" draggable="true" data-drag-for="${p.id}" title="Перетащить для сортировки">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="9" cy="6" r="1.2" fill="currentColor"/><circle cx="15" cy="6" r="1.2" fill="currentColor"/><circle cx="9" cy="12" r="1.2" fill="currentColor"/><circle cx="15" cy="12" r="1.2" fill="currentColor"/><circle cx="9" cy="18" r="1.2" fill="currentColor"/><circle cx="15" cy="18" r="1.2" fill="currentColor"/></svg>
+                  <span>drag</span>
                 </div>
                 <div class="compare-prop-name">${typeof getPropName==='function'?getPropName(p):p.name}</div>
                 <div class="compare-prop-city">${typeof getCityLabel==='function'?getCityLabel(p):(p.cityLabel||p.city)}</div>
@@ -261,39 +262,49 @@ function renderComparePage() {
   setTimeout(() => initCompareDrag(), 0);
 
 function initCompareDrag() {
-  // Desktop only
   if (window.innerWidth < 768) return;
 
   const table = document.querySelector('.compare-table');
   if (!table) return;
 
-  const ths = Array.from(table.querySelectorAll('th[data-prop-id]'));
   let dragSrcId = null;
 
-  ths.forEach(th => {
-    th.addEventListener('dragstart', function(e) {
-      dragSrcId = this.dataset.propId;
-      this.classList.add('compare-col-dragging');
+  // Drag starts on handle
+  table.querySelectorAll('.compare-col-drag-handle[data-drag-for]').forEach(handle => {
+    handle.addEventListener('dragstart', function(e) {
+      dragSrcId = this.dataset.dragFor;
       e.dataTransfer.effectAllowed = 'move';
       e.dataTransfer.setData('text/plain', dragSrcId);
+      // Highlight source col
+      const srcTh = table.querySelector('th[data-prop-id="' + dragSrcId + '"]');
+      if (srcTh) srcTh.classList.add('compare-col-dragging');
+      // Need slight delay so browser captures element before class change
+      setTimeout(() => {}, 0);
     });
 
-    th.addEventListener('dragend', function() {
-      this.classList.remove('compare-col-dragging');
-      table.querySelectorAll('th[data-prop-id]').forEach(t => t.classList.remove('compare-col-dragover'));
+    handle.addEventListener('dragend', function() {
+      dragSrcId = null;
+      table.querySelectorAll('th[data-prop-id]').forEach(t => {
+        t.classList.remove('compare-col-dragging', 'compare-col-dragover');
+      });
     });
+  });
 
+  // Drop zone = th headers
+  table.querySelectorAll('th[data-prop-id]').forEach(th => {
     th.addEventListener('dragover', function(e) {
       e.preventDefault();
       e.dataTransfer.dropEffect = 'move';
+      if (this.dataset.propId === dragSrcId) return;
       table.querySelectorAll('th[data-prop-id]').forEach(t => t.classList.remove('compare-col-dragover'));
-      if (this.dataset.propId !== dragSrcId) {
-        this.classList.add('compare-col-dragover');
-      }
+      this.classList.add('compare-col-dragover');
     });
 
-    th.addEventListener('dragleave', function() {
-      this.classList.remove('compare-col-dragover');
+    th.addEventListener('dragleave', function(e) {
+      // Only remove if leaving th entirely (not moving to child)
+      if (!this.contains(e.relatedTarget)) {
+        this.classList.remove('compare-col-dragover');
+      }
     });
 
     th.addEventListener('drop', function(e) {
@@ -301,7 +312,6 @@ function initCompareDrag() {
       const targetId = this.dataset.propId;
       if (!dragSrcId || dragSrcId === targetId) return;
 
-      // Reorder in localStorage
       let list = getCompareList();
       const fromIdx = list.indexOf(dragSrcId);
       const toIdx   = list.indexOf(targetId);
@@ -310,8 +320,6 @@ function initCompareDrag() {
       list.splice(fromIdx, 1);
       list.splice(toIdx, 0, dragSrcId);
       saveCompareList(list);
-
-      // Re-render
       renderComparePage();
     });
   });
