@@ -259,66 +259,82 @@ function renderComparePage() {
       </table>
     </div>`;
 }
-  setTimeout(() => initCompareDrag(), 0);
 
 function initCompareDrag() {
-  if (window.innerWidth < 768) return;
+  // No-op: drag is handled by initCompareDragGlobal() which runs once
+}
 
-  const table = document.querySelector('.compare-table');
-  if (!table) return;
+// One-time global drag handler — survives re-renders because it uses document delegation
+(function initCompareDragGlobal() {
+  if (window._compareDragInit) return;
+  window._compareDragInit = true;
 
-  let dragId    = null;   // id being dragged
-  let ghost     = null;   // floating ghost div
-  let overCol   = null;   // current th we hover over
+  let dragId  = null;
+  let ghost   = null;
+  let overCol = null;
 
-  function getColTh(el) {
-    return el.closest('th[data-prop-id]');
+  function getHandle(el) {
+    return el && el.closest ? el.closest('.compare-col-drag-handle[data-drag-for]') : null;
   }
-
-  function createGhost(th) {
+  function getTh(el) {
+    return el && el.closest ? el.closest('th[data-prop-id]') : null;
+  }
+  function getTable() {
+    return document.querySelector('.compare-table');
+  }
+  function createGhost(text) {
     const g = document.createElement('div');
     g.className = 'compare-drag-ghost';
-    const name = th.querySelector('.compare-prop-name');
-    g.textContent = name ? name.textContent : '…';
+    g.textContent = text || '…';
     document.body.appendChild(g);
     return g;
   }
-
   function moveGhost(e) {
     if (!ghost) return;
-    ghost.style.left = (e.clientX + 14) + 'px';
-    ghost.style.top  = (e.clientY - 20) + 'px';
+    ghost.style.left = (e.clientX + 16) + 'px';
+    ghost.style.top  = (e.clientY - 16) + 'px';
   }
-
   function clearOver() {
-    if (overCol) { overCol.classList.remove('compare-col-dragover'); overCol = null; }
+    if (overCol) {
+      overCol.classList.remove('compare-col-dragover');
+      overCol = null;
+    }
+  }
+  function cleanup() {
+    clearOver();
+    if (ghost) { ghost.remove(); ghost = null; }
+    const t = getTable();
+    if (t) t.querySelectorAll('.compare-col-dragging').forEach(el => el.classList.remove('compare-col-dragging'));
+    dragId = null;
   }
 
-  // Mousedown on handle
-  table.addEventListener('mousedown', function(e) {
-    const handle = e.target.closest('.compare-col-drag-handle[data-drag-for]');
+  document.addEventListener('mousedown', function(e) {
+    if (window.innerWidth < 768) return;
+    const handle = getHandle(e.target);
     if (!handle) return;
     e.preventDefault();
+    e.stopPropagation();
 
     dragId = handle.dataset.dragFor;
-    const th = getColTh(handle);
+    const th = getTh(handle);
     if (th) th.classList.add('compare-col-dragging');
 
-    ghost = createGhost(th || handle);
+    const name = th ? th.querySelector('.compare-prop-name') : null;
+    ghost = createGhost(name ? name.textContent : dragId);
     moveGhost(e);
-  });
+  }, true);
 
   document.addEventListener('mousemove', function(e) {
     if (!dragId) return;
     moveGhost(e);
 
-    // Find which th we're over
     ghost.style.display = 'none';
     const el = document.elementFromPoint(e.clientX, e.clientY);
     ghost.style.display = '';
 
     clearOver();
-    const th = el ? getColTh(el) : null;
+    if (!el) return;
+    const th = getTh(el);
     if (th && th.dataset.propId && th.dataset.propId !== dragId) {
       th.classList.add('compare-col-dragover');
       overCol = th;
@@ -328,27 +344,28 @@ function initCompareDrag() {
   document.addEventListener('mouseup', function(e) {
     if (!dragId) return;
 
-    // Drop
     if (overCol) {
       const targetId = overCol.dataset.propId;
-      let list = getCompareList();
+      const list = getCompareList();
       const fromIdx = list.indexOf(dragId);
       const toIdx   = list.indexOf(targetId);
       if (fromIdx !== -1 && toIdx !== -1 && fromIdx !== toIdx) {
         list.splice(fromIdx, 1);
         list.splice(toIdx, 0, dragId);
         saveCompareList(list);
+        cleanup();
         renderComparePage();
+        return;
       }
     }
-
-    // Cleanup
-    clearOver();
-    if (ghost) { ghost.remove(); ghost = null; }
-    table.querySelectorAll('.compare-col-dragging').forEach(t => t.classList.remove('compare-col-dragging'));
-    dragId = null;
+    cleanup();
   });
-}
+
+  // Cancel on Escape
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape' && dragId) cleanup();
+  });
+})();
 
 
 function removeFromCompare(id) {
