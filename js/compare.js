@@ -216,7 +216,17 @@ function renderComparePage() {
     { key: 'floor',    label: _cmpT('compare.row_floor',    'Этаж'),               fn: p => p.floor },
     { key: 'year',     label: _cmpT('compare.row_year',     'Год сдачи'),          fn: p => p.year || '—' },
     { key: 'city',     label: _cmpT('compare.row_city',     'Город'),              fn: p => typeof getCityLabel==='function'?getCityLabel(p):(p.cityLabel||p.city) },
-    { key: 'type',     label: _cmpT('compare.row_type',     'Тип'),                fn: p => p.type || '—' },
+    { key: 'type', label: _cmpT('compare.row_type', 'Тип'),
+      fn: p => {
+        const map = {
+          'apartment': _cmpT('type.apartment', 'Квартира'),
+          'apart':     _cmpT('type.apartment', 'Квартира'),
+          'villa':     _cmpT('type.villa',     'Вилла'),
+          'commercial':_cmpT('type.commercial','Коммерческая'),
+        };
+        return map[p.type] || p.type || '—';
+      }
+    },
     { key: 'status',   label: _cmpT('compare.row_status',   'Статус'),             fn: p => { const b=typeof getPropBadge==='function'?getPropBadge(p):{text:p.status||'—',cls:''}; return `<span class="prop-badge ${b.cls}" style="position:static;display:inline-block;">${b.text}</span>`; } },
     { key: 'roi',      label: _cmpT('compare.row_roi',      'ROI'),                fn: p => p.roi ? `<span style="color:#3B6D11;font-weight:700;">${p.roi}%</span>` : '—' },
     { key: 'growth',   label: _cmpT('compare.row_growth',   'Рост цены/год'),      fn: p => p.growth ? `${p.growth}%` : '—' },
