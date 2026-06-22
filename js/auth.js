@@ -289,6 +289,31 @@ const Auth = (() => {
       }
       dd.style.display = 'block';
       setTimeout(() => dd.classList.add('open'), 10);
+
+      // Update badges directly from localStorage — works on any page
+      // Fav badge
+      try {
+        const favMap = JSON.parse(localStorage.getItem('gre_favorites') || '{}');
+        const u = getSession();
+        const favCount = u ? Object.keys(favMap[u.email] || {}).length : 0;
+        const favBadge = document.getElementById('favCountBadge');
+        if (favBadge) {
+          favBadge.textContent = favCount;
+          favBadge.style.display = favCount > 0 ? 'inline-flex' : 'none';
+        }
+      } catch(e) {}
+
+      // Compare badge
+      try {
+        const cmpList = JSON.parse(localStorage.getItem('gre_compare') || '[]');
+        const cmpCount = Array.isArray(cmpList) ? cmpList.length : 0;
+        const cmpBadge = document.getElementById('compareCountBadge');
+        if (cmpBadge) {
+          cmpBadge.textContent = cmpCount;
+          cmpBadge.style.display = cmpCount > 0 ? 'inline-flex' : 'none';
+        }
+      } catch(e) {}
+
       // Close on outside click
       setTimeout(() => {
         document.addEventListener('click', outsideDropdownClick);
