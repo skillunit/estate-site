@@ -1,3 +1,10 @@
+/* ── Compare stub — replaced by compare.js when loaded ── */
+if (typeof window.toggleCompare === 'undefined') {
+  window.toggleCompare = function(id) {
+    console.warn('[GRE] compare.js not loaded yet, queuing:', id);
+  };
+}
+
 //  ЕДИНАЯ БАЗА ОБЪЕКТОВ
 // ═══════════════════════════════════
 const MAP_PROPERTIES = [
@@ -878,7 +885,7 @@ function compareCardBtn(id) {
   const color = active ? '#C0392B' : 'currentColor';
   const fill  = active ? '#C0392B' : 'none';
   const svg = `<svg width="14" height="14" viewBox="0 0 24 24" fill="${fill}" stroke="${color}" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>`;
-  return `<button class="card-compare-inline${active ? ' compare-active' : ''}" data-compare-id="${id}" onclick="event.stopPropagation();if(typeof toggleCompare==='function')toggleCompare('${id}')" aria-label="Сравнить">${svg}</button>`;
+  return `<button class="card-compare-inline${active ? ' compare-active' : ''}" data-compare-id="${id}" onclick="event.stopPropagation();toggleCompare('${id}')" aria-label="Сравнить">${svg}</button>`;
 }
 
 function favCardBtn(id) {
