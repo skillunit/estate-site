@@ -661,6 +661,7 @@ window.GRE_LANG_EN = {
     'hist.time_days_ago': '{n}d ago',
 
   // ── Compare page ──
+  'compare.row_deal': 'Deal type',
   'compare.hero_title': 'Property Comparison',
   'compare.hero_sub': 'Up to 4 properties at once',
   'compare.added': 'Added for comparison:',
