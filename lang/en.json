@@ -223,5 +223,39 @@
     "paphos": "Paphos",
     "athens": "Athens",
     "mykonos": "Mykonos"
+  },
+  "compare_page": {
+    "hero_title": "Property Comparison",
+    "hero_sub": "Up to 4 properties at once",
+    "added": "Added for comparison:",
+    "clear_all": "Clear list",
+    "empty_title": "Comparison list is empty",
+    "empty_sub": "Click ⚖ on a property card to add it to comparison",
+    "login_title": "Sign in to compare properties",
+    "login_sub": "Add properties via the ⚖ icon on the card",
+    "limit_title": "Maximum 4 properties",
+    "limit_text": "You have already added 4 properties. Remove one to add a new one.",
+    "go_compare": "Go to comparison",
+    "close": "Close",
+    "remove": "Remove",
+    "toast_added": "Added to comparison · {link}",
+    "toast_link": "Compare",
+    "toast_removed": "Removed from comparison",
+    "row_photo": "Photo",
+    "row_price": "Price",
+    "row_area": "Area",
+    "row_rooms": "Bedrooms",
+    "row_floor": "Floor",
+    "row_year": "Year",
+    "row_city": "City",
+    "row_type": "Type",
+    "row_status": "Status",
+    "row_roi": "ROI",
+    "row_growth": "Price growth/yr",
+    "row_payback": "Payback",
+    "browse": "Browse properties"
+  },
+  "auth": {
+    "compare": "Property Comparison"
   }
 }
