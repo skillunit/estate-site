@@ -628,6 +628,11 @@ window.GRE_LANG_HE = {
     'hist.time_yesterday': 'אתמול',
     'hist.time_days_ago': 'לפני {n} ימים',
 
+  // ── Property types ──
+  'type.apartment': 'דירה',
+  'type.villa': 'וילה',
+  'type.commercial': 'מסחרי',
+
   // ── Compare page ──
   'compare.drag_hint': 'גרור לסידור מחדש',
   'compare.row_deal': 'סוג עסקה',
