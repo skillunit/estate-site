@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>Сравнение объектов — Georgia Real Estate</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg"/>
+  <link rel="stylesheet" href="css/base.css?v=6"/>
+  <link rel="stylesheet" href="css/components.css?v=6"/>
+  <link rel="stylesheet" href="css/pages.css?v=6"/>
+  <link rel="stylesheet" href="css/responsive.css?v=6"/>
+</head>
+<body>
+
+<!-- HEADER -->
+<div id="headerWrap"></div>
+<script>
+fetch('partials/header.html').then(r=>r.text()).then(h=>{
+  document.getElementById('headerWrap').innerHTML=h;
+  if(typeof initHeader==='function') initHeader();
+  if(typeof Auth!=='undefined') Auth.init();
+  if(typeof I18n!=='undefined') I18n.apply();
+});
+</script>
+
+<!-- HERO -->
+<div class="fav-hero">
+  <div class="fav-hero-bg" style="background-image:url('https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=1400&h=400&fit=crop');"></div>
+  <div class="fav-hero-overlay"></div>
+  <div class="fav-hero-content">
+    <h1 data-i18n="compare.hero_title">Сравнение объектов</h1>
+    <p class="page-hero-subtitle" data-i18n="compare.hero_sub">До 4 объектов одновременно</p>
+  </div>
+</div>
+
+<!-- TOOLBAR -->
+<div class="fav-toolbar" id="compareToolbar" style="display:none;">
+  <div class="fav-toolbar-inner">
+    <div class="fav-count-line">
+      <span data-i18n="compare.added">Добавлено к сравнению:</span>
+      <strong id="compareCount">0 / 4</strong>
+    </div>
+    <button class="fav-clear-btn" onclick="clearAllCompare()">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/></svg>
+      <span data-i18n="compare.clear_all">Очистить список</span>
+    </button>
+  </div>
+</div>
+
+<!-- BODY -->
+<div class="fav-body" id="compareBody">
+  <div id="compareWrap"></div>
+  <div id="compareEmpty" style="display:none;"></div>
+</div>
+
+<!-- FOOTER -->
+<div id="footerWrap"></div>
+<script>
+fetch('partials/footer.html').then(r=>r.text()).then(h=>{
+  document.getElementById('footerWrap').innerHTML=h;
+  if(typeof I18n!=='undefined') I18n.apply();
+});
+</script>
+
+<!-- Floating panel -->
+<div class="floating-panel">
+  <button class="btn-scroll-top" id="btnScrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Наверх">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"/></svg>
+  </button>
+  <button class="btn-consult" onclick="openContactPopup()" aria-label="Онлайн консультация">
+    <span class="btn-consult-tooltip" data-i18n="floating.consult">Онлайн консультация</span>
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+  </button>
+</div>
+<script>
+(function(){
+  var btn=document.getElementById('btnScrollTop');
+  if(!btn) return;
+  window.addEventListener('scroll',function(){btn.classList.toggle('visible',window.scrollY>300);},{passive:true});
+})();
+</script>
+
+<!-- SCRIPTS -->
+<script src="lang/translations.js?v=6"></script>
+<script src="lang/properties.js?v=6"></script>
+<script src="js/i18n.js?v=6"></script>
+<script src="js/auth.js?v=6"></script>
+<script src="js/catalog.js?v=6"></script>
+<script src="js/favorites.js?v=6"></script>
+<script src="js/compare.js?v=6"></script>
+<script src="js/forms.js?v=6"></script>
+<script src="js/reviews.js?v=6"></script>
+<script src="js/animations.js?v=6"></script>
+<script src="js/nav.js?v=6"></script>
+<script src="js/nav-active.js?v=1"></script>
+<script src="js/phone-picker.js?v=1"></script>
+
+<script>
+function clearAllCompare() {
+  localStorage.removeItem('gre_compare');
+  if (typeof updateCompareBadge === 'function') updateCompareBadge();
+  renderComparePage();
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  renderComparePage();
+  const toolbar = document.getElementById('compareToolbar');
+  const body    = document.getElementById('compareBody');
+  const u = typeof Auth !== 'undefined' ? Auth.currentUser() : null;
+  const count = typeof getCompareCount === 'function' ? getCompareCount() : 0;
+  if (u && count > 0) {
+    if (toolbar) toolbar.style.display = '';
+    if (body) body.classList.add('toolbar-active');
+  }
+  if (typeof I18n !== 'undefined') I18n.apply();
+});
+</script>
+</body>
+</html>
