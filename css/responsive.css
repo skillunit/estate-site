@@ -2,6 +2,7 @@
    RESPONSIVE
 ═══════════════════════════════════ */
 @media (max-width:1024px) {
+  :root { --page-pad: 24px; }
   .directions-grid { grid-template-columns:repeat(3,1fr); }
   .props-grid { grid-template-columns:repeat(2,1fr); }
   .footer-grid { grid-template-columns:1fr 1fr 1fr; }
@@ -16,7 +17,7 @@
   .catalog-filter-inner { grid-template-columns:1fr 1fr; }
   .catalog-filter-inner .btn { grid-column:span 2; }
   /* unified filter */
-  .filter-form { padding: 16px 24px; }
+  .filter-form { padding: 16px var(--page-pad); }
   .filter-row-1 { gap: 8px; }
   .filter-row-2 { gap: 8px; }
   .catalog-grid { grid-template-columns:repeat(2,1fr); }
@@ -26,7 +27,8 @@
 
 @media (max-width:768px) {
   /* ── Global padding reduction ── */
-  .container { padding: 0 16px; }
+  :root { --page-pad: 16px; }
+  .container { padding: 0 var(--page-pad); }
   .header-inner { padding: 0 16px; gap: 12px; }
   .section { padding: 48px 0; }
   .section-sm { padding: 32px 0; }
@@ -97,9 +99,9 @@
   .hero-actions .btn { width:100%; justify-content:center; }
 
   /* ── Filter bar (unified) ── */
-  .filter-tabs { padding: 0 16px; }
+  .filter-tabs { padding: 0 var(--page-pad); }
   .filter-tab { padding: 14px 16px; }
-  .filter-form { padding: 12px 16px; }
+  .filter-form { padding: 12px var(--page-pad); }
   .filter-row-1 { flex-wrap: wrap; gap: 8px; }
   .filter-row-2 { flex-wrap: wrap; gap: 8px; }
   .filter-row-2-actions { margin-left: 0; width: 100%; flex-direction: row; align-items: center; justify-content: space-between; }
@@ -110,7 +112,7 @@
   .directions-grid { grid-template-columns:repeat(2,1fr); gap:10px; }
 
   /* ── About strip ── */
-  .about-strip-inner { padding: 0 16px; gap:28px; }
+  .about-strip-inner { padding: 0 var(--page-pad); gap:28px; }
   .stats-row { grid-template-columns:1fr 1fr; }
   .stat-item { padding: 20px 12px; }
   .stat-num { font-size:1.5rem; }
@@ -123,7 +125,7 @@
 
   /* ── Inner page heroes — одинаковая высота ── */
   .catalog-hero, .team-hero, .contacts-hero, .blog-hero { height: 180px; }
-  .catalog-hero-content { padding: 0 16px 24px; }
+  .catalog-hero-content { padding: 0 var(--page-pad) 24px; }
   .team-hero-content { padding: 0 16px 24px; }
   /* catalog filter → handled by .filter-form above */
   .catalog-body { padding: 24px 16px 60px; }
