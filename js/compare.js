@@ -227,9 +227,9 @@ function renderComparePage() {
             <th class="compare-label-col"></th>
             ${props.map(p => `
               <th class="compare-prop-col" data-prop-id="${p.id}">
-                <div class="compare-col-drag-handle" data-drag-for="${p.id}" title="Перетащить для сортировки">
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="9" cy="6" r="1.2" fill="currentColor"/><circle cx="15" cy="6" r="1.2" fill="currentColor"/><circle cx="9" cy="12" r="1.2" fill="currentColor"/><circle cx="15" cy="12" r="1.2" fill="currentColor"/><circle cx="9" cy="18" r="1.2" fill="currentColor"/><circle cx="15" cy="18" r="1.2" fill="currentColor"/></svg>
-                  <span>drag</span>
+                <div class="compare-col-drag-handle" data-drag-for="${p.id}" title="${_cmpT('compare.drag_hint','Перетащить')}">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="9" cy="6" r="1.2" fill="currentColor"/><circle cx="15" cy="6" r="1.2" fill="currentColor"/><circle cx="9" cy="12" r="1.2" fill="currentColor"/><circle cx="15" cy="12" r="1.2" fill="currentColor"/><circle cx="9" cy="18" r="1.2" fill="currentColor"/><circle cx="15" cy="18" r="1.2" fill="currentColor"/></svg>
+                  <span>${_cmpT('compare.drag_hint','Перетащить')}</span>
                 </div>
                 <div class="compare-prop-name">${typeof getPropName==='function'?getPropName(p):p.name}</div>
                 <div class="compare-prop-city">${typeof getCityLabel==='function'?getCityLabel(p):(p.cityLabel||p.city)}</div>
@@ -274,7 +274,18 @@ function initCompareDrag() {
   let overCol = null;
 
   function getHandle(el) {
-    return el && el.closest ? el.closest('.compare-col-drag-handle[data-drag-for]') : null;
+    if (!el || !el.closest) return null;
+    // Direct handle click
+    const handle = el.closest('.compare-col-drag-handle[data-drag-for]');
+    if (handle) return handle;
+    // Click anywhere on th header (except remove button and links)
+    if (el.closest('.compare-remove-btn') || el.closest('a') || el.closest('button:not(.compare-col-drag-handle)')) return null;
+    const th = el.closest('th[data-prop-id]');
+    if (th) {
+      // Return the handle inside this th so dragId gets set correctly
+      return th.querySelector('.compare-col-drag-handle[data-drag-for]') || null;
+    }
+    return null;
   }
   function getTh(el) {
     return el && el.closest ? el.closest('th[data-prop-id]') : null;
