@@ -2417,7 +2417,7 @@
 @media (max-width: 768px) {
   .fav-hero, .hist-hero { height: 160px; }
   .fav-hero-content, .hist-hero-content { padding: 0 16px 28px; }
-  .fav-toolbar, .hist-toolbar { padding: 20px 16px 0; border-radius: 12px 12px 0 0; }
+  .fav-toolbar, .hist-toolbar { padding: 20px 16px 0; }
   .fav-body, .hist-body { padding: 16px 16px 60px; }
 }
 
