@@ -22,6 +22,22 @@
   .page { display: block !important; }
   /* Навбар — ссылки ведут на index.html */
 </style>
+<style>
+.phone-wrap { position: relative; display: flex; align-items: stretch; }
+.phone-flag-btn { display: flex; align-items: center; gap: 5px; padding: 0 10px 0 12px; background: var(--gray-50,#f8f8f8); border: 1.5px solid var(--border); border-right: none; border-radius: var(--radius-sm) 0 0 var(--radius-sm); cursor: pointer; font-size: 0.8rem; color: var(--dark); white-space: nowrap; height: 44px; min-width: 92px; transition: background 0.15s; flex-shrink: 0; }
+.phone-flag-btn:hover { background: var(--gray-100,#f0f0f0); }
+.phone-flag-btn .ph-flag { font-size: 1.1rem; line-height: 1; }
+.phone-flag-btn .ph-code { font-weight: 600; font-size: 0.78rem; }
+.phone-flag-btn .ph-arrow { font-size: 0.6rem; color: var(--gray-400,#aaa); margin-left: 2px; }
+.phone-wrap .form-input { border-radius: 0 var(--radius-sm) var(--radius-sm) 0 !important; border-left: none !important; padding-left: 12px !important; flex: 1; min-width: 0; }
+.phone-dropdown { position: absolute; top: calc(100% + 4px); left: 0; background: var(--white); border: 1.5px solid var(--border); border-radius: var(--radius-sm); box-shadow: 0 8px 24px rgba(0,0,0,0.12); z-index: 9999; min-width: 220px; max-height: 280px; overflow-y: auto; display: none; }
+.phone-dropdown.open { display: block; }
+.phone-dropdown-item { display: flex; align-items: center; gap: 10px; padding: 9px 14px; cursor: pointer; font-size: 0.82rem; transition: background 0.12s; }
+.phone-dropdown-item:hover { background: var(--gray-50,#f8f8f8); }
+.phone-dropdown-item .ph-flag { font-size: 1.05rem; }
+.phone-dropdown-item .ph-name { flex: 1; color: var(--dark); }
+.phone-dropdown-item .ph-code { color: var(--gray-400,#aaa); font-size: 0.75rem; }
+</style>
 </head>
 <body data-page="contact">
 
@@ -202,7 +218,7 @@
           </div>
           <div class="form-group" style="margin-top:14px;margin-bottom:0;">
             <label data-i18n="contact.label_phone_field">Телефон</label>
-            <input class="form-input" type="tel" id="contactPhone" placeholder="Ваш Телефон" data-i18n-attr="placeholder:contact.ph_phone">
+            <div class="phone-wrap"><input class="form-input" type="tel" id="contactPhone"></div>
           </div>
           <div class="form-group" style="margin-top:14px;">
             <label data-i18n="contact.label_message">Сообщение</label>
@@ -317,5 +333,6 @@ function submitContactForm() {
 <script src="js/favorites.js?v=7"></script>
 <script src="js/history.js?v=4"></script>
 <script src="js/nav-active.js?v=1"></script>
+<script src="js/phone-picker.js?v=1"></script>
 </body>
 </html>
