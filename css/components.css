@@ -1507,24 +1507,17 @@ thead .compare-col-dragover {
 }
 .compare-table th.compare-col-hover,
 .compare-table td.compare-col-hover {
-  /* только левая и правая граница — без теней на каждой ячейке */
-  border-left: 2px solid rgba(0,0,0,0.08) !important;
-  border-right: 2px solid rgba(0,0,0,0.08) !important;
+  box-shadow: 4px 0 12px -4px rgba(0,0,0,0.10),
+              -4px 0 12px -4px rgba(0,0,0,0.10) !important;
   position: relative;
   z-index: 1;
-  box-shadow: none !important;
 }
-/* шапка — верхняя граница тоже */
 .compare-table thead th.compare-col-hover {
-  border-top: 2px solid rgba(0,0,0,0.10) !important;
-  border-left: 2px solid rgba(0,0,0,0.08) !important;
-  border-right: 2px solid rgba(0,0,0,0.08) !important;
-  box-shadow: none !important;
+  box-shadow: 4px 0 12px -4px rgba(0,0,0,0.10),
+              -4px 0 12px -4px rgba(0,0,0,0.10) !important;
 }
-/* нижняя граница на последней строке */
 .compare-cta-row td.compare-col-hover {
-  border-bottom: 2px solid rgba(0,0,0,0.08) !important;
-  border-left: 2px solid rgba(0,0,0,0.08) !important;
-  border-right: 2px solid rgba(0,0,0,0.08) !important;
-  box-shadow: none !important;
+  box-shadow: 0 8px 20px -4px rgba(0,0,0,0.10),
+              4px 0 12px -4px rgba(0,0,0,0.10),
+              -4px 0 12px -4px rgba(0,0,0,0.10) !important;
 }
