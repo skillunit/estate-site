@@ -168,6 +168,28 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 });
 
+
+/* ── Compare photo slider ── */
+function cmpSlide(e, btn, dir) {
+  e.stopPropagation();
+  const slider = btn.closest('.card-slider');
+  if (!slider) return;
+  const imgs = JSON.parse(slider.dataset.imgs || '[]');
+  let idx = (parseInt(slider.dataset.idx) || 0) + dir;
+  idx = (idx + imgs.length) % imgs.length;
+  slider.dataset.idx = idx;
+  const img = slider.querySelector('.card-slider-img');
+  if (img) {
+    img.style.opacity = '0';
+    setTimeout(() => {
+      img.src = imgs[idx];
+      img.onload = () => img.style.opacity = '1';
+      if (img.complete) img.style.opacity = '1';
+    }, 150);
+  }
+  slider.querySelectorAll('.card-slider-dot').forEach((d, i) => d.classList.toggle('active', i === idx));
+}
+
 /* ════════════════════════════════════
    COMPARE PAGE (compare.html)
 ════════════════════════════════════ */
@@ -217,7 +239,19 @@ function renderComparePage() {
 
   // Rows to compare
   const rows = [
-    { key: 'photo',    label: _cmpT('compare.row_photo',    'Фото'),               fn: p => `<img src="${(p.imgs||[p.img])[0]}" style="width:100%;height:160px;object-fit:cover;border-radius:8px;cursor:pointer;" onclick="window.location.href='index.html?prop=${p.id}'" loading="lazy">` },
+    { key: 'photo', label: _cmpT('compare.row_photo', 'Фото'),
+      fn: p => {
+        const imgs = p.imgs || [p.img];
+        const dots = imgs.map((_, i) => `<span class="card-slider-dot${i===0?' active':''}"></span>`).join('');
+        return `<div class="card-slider compare-photo-slider" data-imgs='${JSON.stringify(imgs)}' data-idx="0" style="position:relative;border-radius:8px;overflow:hidden;height:180px;">
+          <img class="card-slider-img" src="${imgs[0]}" style="width:100%;height:180px;object-fit:cover;display:block;cursor:pointer;" onclick="window.location.href='index.html?prop=${p.id}'" loading="lazy">
+          ${imgs.length > 1 ? `
+          <button class="card-slider-btn card-slider-prev" onclick="cmpSlide(event,this,-1)" aria-label="Назад">&#8249;</button>
+          <button class="card-slider-btn card-slider-next" onclick="cmpSlide(event,this,1)" aria-label="Вперёд">&#8250;</button>
+          <div class="card-slider-dots" style="opacity:1;">${dots}</div>` : ''}
+        </div>`;
+      }
+    },
     { key: 'deal', label: _cmpT('compare.row_deal', 'Сделка'),
       fn: p => {
         if (p.deal === 'rent') {
