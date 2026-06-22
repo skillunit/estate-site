@@ -1307,35 +1307,63 @@ footer {
 .compare-cell { color: var(--dark); font-weight: 500; }
 .compare-cta-row td { padding-top: 20px; padding-bottom: 20px; border-bottom: none; }
 
-/* ── Compare drag & drop (desktop only) ── */
-@media (min-width: 768px) {
-  .compare-table th[data-prop-id] {
-    cursor: grab;
-    user-select: none;
-    transition: background 0.15s, opacity 0.15s;
-  }
-  .compare-table th[data-prop-id]:active { cursor: grabbing; }
+/* ── Compare columns: shadow separator + drag & drop ── */
 
-  .compare-col-drag-handle {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 8px;
-    opacity: 0.25;
-    transition: opacity 0.15s;
-  }
-  .compare-table th[data-prop-id]:hover .compare-col-drag-handle { opacity: 0.6; }
+/* Column shadow separator */
+.compare-table th.compare-prop-col,
+.compare-table td.compare-cell {
+  border-left: 1px solid var(--border);
+  box-shadow: inset 4px 0 12px -8px rgba(0,0,0,0.07);
+}
+.compare-table th.compare-label-col,
+.compare-table td.compare-label {
+  background: var(--gray-50, #f8f8f6);
+  position: sticky;
+  left: 0;
+  z-index: 2;
+}
 
-  .compare-col-dragging {
-    opacity: 0.4;
-    background: var(--gray-50, #f8f8f6) !important;
-  }
-  .compare-col-dragover {
-    background: #fff5f5 !important;
-    outline: 2px dashed var(--red);
-    outline-offset: -2px;
-  }
+/* Drag handle */
+.compare-col-drag-handle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  margin-bottom: 10px;
+  padding: 5px 0;
+  border-radius: 6px;
+  color: var(--gray-400);
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  opacity: 0;
+  transition: opacity 0.2s, background 0.2s, color 0.2s;
+  cursor: grab;
+  user-select: none;
+}
+.compare-col-drag-handle:active { cursor: grabbing; }
+.compare-table th[data-prop-id]:hover .compare-col-drag-handle {
+  opacity: 1;
+  background: var(--gray-50, #f8f8f6);
+  color: var(--gray-500);
+}
+
+/* Dragging states */
+.compare-col-dragging {
+  opacity: 0.35 !important;
+}
+.compare-col-dragging td,
+.compare-col-dragging th { background: var(--gray-50) !important; }
+
+.compare-col-dragover {
+  background: #fff0f0 !important;
+  outline: 2px dashed var(--red) !important;
+  outline-offset: -3px;
 }
 
 @media (max-width: 767px) {
-  .compare-col-drag-handle { display: none; }
+  .compare-col-drag-handle { display: none !important; }
+  .compare-table th.compare-prop-col,
+  .compare-table td.compare-cell { box-shadow: none; }
 }
