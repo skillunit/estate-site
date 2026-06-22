@@ -474,6 +474,53 @@ function initCompareDrag() {
 })();
 
 
+/* ── Compare column hover highlight ── */
+function initCompareHover() {
+  const table = document.querySelector('.compare-table');
+  if (!table) return;
+
+  function getCellsForProp(propId) {
+    const th = table.querySelector('th[data-prop-id="' + propId + '"]');
+    if (!th) return [];
+    const allThs = Array.from(table.querySelectorAll('thead tr th'));
+    const colIdx = allThs.indexOf(th);
+    if (colIdx === -1) return [];
+    const cells = [th];
+    table.querySelectorAll('tbody tr').forEach(row => {
+      const td = row.querySelectorAll('td')[colIdx];
+      if (td) cells.push(td);
+    });
+    return cells;
+  }
+
+  // Delegate mouseover/mouseout on table
+  table.addEventListener('mouseover', function(e) {
+    const th = e.target.closest('th[data-prop-id]');
+    const td = e.target.closest('td.compare-cell');
+    let propId = null;
+    if (th) propId = th.dataset.propId;
+    else if (td) {
+      // find which col this td belongs to
+      const row = td.parentElement;
+      const colIdx = Array.from(row.children).indexOf(td);
+      const ths = Array.from(table.querySelectorAll('th[data-prop-id]'));
+      // label col is index 0, props start at 1
+      const propTh = table.querySelectorAll('thead tr th')[colIdx];
+      if (propTh) propId = propTh.dataset.propId;
+    }
+    if (!propId) return;
+    // Clear all first
+    table.querySelectorAll('.compare-col-hover').forEach(c => c.classList.remove('compare-col-hover'));
+    // Set new
+    getCellsForProp(propId).forEach(c => c.classList.add('compare-col-hover'));
+  });
+
+  table.addEventListener('mouseleave', function() {
+    table.querySelectorAll('.compare-col-hover').forEach(c => c.classList.remove('compare-col-hover'));
+  });
+}
+
+
 function removeFromCompare(id) {
   let list = getCompareList().filter(x => x !== id);
   saveCompareList(list);
