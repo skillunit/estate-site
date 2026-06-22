@@ -660,6 +660,11 @@ window.GRE_LANG_EN = {
     'hist.time_yesterday': 'yesterday',
     'hist.time_days_ago': '{n}d ago',
 
+  // ── Property types ──
+  'type.apartment': 'Apartment',
+  'type.villa': 'Villa',
+  'type.commercial': 'Commercial',
+
   // ── Compare page ──
   'compare.drag_hint': 'Drag to reorder',
   'compare.row_deal': 'Deal type',
