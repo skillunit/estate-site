@@ -223,5 +223,39 @@
     "paphos": "פאפוס",
     "athens": "אתונה",
     "mykonos": "מיקונוס"
+  },
+  "compare_page": {
+    "hero_title": "השוואת נכסים",
+    "hero_sub": "עד 4 נכסים בו-זמנית",
+    "added": "נוסף להשוואה:",
+    "clear_all": "נקה רשימה",
+    "empty_title": "רשימת ההשוואה ריקה",
+    "empty_sub": "לחץ ⚖ על כרטיס נכס כדי להוסיפו להשוואה",
+    "login_title": "התחבר כדי להשוות נכסים",
+    "login_sub": "הוסף נכסים דרך אייקון ⚖ על הכרטיס",
+    "limit_title": "מקסימום 4 נכסים",
+    "limit_text": "כבר הוספת 4 נכסים להשוואה. הסר אחד כדי להוסיף חדש.",
+    "go_compare": "עבור להשוואה",
+    "close": "סגור",
+    "remove": "הסר",
+    "toast_added": "נוסף להשוואה · {link}",
+    "toast_link": "השווה",
+    "toast_removed": "הוסר מההשוואה",
+    "row_photo": "תמונה",
+    "row_price": "מחיר",
+    "row_area": "שטח",
+    "row_rooms": "חדרי שינה",
+    "row_floor": "קומה",
+    "row_year": "שנת מסירה",
+    "row_city": "עיר",
+    "row_type": "סוג",
+    "row_status": "סטטוס",
+    "row_roi": "תשואה",
+    "row_growth": "עליית מחיר/שנה",
+    "row_payback": "החזר השקעה",
+    "browse": "עבור לנכסים"
+  },
+  "auth": {
+    "compare": "השוואת נכסים"
   }
 }
