@@ -334,5 +334,30 @@ function submitContactForm() {
 <script src="js/history.js?v=4"></script>
 <script src="js/nav-active.js?v=1"></script>
 <script src="js/phone-picker.js?v=1"></script>
+<div class="floating-panel">
+  <button class="btn-scroll-top" id="btnScrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Наверх" data-i18n-attr="aria-label:floating.top">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+      <polyline points="18 15 12 9 6 15"/>
+    </svg>
+  </button>
+
+  <button class="btn-consult" onclick="openContactPopup()" aria-label="Онлайн консультация" data-i18n-attr="aria-label:floating.consult">
+    <span class="btn-consult-tooltip" data-i18n="floating.consult">Онлайн консультация</span>
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+    </svg>
+  </button>
+</div>
+
+<script>
+(function() {
+  var btn = document.getElementById('btnScrollTop');
+  if (!btn) return;
+  window.addEventListener('scroll', function() {
+    btn.classList.toggle('visible', window.scrollY > 300);
+  }, { passive: true });
+})();
+</script>
+
 </body>
 </html>
