@@ -1306,3 +1306,36 @@ footer {
 .compare-row:nth-child(even) .compare-label { background: var(--gray-50, #f8f8f6); }
 .compare-cell { color: var(--dark); font-weight: 500; }
 .compare-cta-row td { padding-top: 20px; padding-bottom: 20px; border-bottom: none; }
+
+/* ── Compare drag & drop (desktop only) ── */
+@media (min-width: 768px) {
+  .compare-table th[data-prop-id] {
+    cursor: grab;
+    user-select: none;
+    transition: background 0.15s, opacity 0.15s;
+  }
+  .compare-table th[data-prop-id]:active { cursor: grabbing; }
+
+  .compare-col-drag-handle {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 8px;
+    opacity: 0.25;
+    transition: opacity 0.15s;
+  }
+  .compare-table th[data-prop-id]:hover .compare-col-drag-handle { opacity: 0.6; }
+
+  .compare-col-dragging {
+    opacity: 0.4;
+    background: var(--gray-50, #f8f8f6) !important;
+  }
+  .compare-col-dragover {
+    background: #fff5f5 !important;
+    outline: 2px dashed var(--red);
+    outline-offset: -2px;
+  }
+}
+
+@media (max-width: 767px) {
+  .compare-col-drag-handle { display: none; }
+}
