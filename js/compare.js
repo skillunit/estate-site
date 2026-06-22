@@ -198,10 +198,16 @@ function renderComparePage() {
   // Rows to compare
   const rows = [
     { key: 'photo',    label: _cmpT('compare.row_photo',    'Фото'),               fn: p => `<img src="${(p.imgs||[p.img])[0]}" style="width:100%;height:160px;object-fit:cover;border-radius:8px;cursor:pointer;" onclick="window.location.href='index.html?prop=${p.id}'" loading="lazy">` },
-    { key: 'deal',    label: _cmpT('compare.row_deal', 'Сделка'),
+    { key: 'deal', label: _cmpT('compare.row_deal', 'Сделка'),
       fn: p => {
-        if (p.deal === 'rent') return '<span style="display:inline-flex;align-items:center;gap:5px;color:#1a6b3a;font-weight:600;">🔑 ' + _cmpT('filter.rent','Аренда') + '</span>';
-        return '<span style="display:inline-flex;align-items:center;gap:5px;color:#8B4513;font-weight:600;">🏷 ' + _cmpT('filter.buy','Продажа') + '</span>';
+        if (p.deal === 'rent') {
+          return '<span class="compare-deal-badge compare-deal-rent">'
+            + '<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>'
+            + _cmpT('filter.rent','Аренда') + '</span>';
+        }
+        return '<span class="compare-deal-badge compare-deal-buy">'
+          + '<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>'
+          + _cmpT('filter.buy','Продажа') + '</span>';
       }
     },
     { key: 'price',    label: _cmpT('compare.row_price',    'Цена'),               fn: p => `<strong>${typeof formatPrice==='function'?formatPrice(p.price):p.price}</strong>` },
