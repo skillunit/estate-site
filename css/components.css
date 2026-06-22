@@ -1507,22 +1507,21 @@ thead .compare-col-dragover {
 }
 .compare-table th.compare-col-hover,
 .compare-table td.compare-col-hover {
-  background: var(--white) !important;
-  box-shadow: inset 0 0 0 0 transparent,
-              4px 0 16px -4px rgba(0,0,0,0.08),
-              -4px 0 16px -4px rgba(0,0,0,0.08) !important;
+  /* сохраняем зебру, только добавляем боковые тени */
+  box-shadow: 4px 0 12px -4px rgba(0,0,0,0.10),
+              -4px 0 12px -4px rgba(0,0,0,0.10) !important;
   position: relative;
   z-index: 1;
 }
-/* top border highlight on th */
+/* красная полоска сверху на th */
 .compare-table thead th.compare-col-hover {
   box-shadow: 0 -3px 0 var(--red) inset,
-              4px 0 16px -4px rgba(0,0,0,0.08),
-              -4px 0 16px -4px rgba(0,0,0,0.08) !important;
+              4px 0 12px -4px rgba(0,0,0,0.10),
+              -4px 0 12px -4px rgba(0,0,0,0.10) !important;
 }
-/* bottom shadow on last row */
+/* тень снизу на последней строке */
 .compare-cta-row td.compare-col-hover {
-  box-shadow: 0 8px 24px -4px rgba(0,0,0,0.10),
-              4px 0 16px -4px rgba(0,0,0,0.08),
-              -4px 0 16px -4px rgba(0,0,0,0.08) !important;
+  box-shadow: 0 6px 20px -4px rgba(0,0,0,0.10),
+              4px 0 12px -4px rgba(0,0,0,0.10),
+              -4px 0 12px -4px rgba(0,0,0,0.10) !important;
 }
