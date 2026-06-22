@@ -1,119 +1,337 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-  <title>Сравнение объектов — Georgia Real Estate</title>
-  <link rel="icon" type="image/svg+xml" href="favicon.svg"/>
-  <link rel="stylesheet" href="css/base.css?v=6"/>
-  <link rel="stylesheet" href="css/components.css?v=6"/>
-  <link rel="stylesheet" href="css/pages.css?v=6"/>
-  <link rel="stylesheet" href="css/responsive.css?v=6"/>
+<meta charset="UTF-8">
+<link rel="icon" type="image/x-icon" href="favicon.ico">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Сравнение объектов — Georgia Real Estate</title>
+<meta name="description" content="Сравнение объектов недвижимости в Грузии">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/base.css?v=9">
+<link rel="stylesheet" href="css/pages.css?v=72">
+<link rel="stylesheet" href="css/components.css?v=53">
+<link rel="stylesheet" href="css/responsive.css?v=3">
+<style>
+  body { background: var(--white); }
+  .page { display: block !important; }
+
+  /* ── Grid ── */
+  .fav-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+  @media (max-width: 1024px) { .fav-grid { grid-template-columns: repeat(2,1fr); } }
+  @media (max-width: 600px)  { .fav-grid { grid-template-columns: 1fr; } }
+
+  /* ── Card extras ── */
+  .fav-card-added { font-size: 0.7rem; color: var(--gray-400); font-style: italic; margin-bottom: 4px; }
+  .fav-card-actions { display: flex; align-items: center; justify-content: space-between; margin-top: 12px; }
+  .fav-delete-btn {
+    display: flex; align-items: center; gap: 5px;
+    background: none; border: 1px solid var(--border); border-radius: 6px; padding: 6px 10px;
+    font-size: 0.72rem; color: var(--gray-500); cursor: pointer; transition: var(--transition); font-family: var(--font-body);
+  }
+  .fav-delete-btn:hover { border-color: var(--red); color: var(--red); }
+
+  /* ── Empty state ── */
+  #favEmpty { grid-column: 1 / -1; text-align: center; padding: 80px 20px; }
+  .fav-empty-icon { margin-bottom: 20px; opacity: 0.2; transform: scale(2.5); display: inline-block; }
+  .fav-empty-title { font-family: var(--font-head); font-size: 1.4rem; font-weight: 700; color: var(--dark); margin-bottom: 10px; }
+  .fav-empty-sub { font-size: 0.9rem; color: var(--gray-500); max-width: 340px; margin: 0 auto; line-height: 1.6; }
+
+  /* ── Confirm dialog ── */
+  .fav-confirm { position: fixed; inset: 0; z-index: 4500; background: rgba(0,0,0,0.5); backdrop-filter: blur(4px); display: none; align-items: center; justify-content: center; padding: 20px; }
+  .fav-confirm.open { display: flex; }
+  .fav-confirm-box { background: var(--white); border-radius: 16px; padding: 36px; max-width: 380px; width: 100%; text-align: center; box-shadow: 0 24px 64px rgba(0,0,0,0.18); animation: authModalIn 0.2s ease; }
+  .fav-confirm-icon { font-size: 2rem; margin-bottom: 14px; }
+  .fav-confirm-title { font-family: var(--font-head); font-size: 1.1rem; font-weight: 700; color: var(--dark); margin-bottom: 10px; }
+  .fav-confirm-sub { font-size: 0.84rem; color: var(--gray-500); margin-bottom: 24px; }
+  .fav-confirm-btns { display: flex; gap: 10px; justify-content: center; }
+</style>
 </head>
-<body>
+<body data-page="compare">
 
 <!-- HEADER -->
-<div id="headerWrap"></div>
-<script>
-fetch('partials/header.html').then(r=>r.text()).then(h=>{
-  document.getElementById('headerWrap').innerHTML=h;
-  if(typeof initHeader==='function') initHeader();
-  if(typeof Auth!=='undefined') Auth.init();
-  if(typeof I18n!=='undefined') I18n.apply();
-});
-</script>
+<!-- HEADER:START -->
+<!--
+  partials/header.html — единый хедер для всех страниц.
 
-<!-- HERO -->
-<div class="fav-hero">
-  <div class="fav-hero-bg" style="background-image:url('https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=1400&h=400&fit=crop');"></div>
-  <div class="fav-hero-overlay"></div>
-  <div class="fav-hero-content">
-    <h1 data-i18n="compare.hero_title">Сравнение объектов</h1>
-    <p class="page-hero-subtitle" data-i18n="compare.hero_sub">До 4 объектов одновременно</p>
+  Активный пункт меню подсвечивается автоматически через
+  js/nav-active.js на основе атрибута body[data-page] — самой
+  странице вручную ничего указывать не нужно, достаточно,
+  чтобы <body data-page="..."> был выставлен правильно.
+
+  Значения data-page на пунктах меню ниже должны совпадать со
+  значением body[data-page] той страницы, на которую они ведут:
+    home    → index.html
+    team    → team.html
+    catalog → projects.html
+    blog    → blog.html, article.html (любая статья блога)
+    contact → contact.html
+
+  WordPress: это будущий header.php. Логотип/меню/телефон/lang-switch/
+  auth-иконка переносятся как есть; showPage()-вызовы заменяются на
+  обычные ссылки (showPage — легаси одностраничного режима index.html,
+  на всех остальных страницах и так используются обычные href).
+-->
+<header id="header">
+  <div class="header-inner">
+    <!-- Logo -->
+    <a class="logo" href="index.html" aria-label="Georgia Real Estate — на главную">
+      <svg class="logo-icon" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect width="36" height="36" fill="white"/>
+        <rect x="15.5" y="2" width="5" height="32" fill="#C0392B"/>
+        <rect x="2" y="15.5" width="32" height="5" fill="#C0392B"/>
+        <rect x="4" y="4" width="2.5" height="8" fill="#C0392B"/>
+        <rect x="1.5" y="6" width="7.5" height="2.5" fill="#C0392B"/>
+        <rect x="29.5" y="4" width="2.5" height="8" fill="#C0392B"/>
+        <rect x="27" y="6" width="7.5" height="2.5" fill="#C0392B"/>
+        <rect x="4" y="24" width="2.5" height="8" fill="#C0392B"/>
+        <rect x="1.5" y="27.5" width="7.5" height="2.5" fill="#C0392B"/>
+        <rect x="29.5" y="24" width="2.5" height="8" fill="#C0392B"/>
+        <rect x="27" y="27.5" width="7.5" height="2.5" fill="#C0392B"/>
+      </svg>
+      <div class="logo-text">
+        <span class="logo-text-top">Georgia</span>
+        <span class="logo-text-bot">Real Estate</span>
+      </div>
+    </a>
+
+    <!-- Nav -->
+    <nav class="header-nav" id="mainNav">
+      <a href="index.html" data-page="home">
+        <span data-i18n="nav.home">Главная</span>
+      </a>
+      <span class="nav-sep">|</span>
+      <a href="team.html" data-page="team">
+        <span data-i18n="nav.team">Команда</span>
+      </a>
+      <span class="nav-sep">|</span>
+      <a href="projects.html" data-page="catalog">
+        <span data-i18n="nav.projects">Проекты</span>
+      </a>
+      <span class="nav-sep">|</span>
+      <a href="blog.html" data-page="blog">
+        <span data-i18n="nav.blog">Блог</span>
+      </a>
+      <span class="nav-sep">|</span>
+      <a href="contact.html" data-page="contact" class="nav-contact-link">
+        <span data-i18n="nav.contact">Связаться с нами</span>
+      </a>
+      <div class="nav-mobile-footer">
+        <a href="tel:+995322123456" class="nav-mobile-phone">+995 32 2 123 456</a>
+        <div class="nav-mobile-socials">
+          <a class="nav-mobile-social" href="https://facebook.com/" target="_blank" aria-label="Facebook">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M9.78 18.65l.28-4.23 7.68-6.92c.34-.31-.07-.46-.52-.19L7.74 13.3 3.64 12c-.88-.25-.89-.86.2-1.3l15.97-6.16c.73-.33 1.43.18 1.15 1.3l-2.72 12.81c-.19.91-.74 1.13-1.5.71L12.6 16.3l-1.99 1.93c-.23.23-.42.42-.83.42z"/></svg>
+          </a>
+          <a class="nav-mobile-social" href="https://t.me/" target="_blank" aria-label="Telegram">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          </a>
+          <a class="nav-mobile-social" href="https://instagram.com/" target="_blank" aria-label="Instagram">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+          </a>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Right -->
+    <div class="header-right">
+      <div class="header-phone" data-i18n="nav.phone">+995 32 2 123 456</div>
+      <div class="lang-switch">
+        <button class="lang-btn active" data-lang="ru">RU</button>
+        <span class="lang-sep-char">|</span>
+        <button class="lang-btn" data-lang="en">EN</button>
+        <span class="lang-sep-char">|</span>
+        <button class="lang-btn" data-lang="he">HE</button>
+      </div>
+      <!-- Auth icon -->
+      <div id="authBtnWrap"></div>
+      <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Меню">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
   </div>
-</div>
+</header>
+<!-- HEADER:END -->
 
-<!-- TOOLBAR -->
-<div class="fav-toolbar" id="compareToolbar" style="display:none;">
-  <div class="fav-toolbar-inner">
-    <div class="fav-count-line">
-      <span data-i18n="compare.added">Добавлено к сравнению:</span>
-      <strong id="compareCount">0 / 4</strong>
+<!-- PAGE -->
+<div class="page page-body">
+
+  <!-- Hero with parallax -->
+  <div class="fav-hero">
+    <div class="fav-hero-bg"></div>
+    <div class="fav-hero-overlay"></div>
+    <div class="fav-hero-content">
+      <div>
+        <div class="fav-hero-label" data-i18n="auth.account">Личный кабинет</div>
+        <h1 class="fav-hero-title">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#E8A0A0" stroke-width="1.8"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+          <span data-i18n="compare.hero_title">Сравнение объектов</span>
+        </h1>
+        <div class="fav-hero-sub" data-i18n="compare.hero_sub">До 4 объектов одновременно</div>
+      </div>
+      <div class="fav-hero-badge">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+        <span id="favCount">0 объектов</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toolbar -->
+  <div class="fav-toolbar" id="compareToolbar" style="display:none;">
+    <div style="display:flex;align-items:center;gap:12px;">
+      <span class="fav-sort-label" data-i18n="compare.added">Добавлено к сравнению:</span>
+      <strong id="compareCountToolbar">0 / 4</strong>
     </div>
     <button class="fav-clear-btn" onclick="clearAllCompare()">
-      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/></svg>
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/><path d="M9 6V4h6v2"/></svg>
       <span data-i18n="compare.clear_all">Очистить список</span>
     </button>
   </div>
+
+  <!-- Compare body -->
+  <div class="fav-body" id="compareBody">
+    <div id="compareWrap"></div>
+    <div id="compareEmpty" style="display:none;"></div>
+  </div>
+
+  <!-- Footer -->
+  <!-- FOOTER:START -->
+<!--
+  partials/footer.html — единый футер для всех страниц.
+
+  WordPress: это будущий footer.php. Меню/услуги/контакты переносятся
+  как есть в виде статичных пунктов (или через wp_nav_menu при желании
+  сделать их редактируемыми из админки).
+-->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand-name">
+          <svg width="22" height="22" viewBox="0 0 36 36" fill="none"><rect width="36" height="36" fill="transparent"/><rect x="15.5" y="2" width="5" height="32" fill="#C0392B"/><rect x="2" y="15.5" width="32" height="5" fill="#C0392B"/><rect x="4" y="4" width="2.5" height="8" fill="#C0392B"/><rect x="1.5" y="6" width="7.5" height="2.5" fill="#C0392B"/><rect x="29.5" y="4" width="2.5" height="8" fill="#C0392B"/><rect x="27" y="6" width="7.5" height="2.5" fill="#C0392B"/><rect x="4" y="24" width="2.5" height="8" fill="#C0392B"/><rect x="1.5" y="27.5" width="7.5" height="2.5" fill="#C0392B"/><rect x="29.5" y="24" width="2.5" height="8" fill="#C0392B"/><rect x="27" y="27.5" width="7.5" height="2.5" fill="#C0392B"/></svg>
+          Georgia Real Estate
+        </div>
+        <div class="footer-brand-desc" data-i18n="footer.brand_desc">Ваш надёжный партнёр на рынке недвижимости в Грузии.</div>
+        <div class="footer-socials">
+          <a class="footer-social" href="https://facebook.com/" target="_blank" aria-label="Facebook"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></a>
+          <a class="footer-social" href="https://t.me/" target="_blank" aria-label="Telegram"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221l-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12L7.19 13.67l-2.96-.924c-.643-.204-.657-.643.136-.953l11.57-4.461c.537-.194 1.006.131.958.889z"/></svg></a>
+          <a class="footer-social" href="https://instagram.com/" target="_blank" aria-label="Instagram"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-col-title" data-i18n="footer.menu_title">Меню</div>
+        <ul class="footer-links">
+          <li><a href="index.html" data-i18n="footer.menu_about">О компании</a></li>
+          <li><a href="projects.html" data-i18n="footer.menu_catalog">Недвижимость</a></li>
+          <li><a href="legal.html" data-i18n="footer.menu_legal">Сделка, налоги, ВНЖ</a></li>
+          <li><a href="blog.html" data-i18n="footer.menu_blog">Блог</a></li>
+          <li><a href="contact.html" data-i18n="footer.menu_contact">Контакты</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title" data-i18n="footer.services_title">Услуги</div>
+        <ul class="footer-links">
+          <li data-i18n="footer.services_1">Подбор недвижимости</li>
+          <li data-i18n="footer.services_2">Юридическое сопровождение</li>
+          <li data-i18n="footer.services_3">Управление недвижимостью</li>
+          <li data-i18n="footer.services_4">Инвестиционные консультации</li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title" data-i18n="footer.contacts_title">Контакты</div>
+        <div class="footer-contact">
+          <span><a href="tel:+995322123456">+995 32 2 123 456</a></span>
+          <span><a href="mailto:info@georgia-re.com">info@georgia-re.com</a></span>
+          <span data-i18n="contact.footer_address">г. Тбилиси, ул. Руставели 15</span>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-copy" data-i18n="footer.copyright">© 2026 Georgia Real Estate</span>
+      <a class="footer-policy" href="privacy.html" data-i18n="footer.privacy">Политика конфиденциальности</a>
+    </div>
+  </div>
+</footer>
+<!-- FOOTER:END -->
 </div>
 
-<!-- BODY -->
-<div class="fav-body" id="compareBody">
-  <div id="compareWrap"></div>
-  <div id="compareEmpty" style="display:none;"></div>
-</div>
 
-<!-- FOOTER -->
-<div id="footerWrap"></div>
-<script>
-fetch('partials/footer.html').then(r=>r.text()).then(h=>{
-  document.getElementById('footerWrap').innerHTML=h;
-  if(typeof I18n!=='undefined') I18n.apply();
-});
-</script>
-
-<!-- Floating panel -->
-<div class="floating-panel">
-  <button class="btn-scroll-top" id="btnScrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Наверх">
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"/></svg>
-  </button>
-  <button class="btn-consult" onclick="openContactPopup()" aria-label="Онлайн консультация">
-    <span class="btn-consult-tooltip" data-i18n="floating.consult">Онлайн консультация</span>
-    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-  </button>
-</div>
-<script>
-(function(){
-  var btn=document.getElementById('btnScrollTop');
-  if(!btn) return;
-  window.addEventListener('scroll',function(){btn.classList.toggle('visible',window.scrollY>300);},{passive:true});
-})();
-</script>
-
-<!-- SCRIPTS -->
-<script src="lang/translations.js?v=6"></script>
-<script src="lang/properties.js?v=6"></script>
-<script src="js/i18n.js?v=6"></script>
-<script src="js/auth.js?v=6"></script>
-<script src="js/catalog.js?v=6"></script>
-<script src="js/favorites.js?v=6"></script>
-<script src="js/compare.js?v=6"></script>
-<script src="js/forms.js?v=6"></script>
-<script src="js/reviews.js?v=6"></script>
-<script src="js/animations.js?v=6"></script>
-<script src="js/nav.js?v=6"></script>
-<script src="js/nav-active.js?v=1"></script>
-<script src="js/phone-picker.js?v=1"></script>
 
 <script>
+function toggleMenu() {
+  document.getElementById('mainNav').classList.toggle('open');
+  document.getElementById('hamburger').classList.toggle('open');
+}
 function clearAllCompare() {
   localStorage.removeItem('gre_compare');
   if (typeof updateCompareBadge === 'function') updateCompareBadge();
   renderComparePage();
-}
-
-document.addEventListener('DOMContentLoaded', function() {
-  renderComparePage();
   const toolbar = document.getElementById('compareToolbar');
-  const body    = document.getElementById('compareBody');
-  const u = typeof Auth !== 'undefined' ? Auth.currentUser() : null;
-  const count = typeof getCompareCount === 'function' ? getCompareCount() : 0;
-  if (u && count > 0) {
-    if (toolbar) toolbar.style.display = '';
-    if (body) body.classList.add('toolbar-active');
-  }
-  if (typeof I18n !== 'undefined') I18n.apply();
+  if (toolbar) toolbar.style.display = 'none';
+}
+</script>
+
+<!-- Load catalog data first (MAP_PROPERTIES), then favorites logic -->
+<script src="lang/ru.js?v=29"></script>
+<script src="lang/en.js?v=29"></script>
+<script src="lang/he.js?v=29"></script>
+<script src="lang/properties.js?v=1"></script>
+<script src="lang/translations.js?v=23"></script>
+<script src="js/i18n.js?v=26"></script>
+<script src="js/catalog.js?v=71"></script>
+<script src="js/auth.js?v=5"></script>
+<script src="js/favorites.js?v=7"></script>
+<script src="js/compare.js?v=1"></script>
+<script src="js/history.js?v=4"></script>
+<script src="js/animations.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  setTimeout(() => {
+    renderComparePage();
+    const u = typeof Auth !== 'undefined' ? Auth.currentUser() : null;
+    const count = typeof getCompareCount === 'function' ? getCompareCount() : 0;
+    const toolbar = document.getElementById('compareToolbar');
+    const body = document.getElementById('compareBody');
+    if (u && count > 0 && toolbar) {
+      toolbar.style.display = '';
+      if (body) body.classList.add('toolbar-active');
+    }
+    const countEl = document.getElementById('compareCount');
+    if (countEl) countEl.textContent = count + ' / 4';
+    const countEl2 = document.getElementById('compareCountToolbar');
+    if (countEl2) countEl2.textContent = count + ' / 4';
+    if (typeof I18n !== 'undefined') I18n.apply();
+  }, 100);
 });
 </script>
+<script src="js/nav-active.js?v=1"></script>
+<div class="floating-panel">
+  <button class="btn-scroll-top" id="btnScrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Наверх" data-i18n-attr="aria-label:floating.top">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+      <polyline points="18 15 12 9 6 15"/>
+    </svg>
+  </button>
+
+  <button class="btn-consult" onclick="openContactPopup()" aria-label="Онлайн консультация" data-i18n-attr="aria-label:floating.consult">
+    <span class="btn-consult-tooltip" data-i18n="floating.consult">Онлайн консультация</span>
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+    </svg>
+  </button>
+</div>
+
+<script>
+(function() {
+  var btn = document.getElementById('btnScrollTop');
+  if (!btn) return;
+  window.addEventListener('scroll', function() {
+    btn.classList.toggle('visible', window.scrollY > 300);
+  }, { passive: true });
+})();
+</script>
+
 </body>
 </html>
