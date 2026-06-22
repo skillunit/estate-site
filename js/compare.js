@@ -294,9 +294,31 @@ function initCompareDrag() {
     ghost.style.left = (e.clientX + 16) + 'px';
     ghost.style.top  = (e.clientY - 16) + 'px';
   }
+  function getColCells(propId) {
+    const table = getTable();
+    if (!table) return [];
+    const th = table.querySelector('th[data-prop-id="' + propId + '"]');
+    if (!th) return [];
+    // Get column index among prop columns (skip label col at index 0)
+    const allThs = Array.from(table.querySelectorAll('thead tr th'));
+    const colIdx = allThs.indexOf(th);
+    if (colIdx === -1) return [];
+    // Collect th + all tds at same column index
+    const cells = [th];
+    table.querySelectorAll('tbody tr').forEach(row => {
+      const td = row.querySelectorAll('td')[colIdx];
+      if (td) cells.push(td);
+    });
+    return cells;
+  }
+
+  function setColHighlight(propId, on) {
+    getColCells(propId).forEach(cell => cell.classList.toggle('compare-col-dragover', on));
+  }
+
   function clearOver() {
     if (overCol) {
-      overCol.classList.remove('compare-col-dragover');
+      setColHighlight(overCol.dataset.propId, false);
       overCol = null;
     }
   }
@@ -304,7 +326,10 @@ function initCompareDrag() {
     clearOver();
     if (ghost) { ghost.remove(); ghost = null; }
     const t = getTable();
-    if (t) t.querySelectorAll('.compare-col-dragging').forEach(el => el.classList.remove('compare-col-dragging'));
+    if (t) t.querySelectorAll('.compare-col-dragging, .compare-col-dragover').forEach(el => {
+      el.classList.remove('compare-col-dragging');
+      el.classList.remove('compare-col-dragover');
+    });
     dragId = null;
   }
 
@@ -336,7 +361,7 @@ function initCompareDrag() {
     if (!el) return;
     const th = getTh(el);
     if (th && th.dataset.propId && th.dataset.propId !== dragId) {
-      th.classList.add('compare-col-dragover');
+      setColHighlight(th.dataset.propId, true);
       overCol = th;
     }
   });
