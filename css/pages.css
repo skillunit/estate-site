@@ -2226,12 +2226,6 @@
   position: relative;
   z-index: 2;
   background: var(--white);
-  border-radius: 18px 18px 0 0;
-  margin-top: -32px;
-  padding-top: 44px;
-  box-shadow: 0 -8px 32px rgba(0,0,0,0.10);
-  /* prevent shadow/border-radius bleeding beyond viewport */
-  overflow-x: clip;
 }
 
 /* catalog: filter bar is the first thing after hero — it starts the slide-over */
@@ -2310,9 +2304,9 @@
   .blog-section-inner,
   .contacts-body,
   .blog-article-body {
-    border-radius: 12px 12px 0 0;
-    margin-top: -20px;
-    padding-top: 32px;
+    
+    
+    
   }
 }
 
