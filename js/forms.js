@@ -20,33 +20,20 @@ function closeContactPopupOutside(e) {
   if (e.target === document.getElementById('contactPopup')) closeContactPopup();
 }
 
-// Georgian phone mask: +995 5XX XXX XXX
-(function() {
-  document.addEventListener('DOMContentLoaded', function() {
-    const ph = document.getElementById('cpPhone');
-    if (!ph) return;
-    ph.addEventListener('input', function() {
-      let digits = this.value.replace(/\D/g, '');
-      if (digits.startsWith('995')) digits = digits.slice(3);
-      if (digits.length > 9) digits = digits.slice(0, 9);
-      let formatted = '+995';
-      if (digits.length > 0) formatted += ' ' + digits.slice(0, 3);
-      if (digits.length > 3) formatted += ' ' + digits.slice(3, 6);
-      if (digits.length > 6) formatted += ' ' + digits.slice(6, 9);
-      this.value = formatted;
-    });
-    ph.addEventListener('keydown', function(e) {
-      if (e.key === 'Backspace' && this.value === '+995') { e.preventDefault(); this.value = ''; }
-    });
-    ph.addEventListener('focus', function() { if (!this.value) this.value = '+995 '; });
-    ph.addEventListener('blur', function() { if (this.value === '+995 ' || this.value === '+995') this.value = ''; });
-  });
-})();
+// Phone mask handled by PhonePicker module (js/phone-picker.js)
 
 function validateGeoPhone(val) {
-  const digits = val.replace(/\D/g, '');
-  const num = digits.startsWith('995') ? digits.slice(3) : digits;
-  return /^[5789]\d{8}$/.test(num);
+  // Now delegates to PhonePicker if available
+  return true; // validation done per-country in PhonePicker
+}
+function validatePhone(inputId) {
+  if (typeof PhonePicker !== 'undefined') {
+    const data = PhonePicker.getPhoneData(inputId);
+    return data && data.valid;
+  }
+  // fallback: any non-empty value
+  const el = document.getElementById(inputId);
+  return el && el.value.replace(/\D/g,'').length >= 7;
 }
 function setFieldError(id, msg) {
   const el = document.getElementById(id);
@@ -72,7 +59,7 @@ function submitContactPopup() {
   const email = document.getElementById('cpEmail').value.trim();
   const msg   = document.getElementById('cpMessage').value.trim();
   if (!name) { setFieldError('cpName', 'Введите ваше имя'); valid = false; }
-  if (!validateGeoPhone(phone)) { setFieldError('cpPhone', 'Введите грузинский номер: +995 5XX XXX XXX'); valid = false; }
+  if (!validatePhone('cpPhone')) { setFieldError('cpPhone', typeof GRE_T === 'function' ? GRE_T('popup.phone_error', 'Введите корректный номер телефона') : 'Введите корректный номер телефона'); valid = false; }
   if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { setFieldError('cpEmail', 'Введите корректный email'); valid = false; }
   if (!msg) { setFieldError('cpMessage', 'Напишите ваш вопрос'); valid = false; }
   if (!valid) return;
