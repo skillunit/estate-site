@@ -724,6 +724,7 @@ window.GRE_LANG_RU = {
     'hist.time_days_ago': '{n} дн. назад',
 
   // ── Compare page ──
+  'compare.row_deal': 'Тип сделки',
   'compare.hero_title': 'Сравнение объектов',
   'compare.hero_sub': 'До 4 объектов одновременно',
   'compare.added': 'Добавлено к сравнению:',
