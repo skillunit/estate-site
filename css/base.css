@@ -222,7 +222,7 @@ header {
 }
 .hero-bg {
   position: absolute; inset: 0;
-  background: url('https://picsum.photos/seed/tbilisi-hero/1600/900') center/cover no-repeat;
+  background: url('https://images.unsplash.com/photo-1561731172-9d906d7b13bf?w=1920&h=900&fit=crop') center/cover no-repeat;
 }
 .hero-overlay {
   position: absolute; inset: 0;
