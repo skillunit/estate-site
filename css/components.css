@@ -1460,3 +1460,28 @@ thead .compare-col-dragover {
 @media (min-width: 768px) {
   .compare-table th[data-prop-id] .compare-remove-btn { cursor: pointer; }
 }
+
+/* ── Compare deal badges ── */
+.compare-deal-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border-radius: 4px;
+  white-space: nowrap;
+}
+.compare-deal-buy {
+  background: rgba(192,57,43,0.10);
+  color: var(--red);
+  border: 1px solid rgba(192,57,43,0.20);
+}
+.compare-deal-rent {
+  background: rgba(39,174,96,0.10);
+  color: #1a7a42;
+  border: 1px solid rgba(39,174,96,0.20);
+}
