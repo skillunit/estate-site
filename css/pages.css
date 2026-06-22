@@ -2397,9 +2397,7 @@
 .hist-body {
   position: relative; z-index: 2;
   background: var(--white);
-  border-radius: 18px 18px 0 0;
-  margin-top: -32px;
-  box-shadow: 0 -8px 32px rgba(0,0,0,0.10);
+  
 }
 
 .fav-toolbar,
@@ -2412,9 +2410,7 @@
 /* Когда toolbar виден — body идёт следом без повторного наезда */
 .fav-body.toolbar-active,
 .hist-body.toolbar-active {
-  border-radius: 0;
-  margin-top: 0;
-  box-shadow: none;
+  
   padding-top: 20px;
 }
 
