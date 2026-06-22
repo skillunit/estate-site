@@ -69,6 +69,17 @@ function refreshAllCompareBtns() {
     btn.innerHTML = compareSVG(active);
     btn.classList.toggle('compare-active', active);
   });
+  // Also update detail page button if open
+  const detailBtn = document.getElementById('detailCompareBtn');
+  if (detailBtn && detailBtn.dataset.compareId) {
+    const active = isInCompare(detailBtn.dataset.compareId);
+    detailBtn.classList.toggle('fav-active', active);
+    const svg = detailBtn.querySelector('svg');
+    if (svg) {
+      svg.style.stroke = active ? '#C0392B' : '';
+      svg.style.fill   = active ? 'rgba(192,57,43,0.15)' : '';
+    }
+  }
   updateCompareBadge();
 }
 
@@ -143,6 +154,15 @@ document.addEventListener('DOMContentLoaded', () => {
       setTimeout(() => {
         updateCompareBadge();
         refreshAllCompareBtns();
+        // Update detail page compare button
+        const btn = document.getElementById('detailCompareBtn');
+        if (btn) {
+          const active = isInCompare(id);
+          btn.dataset.compareId = id;
+          btn.classList.toggle('fav-active', active);
+          btn.querySelector('svg').style.stroke = active ? '#C0392B' : '';
+          btn.querySelector('svg').style.fill   = active ? 'rgba(192,57,43,0.15)' : '';
+        }
       }, 80);
     };
   }
