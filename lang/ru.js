@@ -723,6 +723,11 @@ window.GRE_LANG_RU = {
     'hist.time_yesterday': 'вчера',
     'hist.time_days_ago': '{n} дн. назад',
 
+  // ── Property types ──
+  'type.apartment': 'Квартира',
+  'type.villa': 'Вилла',
+  'type.commercial': 'Коммерческая',
+
   // ── Compare page ──
   'compare.drag_hint': 'Перетащить для сортировки',
   'compare.row_deal': 'Тип сделки',
