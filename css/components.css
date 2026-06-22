@@ -1367,3 +1367,25 @@ footer {
   .compare-table th.compare-prop-col,
   .compare-table td.compare-cell { box-shadow: none; }
 }
+
+/* ── Compare drag ghost ── */
+.compare-drag-ghost {
+  position: fixed;
+  z-index: 9999;
+  pointer-events: none;
+  background: var(--white);
+  border: 2px solid var(--red);
+  border-radius: 8px;
+  padding: 8px 16px;
+  font-family: var(--font-head);
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--dark);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.18);
+  white-space: nowrap;
+  transform: rotate(2deg);
+  opacity: 0.95;
+}
+
+/* hide text selection during drag */
+.compare-table { user-select: none; }
