@@ -169,6 +169,70 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 
+/* ── Compare column hover — global delegation, survives re-renders ── */
+(function initCompareHoverGlobal() {
+  if (window._compareHoverInit) return;
+  window._compareHoverInit = true;
+
+  function getColCells(table, propId) {
+    const th = table.querySelector('th[data-prop-id="' + propId + '"]');
+    if (!th) return [];
+    const allThs = Array.from(table.querySelectorAll('thead tr th'));
+    const colIdx = allThs.indexOf(th);
+    if (colIdx === -1) return [];
+    const cells = [th];
+    table.querySelectorAll('tbody tr').forEach(row => {
+      const td = row.querySelectorAll('td')[colIdx];
+      if (td) cells.push(td);
+    });
+    return cells;
+  }
+
+  function clearHover(table) {
+    if (table) table.querySelectorAll('.compare-col-hover').forEach(c => c.classList.remove('compare-col-hover'));
+  }
+
+  document.addEventListener('mouseover', function(e) {
+    const table = e.target.closest('.compare-table');
+    if (!table) return;
+
+    // Find propId from hovered element
+    let propId = null;
+    const th = e.target.closest('th[data-prop-id]');
+    if (th) {
+      propId = th.dataset.propId;
+    } else {
+      const td = e.target.closest('td.compare-cell');
+      if (td) {
+        const row = td.parentElement;
+        const colIdx = Array.from(row.children).indexOf(td);
+        const propTh = table.querySelectorAll('thead tr th')[colIdx];
+        if (propTh) propId = propTh.dataset.propId;
+      }
+    }
+
+    clearHover(table);
+    if (propId) {
+      getColCells(table, propId).forEach(c => c.classList.add('compare-col-hover'));
+    }
+  });
+
+  document.addEventListener('mouseleave', function(e) {
+    const table = e.target.closest && e.target.closest('.compare-table');
+    if (table) clearHover(table);
+  }, true);
+
+  // Also clear when mouse leaves table
+  document.addEventListener('mouseout', function(e) {
+    const table = e.target.closest && e.target.closest('.compare-table');
+    if (!table) return;
+    if (!e.relatedTarget || !e.relatedTarget.closest || !e.relatedTarget.closest('.compare-table')) {
+      clearHover(table);
+    }
+  });
+})();
+
+
 /* ── Compare photo slider ── */
 function cmpSlide(e, btn, dir) {
   e.stopPropagation();
@@ -473,52 +537,6 @@ function initCompareDrag() {
   });
 })();
 
-
-/* ── Compare column hover highlight ── */
-function initCompareHover() {
-  const table = document.querySelector('.compare-table');
-  if (!table) return;
-
-  function getCellsForProp(propId) {
-    const th = table.querySelector('th[data-prop-id="' + propId + '"]');
-    if (!th) return [];
-    const allThs = Array.from(table.querySelectorAll('thead tr th'));
-    const colIdx = allThs.indexOf(th);
-    if (colIdx === -1) return [];
-    const cells = [th];
-    table.querySelectorAll('tbody tr').forEach(row => {
-      const td = row.querySelectorAll('td')[colIdx];
-      if (td) cells.push(td);
-    });
-    return cells;
-  }
-
-  // Delegate mouseover/mouseout on table
-  table.addEventListener('mouseover', function(e) {
-    const th = e.target.closest('th[data-prop-id]');
-    const td = e.target.closest('td.compare-cell');
-    let propId = null;
-    if (th) propId = th.dataset.propId;
-    else if (td) {
-      // find which col this td belongs to
-      const row = td.parentElement;
-      const colIdx = Array.from(row.children).indexOf(td);
-      const ths = Array.from(table.querySelectorAll('th[data-prop-id]'));
-      // label col is index 0, props start at 1
-      const propTh = table.querySelectorAll('thead tr th')[colIdx];
-      if (propTh) propId = propTh.dataset.propId;
-    }
-    if (!propId) return;
-    // Clear all first
-    table.querySelectorAll('.compare-col-hover').forEach(c => c.classList.remove('compare-col-hover'));
-    // Set new
-    getCellsForProp(propId).forEach(c => c.classList.add('compare-col-hover'));
-  });
-
-  table.addEventListener('mouseleave', function() {
-    table.querySelectorAll('.compare-col-hover').forEach(c => c.classList.remove('compare-col-hover'));
-  });
-}
 
 
 function removeFromCompare(id) {
