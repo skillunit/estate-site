@@ -1359,10 +1359,28 @@ footer {
 .compare-col-dragging td,
 .compare-col-dragging th { background: var(--gray-50) !important; }
 
+/* dragover — вся колонка целиком */
 .compare-col-dragover {
-  background: #fff0f0 !important;
-  outline: 2px dashed var(--red) !important;
-  outline-offset: -3px;
+  background: #fff5f5 !important;
+  position: relative;
+}
+/* левая граница — первая ячейка колонки */
+.compare-col-dragover:first-child,
+thead .compare-col-dragover {
+  border-left: 2px dashed var(--red) !important;
+}
+/* правая граница */
+.compare-col-dragover {
+  border-right: 2px dashed var(--red) !important;
+  border-left: 2px dashed var(--red) !important;
+}
+/* верхняя граница только на th */
+thead .compare-col-dragover {
+  border-top: 2px dashed var(--red) !important;
+}
+/* нижняя граница только на последней td */
+.compare-cta-row .compare-col-dragover {
+  border-bottom: 2px dashed var(--red) !important;
 }
 
 @media (max-width: 767px) {
