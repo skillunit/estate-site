@@ -1,6 +1,11 @@
 /* ═══════════════════════════════════
    RESPONSIVE
 ═══════════════════════════════════ */
+/* ── 1460px: prevent overflow on 1440px Mac screens ── */
+@media (max-width: 1460px) {
+  :root { --page-pad: 20px; }
+}
+
 @media (max-width:1024px) {
   :root { --page-pad: 24px; }
   .directions-grid { grid-template-columns:repeat(3,1fr); }
