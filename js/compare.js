@@ -226,7 +226,10 @@ function renderComparePage() {
           <tr>
             <th class="compare-label-col"></th>
             ${props.map(p => `
-              <th class="compare-prop-col">
+              <th class="compare-prop-col" draggable="true" data-prop-id="${p.id}">
+                <div class="compare-col-drag-handle" title="Перетащить для сортировки">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="8" y1="6" x2="16" y2="6"/><line x1="8" y1="12" x2="16" y2="12"/><line x1="8" y1="18" x2="16" y2="18"/></svg>
+                </div>
                 <div class="compare-prop-name">${typeof getPropName==='function'?getPropName(p):p.name}</div>
                 <div class="compare-prop-city">${typeof getCityLabel==='function'?getCityLabel(p):(p.cityLabel||p.city)}</div>
                 <button class="compare-remove-btn" onclick="removeFromCompare('${p.id}')" title="${_cmpT('compare.remove','Убрать')}">
@@ -254,6 +257,64 @@ function renderComparePage() {
         </tbody>
       </table>
     </div>`;
+}
+  setTimeout(() => initCompareDrag(), 0);
+
+function initCompareDrag() {
+  // Desktop only
+  if (window.innerWidth < 768) return;
+
+  const table = document.querySelector('.compare-table');
+  if (!table) return;
+
+  const ths = Array.from(table.querySelectorAll('th[data-prop-id]'));
+  let dragSrcId = null;
+
+  ths.forEach(th => {
+    th.addEventListener('dragstart', function(e) {
+      dragSrcId = this.dataset.propId;
+      this.classList.add('compare-col-dragging');
+      e.dataTransfer.effectAllowed = 'move';
+      e.dataTransfer.setData('text/plain', dragSrcId);
+    });
+
+    th.addEventListener('dragend', function() {
+      this.classList.remove('compare-col-dragging');
+      table.querySelectorAll('th[data-prop-id]').forEach(t => t.classList.remove('compare-col-dragover'));
+    });
+
+    th.addEventListener('dragover', function(e) {
+      e.preventDefault();
+      e.dataTransfer.dropEffect = 'move';
+      table.querySelectorAll('th[data-prop-id]').forEach(t => t.classList.remove('compare-col-dragover'));
+      if (this.dataset.propId !== dragSrcId) {
+        this.classList.add('compare-col-dragover');
+      }
+    });
+
+    th.addEventListener('dragleave', function() {
+      this.classList.remove('compare-col-dragover');
+    });
+
+    th.addEventListener('drop', function(e) {
+      e.preventDefault();
+      const targetId = this.dataset.propId;
+      if (!dragSrcId || dragSrcId === targetId) return;
+
+      // Reorder in localStorage
+      let list = getCompareList();
+      const fromIdx = list.indexOf(dragSrcId);
+      const toIdx   = list.indexOf(targetId);
+      if (fromIdx === -1 || toIdx === -1) return;
+
+      list.splice(fromIdx, 1);
+      list.splice(toIdx, 0, dragSrcId);
+      saveCompareList(list);
+
+      // Re-render
+      renderComparePage();
+    });
+  });
 }
 
 function removeFromCompare(id) {
