@@ -873,6 +873,14 @@ const BADGE_TEXT_KEYS = {
   'Доступно':                  'badge.available',
 };
 /* ── Fav button helper — inline in card body ── */
+function compareCardBtn(id) {
+  const active = (typeof isInCompare === 'function') ? isInCompare(id) : false;
+  const color = active ? '#C0392B' : 'currentColor';
+  const fill  = active ? '#C0392B' : 'none';
+  const svg = `<svg width="14" height="14" viewBox="0 0 24 24" fill="${fill}" stroke="${color}" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>`;
+  return `<button class="card-compare-inline${active ? ' compare-active' : ''}" data-compare-id="${id}" onclick="event.stopPropagation();if(typeof toggleCompare==='function')toggleCompare('${id}')" aria-label="Сравнить">${svg}</button>`;
+}
+
 function favCardBtn(id) {
   // isFavById is defined in favorites.js; safe to call after DOMContentLoaded
   const filled = (typeof isFavById === 'function') ? isFavById(id) : false;
@@ -1021,6 +1029,7 @@ function renderRecentlyViewed() {
         <span class="prop-badge ${badge.cls}">${badge.text}</span>
         ${p.top ? `<span class="top-label">${typeof I18n!=="undefined"?I18n.t("card.top"):"★ ТОП"}</span>` : ''}
         ${shareCardBtn(p.id)}
+        ${compareCardBtn(p.id)}
         ${favCardBtn(p.id)}
       </div>
       <div class="catalog-card-body">
@@ -1214,6 +1223,7 @@ function renderCatalogGrid(countryVal, cityVal, statusVal, typeVal, extra) {
         <span class="prop-badge ${badge.cls}">${badge.text}</span>
         ${p.top ? `<span class="top-label">${typeof I18n!=="undefined"?I18n.t("card.top"):"★ ТОП"}</span>` : ''}
         ${shareCardBtn(p.id)}
+        ${compareCardBtn(p.id)}
         ${favCardBtn(p.id)}
       </div>
       <div class="catalog-card-body">
@@ -2101,6 +2111,7 @@ function renderRelated(currentId) {
         <span class="prop-badge ${badge.cls}">${badge.text}</span>
         ${p.top ? `<span class="top-label">${typeof I18n!=="undefined"?I18n.t("card.top"):"★ ТОП"}</span>` : ''}
         ${shareCardBtn(p.id)}
+        ${compareCardBtn(p.id)}
         ${favCardBtn(p.id)}
       </div>
       <div class="catalog-card-body">
@@ -2240,6 +2251,7 @@ function buildFeaturedCards(props) {
         <span class="prop-badge ${badge.cls}">${badge.text}</span>
         <span class="top-label">${typeof I18n!=="undefined"?I18n.t("card.top"):"★ ТОП"}</span>
         ${shareCardBtn(p.id)}
+        ${compareCardBtn(p.id)}
         ${favCardBtn(p.id)}
       </div>
       <div class="catalog-card-body">
