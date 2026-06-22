@@ -1507,21 +1507,23 @@ thead .compare-col-dragover {
 }
 .compare-table th.compare-col-hover,
 .compare-table td.compare-col-hover {
-  /* сохраняем зебру, только добавляем боковые тени */
+  /* только боковые тени — без фона и без разделителей */
   box-shadow: 4px 0 12px -4px rgba(0,0,0,0.10),
               -4px 0 12px -4px rgba(0,0,0,0.10) !important;
   position: relative;
   z-index: 1;
+  border-bottom-color: transparent !important;
 }
-/* красная полоска сверху на th */
+/* шапка — без красной полоски, только тени */
 .compare-table thead th.compare-col-hover {
-  box-shadow: 0 -3px 0 var(--red) inset,
-              4px 0 12px -4px rgba(0,0,0,0.10),
+  box-shadow: 4px 0 12px -4px rgba(0,0,0,0.10),
               -4px 0 12px -4px rgba(0,0,0,0.10) !important;
+  border-bottom: 2px solid var(--border) !important;
 }
-/* тень снизу на последней строке */
+/* тень снизу только на последней строке (внешний низ блока) */
 .compare-cta-row td.compare-col-hover {
-  box-shadow: 0 6px 20px -4px rgba(0,0,0,0.10),
+  box-shadow: 0 8px 20px -4px rgba(0,0,0,0.10),
               4px 0 12px -4px rgba(0,0,0,0.10),
               -4px 0 12px -4px rgba(0,0,0,0.10) !important;
+  border-bottom-color: transparent !important;
 }
